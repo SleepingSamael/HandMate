@@ -1,0 +1,1262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/back"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:clipChildren="false">
+
+    <!--1. 中间可滑动的viewPager-->
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/bottom_layout"
+            android:layout_below="@+id/linearLayout">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginLeft="100dp"
+                android:layout_marginRight="100dp"
+                android:background="@color/white"
+                >
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="@drawable/table_divider8"
+                    android:showDividers="middle"
+                    >
+
+                    <TableRow
+                        android:id="@+id/title1"
+                        android:layout_height="wrap_content"
+                        android:background="@color/sysblue"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="150dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="100dp"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/white"
+                            android:textSize="54dp"
+                            android:text="1.视觉模拟评分法（Visual Analogue Scale/Score，VAS评分）"/>
+
+                    </TableRow>
+
+                    <TableRow android:layout_height="wrap_content"
+                        android:id="@+id/item1">
+
+
+                        <RadioGroup
+                            android:id="@+id/VAS_select"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:divider="@drawable/radiobutton_divider"
+                            android:showDividers="middle"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/radioButton_VAS0"
+                                android:layout_width="1620dp"
+                                android:layout_height="115dp"
+                                android:text="0分:无痛"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"/>
+
+                            <RadioButton
+                                android:id="@+id/radioButton_VAS3"
+                                android:layout_width="1620dp"
+                                android:layout_height="115dp"
+                                android:text="3分以下:有轻微的疼痛，能忍受"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginLeft="100dp"/>
+                            <RadioButton
+                                android:id="@+id/radioButton_VAS4to6"
+                                android:layout_width="1620dp"
+                                android:layout_height="115dp"
+                                android:text="4分-6分:患者疼痛并影响睡眠，尚能忍受"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginLeft="100dp"/>
+                            <RadioButton
+                                android:id="@+id/radioButton_VAS7to10"
+                                android:layout_width="1620dp"
+                                android:layout_height="115dp"
+                                android:text="7分-10分:患者有渐强烈的疼痛，疼痛难忍，影响食欲，影响睡眠"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginLeft="100dp"/>
+                        </RadioGroup>
+
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/title2"
+                        android:layout_height="wrap_content"
+                        android:background="@color/sysblue"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="150dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="100dp"
+                            android:gravity="center_vertical"
+                            android:text="2.改良Ashworth痉挛评定量表"
+                            android:textColor="@color/white"
+                            android:textSize="54dp" />
+
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/item2"
+                        android:layout_height="wrap_content">
+
+
+                        <RadioGroup
+                            android:id="@+id/Ashworth_select"
+                            android:layout_width="1920dp"
+                            android:layout_height="wrap_content"
+                            android:divider="@drawable/radiobutton_divider"
+                            android:showDividers="middle"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/radioButton_Ashworth0"
+                                android:layout_width="1620dp"
+                                android:layout_height="115dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:text="0级    正常肌张力"
+                                 />
+
+                            <RadioButton
+                                android:id="@+id/radioButton_Ashworth1"
+                                android:layout_width="1600dp"
+                                android:layout_height="230dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:layout_marginRight="100dp"
+                                android:lineSpacingMultiplier="2"
+                                android:text="1级    肌张力略微增加：受累部分被动屈伸时，在关节活动范围之末时呈现最小的阻力，或出现突然卡住和突然释放" />
+
+                            <RadioButton
+                                android:id="@+id/radioButton_Ashworth1plus"
+                                android:layout_width="1600dp"
+                                android:layout_height="230dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:layout_marginRight="100dp"
+                                android:lineSpacingMultiplier="2"
+                                android:text="1+级    肌张力轻度增加：在关节活动后50%范围内出现突然卡住，然后在关节活动范围后50%均呈现最小阻力" />
+
+                            <RadioButton
+                                android:id="@+id/radioButton_Ashworth2"
+                                android:layout_width="1600dp"
+                                android:layout_height="230dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:layout_marginRight="100dp"
+                                android:lineSpacingMultiplier="2"
+                                android:text="2级    肌张力较明显地增加：通过关节活动范围的大部分时，肌张力均较明显地增加，但受累部分仍能较容易地被移动"
+                                />
+
+                            <RadioButton
+                                android:id="@+id/radioButton_Ashworth3"
+                                android:layout_width="1600dp"
+                                android:layout_height="115dp"
+                                android:layout_marginLeft="100dp"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:text="3级    肌张力严重增加：被动活动困难"
+                                android:textColor="@color/grey"
+                                android:textSize="42px" />
+
+                            <RadioButton
+                                android:id="@+id/radioButton_Ashworth4"
+                                android:layout_width="1600dp"
+                                android:layout_height="115dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:text="4级    僵直：受累部分被动屈伸时呈现僵直状态，不能活动"
+                                 />
+
+                        </RadioGroup>
+
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/title3"
+                        android:layout_height="wrap_content"
+                        android:background="@color/sysblue"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="150dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="100dp"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/white"
+                            android:textSize="54dp"
+                            android:text="3.手功能Brunnstrom分期" />
+
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/item3"
+                        android:layout_height="wrap_content">
+
+
+                        <RadioGroup
+                            android:id="@+id/Brunnstrom_select"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:divider="@drawable/radiobutton_divider"
+                            android:showDividers="middle"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/radioButton_Brunnstrom_I"
+                                android:layout_width="match_parent"
+                                android:layout_height="115dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:text="Ⅰ级      无任何运动"
+                                />
+
+                            <RadioButton
+                                android:id="@+id/radioButton_Brunnstrom_II"
+                                android:layout_width="match_parent"
+                                android:layout_height="115dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:text="Ⅱ级      仅有极细屈伸"
+                                />
+
+                            <RadioButton
+                                android:id="@+id/radioButton_Brunnstrom_III"
+                                android:layout_width="match_parent"
+                                android:layout_height="115dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:text="Ⅲ	级      可作钩状抓握，但不能伸指"
+                                 />
+
+                            <RadioButton
+                                android:id="@+id/radioButton_Brunnstrom_IV"
+                                android:layout_width="match_parent"
+                                android:layout_height="115dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:text="Ⅳ	级      能侧捏及松开拇指；手指有半随意的小范围伸展活动 "
+                                 />
+
+                            <RadioButton
+                                android:id="@+id/radioButton_Brunnstrom_V"
+                                android:layout_width="match_parent"
+                                android:layout_height="115dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:text="Ⅴ级      可作球状和圆柱状抓握；手指同时伸展，但不能单独伸展 "
+                                 />
+
+                            <RadioButton
+                                android:id="@+id/radioButton_Brunnstrom_VI"
+                                android:layout_width="match_parent"
+                                android:layout_height="115dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:text="Ⅵ	级      所有抓握均能完成，但速度和准确性比健侧差"
+                                />
+
+                        </RadioGroup>
+
+                    </TableRow>
+
+                    <TableRow android:id="@+id/title4"
+                        android:layout_height="wrap_content"
+                        android:background="@color/sysblue"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="150dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="100dp"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/white"
+                            android:textSize="54dp"
+                            android:text="4.Carroll上肢功能测试"
+                            />
+
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/title5"
+                        android:layout_height="wrap_content"
+                        android:background="@color/sysblue"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="150dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="100dp"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/white"
+                            android:textSize="54dp"
+                            android:text="5.手灵活性评定（九孔插板试验，nine-hole peg test, NHPT）" />
+                    </TableRow>
+                    <TableRow android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="50dp"
+                            android:layout_marginLeft="100dp"
+                            android:layout_marginTop="50dp"
+                            android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="1520dp"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingMultiplier="2"
+                            android:textColor="@color/grey"
+                            android:textSize="42px"
+                            android:text="9孔插板为一块13*13cm的木板，上有9个孔，孔深1.3cm，孔与孔之间间隔为3.2cm，每孔直径0.71cm，插棒为长3.2cm、直径为0.64cm的圆柱形棒，共9根。实验方法：在板旁测试手的一侧放一浅皿，将9根插棒放入其中，让患者用测试手一次一根地将木棒放入洞中，插完9根再每次一根地拔出放回浅皿内，计算共需的时间，测试时先利手后非利手。"
+                            />
+                        </LinearLayout>
+                    </TableRow>
+
+                    <TableRow android:id="@+id/title6"
+                        android:layout_height="wrap_content"
+                        android:background="@color/sysblue"
+                        android:gravity="center_vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="150dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="100dp"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/white"
+                            android:textSize="54dp"
+                            android:text="6.Moberg拾物试验（实体觉）"
+                            />
+                    </TableRow>
+                    <TableRow android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="50dp"
+                            android:layout_marginLeft="100dp"
+                            android:layout_marginTop="50dp"
+                            android:orientation="vertical">
+                        <TextView
+                            android:layout_width="1520dp"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingMultiplier="2"
+                            android:textColor="@color/grey"
+                            android:textSize="42px"
+                            android:text="把十种常用物品放于患者面前，尽快地、每次一件将桌面上的物体拾到纸盒内，先患手睁闭眼各做一次，再健手各做一次，记录时间。"
+                            />
+                        </LinearLayout>
+                    </TableRow>
+
+                    <TableRow android:id="@+id/title7"
+                        android:layout_height="wrap_content"
+                        android:background="@color/sysblue"
+                        android:gravity="center_vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="150dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="100dp"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/white"
+                            android:textSize="54dp"
+                            android:text="7.Barthel指数评分标准"
+                            />
+                    </TableRow>
+                    <TableRow  android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="0.0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="100dp"
+                            android:layout_marginRight="100dp"
+                            android:textSize="42px"
+                            android:textColor="@color/grey"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="大便"/>
+                        <View
+                            android:layout_height="match_parent"
+                            android:layout_width="2dp"
+                            android:background="#DBDBDB"
+                            />
+                        <RadioGroup
+                            android:id="@+id/Barthel_select_1"
+                            android:layout_width="0.0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="10"
+                            android:divider="@drawable/radiobutton_divider"
+                            android:showDividers="middle"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/radioButton_Barthel_1_0point"
+                                android:layout_width="match_parent"
+                                android:layout_height="115dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:text="0分      失禁；或无失禁，但有昏迷"
+                                 />
+
+                            <RadioButton
+                                android:id="@+id/radioButton_Barthel_1_5point"
+                                android:layout_width="match_parent"
+                                android:layout_height="115dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:text="5分      偶尔失禁，或需要在帮助下使用灌肠剂，或需要器具帮助"
+                                 />
+                            <RadioButton
+                                android:id="@+id/radioButton_Barthel_1_10point"
+                                android:layout_width="match_parent"
+                                android:layout_height="115dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:text="10分      能控制，如果需要，能使用灌肠剂或栓剂"
+                                />
+
+                        </RadioGroup>
+                    </TableRow>
+                    <TableRow android:layout_height="wrap_content"
+                        android:divider="@drawable/radiobutton_divider"
+                        android:showDividers="middle">
+                        <TextView
+                            android:layout_width="0.0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="100dp"
+                            android:layout_marginRight="100dp"
+                            android:textSize="42px"
+                            android:textColor="@color/grey"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="小便"/>
+                        <View
+                            android:layout_height="match_parent"
+                            android:layout_width="2dp"
+                            android:background="#DBDBDB"
+                            />
+                        <RadioGroup
+                            android:id="@+id/Barthel_select_2"
+                            android:layout_width="0.0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="10"
+                            android:divider="@drawable/radiobutton_divider"
+                            android:showDividers="middle"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/radioButton_Barthel_2_0point"
+                                android:layout_width="match_parent"
+                                android:layout_height="115dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:text="0分      失禁；或需由他人导尿；或无失禁，但有昏迷" />
+
+                            <RadioButton
+                                android:id="@+id/radioButton_Barthel_2_5point"
+                                android:layout_width="1250dp"
+                                android:layout_height="230dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:layout_marginRight="100dp"
+                                android:lineSpacingMultiplier="2"
+                                android:text="5分      偶尔失与禁（每24小时≤1次，每周大于1次），或需要器具帮助"
+                                />
+                            <RadioButton
+                                android:id="@+id/radioButton_Barthel_2_10point"
+                                android:layout_width="1250dp"
+                                android:layout_height="230dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:layout_marginRight="100dp"
+                                android:lineSpacingMultiplier="2"
+                                android:text="10分      能控制，如果需要，能使用集尿器或其他用具，并清洗。如无需帮助，自行导尿，并清洗导尿管，视为能控制" />
+
+                        </RadioGroup>
+                    </TableRow>
+
+                <TableRow android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="0.0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="100dp"
+                        android:layout_marginRight="100dp"
+                        android:textSize="42px"
+                        android:textColor="@color/grey"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="修饰"/>
+                    <View
+                        android:layout_height="match_parent"
+                        android:layout_width="2dp"
+                        android:background="#DBDBDB"
+                        />
+                    <RadioGroup
+                        android:id="@+id/Barthel_select_3"
+                        android:layout_width="0.0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"
+                        android:divider="@drawable/radiobutton_divider"
+                        android:showDividers="middle"
+                        android:orientation="vertical">
+
+                        <RadioButton
+                            android:id="@+id/radioButton_Barthel_3_0point"
+                            android:layout_width="match_parent"
+                            android:layout_height="115dp"
+                            android:textSize="42px"
+                            android:textColor="@color/grey"
+                            android:button="@drawable/radiobutton"
+                            android:paddingLeft="70px"
+                            android:layout_marginLeft="100dp"
+                            android:text="0分      依赖或需要帮助"
+                            />
+
+                        <RadioButton
+                            android:id="@+id/radioButton_Barthel_3_5point"
+                            android:layout_width="1250dp"
+                            android:layout_height="230dp"
+                            android:textSize="42px"
+                            android:textColor="@color/grey"
+                            android:button="@drawable/radiobutton"
+                            android:paddingLeft="70px"
+                            android:layout_marginLeft="100dp"
+                            android:layout_marginRight="100dp"
+                            android:lineSpacingMultiplier="2"
+                            android:text="5分      自理：在提供器具的情况下，可独立完成洗脸、刷牙、梳头、剃须"
+                             />
+                    </RadioGroup>
+                </TableRow>
+
+                    <TableRow android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="0.0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="100dp"
+                            android:layout_marginRight="100dp"
+                            android:textSize="42px"
+                            android:textColor="@color/grey"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="用厕"/>
+                        <View
+                            android:layout_height="match_parent"
+                            android:layout_width="2dp"
+                            android:background="#DBDBDB"
+                            />
+                        <RadioGroup
+                            android:id="@+id/Barthel_select_4"
+                            android:layout_width="0.0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="10"
+                            android:divider="@drawable/radiobutton_divider"
+                            android:showDividers="middle"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/radioButton_Barthel_4_0point"
+                                android:layout_width="match_parent"
+                                android:layout_height="115dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:text="0分      依赖" />
+
+                            <RadioButton
+                                android:id="@+id/radioButton_Barthel_4_5point"
+                                android:layout_width="1250dp"
+                                android:layout_height="230dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:layout_marginRight="100dp"
+                                android:lineSpacingMultiplier="2"
+                                android:text="5分      需部分帮助：指在穿脱衣裤，使用卫生纸擦净会阴，保持平衡或便后清洁时需要帮助"
+                                 />
+                            <RadioButton
+                                android:id="@+id/radioButton_Barthel_4_10point"
+                                android:layout_width="1250dp"
+                                android:layout_height="345dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:layout_marginRight="100dp"
+                                android:lineSpacingMultiplier="2"
+                                android:text="10分      自理：指能独立 地进出厕所，使用厕所或便盆，并能穿脱衣裤、使用卫生纸，擦净会阴和冲洗排泄物，或倒掉并清洗便盆"
+                                 />
+                        </RadioGroup>
+                    </TableRow>
+
+                    <TableRow android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="0.0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="100dp"
+                            android:layout_marginRight="100dp"
+                            android:textSize="42px"
+                            android:textColor="@color/grey"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="进食"/>
+                        <View
+                            android:layout_height="match_parent"
+                            android:layout_width="2dp"
+                            android:background="#DBDBDB"
+                            />
+                        <RadioGroup
+                            android:id="@+id/Barthel_select_5"
+                            android:layout_width="0.0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="10"
+                            android:divider="@drawable/radiobutton_divider"
+                            android:showDividers="middle"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/radioButton_Barthel_5_0point"
+                                android:layout_width="match_parent"
+                                android:layout_height="115dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:text="0分      依赖"
+                                />
+
+                            <RadioButton
+                                android:id="@+id/radioButton_Barthel_5_5point"
+                                android:layout_width="1250dp"
+                                android:layout_height="230dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:layout_marginRight="100dp"
+                                android:lineSpacingMultiplier="2"
+                                android:text="5分      需部分帮助：指能吃任何正常食物，但在切割、搅拌食物或夹菜、盛饭时需要帮助，或较长时间才能完成"
+                                />
+                            <RadioButton
+                                android:id="@+id/radioButton_Barthel_5_10point"
+                                android:layout_width="1250dp"
+                                android:layout_height="230dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:layout_marginRight="100dp"
+                                android:lineSpacingMultiplier="2"
+                                android:text="10分      自理：指能使用任何必要的装置，在适合的时间内独立完成包括夹菜、盛饭在内的进食过程"
+                                 />
+                        </RadioGroup>
+                    </TableRow>
+
+                    <TableRow android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="0.0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="100dp"
+                            android:layout_marginRight="100dp"
+                            android:textSize="42px"
+                            android:textColor="@color/grey"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="转移"/>
+                        <View
+                            android:layout_height="match_parent"
+                            android:layout_width="2dp"
+                            android:background="#DBDBDB"
+                            />
+                        <RadioGroup
+                            android:id="@+id/Barthel_select_6"
+                            android:layout_width="0.0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="10"
+                            android:divider="@drawable/radiobutton_divider"
+                            android:showDividers="middle"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/radioButton_Barthel_6_0point"
+                                android:layout_width="match_parent"
+                                android:layout_height="115dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:text="0分      依赖"
+                                 />
+
+                            <RadioButton
+                                android:id="@+id/radioButton_Barthel_6_5point"
+                                android:layout_width="match_parent"
+                                android:layout_height="115dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:text="5分       需大量帮助：能坐起，需两人以上帮助"
+                                 />
+                            <RadioButton
+                                android:id="@+id/radioButton_Barthel_6_10point"
+                                android:layout_width="1250dp"
+                                android:layout_height="230dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:lineSpacingMultiplier="2"
+                                android:text="10分      需小量帮助，能坐，需两人或一个强壮且动作娴熟的人帮助"
+                                />
+                        </RadioGroup>
+                    </TableRow>
+
+                    <TableRow android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="0.0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="100dp"
+                            android:layout_marginRight="100dp"
+                            android:textSize="42px"
+                            android:textColor="@color/grey"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="平地步行"/>
+                        <View
+                            android:layout_height="match_parent"
+                            android:layout_width="2dp"
+                            android:background="#DBDBDB"
+                            />
+                        <RadioGroup
+                            android:id="@+id/Barthel_select_7"
+                            android:layout_width="0.0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="10"
+                            android:divider="@drawable/radiobutton_divider"
+                            android:showDividers="middle"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/radioButton_Barthel_7_0point"
+                                android:layout_width="match_parent"
+                                android:layout_height="115dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:text="0分      依赖：不能步行"
+                               />
+
+                            <RadioButton
+                                android:id="@+id/radioButton_Barthel_7_5point"
+                                android:layout_width="1250dp"
+                                android:layout_height="230dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:layout_marginRight="100dp"
+                                android:lineSpacingMultiplier="2"
+                                android:text="5分       需大量帮助：如果不能行走，能使用轮椅行走45米，并能向各个方向移动以及进出厕所"
+                                 />
+                            <RadioButton
+                                android:id="@+id/radioButton_Barthel_7_10point"
+                                android:layout_width="1250dp"
+                                android:layout_height="230dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:layout_marginRight="100dp"
+                                android:lineSpacingMultiplier="2"
+                                android:text="10分      需小量帮助：指在一人帮助下行走45米以上，帮助可以是体力或语言指导、监督"
+                                />
+                            <RadioButton
+                                android:id="@+id/radioButton_Barthel_7_15point"
+                                android:layout_width="1250dp"
+                                android:layout_height="230dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:layout_marginRight="100dp"
+                                android:lineSpacingMultiplier="2"
+                                android:text="15分      自理：指能在家中或病房周围水平路面上独自行走45米以上，可以用辅助装置，但不包括带轮的助行器"
+                               />
+                        </RadioGroup>
+                    </TableRow>
+
+                    <TableRow android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="0.0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="100dp"
+                            android:layout_marginRight="100dp"
+                            android:textSize="42px"
+                            android:textColor="@color/grey"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="穿着"/>
+                        <View
+                            android:layout_height="match_parent"
+                            android:layout_width="2dp"
+                            android:background="#DBDBDB"
+                            />
+                        <RadioGroup
+                            android:id="@+id/Barthel_select_8"
+                            android:layout_width="0.0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="10"
+                            android:divider="@drawable/radiobutton_divider"
+                            android:showDividers="middle"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/radioButton_Barthel_8_0point"
+                                android:layout_width="match_parent"
+                                android:layout_height="115dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:text="0分      需要帮助"
+                                 />
+
+                            <RadioButton
+                                android:id="@+id/radioButton_Barthel_8_5point"
+                                android:layout_width="match_parent"
+                                android:layout_height="115dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:text="5分       需要帮助"
+                                 />
+                            <RadioButton
+                                android:id="@+id/radioButton_Barthel_8_10point"
+                                android:layout_width="match_parent"
+                                android:layout_height="115dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:text="10分      自理"
+                                />
+                        </RadioGroup>
+                    </TableRow>
+
+                    <TableRow android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="0.0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="100dp"
+                            android:layout_marginRight="100dp"
+                            android:textSize="42px"
+                            android:textColor="@color/grey"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="上楼梯"/>
+                        <View
+                            android:layout_height="match_parent"
+                            android:layout_width="2dp"
+                            android:background="#DBDBDB"
+                            />
+                        <RadioGroup
+                            android:id="@+id/Barthel_select_9"
+                            android:layout_width="0.0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="10"
+                            android:divider="@drawable/radiobutton_divider"
+                            android:showDividers="middle"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/radioButton_Barthel_9_0point"
+                                android:layout_width="match_parent"
+                                android:layout_height="115dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:text="0分      依赖：不能上下楼"
+                                 />
+
+                            <RadioButton
+                                android:id="@+id/radioButton_Barthel_9_5point"
+                                android:layout_width="1250dp"
+                                android:layout_height="115dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:text="5分       需要帮助：在体力帮助或语言指导、监督下上、下一层楼"
+                                 />
+                            <RadioButton
+                                android:id="@+id/radioButton_Barthel_9_10point"
+                                android:layout_width="match_parent"
+                                android:layout_height="115dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:text="10分      自理"
+                                 />
+                        </RadioGroup>
+                    </TableRow>
+
+                    <TableRow android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="0.0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="100dp"
+                            android:layout_marginRight="100dp"
+                            android:textSize="42px"
+                            android:textColor="@color/grey"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="洗澡"/>
+                        <View
+                            android:layout_height="match_parent"
+                            android:layout_width="2dp"
+                            android:background="#DBDBDB"
+                            />
+                        <RadioGroup
+                            android:id="@+id/Barthel_select_10"
+                            android:layout_width="0.0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="10"
+                            android:divider="@drawable/radiobutton_divider"
+                            android:showDividers="middle"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/radioButton_Barthel_10_0point"
+                                android:layout_width="match_parent"
+                                android:layout_height="115dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:text="0分      依赖或需要帮助"
+                                />
+
+                            <RadioButton
+                                android:id="@+id/radioButton_Barthel_10_5point"
+                                android:layout_width="match_parent"
+                                android:layout_height="115dp"
+                                android:textSize="42px"
+                                android:textColor="@color/grey"
+                                android:button="@drawable/radiobutton"
+                                android:paddingLeft="70px"
+                                android:layout_marginLeft="100dp"
+                                android:text="5分       自理"
+                                 />
+                        </RadioGroup>
+                    </TableRow>
+
+                    <TableRow android:layout_height="wrap_content">
+                        <TableLayout
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent">
+                            <TableRow android:layout_height="wrap_content">
+                                <TextView
+                                    android:layout_width="0.0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:layout_marginLeft="100dp"
+                                    android:layout_marginTop="50dp"
+                                    android:textSize="42dp"
+                                    android:text="总得分为："></TextView>
+                                <TextView
+                                    android:id="@+id/table_score"
+                                    android:layout_width="0.0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="7"
+                                    android:layout_marginLeft="100dp"
+                                    android:layout_marginTop="50dp"
+                                    android:textSize="42dp"
+                                    android:text="点击计算总分"
+                                    android:textColor="@color/lightgray"/>
+                            </TableRow>
+                            <TableRow android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:id="@+id/textView12"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="50dp"
+                                    android:layout_marginLeft="100dp"
+                                    android:layout_marginTop="50dp"
+                                    android:text="60分以上：有轻度残疾，但生活基本自理；40~60分：\n中度残疾，生活需要帮助;\n20~40分：重度残疾，生活需要很大帮助：\n20分以下：完全残疾，生活完全依赖。"
+                                    android:textSize="42dp" />
+                            </TableRow>
+                            <TableRow android:layout_height="wrap_content"
+                                android:layout_width="match_parent"
+                                android:gravity="center">
+                                <Button android:id="@+id/save_table"
+                                    android:layout_width="222dp"
+                                    android:layout_height="82dp"
+                                    android:background="@drawable/startbutton"
+                                    android:elevation="6dp"
+                                    android:textColor="@color/white"
+                                    android:textSize="42px"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:layout_marginTop="20dp"
+                                    android:layout_marginBottom="50dp"
+                                    android:text="保存"/>
+                            </TableRow>
+                        </TableLayout>
+
+                    </TableRow>
+
+                </TableLayout>
+            </LinearLayout>
+        </ScrollView>
+<!--/LinearLayout-->
+
+    <!--2. 底部的三个图标按钮-->
+
+    <RelativeLayout
+        android:id="@+id/bottom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+
+        <Button
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/user"
+            android:background="@drawable/user" />
+        <TextView
+            android:id="@+id/tv_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="26dp"
+            android:layout_marginStart="26dp"
+            android:layout_toEndOf="@+id/user"
+            android:layout_toRightOf="@+id/user"
+            android:text="用户1"
+            android:textColor="@color/darkgrey"
+            android:textSize="40px" />
+
+        <ImageView
+            android:id="@+id/home"
+            android:layout_width="208dp"
+            android:layout_height="85dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/logo" />
+        <Button
+            android:id="@+id/set"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/setting" />
+
+    </RelativeLayout>
+
+    <!--3. 顶部的titleBar-->
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--沉浸式activity，这个view是用来占位的-->
+
+        <View
+            android:id="@+id/position_view"
+            android:layout_width="1px"
+            android:layout_height="1px" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="700dp"
+                android:textColor="@color/sysblue"
+                android:gravity="center"
+                android:textSize="48px"
+                android:text="2017-02-03   12:40"
+                android:id="@+id/clock" />
+
+
+            <ImageView
+                android:id="@+id/power"
+                android:layout_width="30dp"
+                android:layout_height="49dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/power"
+                />
+
+            <ImageView
+                android:id="@+id/volume"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="95dp"
+                android:background="@drawable/volume"
+                />
+            <ImageView
+                android:id="@+id/wifi"
+                android:layout_width="62dp"
+                android:layout_height="45dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="162dp"
+                android:background="@drawable/wifi"
+                />
+            <ImageView
+                android:id="@+id/bluetooth"
+                android:layout_width="36dp"
+                android:layout_height="53dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="255dp"
+                android:background="@drawable/bluetooth"
+                />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</RelativeLayout>

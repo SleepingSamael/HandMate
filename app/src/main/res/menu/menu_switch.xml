@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/change"
+        android:title="切换用户" />
+    <item android:id="@+id/restart"
+        android:title="重新启动"/>
+    <item android:id="@+id/exit"
+        android:title="退出系统" />
+
+</menu>

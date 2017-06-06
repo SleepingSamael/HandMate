@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/back"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:background="@drawable/background">
+
+    <android.support.v7.widget.CardView
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="780dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginLeft="70dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="1dp">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="3dip"
+            android:gravity="center"
+            android:divider="@drawable/table_divide"
+            android:showDividers="middle"
+            >
+
+            <TableRow android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/logo_to_admin"
+                    android:layout_width="0.0dp"
+                    android:layout_height="85dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/hardwarelogo" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="0.0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:text="硬件信息"
+                    android:textSize="48dp" />
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="6"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="30dp"
+                    android:text="版本: 10 或更高版本\n系统结构: Intel CPU 系列: 6，型号: 12，分级: 3 具有 MMX 扩展指令集，SSE 整数，SSE 浮点，SSE2, SSE3
+                    \n物理处理器数: 4
+                    \n处理器速度: 3292 MHz
+                    \n内建内存: 8129 MB
+                    \n空闲内存:2 MB
+                    \n可用的内存: 6947 MB
+                    \n占用的内存: 70 %"
+                    android:textSize="32dp" />
+
+            </TableRow>
+
+        </TableLayout>
+    </android.support.v7.widget.CardView>
+
+    <!--2. 底部的三个图标按钮-->
+
+    <RelativeLayout
+        android:id="@+id/bottom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+
+        <Button
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/user"
+            android:background="@drawable/user" />
+        <TextView
+            android:id="@+id/tv_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="26dp"
+            android:layout_marginStart="26dp"
+            android:layout_toEndOf="@+id/user"
+            android:layout_toRightOf="@+id/user"
+            android:text="用户1"
+            android:textColor="@color/darkgrey"
+            android:textSize="40px" />
+
+        <ImageView
+            android:id="@+id/home"
+            android:layout_width="208dp"
+            android:layout_height="85dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/logo" />
+        <Button
+            android:id="@+id/set"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/setting" />
+
+    </RelativeLayout>
+
+    <!--3. 顶部的titleBar-->
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--沉浸式activity，这个view是用来占位的-->
+
+        <View
+            android:id="@+id/position_view"
+            android:layout_width="1px"
+            android:layout_height="1px" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="700dp"
+                android:textColor="@color/sysblue"
+                android:gravity="center"
+                android:textSize="48px"
+                android:text="2017-02-03   12:40"
+                android:id="@+id/clock" />
+
+
+            <ImageView
+                android:id="@+id/power"
+                android:layout_width="30dp"
+                android:layout_height="49dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/power"
+                />
+
+            <ImageView
+                android:id="@+id/volume"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="95dp"
+                android:background="@drawable/volume"
+                />
+
+            <ImageView
+                android:id="@+id/wifi"
+                android:layout_width="62dp"
+                android:layout_height="45dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="162dp"
+                android:background="@drawable/wifi" />
+
+            <ImageView
+                android:id="@+id/bluetooth"
+                android:layout_width="36dp"
+                android:layout_height="53dp"
+                android:layout_marginRight="29dp"
+                android:background="@drawable/bluetooth"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/wifi"
+                android:layout_toStartOf="@+id/wifi"
+                android:layout_marginEnd="29dp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

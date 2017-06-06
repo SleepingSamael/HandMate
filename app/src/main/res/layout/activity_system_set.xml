@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/back"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:background="@drawable/background">
+
+    <android.support.v7.widget.CardView
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="780dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginLeft="70dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="1dp">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="3dip"
+            android:gravity="center"
+            android:divider="@drawable/table_divide"
+            android:showDividers="middle"
+            >
+
+            <TableRow android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="0.0dp"
+                    android:layout_height="84dp"
+                    android:layout_weight="2"
+                    app:srcCompat="@drawable/lighticon"
+                    />
+
+                <TextView
+                    android:layout_width="0.0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="亮度调节"
+                    android:textSize="48dp" />
+
+
+                <TextView
+                    android:layout_width="0.0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="暗"
+                    android:gravity="right"
+                    android:textSize="40dp"/>
+
+                <SeekBar
+                    android:id="@+id/light_seekBar"
+                    android:layout_width="0.0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_weight="6"
+                    android:maxHeight="10dp"
+                    android:minHeight="10dp"
+                    android:progressDrawable="@drawable/seekbar"
+                    android:thumb="@drawable/seekbarbutton" />
+                <TextView
+                    android:layout_width="0.0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="亮"
+                    android:textSize="40dp"/>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="84dp"
+                    android:layout_weight="2"
+                    app:srcCompat="@drawable/fonticon" />
+
+                <TextView
+                    android:layout_width="0.0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="字体大小"
+                    android:textSize="48dp" />
+
+                <TextView
+                    android:layout_width="0.0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="A"
+                    android:gravity="right"
+                    android:textSize="30dp"/>
+
+                <SeekBar
+                    android:id="@+id/font_seekBar"
+                    android:layout_width="0.0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_weight="6"
+                    android:maxHeight="10dp"
+                    android:minHeight="10dp"
+                    android:progressDrawable="@drawable/seekbar"
+                    android:thumb="@drawable/seekbarbutton" />
+                <TextView
+                    android:layout_width="0.0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="A"
+                    android:textSize="48dp"/>
+                </TableRow>
+
+            <TableRow android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="84dp"
+                    android:layout_weight="2"
+                    app:srcCompat="@drawable/voluicon" />
+
+                <TextView
+                    android:layout_width="0.0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="音量调节"
+                    android:textSize="48dp" />
+
+
+                <TextView
+                    android:layout_width="0.0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="小"
+                    android:textSize="40dp"
+                    android:gravity="right"/>
+                <SeekBar
+                    android:id="@+id/volum_seekBar"
+                    android:layout_width="0.0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_weight="6"
+                    android:maxHeight="10dp"
+                    android:minHeight="10dp"
+                    android:progressDrawable="@drawable/seekbar"
+                    android:thumb="@drawable/seekbarbutton" />
+
+                <TextView
+                    android:layout_width="0.0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="大"
+                    android:textSize="40dp"/>
+            </TableRow>
+
+            <TableRow android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="84dp"
+                    android:layout_weight="2"
+                    app:srcCompat="@drawable/voiceicon" />
+
+                <TextView
+                    android:layout_width="0.0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="语音开关"
+                    android:textSize="48dp" />
+
+
+                <Switch
+                    android:id="@+id/voice_switch"
+                    android:layout_width="0.0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="7"
+                    android:checked="false"
+                    android:thumb="@drawable/switch_thumb"
+                    android:track="@drawable/switch_track"
+                    android:layout_marginRight="110dp"
+                    android:layout_marginLeft="95dp"
+                    />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="84dp"
+                    android:layout_weight="2"
+                    app:srcCompat="@drawable/seticon" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="高级设置"
+                    android:textSize="48dp"/>
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_weight="6"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="60dp"/>
+                <ImageView
+                    android:id="@+id/senior_set"
+                    android:layout_width="0dp"
+                    android:layout_height="82dp"
+                    android:layout_weight="2"
+                    app:srcCompat="@drawable/arrowicon" />
+            </TableRow>
+
+        </TableLayout>
+    </android.support.v7.widget.CardView>
+
+    <!--2. 底部的三个图标按钮-->
+
+    <RelativeLayout
+        android:id="@+id/bottom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+
+        <Button
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/user"
+            android:background="@drawable/user" />
+        <TextView
+            android:id="@+id/tv_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="26dp"
+            android:layout_marginStart="26dp"
+            android:layout_toEndOf="@+id/user"
+            android:layout_toRightOf="@+id/user"
+            android:text="用户1"
+            android:textColor="@color/darkgrey"
+            android:textSize="40px" />
+
+        <ImageView
+            android:id="@+id/home"
+            android:layout_width="208dp"
+            android:layout_height="85dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/logo" />
+        <Button
+            android:id="@+id/set"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/setting" />
+
+    </RelativeLayout>
+
+    <!--3. 顶部的titleBar-->
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--沉浸式activity，这个view是用来占位的-->
+
+        <View
+            android:id="@+id/position_view"
+            android:layout_width="1px"
+            android:layout_height="1px" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="700dp"
+                android:textColor="@color/sysblue"
+                android:gravity="center"
+                android:textSize="48px"
+                android:text="2017-02-03   12:40"
+                android:id="@+id/clock" />
+
+
+            <ImageView
+                android:id="@+id/power"
+                android:layout_width="30dp"
+                android:layout_height="49dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/power"
+                />
+
+            <ImageView
+                android:id="@+id/volume"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="95dp"
+                android:background="@drawable/volume"
+                />
+
+            <ImageView
+                android:id="@+id/wifi"
+                android:layout_width="62dp"
+                android:layout_height="45dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="162dp"
+                android:background="@drawable/wifi" />
+
+            <ImageView
+                android:id="@+id/bluetooth"
+                android:layout_width="36dp"
+                android:layout_height="53dp"
+                android:layout_marginRight="29dp"
+                android:background="@drawable/bluetooth"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/wifi"
+                android:layout_toStartOf="@+id/wifi"
+                android:layout_marginEnd="29dp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
