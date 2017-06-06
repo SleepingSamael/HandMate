@@ -97,9 +97,6 @@ public class TimeLineAdapter extends BaseAdapter {
             item.lineHiLight2.setVisibility(View.INVISIBLE);
         }
 
-
-
-
         return convertView;
     }
 

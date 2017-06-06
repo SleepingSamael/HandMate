@@ -291,18 +291,15 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
                 startActivity(i);
                 break;
             case R.id.restart:
-                PowerManager pManager=(PowerManager) getSystemService(Context.POWER_SERVICE);
-                pManager.reboot(null);//重启</span>
-                /*Toast.makeText(this, "重新启动", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "重新启动", Toast.LENGTH_SHORT).show();
                 final Intent intent = getPackageManager().getLaunchIntentForPackage(getPackageName());
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);*/
+                startActivity(intent);
                 break;
             case R.id.exit:
-
-                //Toast.makeText(this, "退出系统", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "退出系统", Toast.LENGTH_SHORT).show();
                 //关闭整个程序
-                //SysApplication.getInstance().exit();
+                SysApplication.getInstance().exit();
                 break;
             default:
                 break;

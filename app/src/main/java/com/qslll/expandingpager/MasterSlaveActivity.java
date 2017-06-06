@@ -128,37 +128,37 @@ public class MasterSlaveActivity extends AppCompatActivity implements ExpandingF
             public void onClick(View v) {
                 Intent i = new Intent(MasterSlaveActivity.this, com.qslll.expandingpager.U3D.u3dPlayer.class);
                 switch (title.getText().toString()) {
-                    case "场景1":
+                    case "海岛":
                         historyData.setPid(userData.getUserId());
                         historyData.setHid(mhistoryDataManager.countData()+1);
-                        historyData.setItem("主从模式 　场景1");
+                        historyData.setItem("主从模式 　海岛");
                         historyData.setDate(sdate);
                         historyData.setTime(stime);
                         mhistoryDataManager.inserHistorytData(historyData);
                         mbundle.putInt("Mode", 1001);
                         break;
-                    case "场景2":
+                    case "丛林":
                         historyData.setPid(userData.getUserId());
                         historyData.setHid(mhistoryDataManager.countData()+1);
-                        historyData.setItem("主从模式 　场景2");
+                        historyData.setItem("主从模式 　丛林");
                         historyData.setDate(sdate);
                         historyData.setTime(stime);
                         mhistoryDataManager.inserHistorytData(historyData);
                         mbundle.putInt("Mode", 1002);
                         break;
-                    case "场景3":
+                    case "海滩":
                         historyData.setPid(userData.getUserId());
                         historyData.setHid(mhistoryDataManager.countData()+1);
-                        historyData.setItem("主从模式 　场景3");
+                        historyData.setItem("主从模式 　海滩");
                         historyData.setDate(sdate);
                         historyData.setTime(stime);
                         mhistoryDataManager.inserHistorytData(historyData);
                         mbundle.putInt("Mode", 1003);
                         break;
-                    case "场景4":
+                    case "客厅":
                         historyData.setPid(userData.getUserId());
                         historyData.setHid(mhistoryDataManager.countData()+1);
-                        historyData.setItem("主从模式 　场景4");
+                        historyData.setItem("主从模式 　客厅");
                         historyData.setDate(sdate);
                         historyData.setTime(stime);
                         mhistoryDataManager.inserHistorytData(historyData);
@@ -226,10 +226,10 @@ public class MasterSlaveActivity extends AppCompatActivity implements ExpandingF
     private List<Travel> generateTravelList(){
         List<Travel> travels = new ArrayList<>();
         for(int i=0;i<1;++i){
-            travels.add(new Travel("场景1", R.drawable.game1,"主从模式通过主手带动从手运动，并在屏幕上显示当前手部的动作，给患者直观的视觉感受。"));
-            travels.add(new Travel("场景2", R.drawable.game2,"主从模式通过主手带动从手运动，并在屏幕上显示当前手部的动作，给患者直观的视觉感受。"));
-            travels.add(new Travel("场景3", R.drawable.game3,"主从模式通过主手带动从手运动，并在屏幕上显示当前手部的动作，给患者直观的视觉感受。"));
-            travels.add(new Travel("场景4", R.drawable.game4,"主从模式通过主手带动从手运动，并在屏幕上显示当前手部的动作，给患者直观的视觉感受。"));
+            travels.add(new Travel("海岛", R.drawable.game1,"主从模式通过主手带动从手运动，并在屏幕上显示当前手部的动作，给患者直观的视觉感受。"));
+            travels.add(new Travel("丛林", R.drawable.game2,"主从模式通过主手带动从手运动，并在屏幕上显示当前手部的动作，给患者直观的视觉感受。"));
+            travels.add(new Travel("海滩", R.drawable.game3,"主从模式通过主手带动从手运动，并在屏幕上显示当前手部的动作，给患者直观的视觉感受。"));
+            travels.add(new Travel("客厅", R.drawable.game4,"主从模式通过主手带动从手运动，并在屏幕上显示当前手部的动作，给患者直观的视觉感受。"));
         }
         return travels;
     }

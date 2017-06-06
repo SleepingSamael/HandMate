@@ -84,11 +84,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TimeLineAdapter.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TimeLineAdapter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/timeline/TimeLineAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="100" column="0" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
+            <state relative-caret-position="492">
+              <caret line="71" column="37" selection-start-line="71" selection-start-column="26" selection-end-line="71" selection-end-column="37" />
               <folding>
                 <element signature="e#695#705#0" expanded="true" />
               </folding>
@@ -96,10 +96,20 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="ExerciseActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/ExerciseActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="54">
+              <caret line="64" column="81" selection-start-line="64" selection-start-column="81" selection-end-line="64" selection-end-column="81" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="SortAdapter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/search/SortAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="367">
+            <state relative-caret-position="-281">
               <caret line="52" column="22" selection-start-line="52" selection-start-column="22" selection-end-line="52" selection-end-column="22" />
               <folding />
             </state>
@@ -144,12 +154,27 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IMyAidlInterface.aidl" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/aidl/com/qslll/expandingpager/IMyAidlInterface.aidl">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+            <state relative-caret-position="102">
+              <caret line="298" column="27" selection-start-line="298" selection-start-column="27" selection-end-line="298" selection-end-column="27" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MasterSlaveActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/MasterSlaveActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="371">
+              <caret line="179" column="13" selection-start-line="179" selection-start-column="13" selection-end-line="179" selection-end-column="13" />
+              <folding>
+                <element signature="e#4452#6801#0" expanded="true" />
+                <element signature="e#6800#6801#0" expanded="true" />
+                <element signature="e#7610#7853#0" expanded="true" />
+                <element signature="e#7852#7853#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -2854,7 +2879,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/ReportActivity.java" />
         <option value="$PROJECT_DIR$/Android.mk" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/EvaluateActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/EvaluateTableActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/ExerciseActivity.java" />
@@ -2864,15 +2888,16 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/UserEditActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/GameItemActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/timeline_item.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/MasterSlaveActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/HistoryActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_switch.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/UsersActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/ComService.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/timeline/TimeLineAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/U3D/u3dPlayer.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Connection.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/adapter/UserAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/timeline/TimeLineAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/MasterSlaveActivity.java" />
       </list>
     </option>
   </component>
@@ -3681,8 +3706,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-11" y="-11" width="2582" height="1406" extended-state="7" />
-    <editor active="true" />
+    <frame x="-11" y="-11" width="2582" height="1406" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15711805" sideWeight="0.49837267" order="7" side_tool="false" content_ui="tabs" />
@@ -3690,7 +3715,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.71985817" sideWeight="0.35028479" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11892361" sideWeight="0.64971524" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5607639" sideWeight="0.64971524" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.056946687" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -4350,16 +4375,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="80" column="34" selection-start-line="80" selection-start-column="34" selection-end-line="80" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/ReportActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2646">
@@ -4422,26 +4437,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/ExerciseActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2970">
-          <caret line="64" column="81" selection-start-line="64" selection-start-column="81" selection-end-line="64" selection-end-column="81" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/GameItemActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5076">
           <caret line="134" column="50" selection-start-line="134" selection-start-column="50" selection-end-line="134" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/MasterSlaveActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3035">
-          <caret line="70" column="26" selection-start-line="70" selection-start-column="21" selection-end-line="70" selection-end-column="26" />
           <folding />
         </state>
       </provider>
@@ -4619,7 +4618,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/search/SortAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
+        <state relative-caret-position="-281">
           <caret line="52" column="22" selection-start-line="52" selection-start-column="22" selection-end-line="52" selection-end-column="22" />
           <folding />
         </state>
@@ -4627,10 +4626,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/timeline/TimeLineAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="100" column="0" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
+        <state relative-caret-position="492">
+          <caret line="71" column="37" selection-start-line="71" selection-start-column="26" selection-end-line="71" selection-end-column="37" />
           <folding>
             <element signature="e#695#705#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/ExerciseActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="64" column="81" selection-start-line="64" selection-start-column="81" selection-end-line="64" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="298" column="27" selection-start-line="298" selection-start-column="27" selection-end-line="298" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/MasterSlaveActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="371">
+          <caret line="179" column="13" selection-start-line="179" selection-start-column="13" selection-end-line="179" selection-end-column="13" />
+          <folding>
+            <element signature="e#4452#6801#0" expanded="true" />
+            <element signature="e#6800#6801#0" expanded="true" />
+            <element signature="e#7610#7853#0" expanded="true" />
+            <element signature="e#7852#7853#0" expanded="true" />
           </folding>
         </state>
       </provider>
