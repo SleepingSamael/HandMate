@@ -133,6 +133,7 @@ public class UserEditActivity extends AppCompatActivity {
                 Intent i;
                 i = new Intent(UserEditActivity.this,UsersActivity.class);
                 startActivity(i);
+                finish();
             }
         });
 
@@ -172,6 +173,7 @@ public class UserEditActivity extends AppCompatActivity {
                         Intent i;
                         i = new Intent(UserEditActivity.this, UsersActivity.class);
                         startActivity(i);
+                        finish();
 
                     }
 
@@ -206,6 +208,7 @@ public class UserEditActivity extends AppCompatActivity {
                         Intent i;
                         i = new Intent(UserEditActivity.this, UsersActivity.class);
                         startActivity(i);
+                            finish();
                     }
                 }
             }

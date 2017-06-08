@@ -196,6 +196,7 @@ public class GameItemActivity extends AppCompatActivity implements ExpandingFrag
                 Intent i;
                 i = new Intent(GameItemActivity.this,SystemSetActivity.class);
                 startActivity(i);
+                finish();
             }
         });
         /**
@@ -261,6 +262,7 @@ public class GameItemActivity extends AppCompatActivity implements ExpandingFrag
                 Intent i;
                 i = new Intent(GameItemActivity.this, UsersActivity.class);
                 startActivity(i);
+                finish();
                 break;
             case R.id.restart:
                 Toast.makeText(this, "重新启动", Toast.LENGTH_SHORT).show();

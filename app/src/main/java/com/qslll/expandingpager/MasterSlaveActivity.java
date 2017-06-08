@@ -200,6 +200,7 @@ public class MasterSlaveActivity extends AppCompatActivity implements ExpandingF
                 Intent i;
                 i = new Intent(MasterSlaveActivity.this,SystemSetActivity.class);
                 startActivity(i);
+                finish();
             }
         });
         /**
@@ -266,6 +267,7 @@ public boolean onMenuItemClick(MenuItem item) {
         Intent i;
         i = new Intent(MasterSlaveActivity.this, UsersActivity.class);
         startActivity(i);
+            finish();
         break;
         case R.id.restart:
         Toast.makeText(this, "重新启动", Toast.LENGTH_SHORT).show();

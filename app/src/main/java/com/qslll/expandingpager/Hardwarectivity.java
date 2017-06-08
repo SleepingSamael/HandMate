@@ -81,6 +81,7 @@ public class Hardwarectivity extends AppCompatActivity implements View.OnClickLi
                 Intent i;
                 i = new Intent(Hardwarectivity.this, SystemSetActivity.class);
                 startActivity(i);
+                finish();
             }
         });
     }
@@ -110,6 +111,7 @@ public class Hardwarectivity extends AppCompatActivity implements View.OnClickLi
                 Intent i;
                 i = new Intent(Hardwarectivity.this, UsersActivity.class);
                 startActivity(i);
+                finish();
                 break;
             case R.id.restart:
                 Toast.makeText(this, "重新启动", Toast.LENGTH_SHORT).show();

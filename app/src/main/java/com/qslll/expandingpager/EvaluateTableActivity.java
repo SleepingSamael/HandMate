@@ -56,6 +56,7 @@ public class EvaluateTableActivity extends AppCompatActivity implements View.OnC
                 Intent i;
                 i = new Intent(EvaluateTableActivity.this, SystemSetActivity.class);
                 startActivity(i);
+                finish();
             }
         });
         //home键
@@ -96,6 +97,7 @@ public class EvaluateTableActivity extends AppCompatActivity implements View.OnC
                 Intent i;
                 i = new Intent(EvaluateTableActivity.this, UsersActivity.class);
                 startActivity(i);
+                finish();
                 break;
             case R.id.restart:
                 Toast.makeText(this, "重新启动", Toast.LENGTH_SHORT).show();

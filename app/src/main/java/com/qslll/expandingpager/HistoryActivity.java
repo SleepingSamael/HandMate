@@ -206,6 +206,7 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
                 Intent i;
                 i = new Intent(HistoryActivity.this, SystemSetActivity.class);
                 startActivity(i);
+                finish();
             }
         });
 
@@ -238,6 +239,7 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
                 Intent i;
                 i = new Intent(HistoryActivity.this, UsersActivity.class);
                 startActivity(i);
+                finish();
                 break;
             case R.id.restart:
                 Toast.makeText(this, "重新启动", Toast.LENGTH_SHORT).show();

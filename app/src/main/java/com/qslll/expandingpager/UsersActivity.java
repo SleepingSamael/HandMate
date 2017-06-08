@@ -328,6 +328,7 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
                 userbundle.putInt("Mode", 0);
                 i.putExtras(userbundle);
                 startActivity(i);
+                finish();
             }
 
         });
@@ -367,6 +368,7 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
                 userbundle.putInt("Mode", 1);
                 i.putExtras(userbundle);
                 startActivity(i);
+                finish();
                 return true;
             case 2:
                 Intent j;
@@ -374,6 +376,7 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
                 userbundle.putInt("Mode", 1);
                 j.putExtras(userbundle);
                 startActivity(j);
+                finish();
                 return true;
             default:
                 return super.onContextItemSelected(item);
@@ -436,6 +439,7 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
                 Intent i;
                 i = new Intent(UsersActivity.this, UsersActivity.class);
                 startActivity(i);
+                finish();
                 break;
             case R.id.restart:
                 Toast.makeText(this, "重新启动", Toast.LENGTH_SHORT).show();

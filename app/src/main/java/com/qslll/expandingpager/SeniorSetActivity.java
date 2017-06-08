@@ -64,6 +64,7 @@ public class SeniorSetActivity extends AppCompatActivity implements View.OnClick
                 Intent i;
                 i = new Intent(SeniorSetActivity.this, Hardwarectivity.class);
                 startActivity(i);
+                finish();
             }
         });
 
@@ -87,6 +88,7 @@ public class SeniorSetActivity extends AppCompatActivity implements View.OnClick
                 Intent i;
                 i = new Intent(SeniorSetActivity.this, SystemSetActivity.class);
                 startActivity(i);
+                finish();
             }
         });
 
@@ -118,6 +120,7 @@ public class SeniorSetActivity extends AppCompatActivity implements View.OnClick
                 Intent i;
                 i = new Intent(SeniorSetActivity.this, UsersActivity.class);
                 startActivity(i);
+                finish();
                 break;
             case R.id.restart:
                 Toast.makeText(this, "重新启动", Toast.LENGTH_SHORT).show();

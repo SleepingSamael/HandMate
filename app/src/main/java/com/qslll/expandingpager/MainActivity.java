@@ -156,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
                 Intent i;
                 i = new Intent(MainActivity.this, SystemSetActivity.class);
                 startActivity(i);
+                finish();
             }
         });
         /**
@@ -289,6 +290,7 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
                 Intent i;
                 i = new Intent(MainActivity.this, UsersActivity.class);
                 startActivity(i);
+                finish();
                 break;
             case R.id.restart:
                 Toast.makeText(this, "重新启动", Toast.LENGTH_SHORT).show();

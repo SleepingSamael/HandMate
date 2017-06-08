@@ -97,6 +97,7 @@ public class SystemSetActivity extends AppCompatActivity implements View.OnClick
                 Intent i;
                 i = new Intent(SystemSetActivity.this, SeniorSetActivity.class);
                 startActivity(i);
+                finish();
             }
         });
 
@@ -121,6 +122,7 @@ public class SystemSetActivity extends AppCompatActivity implements View.OnClick
                 Intent i;
                 i = new Intent(SystemSetActivity.this, SystemSetActivity.class);
                 startActivity(i);
+                finish();
             }
         });
 
@@ -152,6 +154,7 @@ public class SystemSetActivity extends AppCompatActivity implements View.OnClick
                 Intent i;
                 i = new Intent(SystemSetActivity.this, UsersActivity.class);
                 startActivity(i);
+                finish();
                 break;
             case R.id.restart:
                 Toast.makeText(this, "重新启动", Toast.LENGTH_SHORT).show();
