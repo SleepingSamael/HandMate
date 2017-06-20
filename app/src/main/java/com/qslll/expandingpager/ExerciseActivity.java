@@ -1,6 +1,7 @@
 package com.qslll.expandingpager;
 
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -52,6 +53,15 @@ public class ExerciseActivity extends AppCompatActivity implements ExpandingFrag
     Bundle mbundle = new Bundle();//存储menu点击值
     int mode;//存储menu点击值
 
+    //手套餐按钮切换调用
+    public static void ExerciseActionStart(Context context, int mode) {
+        Intent intent = new Intent(context, ExerciseActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Bundle mbundle = new Bundle();//存menu点击值
+        mbundle.putInt("Mode", 3);
+        intent.putExtras(mbundle);
+        context.startActivity(intent);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

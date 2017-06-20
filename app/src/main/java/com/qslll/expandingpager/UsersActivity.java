@@ -450,6 +450,8 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
             case R.id.exit:
                 Toast.makeText(this, "退出系统", Toast.LENGTH_SHORT).show();
                 //关闭整个程序
+                // 停止一个 Activity
+                stopService(new Intent(this, ComService.class));
                 SysApplication.getInstance().exit();
                 break;
             default:

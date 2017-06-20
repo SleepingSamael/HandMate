@@ -1,6 +1,7 @@
 package com.qslll.expandingpager;
 
 import android.accessibilityservice.AccessibilityService;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.wifi.WifiInfo;
@@ -38,6 +39,7 @@ import android.content.Context;
 import com.qslll.expandingpager.Entity;
 import com.qslll.expandingpager.ICallBack;
 import com.qslll.expandingpager.IMyAidlInterface;
+import com.qslll.expandingpager.model.users.UserData;
 
 import static android.content.Context.CONNECTIVITY_SERVICE;
 import static android.content.Context.WIFI_SERVICE;
@@ -48,7 +50,7 @@ import static android.content.Context.WIFI_SERVICE;
 
 //建立底层WIFI连接
 public class Connection {
-    private String ip ="192.168.4.1";//服务器ip
+    private String ip ="192.168.137.1";//服务器ip
     private String port="6000";//服务器端口
 
 
@@ -72,6 +74,7 @@ public class Connection {
     public static float angleFromDownStream = 0;
     public int fingerNumber =0;
     private int score = 0;
+    private int powerInfo=0;//下位机电量
     public byte[] messageToDevice;//向下位机发送的角度报文
     public String[] fingerArray = {"0","0","0","0","0"};
     public String aChangeMode=null;//下位机回复上位机修改场景的命令
@@ -114,9 +117,6 @@ public class Connection {
         }
     }
 
-    public void killConnection() throws IOException {
-        mSocket.close();
-    }
     //连接WIFI线程
     private void connectServer(String ip, String port) {
 
@@ -140,7 +140,6 @@ public class Connection {
                 //将连接socket赋值为空
                 mSocket=null;
                 Log.e("MainActivity", "The socket is closed!");
-                showInfo("The socket is closed!");
             }
 
             Log.e("MainActivity", "--->>end connect  server!");
@@ -150,11 +149,9 @@ public class Connection {
             //获取stream向下位机输出的实例
             out = mSocket.getOutputStream();
             Log.e("MainActivity", "I got output stream");
-            showInfo("I got output stream");
             //获取socket输入的
             in = mSocket.getInputStream();
             Log.e("MainActivity", "I got input stream");
-            showInfo("I got input stream");
             //获取stream向下位机输出的writer(字符流用)
             printWriter = new PrintWriter(new BufferedWriter(
                     new OutputStreamWriter(out,
@@ -162,35 +159,25 @@ public class Connection {
             /**
              * 系统开机检测连接
              */
-
             //读取数据流中的数据
             byte[] result =readFromInputStream(in);
             hexResult = bytesToHexString(result);
             String [] str = hexResult.split("\\ ");
 
-            SendByte(rConnectGCU());
-
-           // while (!str[2].equals("03"))
-           // {
-           //     SendByte(rConnectGCU());//请求连接
-           // }
 
             //发送第一条空信息以启动信息接收机制,在receiveData中启动MyReceiverRunnable。
             receiveHandler.sendEmptyMessage(2);
+            Log.e("RECEIVE", "START");
 
             SendByte(rConnectGCU());
-            Log.e("RECEIVE", "START");
-            showInfo("RECEIVE START");
-
 
         } catch (Exception e) {
 
             isConnected = false;
-            //showInfo("连接失败！");
 
             e.printStackTrace();
             Log.e("MainActivity", "Connection Failed!!!");
-            showInfo("Connection Failed!!!");
+            Log.e("Connection", "连接失败");
         }
 
     }
@@ -206,11 +193,11 @@ public class Connection {
             if (printWriter == null || context == null) {
 
                 if (printWriter == null) {
-                    showInfo("连接失败!");
+                    Log.e("Connection", "连接失败");
                     return;
                 }
                 if (context == null) {
-                    showInfo("连接失败!");
+                    Log.e("Connection", "连接失败");
                     return;
                 }
             }
@@ -231,12 +218,10 @@ public class Connection {
                 out.write(context);//按字节发送
                 out.flush();
                 Log.e("SEND", "发送成功");
-
             } else {
                 Log.e("SEND", "连接不存在重新连接");
                 connectServer(ip,port);
             }
-
         } catch (Exception e) {
             Log.e("SEND", "send error");
             e.printStackTrace();
@@ -245,6 +230,7 @@ public class Connection {
 
         }
     }
+
 
 
     //向下位机发送数据进程,手套操调用
@@ -382,6 +368,7 @@ public class Connection {
 
     //消息处理器，对接收到的消息进行处理（上位机接收下位机数据）
     private class ReceiveHandler extends Handler {
+
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -393,40 +380,53 @@ public class Connection {
             if (msg.what == 1) {
                 String result = msg.getData().get("hex").toString();
 
-                Log.e("Connection","I am receiving "+result);
-
-                String [] str = result.split("\\ ");
-
+                Log.e("Receiver", "result= " + result);
+                //连包处理
+                String[] strFF = result.split("ff ff ");
+                for (int ff = 0; ff < strFF.length; ff++)
+                {
+                    strFF[ff].trim();
+                    Log.e("Receiver", "I am receiving " + strFF[ff]);
+                    String[] str = strFF[ff].split("\\ ");
+                    Log.e("Receiver", "ID=    " + str[0]);
                 /**
                  * 判断收到报文类型
                  */
-            if(str[2].equals("08"))//改变模式
-            {
-                aChangeMode = str[4];
-            }
-            if(str[2].equals("10"))//下位机向上位机发送角度信息
-            {
-                String [] str2 = msg.getData().get("msg").toString().split("\\ ");
+                if (str[0].equals("09"))//dButtonInfo改变模式
+                {
+                    aChangeMode = str[3];
+                    changeMode(Integer.valueOf(aChangeMode).intValue());
+                    Log.e("ChangeMode", "切换模式");
+                }
+                if (str[0].equals("20"))//dPowerinfo下位机电量
+                {
+                    int a =Integer.parseInt(str[2], 16);
+                    powerInfo = Integer.valueOf(a).intValue();
+                    Log.e("PowerInfo", "下位机电量为   " + powerInfo);
+                }
+                if (str[0].equals("10"))//下位机向上位机发送角度信息
+                {
+                    String[] str2 = msg.getData().get("msg").toString().split("\\ ");
 
-                //手指序号
-                fingerNumber = Integer.parseInt(str2[2]);
+                    //手指序号
+                    fingerNumber = Integer.parseInt(str2[2]);
 
-                //手指运动角度
-                angleFromDownStream = Float.parseFloat(str2[5]);
+                    //手指运动角度
+                    angleFromDownStream = Float.parseFloat(str2[5]);
 
-                //对手指信息进行整理
+                    //对手指信息进行整理
                     System.arraycopy(str2, 4, fingerArray, 0, 5);
 
-                    Log.e("Connection","-----------------------------------");
+                    Log.e("Connection", "-----------------------------------");
 
-                    for(int i = 0; i<5;i++){
-                        Log.e("Connection","The Array Contains "+fingerArray[i]);
+                    for (int i = 0; i < 5; i++) {
+                        Log.e("Connection", "The Array Contains " + fingerArray[i]);
                     }
-                    Log.e("Connection","-----------------------------------");
+                    Log.e("Connection", "-----------------------------------");
+                }
+            }
             }
 
-
-            }
         }
     }
 
@@ -439,7 +439,6 @@ public class Connection {
 
         }
     }
-
 
     /**
      * 当连接到服务器时,可以触发接收事件.
@@ -496,17 +495,21 @@ public class Connection {
         return null;
     }
 
-    private void showInfo(String msg) {
-       // Toast.makeText(Connection.this, msg, Toast.LENGTH_SHORT).show();
 
-    }
 
+
+    //显示用时
     public void refFormatNowDate() {
         Date date = new Date(System.currentTimeMillis() - 3600000 * 24 * 140);
         long time = System.currentTimeMillis();
         Log.e("TIME",time+"");
     }
 
+    //根据下位机报文跳转模式
+    public void changeMode(int mode) {
+        ComService comservice = new ComService();
+        comservice.ChangeMode(mode);
+    }
     /**
      * rConnectGCU
      * 请求连接报文

@@ -25,5 +25,4 @@ interface IMyAidlInterface {
    训练模式报文收发
    */
    void sendTrainMode(int mode);//向下位机发送训练模式
-   boolean aChangeMode(int mode);//接收下位机aChangeMode报文
 }

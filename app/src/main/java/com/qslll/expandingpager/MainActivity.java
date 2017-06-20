@@ -198,14 +198,6 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
 
     @Override
     public void onExpandingClick(View v) {
-        //v is expandingfragment layout
-       /* ViewGroup vp =(ViewGroup)v.getParent();
-        ViewGroup back = (ViewGroup)vp.getParent();
-        int index=back.indexOfChild(vp);
-        if (viewPager.getCurrentItem() != index) {
-            viewPager.setCurrentItem(index);
-
-        }*/
 
         Travel travel = generateTravelList().get(viewPager.getCurrentItem());
         Bundle mbundle = new Bundle();//存menu点击值
@@ -299,6 +291,8 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
                 startActivity(intent);
                 break;
             case R.id.exit:
+                PowerManager pm = (PowerManager)(getSystemService(
+                        Context.POWER_SERVICE));
                 Toast.makeText(this, "退出系统", Toast.LENGTH_SHORT).show();
                 //关闭整个程序
                 SysApplication.getInstance().exit();
