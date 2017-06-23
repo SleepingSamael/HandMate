@@ -1,4 +1,4 @@
-package com.qslll.expandingpager.search;
+package com.qslll.expandingpager.Search;
 
 /**
  * Created by samael on 2017/3/15.
@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.SectionIndexer;
 import android.widget.TextView;
 import com.qslll.expandingpager.R;
 

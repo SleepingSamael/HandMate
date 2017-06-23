@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.qslll.expandingpager.R;
-import com.qslll.expandingpager.model.Travel;
+import com.qslll.expandingpager.Model.Travel;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

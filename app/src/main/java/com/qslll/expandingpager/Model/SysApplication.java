@@ -1,4 +1,4 @@
-package com.qslll.expandingpager.model;
+package com.qslll.expandingpager.Model;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -17,13 +17,13 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
     <application
-        android:name=".model.users.UserData"
+        android:name=".Model.users.UserData"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <receiver android:name=".BootBroadcastReceiver">
+        <receiver android:name=".Transmission.BootBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
@@ -43,39 +43,47 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="landscape"
+            android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".GameItemActivity"
             android:screenOrientation="landscape"
+            android:launchMode="singleTop"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".HistoryActivity"
             android:screenOrientation="landscape"
+            android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".Hardwarectivity"
             android:screenOrientation="landscape"
+            android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".MasterSlaveActivity"
             android:screenOrientation="landscape"
+            android:launchMode="singleTop"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".EvaluateActivity"
             android:screenOrientation="landscape"
+            android:launchMode="singleTop"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".U3D.u3dPlayer"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:process=":Kill"
+            android:launchMode="singleTask"
             android:screenOrientation="landscape" />
 
         <service
-            android:name=".ComService"
+            android:name=".Transmission.ComService"
             android:enabled="true"
             android:exported="true"
-            android:process=":to" />
+            android:process=":to"
+            />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -84,6 +92,7 @@
         <activity
             android:name=".ExerciseActivity"
             android:screenOrientation="landscape"
+            android:launchMode="singleTop"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
             <intent-filter>
                 <action android:name="com.qslll.expandingpager.exercise" />
@@ -94,31 +103,38 @@
         <activity
             android:name=".UsersActivity"
             android:screenOrientation="landscape"
+            android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".EvaluateTableActivity"
             android:screenOrientation="landscape"
+            android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".SystemSetActivity"
             android:screenOrientation="landscape"
+            android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".ReportActivity"
             android:configChanges="keyboardHidden"
             android:screenOrientation="landscape"
+            android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".UserEditActivity"
             android:screenOrientation="landscape"
+            android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".AdminActivity"
             android:screenOrientation="landscape"
+            android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".SeniorSetActivity"
             android:screenOrientation="landscape"
+            android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
 
     </application>

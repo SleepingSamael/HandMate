@@ -1,4 +1,4 @@
-package com.qslll.expandingpager.timeline;
+package com.qslll.expandingpager.Timeline;
 
 /**
  * Created by samael on 2017/3/28.

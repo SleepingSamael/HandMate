@@ -1,48 +1,28 @@
-package com.qslll.expandingpager;
+package com.qslll.expandingpager.Transmission;
 
-import android.accessibilityservice.AccessibilityService;
-import android.app.Activity;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
 import android.util.Log;
-import android.widget.Toast;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.PrintStream;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.lang.ref.WeakReference;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
-import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Timer;
 
-import android.content.Context;
-import com.qslll.expandingpager.Entity;
-import com.qslll.expandingpager.ICallBack;
+import com.qslll.expandingpager.ExerciseActivity;
 import com.qslll.expandingpager.IMyAidlInterface;
-import com.qslll.expandingpager.model.users.UserData;
-
-import static android.content.Context.CONNECTIVITY_SERVICE;
-import static android.content.Context.WIFI_SERVICE;
+import com.qslll.expandingpager.MasterSlaveActivity;
+import com.qslll.expandingpager.Model.users.UserData;
 
 /**
  * 建立上下位机之间的连接
@@ -50,7 +30,7 @@ import static android.content.Context.WIFI_SERVICE;
 
 //建立底层WIFI连接
 public class Connection {
-    private String ip ="192.168.137.1";//服务器ip
+    private String ip ="192.168.4.1";//服务器ip
     private String port="6000";//服务器端口
 
 
@@ -77,7 +57,6 @@ public class Connection {
     private int powerInfo=0;//下位机电量
     public byte[] messageToDevice;//向下位机发送的角度报文
     public String[] fingerArray = {"0","0","0","0","0"};
-    public String aChangeMode=null;//下位机回复上位机修改场景的命令
 
     String strResult=null;//接收报文十进制
     String hexResult=null;//接收报文十六进制
@@ -165,11 +144,11 @@ public class Connection {
             String [] str = hexResult.split("\\ ");
 
 
+            sendData(rConnectGCU());
             //发送第一条空信息以启动信息接收机制,在receiveData中启动MyReceiverRunnable。
             receiveHandler.sendEmptyMessage(2);
             Log.e("RECEIVE", "START");
 
-            SendByte(rConnectGCU());
 
         } catch (Exception e) {
 
@@ -224,13 +203,13 @@ public class Connection {
             }
         } catch (Exception e) {
             Log.e("SEND", "send error");
+            Log.e("SEND", String.valueOf(e));
             e.printStackTrace();
         } finally {
             Log.e("SEND", "发送完毕");
 
         }
     }
-
 
 
     //向下位机发送数据进程,手套操调用
@@ -242,32 +221,19 @@ public class Connection {
         }
         public void run() {
 
-            while (true) {
+            try {
+                if (!sendData.equals("")) {
+                    SendByte(sendData);
 
-                if (isConnected) {
-                    if (mSocket != null && mSocket.isConnected()) {
-
-                        try {
-                            if (!sendData.equals("")) {
-                                SendByte(sendData);
-
-                                Log.e("SEND", "---->>已发送至下位机....");
-                            }
-
-                        } catch (Exception e) {
-                            // Log.e(tag, "--->>read failure!" + e.toString());
-                        }
-                    }
+                    Log.e("SEND", "---->>已发送至下位机....");
                 }
-                try {
-                    Thread.sleep(200L);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            } catch (Exception e) {
+                Log.e("SendRunnable", "--->>read failure!" + e.toString());
+            }
 
             }
         }
-    }
+
 
 
     //从u3d获取score
@@ -285,7 +251,7 @@ public class Connection {
 
 
 
-    //监控接收到的数据
+    //接受下位机发送数据线程
     private class MyReceiverRunnable implements Runnable {
 
         public void run() {
@@ -309,7 +275,6 @@ public class Connection {
                                 data.putString("hex",hexResult);//十六进制结果
                                 msg.setData(data);
                                 receiveHandler.sendMessage(msg);
-
                             }
 
                         } catch (Exception e) {
@@ -392,37 +357,55 @@ public class Connection {
                 /**
                  * 判断收到报文类型
                  */
+                if (str[0].equals("03"))//心跳检测
+                {
+                    try {
+                        sendData(rHeartBeat());
+                    }catch (Exception e){
+                        Log.e("Connection", String.valueOf(e));
+                    }
+                }
                 if (str[0].equals("09"))//dButtonInfo改变模式
                 {
-                    aChangeMode = str[3];
-                    changeMode(Integer.valueOf(aChangeMode).intValue());
-                    Log.e("ChangeMode", "切换模式");
+                    try {
+                        ButtonMode(Integer.valueOf(str[2]).intValue());
+                    } catch (Exception e){
+                    Log.e("Connection", String.valueOf(e));
+                }
                 }
                 if (str[0].equals("20"))//dPowerinfo下位机电量
                 {
-                    int a =Integer.parseInt(str[2], 16);
-                    powerInfo = Integer.valueOf(a).intValue();
-                    Log.e("PowerInfo", "下位机电量为   " + powerInfo);
+                    try {
+                        int a =Integer.parseInt(str[2], 16);
+                        powerInfo = Integer.valueOf(a).intValue();
+                        Log.e("PowerInfo", "下位机电量为   " + powerInfo);
+                    }catch (Exception e){
+                        Log.e("Connection", String.valueOf(e));
+                    }
                 }
                 if (str[0].equals("10"))//下位机向上位机发送角度信息
                 {
-                    String[] str2 = msg.getData().get("msg").toString().split("\\ ");
+                    try {
+                        String[] str2 = msg.getData().get("msg").toString().split("\\ ");
 
-                    //手指序号
-                    fingerNumber = Integer.parseInt(str2[2]);
+                        //手指序号
+                        fingerNumber = Integer.parseInt(str2[2]);
 
-                    //手指运动角度
-                    angleFromDownStream = Float.parseFloat(str2[5]);
+                        //手指运动角度
+                        angleFromDownStream = Float.parseFloat(str2[5]);
 
-                    //对手指信息进行整理
-                    System.arraycopy(str2, 4, fingerArray, 0, 5);
+                        //对手指信息进行整理
+                        System.arraycopy(str2, 4, fingerArray, 0, 5);
 
-                    Log.e("Connection", "-----------------------------------");
+                        Log.e("Connection", "-----------------------------------");
 
-                    for (int i = 0; i < 5; i++) {
-                        Log.e("Connection", "The Array Contains " + fingerArray[i]);
+                        for (int i = 0; i < 5; i++) {
+                            Log.e("Connection", "The Array Contains " + fingerArray[i]);
+                        }
+                        Log.e("Connection", "-----------------------------------");
+                    }catch (Exception e){
+                        Log.e("Connection", String.valueOf(e));
                     }
-                    Log.e("Connection", "-----------------------------------");
                 }
             }
             }
@@ -463,19 +446,23 @@ public class Connection {
     }
 
 
-    private void sendData(byte[] data) {
-        sendThread = new Thread(new MySendRunnable(data));
+    //开启新线程发送数据
+    public void sendData(byte[] data) {
+        MySendRunnable mySendRunnable1=new MySendRunnable(data);
+        sendThread=new Thread(mySendRunnable1);
+        //sendThread = new Thread(new MySendRunnable(data));
         sendThread.start();
-
-        Log.e("发送下位机", "--->>socket 连接成功!");
-        Log.e("发送下位机", "--->>socket 连接成功!");
-        Log.e("发送下位机", "--->>socket 连接成功!");
-        Log.e("发送下位机", "--->>socket 连接成功!");
         isConnected = true;
-
-
     }
 
+    //开启新线程发送手套操（上→下）
+    public void sendExercise(byte[] data) {
+        MySendRunnable mySendRunnable=new MySendRunnable(data);
+        Thread ExerciseThread=new Thread(mySendRunnable);
+        //ExerciseThread = new Thread(new MySendRunnable(data));
+        ExerciseThread.start();
+
+    }
 
     //底层消息处理，如果消息在等待，则进行相应处理
     public byte[] readFromInputStream(InputStream in) {
@@ -496,8 +483,6 @@ public class Connection {
     }
 
 
-
-
     //显示用时
     public void refFormatNowDate() {
         Date date = new Date(System.currentTimeMillis() - 3600000 * 24 * 140);
@@ -505,10 +490,25 @@ public class Connection {
         Log.e("TIME",time+"");
     }
 
-    //根据下位机报文跳转模式
-    public void changeMode(int mode) {
-        ComService comservice = new ComService();
-        comservice.ChangeMode(mode);
+    /**根据下位机按键报文操作
+     * mode=1：主动模式
+     * mode=2：被动模式
+     * mode=3：开始
+     * mode=4：停止
+     * @param buttontype
+     */
+    public void ButtonMode(int buttontype) {
+        if(buttontype==1) //主从模式
+        {
+            MasterSlaveActivity.MSActionStart(UserData.getContext());
+            Log.e("ChangeMode", "主从模式");
+        }
+        else if(buttontype==2) //手套操
+        {
+            ExerciseActivity.ExerciseActionStart(UserData.getContext());//切换手套餐主从模式
+            Log.e("ChangeMode", "手套操");
+        }
+
     }
     /**
      * rConnectGCU
@@ -533,4 +533,14 @@ public class Connection {
         return b;
     }
 
+    //心跳检测回复报文
+    private byte[] rHeartBeat(){
+        byte[]b=new byte[5];
+        b[0]=(byte)0xff;
+        b[1]=(byte)0xff;
+        b[2]=(byte)0x04;//ID
+        b[3]=(byte)0x05;//长度
+        b[4]=(byte) ~(b[2]+b[3]);
+        return b;
+    }
 }

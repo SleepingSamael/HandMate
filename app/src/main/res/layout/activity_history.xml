@@ -280,12 +280,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
 
-                <com.qslll.expandingpager.timeline.HorizontalListView
+                <com.qslll.expandingpager.Timeline.HorizontalListView
                     android:id="@+id/list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
-                    android:divider="@null"></com.qslll.expandingpager.timeline.HorizontalListView>
+                    android:divider="@null"></com.qslll.expandingpager.Timeline.HorizontalListView>
             </LinearLayout>
         </ScrollView>
 

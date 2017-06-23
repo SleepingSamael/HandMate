@@ -9,8 +9,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.qslll.expandingpager.model.users.UserData;
-import com.qslll.expandingpager.model.users.UsersConstant;
+import com.qslll.expandingpager.Model.users.UserData;
+import com.qslll.expandingpager.Model.users.UsersConstant;
 
 import static android.content.ContentValues.TAG;
 

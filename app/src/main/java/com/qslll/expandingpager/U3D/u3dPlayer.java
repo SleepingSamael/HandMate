@@ -6,14 +6,13 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.qslll.expandingpager.ComService;
+import com.qslll.expandingpager.Transmission.ComService;
 import com.qslll.expandingpager.Database.HistoryDataManager;
 import com.qslll.expandingpager.Entity;
 import com.qslll.expandingpager.ICallBack;
 import com.qslll.expandingpager.IMyAidlInterface;
 import com.qslll.expandingpager.R;
-import com.qslll.expandingpager.Welcome;
-import com.qslll.expandingpager.model.history.HistoryData;
+import com.qslll.expandingpager.Model.history.HistoryData;
 
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -25,7 +24,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.LinearLayout;
@@ -234,8 +232,34 @@ public class u3dPlayer extends UnityPlayerActivity {
         return scenenum;
     }
 
+    //向下位机发送结束信号
+    public void sendTrainAckoff(int mode) {
+
+        if (iMyAidlInterface!=null){
+            try {
+                iMyAidlInterface.sendTrainAck(mode,0);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+                Log.e("sendTranAck", String.valueOf(e));
+            }
+        }
+
+    }
+    //退出unity界面
     public void makePauseUnity() {
-        runOnUiThread(new Runnable() {
+        switch (scenenum/1000){
+            case 1:sendTrainAckoff(1);//主从
+                break;
+            case 2:sendTrainAckoff(2);//手套操
+                break;
+            case 3:sendTrainAckoff(3);//评估
+                break;
+            case 4:sendTrainAckoff(4);//游戏
+                break;
+        }
+        unbindService(serviceConnection);
+        finish();
+       /* runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 if (mUnityPlayer != null) {
@@ -257,15 +281,10 @@ public class u3dPlayer extends UnityPlayerActivity {
                 Intent intent = new Intent(u3dPlayer.this, Welcome.class);
                 startActivity(intent);
             }
-        });
-
-
+        });*/
 
     }
 
-    /**
-     *
-     */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -277,9 +296,8 @@ public class u3dPlayer extends UnityPlayerActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //UnityPlayer.UnitySendMessage("Manager", "Unload", "");
         mUnityPlayer.quit();
-        //MainActivity.this.finish();
+        finish();
     }
 
 

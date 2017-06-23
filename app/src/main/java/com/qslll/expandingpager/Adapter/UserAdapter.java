@@ -1,4 +1,4 @@
-package com.qslll.expandingpager.adapter;
+package com.qslll.expandingpager.Adapter;
 
 import android.content.Context;
 import android.database.Cursor;

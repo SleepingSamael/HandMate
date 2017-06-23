@@ -22,8 +22,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.qslll.expandingpager.model.SysApplication;
-import com.qslll.expandingpager.model.users.UserData;
+import com.qslll.expandingpager.Model.SysApplication;
+import com.qslll.expandingpager.Model.users.UserData;
 
 import java.text.SimpleDateFormat;
 

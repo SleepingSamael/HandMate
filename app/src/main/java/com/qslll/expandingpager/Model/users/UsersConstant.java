@@ -1,6 +1,4 @@
-package com.qslll.expandingpager.model.users;
-
-import java.util.Date;
+package com.qslll.expandingpager.Model.users;
 
 /**
  * Created by samael on 2017/1/12.

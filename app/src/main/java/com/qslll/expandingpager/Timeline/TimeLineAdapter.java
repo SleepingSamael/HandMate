@@ -1,21 +1,17 @@
-package com.qslll.expandingpager.timeline;
+package com.qslll.expandingpager.Timeline;
 
 /**
  * Created by samael on 2017/3/28.
  */
 import android.content.Context;
-import android.database.Cursor;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import com.qslll.expandingpager.R;
-import com.qslll.expandingpager.model.history.HistoryConstant;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.qslll.expandingpager.search;
+package com.qslll.expandingpager.Search;
 import java.util.Comparator;
 
 /**

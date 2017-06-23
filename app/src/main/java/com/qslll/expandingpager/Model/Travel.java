@@ -1,4 +1,4 @@
-package com.qslll.expandingpager.model;
+package com.qslll.expandingpager.Model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

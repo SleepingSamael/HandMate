@@ -23,13 +23,14 @@ import android.widget.Toast;
 import android.widget.SearchView;
 
 import com.qslll.expandingpager.Database.UserDataManager;
-import com.qslll.expandingpager.model.SysApplication;
-import com.qslll.expandingpager.model.users.UserData;
-import com.qslll.expandingpager.model.users.UsersConstant;
-import com.qslll.expandingpager.search.CharacterParser;
-import com.qslll.expandingpager.search.PinyinComparator;
-import com.qslll.expandingpager.search.SortAdapter;
-import com.qslll.expandingpager.search.SortModel;
+import com.qslll.expandingpager.Model.SysApplication;
+import com.qslll.expandingpager.Model.users.UserData;
+import com.qslll.expandingpager.Model.users.UsersConstant;
+import com.qslll.expandingpager.Search.CharacterParser;
+import com.qslll.expandingpager.Search.PinyinComparator;
+import com.qslll.expandingpager.Search.SortAdapter;
+import com.qslll.expandingpager.Search.SortModel;
+import com.qslll.expandingpager.Transmission.ComService;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -153,6 +154,7 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
 
                 Intent i = new Intent(UsersActivity.this, MainActivity.class);
                 startActivity(i);
+                finish();
 
             }
         });

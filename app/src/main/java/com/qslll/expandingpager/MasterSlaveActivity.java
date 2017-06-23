@@ -1,12 +1,18 @@
 package com.qslll.expandingpager;
 
 import android.annotation.TargetApi;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Explode;
+import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -19,11 +25,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qslll.expandingpager.Database.HistoryDataManager;
-import com.qslll.expandingpager.adapter.TravelViewPagerAdapter;
-import com.qslll.expandingpager.model.SysApplication;
-import com.qslll.expandingpager.model.Travel;
-import com.qslll.expandingpager.model.history.HistoryData;
-import com.qslll.expandingpager.model.users.UserData;
+import com.qslll.expandingpager.Adapter.TravelViewPagerAdapter;
+import com.qslll.expandingpager.Model.SysApplication;
+import com.qslll.expandingpager.Model.Travel;
+import com.qslll.expandingpager.Model.history.HistoryData;
+import com.qslll.expandingpager.Model.users.UserData;
+import com.qslll.expandingpager.Transmission.ComService;
 import com.qslll.library.ExpandingPagerFactory;
 import com.qslll.library.fragments.ExpandingFragment;
 
@@ -52,6 +59,28 @@ public class MasterSlaveActivity extends AppCompatActivity implements ExpandingF
     Bundle mbundle = new Bundle();//存储menu点击值
     int mode;//存储menu点击值
 
+    private IMyAidlInterface iMyAidlInterface;
+    //向下位机发送开始信号
+    public void sendTrainAck(int mode) {
+
+        if (iMyAidlInterface!=null){
+            try {
+                iMyAidlInterface.sendTrainAck(mode,1);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+    //主从下位机按钮切换调用
+    public static void MSActionStart(Context context) {
+        Intent intent = new Intent(context, MasterSlaveActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Bundle bundle = new Bundle();//存menu点击值
+        bundle.putInt("Mode", 3);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +99,10 @@ public class MasterSlaveActivity extends AppCompatActivity implements ExpandingF
         final String sdate=arr[0];
         final String stime=arr[1];
         clock.setText(sdate+"   "+stime);
+
+        Intent myServiceIntent = new Intent(MasterSlaveActivity.this, ComService.class);
+        bindService(myServiceIntent, serviceConnection,
+                Context.BIND_AUTO_CREATE);
 
         if (mhistoryDataManager == null) {
             mhistoryDataManager = new HistoryDataManager(this);
@@ -166,7 +199,9 @@ public class MasterSlaveActivity extends AppCompatActivity implements ExpandingF
                         break;
                 }
                 i.putExtras(mbundle);
+                sendTrainAck(1);
                 startActivity(i);
+
             }
 
         });
@@ -294,5 +329,45 @@ default:
         Travel travel = generateTravelList().get(viewPager.getCurrentItem());
         startInfoActivity(view,travel);
     }*/
+   //绑定ComService
+   private ServiceConnection serviceConnection = new ServiceConnection() {
+       @Override
+       public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+           iMyAidlInterface = IMyAidlInterface.Stub.asInterface(iBinder);
+           try {
+               iMyAidlInterface.registerCallback(iCallBack);
+           } catch (RemoteException e) {
+               e.printStackTrace();
+           }
+
+       }
+
+       @Override
+       public void onServiceDisconnected(ComponentName componentName) {
+
+           Log.e("ERROR", "--->>连接失败.");
+       }
+   };
+
+
+    private ICallBack.Stub iCallBack = new ICallBack.Stub() {
+        @Override
+        public void callBack(final Entity entity) throws RemoteException {
+
+            Log.e("MainActivity","MainActivity receive the entity"+entity.getName());
+            Log.e("MainActivity","MainActivity receive the entity"+entity.getName());
+            Log.e("MainActivity","MainActivity receive the entity"+entity.getName());
+            Log.e("MainActivity","MainActivity receive the entity"+entity.getName());
+            Log.e("MainActivity","MainActivity receive the entity"+entity.getName());
+            Log.e("MainActivity","MainActivity receive the entity"+entity.getName());
+            Log.e("MainActivity","MainActivity receive the entity"+entity.getName());
+        }
+    };
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        unbindService(serviceConnection);
+    }
 }
 

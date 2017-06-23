@@ -3,10 +3,9 @@ package com.qslll.expandingpager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TabHost;
-import android.widget.TabWidget;
 import android.widget.TextView;
 
-import com.qslll.expandingpager.model.SysApplication;
+import com.qslll.expandingpager.Model.SysApplication;
 
 public class AdminActivity extends AppCompatActivity {
     private TextView motor;//舵机状态报文显示

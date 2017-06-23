@@ -3,7 +3,6 @@ package com.qslll.expandingpager;
 import android.annotation.TargetApi;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Build;
@@ -12,7 +11,6 @@ import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.RemoteException;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Explode;
 import android.util.Log;
@@ -28,10 +26,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.qslll.expandingpager.adapter.TravelViewPagerAdapter;
-import com.qslll.expandingpager.model.SysApplication;
-import com.qslll.expandingpager.model.Travel;
-import com.qslll.expandingpager.model.users.UserData;
+import com.qslll.expandingpager.Adapter.TravelViewPagerAdapter;
+import com.qslll.expandingpager.Model.SysApplication;
+import com.qslll.expandingpager.Model.Travel;
+import com.qslll.expandingpager.Model.users.UserData;
+import com.qslll.expandingpager.Transmission.ComService;
 import com.qslll.library.ExpandingPagerFactory;
 import com.qslll.library.fragments.ExpandingFragment;
 
@@ -208,6 +207,7 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
 
             sendTrainMode(0);
             startActivity(i);
+            finish();
         }
         if (travel.getName() == "主从模式") {
             Intent i = new Intent(MainActivity.this, MasterSlaveActivity.class);
@@ -216,6 +216,7 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
 
             sendTrainMode(1);
             startActivity(i);
+            finish();
         }
         if (travel.getName() == "手套操") {
             Intent i = new Intent(MainActivity.this, ExerciseActivity.class);
@@ -224,20 +225,22 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
 
             sendTrainMode(2);
             startActivity(i);
+            finish();
         }
         if (travel.getName() == "评估") {
             Intent i = new Intent(MainActivity.this, EvaluateActivity.class);
             mbundle.putInt("Mode", 3);
             i.putExtras(mbundle);
-
             sendTrainMode(3);
             startActivity(i);
+            finish();
         }
         if (travel.getName() == "历史记录") {
             Intent i = new Intent(MainActivity.this, HistoryActivity.class);
             mbundle.putInt("Mode", 3);
             i.putExtras(mbundle);
             startActivity(i);
+            finish();
         }
 
     }
@@ -339,7 +342,11 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
             Log.e("MainActivity","MainActivity receive the entity"+entity.getName());
         }
     };
-
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        unbindService(serviceConnection);
+    }
 
 }
 

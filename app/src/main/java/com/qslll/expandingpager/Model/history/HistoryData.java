@@ -1,4 +1,4 @@
-package com.qslll.expandingpager.model.history;
+package com.qslll.expandingpager.Model.history;
 
 /**
  * 历史记录类

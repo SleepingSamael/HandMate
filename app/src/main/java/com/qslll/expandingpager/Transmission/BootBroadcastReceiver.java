@@ -1,4 +1,4 @@
-package com.qslll.expandingpager;
+package com.qslll.expandingpager.Transmission;
 
 /**
  * Created by samael on 2017/6/15.
@@ -7,6 +7,8 @@ package com.qslll.expandingpager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+
+import com.qslll.expandingpager.Welcome;
 
 /**
  * 该类派生自BroadcastReceiver，覆载方法onReceive中

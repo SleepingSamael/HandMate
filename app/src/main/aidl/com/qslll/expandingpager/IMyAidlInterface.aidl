@@ -25,4 +25,5 @@ interface IMyAidlInterface {
    训练模式报文收发
    */
    void sendTrainMode(int mode);//向下位机发送训练模式
+   void sendTrainAck(int mode,int status);//游戏正式界面后，用户点击确实开始后，AWS发送此报文通知GCU运动
 }

@@ -8,8 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.qslll.expandingpager.model.history.HistoryData;
-import com.qslll.expandingpager.model.history.HistoryConstant;
+import com.qslll.expandingpager.Model.history.HistoryData;
+import com.qslll.expandingpager.Model.history.HistoryConstant;
 
 import static android.content.ContentValues.TAG;
 

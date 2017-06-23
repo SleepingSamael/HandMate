@@ -1,24 +1,20 @@
-package com.qslll.expandingpager;
+package com.qslll.expandingpager.Transmission;
 
+import com.qslll.expandingpager.Entity;
+import com.qslll.expandingpager.ICallBack;
+import com.qslll.expandingpager.IMyAidlInterface;
 import com.qslll.expandingpager.U3D.u3dPlayer;
-import com.qslll.expandingpager.model.users.UserData;
 
-import android.app.Activity;
 import android.app.Service;
-import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.os.Binder;
-import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
-import android.service.carrier.CarrierService;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
@@ -129,7 +125,7 @@ public class ComService extends Service {
                     (byte) ~(0x10 + 0x10 + 0xb4 + 0xb4 + 0xb4 + 0xb4 + 0xb4)};
             bAngles[0] = (byte) 0xff;
             bAngles[1] = (byte) 0xff;
-            bAngles[2] = (byte) 0x20;
+            bAngles[2] = (byte) 0x24;
             bAngles[3] = (byte) 0x10;
             bAngles[4] = (byte) angles[0];
             bAngles[5] = (byte) angles[1];
@@ -138,7 +134,7 @@ public class ComService extends Service {
             bAngles[8] = (byte) angles[4];
             bAngles[9] = (byte) ~(bAngles[2] + bAngles[3] + bAngles[4] + bAngles[5] +
                     bAngles[6] + bAngles[7] + bAngles[8]);
-            connection.SendByte(bAngles);
+            connection.sendData(bAngles);
             Log.e("发送下位机", strAngles);
 
         }
@@ -156,8 +152,27 @@ public class ComService extends Service {
             0：游戏模式1：主动模式2：被动模式3：评估模式
              */
             bytes[5] = (byte) ~(bytes[2] + bytes[3] + bytes[4]);
-            connection.SendByte(bytes);
+            connection.sendExercise(bytes);
             Log.e("切换模式", mode + "");
+        }
+
+        //游戏正式界面后，用户点击确实开始后，AWS发送此报文通知GCU运动
+        @Override
+        public void sendTrainAck(int mode,int status){
+            //TrainAck报文
+            byte[] bytes = new byte[7];
+            bytes[0] = (byte) 0xff;
+            bytes[1] = (byte) 0xff;
+            bytes[2] = (byte) 0x23;//ID
+            bytes[3] = (byte) 0x07;//长度
+            bytes[4] = (byte) mode;//模式
+            bytes[5] = (byte) status;//状态，1：开始 0：停止
+            /*
+            0：游戏模式1：主动模式2：被动模式3：评估模式
+             */
+            bytes[6] = (byte) ~(bytes[2] + bytes[3] + bytes[4] + bytes[5]);
+            connection.sendData(bytes);
+            Log.e("sendTrainAck", "start");
         }
 
     };
@@ -450,9 +465,4 @@ public class ComService extends Service {
 
     }
 
-
-    //接收下位机aChangeMode报文
-    public void ChangeMode(int mode) {
-        ExerciseActivity.ExerciseActionStart(UserData.getContext(),mode);//切换手套餐
-    }
 }

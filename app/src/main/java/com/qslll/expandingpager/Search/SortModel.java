@@ -1,4 +1,4 @@
-package com.qslll.expandingpager.search;
+package com.qslll.expandingpager.Search;
 
 /**
  * Created by samael on 2017/3/15.

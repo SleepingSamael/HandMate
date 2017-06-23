@@ -1,4 +1,4 @@
-package com.qslll.expandingpager.model.users;
+package com.qslll.expandingpager.Model.users;
 
 import android.app.Application;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.content.Context;
  * 用户信息类
  */
 
-public class UserData extends Application{
+public class UserData extends Application{//全局application类
     private String userId="id";                     //ID
     private String userName="name";                 //姓名
     private String userSex="sex";                   //性别
@@ -18,7 +18,7 @@ public class UserData extends Application{
     private String userTel="tel";                   //联系方式
     private String userDiag="diag";                 //诊断
 
-    private static Context context;
+    private static Context context;//service获取context用
 
     //获取用户名
     public String getUserName() {

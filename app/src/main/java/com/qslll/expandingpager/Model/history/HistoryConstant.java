@@ -1,4 +1,4 @@
-package com.qslll.expandingpager.model.history;
+package com.qslll.expandingpager.Model.history;
 
 /**
  * Created by samael on 2017/2/28.

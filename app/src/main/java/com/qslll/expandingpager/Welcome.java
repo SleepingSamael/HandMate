@@ -1,6 +1,5 @@
 package com.qslll.expandingpager;
 
-import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -8,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Point;
-import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.IBinder;
@@ -17,20 +15,11 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.qslll.expandingpager.ComService;
-import com.qslll.expandingpager.Connection;
-import com.qslll.expandingpager.Entity;
-import com.qslll.expandingpager.ICallBack;
-import com.qslll.expandingpager.IMyAidlInterface;
-import com.qslll.expandingpager.MainActivity;
-import com.qslll.expandingpager.R;
-import com.qslll.expandingpager.model.SysApplication;
-
-import java.text.BreakIterator;
+import com.qslll.expandingpager.Model.SysApplication;
+import com.qslll.expandingpager.Transmission.ComService;
 
 
 public class Welcome extends Activity {

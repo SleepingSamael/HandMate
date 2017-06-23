@@ -1,4 +1,4 @@
-package com.qslll.expandingpager.timeline;
+package com.qslll.expandingpager.Timeline;
 
 import android.annotation.TargetApi;
 import android.content.Context;

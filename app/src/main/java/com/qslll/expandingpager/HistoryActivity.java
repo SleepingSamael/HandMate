@@ -3,7 +3,6 @@ package com.qslll.expandingpager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuInflater;
@@ -17,12 +16,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qslll.expandingpager.Database.HistoryDataManager;
-import com.qslll.expandingpager.model.SysApplication;
-import com.qslll.expandingpager.model.history.HistoryConstant;
-import com.qslll.expandingpager.model.users.UserData;
-import com.qslll.expandingpager.timeline.HorizontalListView;
-import com.qslll.expandingpager.timeline.ItemBean;
-import com.qslll.expandingpager.timeline.TimeLineAdapter;
+import com.qslll.expandingpager.Model.SysApplication;
+import com.qslll.expandingpager.Model.history.HistoryConstant;
+import com.qslll.expandingpager.Model.users.UserData;
+import com.qslll.expandingpager.Timeline.HorizontalListView;
+import com.qslll.expandingpager.Timeline.ItemBean;
+import com.qslll.expandingpager.Timeline.TimeLineAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

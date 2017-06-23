@@ -1,10 +1,10 @@
-package com.qslll.expandingpager.adapter;
+package com.qslll.expandingpager.Adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import com.qslll.expandingpager.fragments.TravelExpandingFragment;
-import com.qslll.expandingpager.model.Travel;
+import com.qslll.expandingpager.Model.Travel;
 import com.qslll.library.ExpandingViewPagerAdapter;
 
 import java.util.ArrayList;
