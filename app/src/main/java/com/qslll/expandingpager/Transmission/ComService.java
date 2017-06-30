@@ -3,11 +3,17 @@ package com.qslll.expandingpager.Transmission;
 import com.qslll.expandingpager.Entity;
 import com.qslll.expandingpager.ICallBack;
 import com.qslll.expandingpager.IMyAidlInterface;
+import com.qslll.expandingpager.Model.users.UserData;
 import com.qslll.expandingpager.U3D.u3dPlayer;
+import com.qslll.expandingpager.UsersActivity;
+import com.qslll.expandingpager.Welcome;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.wifi.WifiInfo;
@@ -17,6 +23,7 @@ import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.view.WindowManager;
 import android.widget.Toast;
 import java.io.IOException;
 import java.util.Timer;
@@ -26,6 +33,7 @@ import java.util.TimerTask;
 //建立Android服务层，为下位机和UNITY提供通讯服务
 public class ComService extends Service {
 
+    private String WifiName ="Test";
     private int updateNUM = 0;
     private int connectionCounter = 0;
     private int heartBeatCounter = 0;
@@ -37,8 +45,6 @@ public class ComService extends Service {
     private LocalBroadcastManager localBroadcastManager;
 
     public enum States {SOCKETUNCONNECTED, SOCKETCONNECTED, MACHINECONNECTED}
-
-    ;
     States state;
     Timer heartBeatTimer;
     TimerTask heartBeatTimerTask;
@@ -224,9 +230,9 @@ public class ComService extends Service {
         localReceiver = new LocalReceiver();
         localBroadcastManager.registerReceiver(localReceiver, intentFilter); // 注册本地广播监听器
 
-        //ServiceState();
+        ServiceState();
         //服务被创造时启动WIFI连接线程
-        connection.connectThread();
+        //connection.connectThread();
 
         mContext = this;
     }
@@ -261,7 +267,7 @@ public class ComService extends Service {
                 String WIFISSID = wifiInfo.getSSID();
 
                 //判定WIFI是否为指定的WIFI
-                if (WIFISSID.equals("\"ChejRobot_Glove\"")) {
+                if (WIFISSID.equals("\""+WifiName+"\"")) {
 
                     connection.connectThread();
 
@@ -275,19 +281,19 @@ public class ComService extends Service {
                                 if (connection.isConnected == false) {
 
                                     Log.e("ComService", "Connection is not working");
-                                    Toast.makeText(getBaseContext(), "Connection is not working", Toast.LENGTH_SHORT).show();
 
-                                    sendMsgToMain("CHECK_DEVICE_CONNECTION");
+                                    //sendMsgToMain("CHECK_DEVICE_CONNECTION");
+                                    //Sdialog();
 
-                                    Log.e("ComService", "Deroute !!!!!!!!!!!!!1");
+                                    Log.e("ComService", "Deroute !!!!!!!!!!!!!");
                                 } else {
                                     Log.e("ComService", "I'm in connetion is done");
                                     state = States.MACHINECONNECTED;
-/*
+
                                     Intent intent = new Intent("com.example.broadcasttest.LOCAL_BROADCAST");
                                     intent.putExtra("Connection","reconnect");
                                     localBroadcastManager.sendBroadcast(intent); // 发送本地广播
-*/
+
                                 }
 
                             } catch (InterruptedException e) {
@@ -299,10 +305,10 @@ public class ComService extends Service {
 
                 } else {
 
-                    sendMsgToMain("CHECK_WIFI_STATUS");
+                    dialogOne();
+                    //sendMsgToMain("CHECK_WIFI_STATUS");
 
                 }
-
 
                 break;
 
@@ -320,8 +326,6 @@ public class ComService extends Service {
 
                     //在等待3个3秒钟后，如果没有收到下位机确认回执，则重新发起连接邀请
                     reinitializeConnection();
-
-                    sendMsgToMain("CHECK_DEVICE_CONNECTION");
 
                     break;
                 }
@@ -350,18 +354,18 @@ public class ComService extends Service {
                 break;
 
             case MACHINECONNECTED:
-
+                connection.sendData(connection.rConnectGCU());
                 //进入连接成功状态
                 Log.e("ComService", "I'm Connected in MACHINECONNECTED");
                 if (connection.machineException == true) {
                     Log.e("ComService", "SoftwareException");
                     connection.machineException = false;
                 }
-/*
+
                 Intent intent = new Intent("com.example.broadcasttest.LOCAL_BROADCAST");
                 intent.putExtra("Connection","check_heart_beat");
                 localBroadcastManager.sendBroadcast(intent); // 发送本地广播
-*/
+
                 break;
 
             default:
@@ -379,15 +383,9 @@ public class ComService extends Service {
             //Toast.makeText(context, "received local broadcast", Toast.LENGTH_SHORT).show();
             Log.e("ComService", "I received local message!");
             if (intent.getStringExtra("Connection").equals("reconnect")) {
-                // ServiceState();
+                 ServiceState();
             } else if (intent.getStringExtra("Connection").equals("check_heart_beat")) {
-                //checkHeartBeat();
-
-                //Please put heart beat check in here
-                //Please put heart beat check in here
-                //Please put heart beat check in here
-                //Please put heart beat check in here
-                //Please put heart beat check in here
+                checkHeartBeat();
             }
         }
     }
@@ -397,17 +395,23 @@ public class ComService extends Service {
     private void checkHeartBeat() {
 
         Log.e("ComService", "I'm checking my hearbeat");
-
+        long time = connection.refFormatNowDate()-connection.beatTime;
+        Log.e("ComService", time+"");
+        if (time>10000)
+        {
+            connection.heartBeat=false;
+        }
         if (heartBeatCounter == 0) {
 
             sentHeartBeatRequest();
 
             heartBeatCounter = 1;
+            connection.heartBeat = true;
         } else if (heartBeatCounter == 1) {
 
             if (connection.heartBeat == true) {
 
-                connection.heartBeat = false;
+                //connection.heartBeat = false;
                 sentHeartBeatRequest();
 
             } else {
@@ -437,9 +441,9 @@ public class ComService extends Service {
             }
         };
 
-        heartBeatTimer.schedule(heartBeatTimerTask, 5000);
+        heartBeatTimer.schedule(heartBeatTimerTask, 1000);
 
-        // connection.requestMachineConnection();
+         connection.sendData(connection.rHeartBeat());
     }
 
     //重新初始化WIFI连接
@@ -452,8 +456,8 @@ public class ComService extends Service {
             if (connection.mSocket != null) {
                 connection.mSocket.close();
                 connection.mSocket = null;
-                //Log.i(tag, "--->>取消server.");
-                // receiverThread.interrupt();
+                Log.e("ComServise", "--->>取消server.");
+               //connection.receiverThread.interrupt();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -463,6 +467,58 @@ public class ComService extends Service {
         connection.machineConnection = false;
         heartBeatCounter = 0;
 
+        ServiceState();
+        //服务被创造时启动WIFI连接线程
+        connection.connectThread();
+        connection.sendData(connection.rConnectGCU());
+        mContext = this;
     }
 
+    protected void dialogOne() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+        builder.setMessage("请检查本机网络连接");
+        builder.setTitle("提示");
+        builder.setPositiveButton("重新连接", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ServiceState();
+                //dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("暂不连接", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+
+            }
+        });
+        Dialog dialog=builder.create();
+        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+        //builder.create().show();
+        dialog.show();
+    }
+    protected void Sdialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+        builder.setMessage("请检查本机或下位机网络状态");
+       // Toast.makeText(this, "请检查本机或下位机网络状态", Toast.LENGTH_SHORT).show();
+        builder.setTitle("提示");
+        builder.setPositiveButton("重新连接", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                //serviceConnection.backgroundService.ServiceState();
+                ServiceState();
+            }
+        });
+        builder.setNegativeButton("暂不连接", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+       // builder.create().show();
+        Dialog dialog=builder.create();
+        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+        dialog.show();
+    }
 }

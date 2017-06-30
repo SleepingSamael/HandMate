@@ -1,5 +1,7 @@
 package com.qslll.expandingpager.Transmission;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -18,11 +20,14 @@ import java.net.Socket;
 import java.net.SocketAddress;
 import java.nio.charset.Charset;
 import java.util.Date;
+import java.util.List;
 
 import com.qslll.expandingpager.ExerciseActivity;
 import com.qslll.expandingpager.IMyAidlInterface;
 import com.qslll.expandingpager.MasterSlaveActivity;
 import com.qslll.expandingpager.Model.users.UserData;
+
+import static android.content.Context.ACTIVITY_SERVICE;
 
 /**
  * 建立上下位机之间的连接
@@ -30,12 +35,13 @@ import com.qslll.expandingpager.Model.users.UserData;
 
 //建立底层WIFI连接
 public class Connection {
-    private String ip ="192.168.4.1";//服务器ip
+    private String ip ="192.168.137.1";//服务器ip
     private String port="6000";//服务器端口
 
 
     public boolean isConnected = false;
     public boolean heartBeat = false;
+    public long beatTime = 0;//心跳间隔
     public boolean machineConnection = false;
     public boolean machineException = false;
     public boolean socketReadingStatus = false;
@@ -110,6 +116,7 @@ public class Connection {
                 mSocket = new Socket();
                 //尝试连接socket, socket连接超时设置为1000ms
                 mSocket.connect(sockaddr, 1000);
+                isConnected=true;
 
             }catch (IOException e1) {
                 //如果连接出现异常，重置连接判断flag为false。
@@ -119,6 +126,7 @@ public class Connection {
                 //将连接socket赋值为空
                 mSocket=null;
                 Log.e("MainActivity", "The socket is closed!");
+                Log.e("MainActivity", String.valueOf(e1));
             }
 
             Log.e("MainActivity", "--->>end connect  server!");
@@ -143,20 +151,16 @@ public class Connection {
             hexResult = bytesToHexString(result);
             String [] str = hexResult.split("\\ ");
 
-
-            sendData(rConnectGCU());
             //发送第一条空信息以启动信息接收机制,在receiveData中启动MyReceiverRunnable。
             receiveHandler.sendEmptyMessage(2);
             Log.e("RECEIVE", "START");
 
 
         } catch (Exception e) {
-
             isConnected = false;
-
             e.printStackTrace();
-            Log.e("MainActivity", "Connection Failed!!!");
             Log.e("Connection", "连接失败");
+            Log.e("Connection", String.valueOf(e));
         }
 
     }
@@ -359,11 +363,10 @@ public class Connection {
                  */
                 if (str[0].equals("03"))//心跳检测
                 {
-                    try {
-                        sendData(rHeartBeat());
-                    }catch (Exception e){
-                        Log.e("Connection", String.valueOf(e));
-                    }
+                    beatTime=refFormatNowDate();
+                    heartBeat=true;
+                    sendData(rHeartBeat());
+
                 }
                 if (str[0].equals("09"))//dButtonInfo改变模式
                 {
@@ -484,10 +487,11 @@ public class Connection {
 
 
     //显示用时
-    public void refFormatNowDate() {
+    public long refFormatNowDate() {
         Date date = new Date(System.currentTimeMillis() - 3600000 * 24 * 140);
         long time = System.currentTimeMillis();
-        Log.e("TIME",time+"");
+        //Log.e("TIME",time+"");
+        return time;
     }
 
     /**根据下位机按键报文操作
@@ -498,18 +502,27 @@ public class Connection {
      * @param buttontype
      */
     public void ButtonMode(int buttontype) {
-        if(buttontype==1) //主从模式
-        {
-            MasterSlaveActivity.MSActionStart(UserData.getContext());
-            Log.e("ChangeMode", "主从模式");
+        if(getRunningActivityName()!="com.qslll.expandingpager.U3D.u3dPlayer") {
+            if (buttontype == 1) //主从模式
+            {
+                MasterSlaveActivity.MSActionStart(UserData.getContext());
+                Log.e("ChangeMode", "主从模式");
+            } else if (buttontype == 2) //手套操
+            {
+                ExerciseActivity.ExerciseActionStart(UserData.getContext());//切换手套餐主从模式
+                Log.e("ChangeMode", "手套操");
+            }
         }
-        else if(buttontype==2) //手套操
-        {
-            ExerciseActivity.ExerciseActionStart(UserData.getContext());//切换手套餐主从模式
-            Log.e("ChangeMode", "手套操");
-        }
-
     }
+
+    //获取顶层Activity名称
+    public String getRunningActivityName(){
+        ActivityManager manager = (ActivityManager) UserData.getContext().getSystemService(ACTIVITY_SERVICE);
+        String runningActivity=manager.getRunningTasks(1).get(0).topActivity.getClassName();
+        return runningActivity;
+    }
+
+
     /**
      * rConnectGCU
      * 请求连接报文
@@ -523,7 +536,7 @@ public class Connection {
      4	       1	Check Code 	               校验码
      接口：WIFI
      */
-    private byte[] rConnectGCU(){
+    public byte[] rConnectGCU(){
         byte[]b=new byte[5];
         b[0]=(byte)0xff;
         b[1]=(byte)0xff;
@@ -534,7 +547,7 @@ public class Connection {
     }
 
     //心跳检测回复报文
-    private byte[] rHeartBeat(){
+    public byte[] rHeartBeat(){
         byte[]b=new byte[5];
         b[0]=(byte)0xff;
         b[1]=(byte)0xff;

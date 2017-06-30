@@ -339,12 +339,7 @@ public class GameItemActivity extends AppCompatActivity implements ExpandingFrag
         public void callBack(final Entity entity) throws RemoteException {
 
             Log.e("MainActivity","MainActivity receive the entity"+entity.getName());
-            Log.e("MainActivity","MainActivity receive the entity"+entity.getName());
-            Log.e("MainActivity","MainActivity receive the entity"+entity.getName());
-            Log.e("MainActivity","MainActivity receive the entity"+entity.getName());
-            Log.e("MainActivity","MainActivity receive the entity"+entity.getName());
-            Log.e("MainActivity","MainActivity receive the entity"+entity.getName());
-            Log.e("MainActivity","MainActivity receive the entity"+entity.getName());
+
         }
     };
     @Override

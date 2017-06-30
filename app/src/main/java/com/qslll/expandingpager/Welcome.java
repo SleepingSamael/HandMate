@@ -7,10 +7,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Point;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -24,7 +27,6 @@ import com.qslll.expandingpager.Transmission.ComService;
 
 public class Welcome extends Activity {
     private Button enterGame;
-    private Button broadtest;
     private TextView size;
 
 
@@ -44,6 +46,14 @@ public class Welcome extends Activity {
         SysApplication.getInstance().addActivity(this);//统一关闭用
 
 
+        //权限申请
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!Settings.canDrawOverlays(this)) {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Uri.parse("package:" + getPackageName()));
+                startActivityForResult(intent, 1);
+            }
+        }
         try {
             Intent startIntent = new Intent(Welcome.this, ComService.class);
             startService(startIntent); // 启动服务
@@ -53,7 +63,6 @@ public class Welcome extends Activity {
         }catch(Exception e){
             e.printStackTrace();
         }
-
 
 
         enterGame = (Button) findViewById(R.id.enter_game);
@@ -74,9 +83,9 @@ public class Welcome extends Activity {
             public void onClick(View v) {
 
                 size.setText("");
-                getScreenSizeOfDevice();
+             /*   getScreenSizeOfDevice();
                 getDensity();
-                getDisplayInfomation();
+                getDisplayInfomation();*/
 
             }
         });
@@ -98,58 +107,17 @@ public class Welcome extends Activity {
         });*/
 
 
-    protected void dialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(Welcome.this);
-        builder.setMessage("请检查本机或下位机网络状态");
-        Toast.makeText(this, "请检查本机或下位机网络状态", Toast.LENGTH_SHORT).show();
-        builder.setTitle("提示");
-        builder.setPositiveButton("重新连接", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                //serviceConnection.backgroundService.ServiceState();
-                try {
-                    iMyAidlInterface.runServiceState();
-                } catch (RemoteException e) {
-                    e.printStackTrace();
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (!Settings.canDrawOverlays(this)) {
+                    // SYSTEM_ALERT_WINDOW permission not granted...
                 }
             }
-        });
-        builder.setNegativeButton("暂不连接", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-
-            }
-        });
-        builder.create().show();
+        }
     }
 
-    protected void dialogOne() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(Welcome.this);
-        builder.setMessage("请检查本机网络连接");
-        builder.setTitle("提示");
-        builder.setPositiveButton("重新连接", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-
-                try {
-                    iMyAidlInterface.runServiceState();
-                } catch (RemoteException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        builder.setNegativeButton("暂不连接", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-
-            }
-        });
-        builder.create().show();
-    }
 
 
     private ServiceConnection serviceConnection = new ServiceConnection() {
@@ -180,9 +148,9 @@ public class Welcome extends Activity {
                 @Override
                 public void run() {
                     if(entity.getName().equals("CHECK_DEVICE_CONNECTION")){
-                        dialog();
+
                     }else if (entity.getName().equals("CHECK_WIFI_STATUS")){
-                        dialogOne();
+
                     }
                 }
             });
@@ -198,6 +166,7 @@ public class Welcome extends Activity {
         super.onDestroy();
     }
 
+/*
 
 
     private void getDisplayInfomation() {
@@ -224,5 +193,6 @@ public class Welcome extends Activity {
         double screenInches = diagonal/(double)dens;
         size.append("The screenInches "+screenInches+"\n");
     }
+*/
 
 }
