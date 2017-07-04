@@ -55,11 +55,6 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
     @Bind(R.id.clock)
     TextView clock;
 
-
-
-    public static final String ACTION_REBOOT =
-            "android.intent.action.REBOOT";
-    public static final String ACTION_REQUEST_SHUTDOWN = "android.intent.action.ACTION_REQUEST_SHUTDOWN";
     private IMyAidlInterface iMyAidlInterface;
 
     @Override
@@ -279,6 +274,7 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         // TODO Auto-generated method stub
+        Bundle sdbundle = new Bundle();//存重启、关机信息
         switch (item.getItemId()) {
             case R.id.change:
                 Toast.makeText(this, "切换用户", Toast.LENGTH_SHORT).show();
@@ -288,23 +284,25 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
                 finish();
                 break;
             case R.id.restart:
-                Toast.makeText(this, "重新启动", Toast.LENGTH_SHORT).show();
-                final Intent intent = getPackageManager().getLaunchIntentForPackage(getPackageName());
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                i = new Intent(MainActivity.this, ShutDownActivity.class);
+                sdbundle.putInt("Mode", 1);
+                i.putExtras(sdbundle);
+                startActivity(i);
+                finish();
                 break;
             case R.id.exit:
-                PowerManager pm = (PowerManager)(getSystemService(
-                        Context.POWER_SERVICE));
-                Toast.makeText(this, "退出系统", Toast.LENGTH_SHORT).show();
-                //关闭整个程序
-                SysApplication.getInstance().exit();
+                i = new Intent(MainActivity.this, ShutDownActivity.class);
+                sdbundle.putInt("Mode", 0);
+                i.putExtras(sdbundle);
+                startActivity(i);
+                finish();
                 break;
             default:
                 break;
         }
         return false;
     }
+
 
 
 

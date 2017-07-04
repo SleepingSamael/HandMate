@@ -1,9 +1,11 @@
 package com.qslll.expandingpager;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
+import android.os.PowerManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -435,6 +437,7 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         // TODO Auto-generated method stub
+        Bundle sdbundle = new Bundle();//存重启、关机信息
         switch (item.getItemId()) {
             case R.id.change:
                 Toast.makeText(this, "切换用户", Toast.LENGTH_SHORT).show();
@@ -444,23 +447,23 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
                 finish();
                 break;
             case R.id.restart:
-                Toast.makeText(this, "重新启动", Toast.LENGTH_SHORT).show();
-                final Intent intent = getPackageManager().getLaunchIntentForPackage(getPackageName());
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                i = new Intent(UsersActivity.this, ShutDownActivity.class);
+                sdbundle.putInt("Mode", 1);
+                i.putExtras(sdbundle);
+                startActivity(i);
                 break;
             case R.id.exit:
-                Toast.makeText(this, "退出系统", Toast.LENGTH_SHORT).show();
-                //关闭整个程序
-                // 停止一个 Activity
-                stopService(new Intent(this, ComService.class));
-                SysApplication.getInstance().exit();
+                i = new Intent(UsersActivity.this, ShutDownActivity.class);
+                sdbundle.putInt("Mode", 0);
+                i.putExtras(sdbundle);
+                startActivity(i);
                 break;
             default:
                 break;
         }
         return false;
     }
+
 
     //按拼音排序
     private void PinYinViews() {

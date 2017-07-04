@@ -26,6 +26,7 @@ import com.qslll.expandingpager.ExerciseActivity;
 import com.qslll.expandingpager.IMyAidlInterface;
 import com.qslll.expandingpager.MasterSlaveActivity;
 import com.qslll.expandingpager.Model.users.UserData;
+import com.qslll.expandingpager.ShutDownActivity;
 
 import static android.content.Context.ACTIVITY_SERVICE;
 
@@ -368,6 +369,10 @@ public class Connection {
                     sendData(rHeartBeat());
 
                 }
+                if (str[0].equals("05"))//关机
+                {
+                    ShutDownActivity.shutDownStart(UserData.getContext());
+                }
                 if (str[0].equals("09"))//dButtonInfo改变模式
                 {
                     try {
@@ -509,7 +514,7 @@ public class Connection {
                 Log.e("ChangeMode", "主从模式");
             } else if (buttontype == 2) //手套操
             {
-                ExerciseActivity.ExerciseActionStart(UserData.getContext());//切换手套餐主从模式
+                ExerciseActivity.ExerciseActionStart(UserData.getContext());//切换手套操主从模式
                 Log.e("ChangeMode", "手套操");
             }
         }
@@ -521,7 +526,6 @@ public class Connection {
         String runningActivity=manager.getRunningTasks(1).get(0).topActivity.getClassName();
         return runningActivity;
     }
-
 
     /**
      * rConnectGCU

@@ -180,6 +180,19 @@ public class ComService extends Service {
             connection.sendData(bytes);
             Log.e("sendTrainAck", "start");
         }
+        @Override
+        public void sendShutdown(){
+            //dAWSEndStatus报文
+            byte[] bytes = new byte[6];
+            bytes[0] = (byte) 0xff;
+            bytes[1] = (byte) 0xff;
+            bytes[2] = (byte) 0x06;//ID
+            bytes[3] = (byte) 0x06;//长度
+            bytes[4] = (byte) 0x01;//AWS状态0:not ready 1:ready
+            bytes[5] = (byte) ~(bytes[2] + bytes[3] + bytes[4] );
+            connection.sendData(bytes);
+            Log.e("sendShutdown", "send");
+        }
 
     };
 
