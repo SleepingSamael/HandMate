@@ -30,17 +30,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="800439c1-3e9e-4e17-a0f5-cd09de8e77f6" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/ShutDownActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/progressbar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_shut_down.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/aidl/com/qslll/expandingpager/IMyAidlInterface.aidl" afterPath="$PROJECT_DIR$/app/src/main/aidl/com/qslll/expandingpager/IMyAidlInterface.aidl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Transmission/ComService.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Transmission/ComService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Transmission/Connection.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Transmission/Connection.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/UsersActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/UsersActivity.java" />
     </list>
     <ignored path="expandingpager-master.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -164,7 +154,7 @@
       <file leaf-file-name="ShutDownActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/ShutDownActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="942">
+            <state relative-caret-position="780">
               <caret line="45" column="9" selection-start-line="45" selection-start-column="9" selection-end-line="45" selection-end-column="9" />
               <folding />
             </state>
@@ -3505,7 +3495,14 @@
       <option name="project" value="LOCAL" />
       <updated>1498794612027</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="关机重启功能修改">
+      <created>1499168606406</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1499168606406</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView">
@@ -3585,11 +3582,20 @@
     <MESSAGE value="实现自启动，实现报文跳转界面" />
     <MESSAGE value="修改报文" />
     <MESSAGE value="修改若干传输功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改若干传输功能" />
+    <MESSAGE value="关机重启功能修改" />
+    <option name="LAST_COMMIT_MESSAGE" value="关机重启功能修改" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="34" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/ShutDownActivity.java</url>
+          <line>38</line>
+          <properties />
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="35" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -4001,7 +4007,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/ShutDownActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="942">
+        <state relative-caret-position="780">
           <caret line="45" column="9" selection-start-line="45" selection-start-column="9" selection-end-line="45" selection-end-column="9" />
           <folding />
         </state>
