@@ -33,7 +33,7 @@ import java.util.TimerTask;
 //建立Android服务层，为下位机和UNITY提供通讯服务
 public class ComService extends Service {
 
-    private String WifiName ="Test";
+    private String WifiName ="chej_glove";
     private int updateNUM = 0;
     private int connectionCounter = 0;
     private int heartBeatCounter = 0;
@@ -188,7 +188,7 @@ public class ComService extends Service {
             bytes[1] = (byte) 0xff;
             bytes[2] = (byte) 0x06;//ID
             bytes[3] = (byte) 0x06;//长度
-            bytes[4] = (byte) 0x01;//AWS状态0:not ready 1:ready
+            bytes[4] = (byte) 0x00;//0：关机１：开机
             bytes[5] = (byte) ~(bytes[2] + bytes[3] + bytes[4] );
             connection.sendData(bytes);
             Log.e("sendShutdown", "send");

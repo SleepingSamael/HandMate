@@ -55,6 +55,10 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
     @Bind(R.id.introduce)TextView introduce;
     @Bind(R.id.clock)TextView clock;
     @Bind(R.id.home)ImageView home;
+    @Bind(R.id.power)ImageView power;
+    @Bind(R.id.volume)ImageView volume;
+    @Bind(R.id.wifi)ImageView wifi;
+    @Bind(R.id.bluetooth)ImageView bluetooth;
     private HistoryDataManager mhistoryDataManager;
     HistoryData historyData=new HistoryData();
 
@@ -211,10 +215,43 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
                 finish();
             }
         });
+        power.setOnClickListener(new Button.OnClickListener(){//创建监听
+            public void onClick(View v) {
+                Intent i;
+                i = new Intent(EvaluateActivity.this,SystemSetActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        volume.setOnClickListener(new Button.OnClickListener(){//创建监听
+            public void onClick(View v) {
+                Intent i;
+                i = new Intent(EvaluateActivity.this,SystemSetActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        wifi.setOnClickListener(new Button.OnClickListener(){//创建监听
+            public void onClick(View v) {
+                Intent i;
+                i = new Intent(EvaluateActivity.this,SystemSetActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        bluetooth.setOnClickListener(new Button.OnClickListener(){//创建监听
+            public void onClick(View v) {
+                Intent i;
+                i = new Intent(EvaluateActivity.this,SystemSetActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
         /**
          * 切换用户按钮
          */
         user.setOnClickListener(this);
+        tv_user.setOnClickListener(this);
     }
 
     @Override
@@ -278,6 +315,7 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         // TODO Auto-generated method stub
+        Bundle sdbundle = new Bundle();//存重启、关机信息
         switch (item.getItemId()) {
             case R.id.change:
                 Toast.makeText(this, "切换用户", Toast.LENGTH_SHORT).show();
@@ -287,14 +325,16 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
                 finish();
                 break;
             case R.id.restart:
-                Toast.makeText(this, "重新启动", Toast.LENGTH_SHORT).show();
-                final Intent intent = getPackageManager().getLaunchIntentForPackage(getPackageName());
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                i = new Intent(EvaluateActivity.this, ShutDownActivity.class);
+                sdbundle.putInt("Mode", 1);
+                i.putExtras(sdbundle);
+                startActivity(i);
                 break;
             case R.id.exit:
-                Toast.makeText(this, "退出系统", Toast.LENGTH_SHORT).show();
-                android.os.Process.killProcess(android.os.Process.myPid());
+                i = new Intent(EvaluateActivity.this, ShutDownActivity.class);
+                sdbundle.putInt("Mode", 0);
+                i.putExtras(sdbundle);
+                startActivity(i);
                 break;
             default:
                 break;

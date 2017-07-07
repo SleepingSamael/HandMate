@@ -71,7 +71,7 @@
 
 
                     <Button
-                        android:id="@+id/btn_star"
+                        android:id="@+id/btn_start"
                         android:layout_width="222dp"
                         android:layout_height="82dp"
                         android:layout_gravity="right"
@@ -150,17 +150,6 @@
             android:layout_marginRight="30dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/setting" />
-
-        <Button
-            android:id="@+id/btn_start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/tv_user"
-            android:layout_marginLeft="133dp"
-            android:layout_marginStart="133dp"
-            android:layout_toEndOf="@+id/tv_user"
-            android:layout_toRightOf="@+id/tv_user"
-            android:text="Button" />
 
     </RelativeLayout>
 

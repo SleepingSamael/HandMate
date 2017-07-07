@@ -438,13 +438,11 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
     public boolean onMenuItemClick(MenuItem item) {
         // TODO Auto-generated method stub
         Bundle sdbundle = new Bundle();//存重启、关机信息
+        Intent i;
         switch (item.getItemId()) {
+
             case R.id.change:
                 Toast.makeText(this, "切换用户", Toast.LENGTH_SHORT).show();
-                Intent i;
-                i = new Intent(UsersActivity.this, UsersActivity.class);
-                startActivity(i);
-                finish();
                 break;
             case R.id.restart:
                 i = new Intent(UsersActivity.this, ShutDownActivity.class);

@@ -27,6 +27,10 @@ public class SeniorSetActivity extends AppCompatActivity implements View.OnClick
     private CardView hardware;
     private TextView clock;
     private ImageView home;
+    private ImageView power;
+    private ImageView volume;
+    private ImageView wifi;
+    private ImageView bluetooth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,10 @@ public class SeniorSetActivity extends AppCompatActivity implements View.OnClick
         tv_user=(TextView)findViewById(R.id.tv_user);
         user=(Button)findViewById(R.id.user);
         set = (Button)findViewById(R.id.set);
+        volume=(ImageView)findViewById(R.id.volume);
+        power=(ImageView)findViewById(R.id.power);
+        wifi=(ImageView)findViewById(R.id.wifi);
+        bluetooth=(ImageView)findViewById(R.id.bluetooth);
 
         //获取系统时间
         SimpleDateFormat sDateFormat = new    SimpleDateFormat("yyyy-MM-dd  HH:mm");
@@ -55,6 +63,7 @@ public class SeniorSetActivity extends AppCompatActivity implements View.OnClick
         final UserData userData=(UserData)getApplication();
         tv_user.setText(userData.getUserName());
         user.setOnClickListener(this);
+        tv_user.setOnClickListener(this);
 
         //硬件信息
         hardware.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +100,38 @@ public class SeniorSetActivity extends AppCompatActivity implements View.OnClick
                 finish();
             }
         });
+        power.setOnClickListener(new Button.OnClickListener(){//创建监听
+            public void onClick(View v) {
+                Intent i;
+                i = new Intent(SeniorSetActivity.this,SystemSetActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        volume.setOnClickListener(new Button.OnClickListener(){//创建监听
+            public void onClick(View v) {
+                Intent i;
+                i = new Intent(SeniorSetActivity.this,SystemSetActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        wifi.setOnClickListener(new Button.OnClickListener(){//创建监听
+            public void onClick(View v) {
+                Intent i;
+                i = new Intent(SeniorSetActivity.this,SystemSetActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        bluetooth.setOnClickListener(new Button.OnClickListener(){//创建监听
+            public void onClick(View v) {
+                Intent i;
+                i = new Intent(SeniorSetActivity.this,SystemSetActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
 
     }
 
@@ -114,6 +155,7 @@ public class SeniorSetActivity extends AppCompatActivity implements View.OnClick
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         // TODO Auto-generated method stub
+        Bundle sdbundle = new Bundle();//存重启、关机信息
         switch (item.getItemId()) {
             case R.id.change:
                 Toast.makeText(this, "切换用户", Toast.LENGTH_SHORT).show();
@@ -123,17 +165,16 @@ public class SeniorSetActivity extends AppCompatActivity implements View.OnClick
                 finish();
                 break;
             case R.id.restart:
-                Toast.makeText(this, "重新启动", Toast.LENGTH_SHORT).show();
-                final Intent intent = getPackageManager().getLaunchIntentForPackage(getPackageName());
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                i = new Intent(SeniorSetActivity.this, ShutDownActivity.class);
+                sdbundle.putInt("Mode", 1);
+                i.putExtras(sdbundle);
+                startActivity(i);
                 break;
             case R.id.exit:
-                Toast.makeText(this, "退出系统", Toast.LENGTH_SHORT).show();
-                //关闭整个程序
-                SysApplication.getInstance().exit();
-                break;
-            default:
+                i = new Intent(SeniorSetActivity.this, ShutDownActivity.class);
+                sdbundle.putInt("Mode", 0);
+                i.putExtras(sdbundle);
+                startActivity(i);
                 break;
         }
         return false;

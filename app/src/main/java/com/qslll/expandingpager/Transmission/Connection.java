@@ -36,7 +36,7 @@ import static android.content.Context.ACTIVITY_SERVICE;
 
 //建立底层WIFI连接
 public class Connection {
-    private String ip ="192.168.137.1";//服务器ip
+    private String ip ="192.168.4.1";//服务器ip
     private String port="6000";//服务器端口
 
 
@@ -504,26 +504,31 @@ public class Connection {
      * mode=2：被动模式
      * mode=3：开始
      * mode=4：停止
-     * @param buttontype
+     * @param buttonType
      */
-    public void ButtonMode(int buttontype) {
-        if(getRunningActivityName()!="com.qslll.expandingpager.U3D.u3dPlayer") {
-            if (buttontype == 1) //主从模式
+    public void ButtonMode(int buttonType) {
+        Log.e("ChangeMode",getRunningActivityName() );
+        if(!getRunningActivityName().equals(".U3D.u3dPlayer")) {
+            if (buttonType == 1) //主从模式
             {
                 MasterSlaveActivity.MSActionStart(UserData.getContext());
                 Log.e("ChangeMode", "主从模式");
-            } else if (buttontype == 2) //手套操
+            } else if (buttonType == 2) //手套操
             {
                 ExerciseActivity.ExerciseActionStart(UserData.getContext());//切换手套操主从模式
                 Log.e("ChangeMode", "手套操");
             }
         }
+        else{
+
+        }
+
     }
 
     //获取顶层Activity名称
     public String getRunningActivityName(){
         ActivityManager manager = (ActivityManager) UserData.getContext().getSystemService(ACTIVITY_SERVICE);
-        String runningActivity=manager.getRunningTasks(1).get(0).topActivity.getClassName();
+        String runningActivity=manager.getRunningTasks(1).get(0).topActivity.getShortClassName();
         return runningActivity;
     }
 

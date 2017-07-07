@@ -45,6 +45,10 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
     private TextView info;
     private TextView clock;
     private ImageView home;
+    private ImageView power;
+    private ImageView volume;
+    private ImageView wifi;
+    private ImageView bluetooth;
     //一个横向的ListView
     private HorizontalListView lv_timeline;
     private TimeLineAdapter adapter;
@@ -77,6 +81,10 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
         tv_user = (TextView) findViewById(R.id.tv_user);
         user = (Button) findViewById(R.id.user);
         set =(Button)findViewById(R.id.set);
+        volume=(ImageView)findViewById(R.id.volume);
+        power=(ImageView)findViewById(R.id.power);
+        wifi=(ImageView)findViewById(R.id.wifi);
+        bluetooth=(ImageView)findViewById(R.id.bluetooth);
         tv_name = (TextView) findViewById(R.id.tv_name);
         tv_id = (TextView) findViewById(R.id.tv_id);
         tv_sex = (TextView) findViewById(R.id.tv_sex);
@@ -174,6 +182,7 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
         user.setOnClickListener(this);
+        tv_user.setOnClickListener(this);
 
         //时间线实现
         InitDatas();
@@ -208,6 +217,38 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
                 finish();
             }
         });
+        power.setOnClickListener(new Button.OnClickListener(){//创建监听
+            public void onClick(View v) {
+                Intent i;
+                i = new Intent(HistoryActivity.this,SystemSetActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        volume.setOnClickListener(new Button.OnClickListener(){//创建监听
+            public void onClick(View v) {
+                Intent i;
+                i = new Intent(HistoryActivity.this,SystemSetActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        wifi.setOnClickListener(new Button.OnClickListener(){//创建监听
+            public void onClick(View v) {
+                Intent i;
+                i = new Intent(HistoryActivity.this,SystemSetActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        bluetooth.setOnClickListener(new Button.OnClickListener(){//创建监听
+            public void onClick(View v) {
+                Intent i;
+                i = new Intent(HistoryActivity.this,SystemSetActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
 
     }
 
@@ -232,6 +273,7 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         // TODO Auto-generated method stub
+        Bundle sdbundle = new Bundle();//存重启、关机信息
         switch (item.getItemId()) {
             case R.id.change:
                 Toast.makeText(this, "切换用户", Toast.LENGTH_SHORT).show();
@@ -241,15 +283,16 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
                 finish();
                 break;
             case R.id.restart:
-                Toast.makeText(this, "重新启动", Toast.LENGTH_SHORT).show();
-                final Intent intent = getPackageManager().getLaunchIntentForPackage(getPackageName());
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                i = new Intent(HistoryActivity.this, ShutDownActivity.class);
+                sdbundle.putInt("Mode", 1);
+                i.putExtras(sdbundle);
+                startActivity(i);
                 break;
             case R.id.exit:
-                Toast.makeText(this, "退出系统", Toast.LENGTH_SHORT).show();
-                //关闭整个程序
-                SysApplication.getInstance().exit();
+                i = new Intent(HistoryActivity.this, ShutDownActivity.class);
+                sdbundle.putInt("Mode", 0);
+                i.putExtras(sdbundle);
+                startActivity(i);
                 break;
             default:
                 break;

@@ -20,6 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
+                android:layout_marginTop="-50dp"
                 android:layout_marginLeft="100dp"
                 android:layout_marginRight="100dp"
                 android:background="@color/white"
@@ -1145,46 +1146,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
-
-        <Button
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="10dp"
-            android:id="@+id/user"
-            android:background="@drawable/user" />
-        <TextView
-            android:id="@+id/tv_user"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="26dp"
-            android:layout_marginStart="26dp"
-            android:layout_toEndOf="@+id/user"
-            android:layout_toRightOf="@+id/user"
-            android:text="用户1"
-            android:textColor="@color/darkgrey"
-            android:textSize="40px" />
-
-        <ImageView
-            android:id="@+id/home"
-            android:layout_width="208dp"
-            android:layout_height="85dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerInParent="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/logo" />
-        <Button
-            android:id="@+id/set"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/setting" />
-
     </RelativeLayout>
 
     <!--3. 顶部的titleBar-->
@@ -1206,56 +1167,13 @@
             android:layout_height="90dp"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="700dp"
-                android:textColor="@color/sysblue"
-                android:gravity="center"
-                android:textSize="48px"
-                android:text="2017-02-03   12:40"
-                android:id="@+id/clock" />
-
-
-            <ImageView
-                android:id="@+id/power"
-                android:layout_width="30dp"
-                android:layout_height="49dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="25dp"
-                android:background="@drawable/power"
-                />
-
-            <ImageView
-                android:id="@+id/volume"
-                android:layout_width="46dp"
-                android:layout_height="46dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="95dp"
-                android:background="@drawable/volume"
-                />
-            <ImageView
-                android:id="@+id/wifi"
-                android:layout_width="62dp"
-                android:layout_height="45dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="162dp"
-                android:background="@drawable/wifi"
-                />
-            <ImageView
-                android:id="@+id/bluetooth"
-                android:layout_width="36dp"
-                android:layout_height="53dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="255dp"
-                android:background="@drawable/bluetooth"
-                />
-
+            <Button
+                android:id="@+id/btn_back"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/back" />
         </RelativeLayout>
 
     </LinearLayout>

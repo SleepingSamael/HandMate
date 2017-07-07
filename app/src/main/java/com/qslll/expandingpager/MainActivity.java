@@ -18,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.view.MotionEvent;
@@ -54,6 +55,10 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
     TextView tv_user;
     @Bind(R.id.clock)
     TextView clock;
+    @Bind(R.id.power)ImageView power;
+    @Bind(R.id.volume)ImageView volume;
+    @Bind(R.id.wifi)ImageView wifi;
+    @Bind(R.id.bluetooth)ImageView bluetooth;
 
     private IMyAidlInterface iMyAidlInterface;
 
@@ -153,11 +158,43 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
                 finish();
             }
         });
+        power.setOnClickListener(new Button.OnClickListener(){//创建监听
+            public void onClick(View v) {
+                Intent i;
+                i = new Intent(MainActivity.this,SystemSetActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        volume.setOnClickListener(new Button.OnClickListener(){//创建监听
+            public void onClick(View v) {
+                Intent i;
+                i = new Intent(MainActivity.this,SystemSetActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        wifi.setOnClickListener(new Button.OnClickListener(){//创建监听
+            public void onClick(View v) {
+                Intent i;
+                i = new Intent(MainActivity.this,SystemSetActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        bluetooth.setOnClickListener(new Button.OnClickListener(){//创建监听
+            public void onClick(View v) {
+                Intent i;
+                i = new Intent(MainActivity.this,SystemSetActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
         /**
          * 切换用户按钮
          */
         user.setOnClickListener(this);
-
+        tv_user.setOnClickListener(this);
     }
 
 

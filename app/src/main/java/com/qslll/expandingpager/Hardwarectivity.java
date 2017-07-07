@@ -24,6 +24,10 @@ public class Hardwarectivity extends AppCompatActivity implements View.OnClickLi
     private Button set;
     private ImageView logo_to_admin;
     private ImageView home;
+    private ImageView power;
+    private ImageView volume;
+    private ImageView wifi;
+    private ImageView bluetooth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +48,17 @@ public class Hardwarectivity extends AppCompatActivity implements View.OnClickLi
         tv_user=(TextView)findViewById(R.id.tv_user);
         user=(Button)findViewById(R.id.user);
         set=(Button)findViewById(R.id.set);
+        volume=(ImageView)findViewById(R.id.volume);
+        power=(ImageView)findViewById(R.id.power);
+        wifi=(ImageView)findViewById(R.id.wifi);
+        bluetooth=(ImageView)findViewById(R.id.bluetooth);
         logo_to_admin = (ImageView)findViewById(R.id.logo_to_admin);
 
         //全局变量UserData中调取名字
         final UserData userData=(UserData)getApplication();
         tv_user.setText(userData.getUserName());
         user.setOnClickListener(this);
+        tv_user.setOnClickListener(this);
 
 
         //home键
@@ -84,6 +93,38 @@ public class Hardwarectivity extends AppCompatActivity implements View.OnClickLi
                 finish();
             }
         });
+        power.setOnClickListener(new Button.OnClickListener(){//创建监听
+            public void onClick(View v) {
+                Intent i;
+                i = new Intent(Hardwarectivity.this,SystemSetActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        volume.setOnClickListener(new Button.OnClickListener(){//创建监听
+            public void onClick(View v) {
+                Intent i;
+                i = new Intent(Hardwarectivity.this,SystemSetActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        wifi.setOnClickListener(new Button.OnClickListener(){//创建监听
+            public void onClick(View v) {
+                Intent i;
+                i = new Intent(Hardwarectivity.this,SystemSetActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        bluetooth.setOnClickListener(new Button.OnClickListener(){//创建监听
+            public void onClick(View v) {
+                Intent i;
+                i = new Intent(Hardwarectivity.this,SystemSetActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
     }
     //点击按钮后，加载弹出式菜单
     @Override
@@ -105,6 +146,7 @@ public class Hardwarectivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         // TODO Auto-generated method stub
+        Bundle sdbundle = new Bundle();//存重启、关机信息
         switch (item.getItemId()) {
             case R.id.change:
                 Toast.makeText(this, "切换用户", Toast.LENGTH_SHORT).show();
@@ -114,15 +156,16 @@ public class Hardwarectivity extends AppCompatActivity implements View.OnClickLi
                 finish();
                 break;
             case R.id.restart:
-                Toast.makeText(this, "重新启动", Toast.LENGTH_SHORT).show();
-                final Intent intent = getPackageManager().getLaunchIntentForPackage(getPackageName());
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                i = new Intent(Hardwarectivity.this, ShutDownActivity.class);
+                sdbundle.putInt("Mode", 1);
+                i.putExtras(sdbundle);
+                startActivity(i);
                 break;
             case R.id.exit:
-                Toast.makeText(this, "退出系统", Toast.LENGTH_SHORT).show();
-                //关闭整个程序
-                SysApplication.getInstance().exit();
+                i = new Intent(Hardwarectivity.this, ShutDownActivity.class);
+                sdbundle.putInt("Mode", 0);
+                i.putExtras(sdbundle);
+                startActivity(i);
                 break;
             default:
                 break;

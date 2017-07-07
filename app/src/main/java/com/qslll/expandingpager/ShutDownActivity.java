@@ -4,11 +4,19 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
 import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+
+import com.qslll.expandingpager.Transmission.ComService;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ShutDownActivity extends AppCompatActivity {
 
@@ -32,19 +40,28 @@ public class ShutDownActivity extends AppCompatActivity {
         Bundle bundle = this.getIntent().getExtras();
         sdid = bundle.getInt("Mode") ;
 
+        Intent myServiceIntent = new Intent(ShutDownActivity.this, ComService.class);
+        bindService(myServiceIntent, serviceConnection,
+                Context.BIND_AUTO_CREATE);
+
+
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Looper.prepare();
+                if (sdid==0)
+                {
+                    shutdown();
+                }
+                else if(sdid==1)
+                {
+                    reboot();
+                }
+                Looper.loop();
+            }
+        },3000);
     }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (sdid==0)
-        {
-            shutdown();
-        }
-        else if(sdid==1)
-        {
-            reboot();
-        }
-    }
+
     private void shutdown()
     {
         if (iMyAidlInterface!=null){
@@ -58,7 +75,7 @@ public class ShutDownActivity extends AppCompatActivity {
             //关机
             Process proc =Runtime.getRuntime().exec(new
 
-                    String[]{"su","-c","sync;sleep 5;reboot -p"});
+                    String[]{"su","-c","sync;sleep 1;reboot -p"});
             proc.waitFor();
         }catch(Exception
                 e){
@@ -76,7 +93,7 @@ public class ShutDownActivity extends AppCompatActivity {
         }
         try
         {
-            Process proc =Runtime.getRuntime().exec(new String[]{"su","-c","sync;sleep 5;reboot "});//重启
+            Process proc =Runtime.getRuntime().exec(new String[]{"su","-c","sync;sleep 1;reboot "});//重启
             proc.waitFor();
         }catch (Exception ex){
             ex.printStackTrace();
