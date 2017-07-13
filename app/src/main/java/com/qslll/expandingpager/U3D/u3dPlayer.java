@@ -13,6 +13,7 @@ import com.qslll.expandingpager.ICallBack;
 import com.qslll.expandingpager.IMyAidlInterface;
 import com.qslll.expandingpager.R;
 import com.qslll.expandingpager.Model.history.HistoryData;
+import com.unity3d.player.UnityPlayer;
 
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -34,7 +35,7 @@ import java.util.TimerTask;
 
 //建立U3D连接
 public class u3dPlayer extends UnityPlayerActivity {
-    private String tag = "MainActivity";
+    private String tag = "";
     private LinearLayout u3dLayout;
     private float angle = 0;
     private int scenenum = 1;//场景变量
@@ -147,6 +148,19 @@ public class u3dPlayer extends UnityPlayerActivity {
         return null;
     }
 
+    public String[]  getConnectionStatus(){
+
+        if (iMyAidlInterface!=null){
+            try {
+                return iMyAidlInterface.getComponentStatus();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return null;
+    }
+
     /**
      * aidl不能传输数组，将int数组转成String传递后再分解处理
      * @param angles
@@ -175,35 +189,11 @@ public class u3dPlayer extends UnityPlayerActivity {
            Log.e("u3dPlayer", "I'm receving from Unity " + "   " + touchFeedBack[j]);
        }
    }
-    //获取手套当前数据信息
-    public int getFingerNum(){
-
-        if (iMyAidlInterface!=null){
-            try {
-                fingerNumber = iMyAidlInterface.getCurrentFingerNumber();
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return fingerNumber;
-    }
 
     public void sendDataToAndroid(String input) {
         Log.d(tag,input);
     }
 
-    public float getAngle() {//u3d调用下位机传来角度数据
-
-        if (iMyAidlInterface!=null){
-            try {
-                angle = iMyAidlInterface.getCurrentAngle();
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }        }
-
-        return angle;
-    }
 
     //返回游戏分数
     public void sendToAndroidGameResult(int result){
@@ -244,6 +234,10 @@ public class u3dPlayer extends UnityPlayerActivity {
             }
         }
 
+    }
+    //暂停
+    public  static void  pauseUnity(){
+        UnityPlayer.UnitySendMessage("ALL", "PressStop", "");
     }
     //退出unity界面
     public void makePauseUnity() {

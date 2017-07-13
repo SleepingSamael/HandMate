@@ -14,9 +14,8 @@ interface IMyAidlInterface {
     void runServiceState();
     boolean getConnectionStatus();
 
-    int getCurrentFingerNumber();//手指序号
-    float getCurrentAngle();//当前角度
     String [] getFingerArray();
+    String[] getComponentStatus();
     int getScore();
 
     //向下位机发送角度数据报文

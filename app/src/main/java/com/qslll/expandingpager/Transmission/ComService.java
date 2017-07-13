@@ -86,10 +86,6 @@ public class ComService extends Service {
             //sendMsgToMain(msg);
         }
 
-        @Override
-        public float getCurrentAngle() {
-            return connection.angleFromDownStream;
-        }
 
         @Override
         public void runServiceState() {
@@ -105,10 +101,6 @@ public class ComService extends Service {
             }
         }
 
-        @Override
-        public int getCurrentFingerNumber() {
-            return connection.fingerNumber;
-        }
 
         @Override
         public int getScore() {
@@ -118,6 +110,11 @@ public class ComService extends Service {
         @Override
         public String[] getFingerArray() {
             return connection.fingerArray;
+        }
+
+        @Override
+        public String[] getComponentStatus() {
+            return connection.componentArray;
         }
 
         //向下位机发送角度数据报文

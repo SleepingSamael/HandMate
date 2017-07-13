@@ -27,6 +27,7 @@ import com.qslll.expandingpager.IMyAidlInterface;
 import com.qslll.expandingpager.MasterSlaveActivity;
 import com.qslll.expandingpager.Model.users.UserData;
 import com.qslll.expandingpager.ShutDownActivity;
+import com.qslll.expandingpager.U3D.u3dPlayer;
 
 import static android.content.Context.ACTIVITY_SERVICE;
 
@@ -64,6 +65,7 @@ public class Connection {
     private int powerInfo=0;//下位机电量
     public byte[] messageToDevice;//向下位机发送的角度报文
     public String[] fingerArray = {"0","0","0","0","0"};
+    public String[] componentArray = {"0","0","0","0","0"};
 
     String strResult=null;//接收报文十进制
     String hexResult=null;//接收报文十六进制
@@ -359,65 +361,97 @@ public class Connection {
                     Log.e("Receiver", "I am receiving " + strFF[ff]);
                     String[] str = strFF[ff].split("\\ ");
                     Log.e("Receiver", "ID=    " + str[0]);
-                /**
-                 * 判断收到报文类型
-                 */
-                if (str[0].equals("03"))//心跳检测
-                {
-                    beatTime=refFormatNowDate();
-                    heartBeat=true;
-                    sendData(rHeartBeat());
-
-                }
-                if (str[0].equals("05"))//关机
-                {
-                    ShutDownActivity.shutDownStart(UserData.getContext());
-                }
-                if (str[0].equals("09"))//dButtonInfo改变模式
-                {
-                    try {
-                        ButtonMode(Integer.valueOf(str[2]).intValue());
-                    } catch (Exception e){
-                    Log.e("Connection", String.valueOf(e));
-                }
-                }
-                if (str[0].equals("20"))//dPowerinfo下位机电量
-                {
-                    try {
-                        int a =Integer.parseInt(str[2], 16);
-                        powerInfo = Integer.valueOf(a).intValue();
-                        Log.e("PowerInfo", "下位机电量为   " + powerInfo);
-                    }catch (Exception e){
-                        Log.e("Connection", String.valueOf(e));
+                    /**
+                     * 判断收到报文类型
+                     */
+                    if (str[0].equals("03"))//心跳检测
+                    {
+                        beatTime=refFormatNowDate();
+                        heartBeat=true;
+                        sendData(rHeartBeat());
                     }
-                }
-                if (str[0].equals("10"))//下位机向上位机发送角度信息
-                {
-                    try {
-                        String[] str2 = msg.getData().get("msg").toString().split("\\ ");
-
-                        //手指序号
-                        fingerNumber = Integer.parseInt(str2[2]);
-
-                        //手指运动角度
-                        angleFromDownStream = Float.parseFloat(str2[5]);
-
-                        //对手指信息进行整理
-                        System.arraycopy(str2, 4, fingerArray, 0, 5);
-
-                        Log.e("Connection", "-----------------------------------");
-
-                        for (int i = 0; i < 5; i++) {
-                            Log.e("Connection", "The Array Contains " + fingerArray[i]);
+                    if (str[0].equals("05"))//关机
+                    {
+                        ShutDownActivity.shutDownStart(UserData.getContext());
+                    }
+                    if (str[0].equals("09"))//dButtonInfo改变模式
+                    {
+                        try {
+                            ButtonMode(Integer.valueOf(str[2]).intValue());
+                        } catch (Exception e){
+                            Log.e("Connection", String.valueOf(e));
                         }
-                        Log.e("Connection", "-----------------------------------");
-                    }catch (Exception e){
-                        Log.e("Connection", String.valueOf(e));
                     }
+                    if (str[0].equals("20"))//dPowerinfo下位机电量
+                    {
+                        try {
+                            int a =Integer.parseInt(str[2], 16);
+                            powerInfo = Integer.valueOf(a).intValue();
+                            Log.e("PowerInfo", "下位机电量为   " + powerInfo);
+                        }catch (Exception e){
+                            Log.e("PowerInfo", String.valueOf(e));
+                        }
+                    }
+                    if (str[0].equals("10"))//下位机向上位机发送角度信息
+                    {
+                        try {
+                            String[] str2 = msg.getData().get("msg").toString().split("\\ ");
+                            //手指序号
+                            fingerNumber = Integer.parseInt(str2[2]);
+                            //手指运动角度
+                            angleFromDownStream = Float.parseFloat(str2[5]);
+                            //对手指信息进行整理
+                            System.arraycopy(str2, 4, fingerArray, 0, 5);
+
+                            Log.e("Connection", "-----------------------------------");
+
+                            for (int i = 0; i < 5; i++) {
+                                Log.e("Connection", "The Array Contains " + fingerArray[i]);
+                            }
+                            Log.e("Connection", "-----------------------------------");
+                        }catch (Exception e){
+                            Log.e("Connection", String.valueOf(e));
+                        }
+                    }
+                    if(str[0].equals("21"))//部件信息
+                     {
+                         if(str[2].equals("0"))//舵机
+                         {
+                             switch (str[3])
+                             {
+                                 case "0"://当前位置
+                                     try {
+                                         //对舵机位置信息进行整理
+                                         componentArray[0]=str[5];
+                                         componentArray[1]=str[7];
+                                         componentArray[2]=str[9];
+                                         componentArray[3]=str[11];
+                                         componentArray[4]=str[13];
+                                         Log.e("componentArray", "-----------------------------------");
+                                         for (int i = 0; i < 5; i++) {
+                                             Log.e("componentArray", "The Array Contains " + componentArray[i]);
+                                         }
+                                         Log.e("componentArray", "-----------------------------------");
+                                     }catch (Exception e){
+                                         Log.e("componentArray", String.valueOf(e));
+                                     }
+                                     break;
+                                 case "1"://当前速度
+                                     break;
+                                 case "2"://当前负载
+                                     break;
+                                 case "3"://舵机错误状态
+                                     break;
+                                 case "4"://当前温度
+                                     break;
+                                 case "5"://当前电压
+                                     break;
+                             }
+                         }
+
+                     }
                 }
             }
-            }
-
         }
     }
 
@@ -517,6 +551,15 @@ public class Connection {
             {
                 ExerciseActivity.ExerciseActionStart(UserData.getContext());//切换手套操主从模式
                 Log.e("ChangeMode", "手套操");
+            }
+            else if (buttonType == 3) //开始
+            {
+
+            }
+            else if (buttonType == 4) //停止
+            {
+                u3dPlayer.pauseUnity();
+                Log.e("ChangeMode", "暂停");
             }
         }
         else{
