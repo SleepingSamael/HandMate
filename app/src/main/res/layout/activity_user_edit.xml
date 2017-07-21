@@ -309,7 +309,7 @@
                     android:layout_gravity="center"
                     android:background="@drawable/edittext"
                     android:ems="20"
-                    android:inputType="phone"
+                    android:inputType="text"
                     android:textColor="@color/gray"
                     android:textSize="42px" />
 

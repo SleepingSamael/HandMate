@@ -20,7 +20,7 @@ public class EvaluateTableActivity extends AppCompatActivity {
         SysApplication.getInstance().addActivity(this);
 
         back=(Button) findViewById(R.id.btn_back);
-        save=(Button) findViewById(R.id.btn_save);
+        save=(Button) findViewById(R.id.save_table);
         //back键
         back.setOnClickListener(new View.OnClickListener() {
             @Override

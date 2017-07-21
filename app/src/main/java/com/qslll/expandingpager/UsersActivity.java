@@ -303,6 +303,7 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
         });
 
         //根据输入框输入值的改变来过滤搜索
+
         // 设置搜索文本监听
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             // 当点击搜索按钮时触发该方法
@@ -314,11 +315,12 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public boolean onQueryTextChange(String newText) {
                 if (!TextUtils.isEmpty(newText)){
-                    //users_gv.setFilterText(newText);
+                    users_gv.setFilterText(newText);
                     //当输入框里面的值为空，更新为原来的列表，否则为过滤数据列表
-                   // filterData(newText);
+                   filterData(newText);
                 }else{
-                    users_gv.clearTextFilter();
+                   // users_gv.clearTextFilter();
+                    showlist(mUserDataManager.fetchAllUserDatas());//刷新列表
                 }
                 return false;
             }
@@ -558,6 +560,52 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
     private void filterData(String filterStr){
         List<SortModel> filterDateList = new ArrayList<SortModel>();
 
+        //实例化汉字转拼音类
+        characterParser = CharacterParser.getInstance();
+
+        pinyinComparator = new PinyinComparator();
+        //数据库内容存入数组
+        Cursor cursor=mUserDataManager.fetchAllUserDatas();
+        String[] allName = new String[cursor.getCount()];
+        String[] allID = new String[cursor.getCount()];
+        String[] allDate = new String[cursor.getCount()];
+        String[] allSex = new String[cursor.getCount()];
+        String[] allAge = new String[cursor.getCount()];
+        int position = 0;
+        //cursor.moveToPosition(position);
+        cursor.moveToFirst();
+        int index1 = cursor.getColumnIndex(UsersConstant.NAME);
+        int index2 = cursor.getColumnIndex(UsersConstant._ID);
+        int index3 = cursor.getColumnIndex(UsersConstant.DATE);
+        int index4 = cursor.getColumnIndex(UsersConstant.SEX);
+        int index5 = cursor.getColumnIndex(UsersConstant.AGE);
+        String str1 = cursor.getString(index1);
+        String str2 = cursor.getString(index2);
+        String str3 = cursor.getString(index3);
+        String str4 = cursor.getString(index4);
+        String str5 = cursor.getString(index5);
+        allName[position] = str1;
+        allID[position] = str2;
+        allDate[position] = str3;
+        allSex[position] = str4;
+        allAge[position] = str5;
+        while (cursor.moveToNext()) {
+            str1 = cursor.getString(index1);
+            str2 = cursor.getString(index2);
+            str3 = cursor.getString(index3);
+            str4 = cursor.getString(index4);
+            str5 = cursor.getString(index5);
+            position++;
+            allName[position] = str1;
+            allID[position] = str2;
+            allDate[position] = str3;
+            allSex[position] = str4;
+            allAge[position] = str5;
+
+        }
+
+        SourceDateList = filledData(allName,allID,allDate,allSex,allAge);
+
         if(TextUtils.isEmpty(filterStr)){
             filterDateList = SourceDateList;
         }else{
@@ -572,7 +620,8 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
 
         // 根据a-z进行排序
         Collections.sort(filterDateList, pinyinComparator);
-        adapter.updateListView(filterDateList);
+        adapter = new SortAdapter(this, filterDateList);
+        users_gv.setAdapter(adapter);
     }
 
 
