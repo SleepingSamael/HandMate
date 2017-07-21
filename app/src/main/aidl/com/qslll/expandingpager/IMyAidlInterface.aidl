@@ -16,6 +16,7 @@ interface IMyAidlInterface {
 
     String [] getFingerArray();
     String[] getComponentStatus();
+    String[] getConfigArray();
     int getScore();
 
     //向下位机发送角度数据报文

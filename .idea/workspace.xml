@@ -23,18 +23,29 @@
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
-    <option name="TOOL_WINDOW_REGEXP_FILTER" value="false" />
   </component>
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Transmission/Connection.java" line="365" />
+    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Transmission/Connection.java" line="363" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="800439c1-3e9e-4e17-a0f5-cd09de8e77f6" name="Default" comment="修改搜索bug">
+    <list default="true" id="800439c1-3e9e-4e17-a0f5-cd09de8e77f6" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/EvaluateTableActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/EvaluateTableActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/aidl/com/qslll/expandingpager/IMyAidlInterface.aidl" afterPath="$PROJECT_DIR$/app/src/main/aidl/com/qslll/expandingpager/IMyAidlInterface.aidl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/EvaluateActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/EvaluateActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/ExerciseActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/ExerciseActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/GameItemActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/GameItemActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Hardwarectivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Hardwarectivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/HistoryActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/HistoryActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/MainActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/MasterSlaveActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/MasterSlaveActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/SeniorSetActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/SeniorSetActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/SystemSetActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/SystemSetActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Transmission/ComService.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Transmission/ComService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Transmission/Connection.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Transmission/Connection.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/U3D/UnityPlayerActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/U3D/UnityPlayerActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/U3D/UnityPlayerNativeActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/U3D/UnityPlayerNativeActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/U3D/u3dPlayer.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/U3D/u3dPlayer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/UsersActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/UsersActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_user_edit.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_user_edit.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
     </list>
     <ignored path="expandingpager-master.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -66,70 +77,133 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-          <provider editor-type-id="android-manifest">
-            <state />
-          </provider>
+      <file leaf-file-name="HistoryActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/HistoryActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1242">
-              <caret line="23" column="39" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="39" />
-              <folding />
+            <state relative-caret-position="305">
+              <caret line="276" column="42" selection-start-line="276" selection-start-column="42" selection-end-line="276" selection-end-column="42" />
+              <folding>
+                <element signature="e#11598#11786#0" expanded="true" />
+                <element signature="e#11785#11786#0" expanded="true" />
+                <element signature="e#12569#12757#0" expanded="true" />
+                <element signature="e#12756#12757#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <file leaf-file-name="Hardwarectivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Hardwarectivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="162">
+              <caret line="149" column="42" selection-start-line="149" selection-start-column="42" selection-end-line="149" selection-end-column="42" />
+              <folding>
+                <element signature="e#6401#6589#0" expanded="true" />
+                <element signature="e#6588#6589#0" expanded="true" />
+                <element signature="e#7372#7560#0" expanded="true" />
+                <element signature="e#7559#7560#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HistoryDataManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Database/HistoryDataManager.java">
+      <file leaf-file-name="GameItemActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/GameItemActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="648">
-              <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
-              <folding />
+              <caret line="322" column="42" selection-start-line="322" selection-start-column="42" selection-end-line="322" selection-end-column="42" />
+              <folding>
+                <element signature="e#13115#13303#0" expanded="true" />
+                <element signature="e#13302#13303#0" expanded="true" />
+                <element signature="e#14088#14276#0" expanded="true" />
+                <element signature="e#14275#14276#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UsersActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/UsersActivity.java">
+      <file leaf-file-name="ExerciseActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/ExerciseActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="674">
-              <caret line="332" column="18" selection-start-line="332" selection-start-column="17" selection-end-line="332" selection-end-column="18" />
-              <folding />
+            <state relative-caret-position="162">
+              <caret line="305" column="42" selection-start-line="305" selection-start-column="42" selection-end-line="305" selection-end-column="42" />
+              <folding>
+                <element signature="e#11860#12048#0" expanded="true" />
+                <element signature="e#12047#12048#0" expanded="true" />
+                <element signature="e#12833#13021#0" expanded="true" />
+                <element signature="e#13020#13021#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_users.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_users.xml">
-          <provider selected="true" editor-type-id="android-designer2">
-            <state />
-          </provider>
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/library/src/main/AndroidManifest.xml">
-          <provider editor-type-id="android-manifest">
-            <state />
-          </provider>
+      <file leaf-file-name="EvaluateTableActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/EvaluateTableActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="702">
+              <caret line="22" column="50" selection-start-line="22" selection-start-column="50" selection-end-line="22" selection-end-column="50" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EvaluateActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/EvaluateActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-904">
+              <caret line="321" column="55" selection-start-line="321" selection-start-column="55" selection-end-line="321" selection-end-column="55" />
+              <folding>
+                <element signature="e#7844#8110#0" expanded="true" />
+                <element signature="e#8109#8110#0" expanded="true" />
+                <element signature="e#12302#12490#0" expanded="true" />
+                <element signature="e#12489#12490#0" expanded="true" />
+                <element signature="e#13275#13463#0" expanded="true" />
+                <element signature="e#13462#13463#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="u3dPlayer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/U3D/u3dPlayer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1134">
+              <caret line="180" column="7" selection-start-line="180" selection-start-column="7" selection-end-line="180" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IMyAidlInterface.aidl" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/aidl/com/qslll/expandingpager/IMyAidlInterface.aidl">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="447">
+              <caret line="18" column="30" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ComService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Transmission/ComService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="11210">
+              <caret line="490" column="39" selection-start-line="490" selection-start-column="39" selection-end-line="490" selection-end-column="39" />
+              <folding>
+                <element signature="e#3285#3286#0" expanded="true" />
+                <element signature="e#3341#3342#0" expanded="true" />
+                <element signature="e#3423#3424#0" expanded="true" />
+                <element signature="e#3476#3477#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Connection.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Transmission/Connection.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="18684">
+              <caret line="394" column="69" selection-start-line="394" selection-start-column="69" selection-end-line="394" selection-end-column="69" />
               <folding />
             </state>
           </provider>
@@ -2807,8 +2881,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_hardwarectivity.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/radiobutton.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/edittext.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/radiobutton_divider.xml" />
@@ -2840,24 +2912,26 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/ShutDownActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_game_item.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_evaluate_table.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/SystemSetActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/EvaluateActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/ExerciseActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/GameItemActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/MasterSlaveActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Hardwarectivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/HistoryActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/SeniorSetActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/user_list_item.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Transmission/ComService.java" />
-        <option value="$PROJECT_DIR$/app/src/main/aidl/com/qslll/expandingpager/IMyAidlInterface.aidl" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/U3D/u3dPlayer.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Transmission/Connection.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_user_edit.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/EvaluateTableActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/U3D/UnityPlayerActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/U3D/UnityPlayerNativeActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/UsersActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/SystemSetActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/SeniorSetActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/MasterSlaveActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/HistoryActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Hardwarectivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/GameItemActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/ExerciseActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/EvaluateActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/aidl/com/qslll/expandingpager/IMyAidlInterface.aidl" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/U3D/u3dPlayer.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Transmission/ComService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Transmission/Connection.java" />
       </list>
     </option>
   </component>
@@ -2895,14 +2969,14 @@
       <pane id="AndroidView">
         <subPane />
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
-      <pane id="PackagesPane">
-        <subPane />
-      </pane>
       <pane id="ProjectPane">
         <subPane />
       </pane>
+      <pane id="PackagesPane">
+        <subPane />
+      </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -3330,7 +3404,14 @@
       <option name="project" value="LOCAL" />
       <updated>1499925508560</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="修改搜索bug">
+      <created>1500598554763</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1500598554763</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TodoView">
@@ -3344,22 +3425,24 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="2582" height="1406" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3291592" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24956217" sideWeight="0.49837267" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283713" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23905429" sideWeight="0.49837267" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7740806" sideWeight="0.35817888" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3485114" sideWeight="0.6418211" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.56171733" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4614711" sideWeight="0.66196615" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17950962" sideWeight="0.6418211" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.056946687" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.561296" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6602452" sideWeight="0.66196615" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22416812" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25630593" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25624496" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23380035" sideWeight="0.4983884" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24979855" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -3372,8 +3455,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.056946687" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21716288" sideWeight="0.4983884" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -3417,93 +3498,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="56" />
+      <option name="time" value="57" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/progressbar.jpg" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/progressbar.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="4" column="43" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_shutdown.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/progressbaricon.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/timeline_item.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/AdminActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_shut_down.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="24" column="28" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Welcome.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4806">
-          <caret line="111" column="15" selection-start-line="111" selection-start-column="15" selection-end-line="111" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/ShutDownActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="773">
-          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/ReportActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="121" column="33" selection-start-line="121" selection-start-column="33" selection-end-line="121" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_game_item.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="10638">
-          <caret line="197" column="40" selection-start-line="197" selection-start-column="40" selection-end-line="197" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_history.xml">
       <provider editor-type-id="android-designer2">
         <state />
@@ -3514,83 +3513,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/SystemSetActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2592">
-          <caret line="73" column="41" selection-start-line="73" selection-start-column="41" selection-end-line="73" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/UserEditActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
           <caret line="34" column="24" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/EvaluateActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9504">
-          <caret line="217" column="8" selection-start-line="217" selection-start-column="8" selection-end-line="248" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/ExerciseActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11016">
-          <caret line="243" column="47" selection-start-line="243" selection-start-column="47" selection-end-line="243" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/GameItemActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10476">
-          <caret line="234" column="47" selection-start-line="234" selection-start-column="47" selection-end-line="234" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6642">
-          <caret line="163" column="43" selection-start-line="163" selection-start-column="43" selection-end-line="163" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/MasterSlaveActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11232">
-          <caret line="247" column="50" selection-start-line="247" selection-start-column="50" selection-end-line="247" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Hardwarectivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1890">
-          <caret line="50" column="8" selection-start-line="50" selection-start-column="8" selection-end-line="53" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/HistoryActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3294">
-          <caret line="86" column="58" selection-start-line="86" selection-start-column="58" selection-end-line="86" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/SeniorSetActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="50" column="58" selection-start-line="50" selection-start-column="58" selection-end-line="50" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/user_list_item.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="147" column="40" selection-start-line="147" selection-start-column="40" selection-end-line="147" selection-end-column="40" />
         </state>
       </provider>
     </entry>
@@ -3626,35 +3552,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2106">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/aidl/com/qslll/expandingpager/IMyAidlInterface.aidl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Transmission/ComService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4320">
-          <caret line="116" column="36" selection-start-line="116" selection-start-column="36" selection-end-line="116" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Transmission/Connection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-121">
-          <caret line="403" column="24" selection-start-line="403" selection-start-column="24" selection-end-line="403" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/U3D/u3dPlayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
-          <caret line="240" column="5" selection-start-line="240" selection-start-column="5" selection-end-line="240" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -3754,17 +3651,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/EvaluateTableActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="22" column="50" selection-start-line="22" selection-start-column="50" selection-end-line="22" selection-end-column="50" />
-          <folding>
-            <element signature="e#927#1069#0" expanded="false" />
-            <element signature="e#1068#1069#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_evaluate_table.xml">
       <provider selected="true" editor-type-id="android-designer2">
         <state />
@@ -3772,35 +3658,168 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="1188">
           <caret line="22" column="44" selection-start-line="22" selection-start-column="44" selection-end-line="22" selection-end-column="44" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_system_set.xml">
-      <provider selected="true" editor-type-id="android-designer2">
+    <entry file="file://$PROJECT_DIR$/captures/com.qslll.expandingpager_2017.07.21_10.03.li">
+      <provider selected="true" editor-type-id="capture-editor">
         <state />
       </provider>
-      <provider editor-type-id="text-editor">
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/user_list_item.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4691">
+          <caret line="58" column="23" selection-start-line="0" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/timeline_item.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="4" column="5" selection-start-line="0" selection-start-column="0" selection-end-line="79" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_front.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="7" column="36" selection-start-line="0" selection-start-column="0" selection-end-line="42" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_bottom.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="12" selection-end-column="15" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_user_edit.xml">
-      <provider selected="true" editor-type-id="android-designer2">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_welcome.xml">
+      <provider editor-type-id="android-designer2">
         <state />
       </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="16416">
-          <caret line="304" column="16" selection-start-line="304" selection-start-column="16" selection-end-line="304" selection-end-column="16" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="9" column="56" selection-start-line="0" selection-start-column="0" selection-end-line="30" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_users.xml">
-      <provider selected="true" editor-type-id="android-designer2">
+      <provider editor-type-id="android-designer2">
         <state />
       </provider>
-      <provider editor-type-id="text-editor">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="24" column="45" selection-start-line="0" selection-start-column="0" selection-end-line="224" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_user_edit.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="300" column="30" selection-start-line="0" selection-start-column="0" selection-end-line="495" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_u3d_player.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="9" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="21" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_system_set.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="9" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="363" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/U3D/UnityPlayerActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="13" column="32" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/U3D/UnityPlayerNativeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="604">
+          <caret line="93" column="5" selection-start-line="0" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_senior_set.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="6" column="33" selection-start-line="0" selection-start-column="0" selection-end-line="259" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_report.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="8" column="19" selection-start-line="0" selection-start-column="0" selection-end-line="383" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-v17/activity_main.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="10" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="148" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_shut_down.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
@@ -3809,8 +3828,178 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/UsersActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="674">
-          <caret line="332" column="18" selection-start-line="332" selection-start-column="17" selection-end-line="332" selection-end-column="18" />
+        <state relative-caret-position="121">
+          <caret line="421" column="4" selection-start-line="421" selection-start-column="4" selection-end-line="468" selection-end-column="5" />
+          <folding>
+            <element signature="e#13808#14153#0" expanded="true" />
+            <element signature="e#14152#14153#0" expanded="true" />
+            <element signature="e#18304#18492#0" expanded="true" />
+            <element signature="e#18491#18492#0" expanded="true" />
+            <element signature="e#19271#19459#0" expanded="true" />
+            <element signature="e#19458#19459#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/SystemSetActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="359">
+          <caret line="213" column="11" selection-start-line="169" selection-start-column="4" selection-end-line="216" selection-end-column="5" />
+          <folding>
+            <element signature="e#6035#6223#0" expanded="false" />
+            <element signature="e#6222#6223#0" expanded="false" />
+            <element signature="e#7010#7198#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/SeniorSetActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-937">
+          <caret line="158" column="42" selection-start-line="158" selection-start-column="42" selection-end-line="158" selection-end-column="42" />
+          <folding>
+            <element signature="e#6629#6817#0" expanded="false" />
+            <element signature="e#6816#6817#0" expanded="false" />
+            <element signature="e#7604#7792#0" expanded="false" />
+            <element signature="e#7791#7792#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/MasterSlaveActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="336" column="42" selection-start-line="336" selection-start-column="42" selection-end-line="336" selection-end-column="42" />
+          <folding>
+            <element signature="e#13537#13725#0" expanded="true" />
+            <element signature="e#13724#13725#0" expanded="true" />
+            <element signature="e#14516#14704#0" expanded="true" />
+            <element signature="e#14703#14704#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="314" column="42" selection-start-line="314" selection-start-column="42" selection-end-line="314" selection-end-column="42" />
+          <folding>
+            <element signature="e#11374#11562#0" expanded="false" />
+            <element signature="e#11561#11562#0" expanded="false" />
+            <element signature="e#12339#12527#0" expanded="false" />
+            <element signature="e#12526#12527#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/HistoryActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="276" column="42" selection-start-line="276" selection-start-column="42" selection-end-line="276" selection-end-column="42" />
+          <folding>
+            <element signature="e#11598#11786#0" expanded="true" />
+            <element signature="e#11785#11786#0" expanded="true" />
+            <element signature="e#12569#12757#0" expanded="true" />
+            <element signature="e#12756#12757#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Hardwarectivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="149" column="42" selection-start-line="149" selection-start-column="42" selection-end-line="149" selection-end-column="42" />
+          <folding>
+            <element signature="e#6401#6589#0" expanded="true" />
+            <element signature="e#6588#6589#0" expanded="true" />
+            <element signature="e#7372#7560#0" expanded="true" />
+            <element signature="e#7559#7560#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/GameItemActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="648">
+          <caret line="322" column="42" selection-start-line="322" selection-start-column="42" selection-end-line="322" selection-end-column="42" />
+          <folding>
+            <element signature="e#13115#13303#0" expanded="true" />
+            <element signature="e#13302#13303#0" expanded="true" />
+            <element signature="e#14088#14276#0" expanded="true" />
+            <element signature="e#14275#14276#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/EvaluateTableActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="702">
+          <caret line="22" column="50" selection-start-line="22" selection-start-column="50" selection-end-line="22" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/ExerciseActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="305" column="42" selection-start-line="305" selection-start-column="42" selection-end-line="305" selection-end-column="42" />
+          <folding>
+            <element signature="e#11860#12048#0" expanded="true" />
+            <element signature="e#12047#12048#0" expanded="true" />
+            <element signature="e#12833#13021#0" expanded="true" />
+            <element signature="e#13020#13021#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/EvaluateActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-904">
+          <caret line="321" column="55" selection-start-line="321" selection-start-column="55" selection-end-line="321" selection-end-column="55" />
+          <folding>
+            <element signature="e#7844#8110#0" expanded="true" />
+            <element signature="e#8109#8110#0" expanded="true" />
+            <element signature="e#12302#12490#0" expanded="true" />
+            <element signature="e#12489#12490#0" expanded="true" />
+            <element signature="e#13275#13463#0" expanded="true" />
+            <element signature="e#13462#13463#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/aidl/com/qslll/expandingpager/IMyAidlInterface.aidl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="447">
+          <caret line="18" column="30" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/U3D/u3dPlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1134">
+          <caret line="180" column="7" selection-start-line="180" selection-start-column="7" selection-end-line="180" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Transmission/ComService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11210">
+          <caret line="490" column="39" selection-start-line="490" selection-start-column="39" selection-end-line="490" selection-end-column="39" />
+          <folding>
+            <element signature="e#3285#3286#0" expanded="true" />
+            <element signature="e#3341#3342#0" expanded="true" />
+            <element signature="e#3423#3424#0" expanded="true" />
+            <element signature="e#3476#3477#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Transmission/Connection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18684">
+          <caret line="394" column="69" selection-start-line="394" selection-start-column="69" selection-end-line="394" selection-end-column="69" />
           <folding />
         </state>
       </provider>

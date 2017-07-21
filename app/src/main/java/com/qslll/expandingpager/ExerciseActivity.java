@@ -3,6 +3,7 @@ package com.qslll.expandingpager;
 import android.annotation.TargetApi;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Build;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Explode;
 import android.util.Log;
@@ -302,7 +304,6 @@ public class ExerciseActivity extends AppCompatActivity implements ExpandingFrag
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         // TODO Auto-generated method stub
-        Bundle sdbundle = new Bundle();//存重启、关机信息
         switch (item.getItemId()) {
             case R.id.change:
                 Toast.makeText(this, "切换用户", Toast.LENGTH_SHORT).show();
@@ -312,21 +313,63 @@ public class ExerciseActivity extends AppCompatActivity implements ExpandingFrag
                 finish();
                 break;
             case R.id.restart:
-                i = new Intent(ExerciseActivity.this, ShutDownActivity.class);
-                sdbundle.putInt("Mode", 1);
-                i.putExtras(sdbundle);
-                startActivity(i);
+                restartDialog();
                 break;
             case R.id.exit:
-                i = new Intent(ExerciseActivity.this, ShutDownActivity.class);
-                sdbundle.putInt("Mode", 0);
-                i.putExtras(sdbundle);
-                startActivity(i);
+                shutDownDialog();
                 break;
             default:
                 break;
         }
         return false;
+    }
+    private void shutDownDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(ExerciseActivity.this);
+        builder.setMessage("确定要关机吗？");
+        builder.setTitle("提示");
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Bundle sdbundle = new Bundle();//存重启、关机信息
+                Intent i;
+                i = new Intent(ExerciseActivity.this, ShutDownActivity.class);
+                sdbundle.putInt("Mode", 0);
+                i.putExtras(sdbundle);
+                startActivity(i);
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
+    }
+    private void restartDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(ExerciseActivity.this);
+        builder.setMessage("确定要重启吗？");
+        builder.setTitle("提示");
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Bundle sdbundle = new Bundle();//存重启、关机信息
+                Intent i;
+                i = new Intent(ExerciseActivity.this, ShutDownActivity.class);
+                sdbundle.putInt("Mode", 1);
+                i.putExtras(sdbundle);
+                startActivity(i);
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
     }
 
    /* @Override

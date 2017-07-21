@@ -66,7 +66,7 @@ public class Connection {
     public byte[] messageToDevice;//向下位机发送的角度报文
     public String[] fingerArray = {"0","0","0","0","0"};
     public String[] componentArray = {"0","0","0","0","0"};
-
+    public String[] configArray =new String[15];
     String strResult=null;//接收报文十进制
     String hexResult=null;//接收报文十六进制
 
@@ -94,7 +94,6 @@ public class Connection {
 
                     //启动线程，并启动Looper对事件进行监控和处理
                     Looper.prepare();
-                    //Log.i(tag, "---->> connect/close server!");
 
                     //在新建立的线程中连接无线WIFI
                     connectServer(ip, port);
@@ -161,7 +160,6 @@ public class Connection {
 
         } catch (Exception e) {
             isConnected = false;
-            e.printStackTrace();
             Log.e("Connection", "连接失败");
             Log.e("Connection", String.valueOf(e));
         }
@@ -392,6 +390,10 @@ public class Connection {
                             Log.e("PowerInfo", String.valueOf(e));
                         }
                     }
+                    if (str[0].equals("fc"))//配置文件
+                    {
+                        System.arraycopy(str, 2, fingerArray, 0, 15);
+                    }
                     if (str[0].equals("10"))//下位机向上位机发送角度信息
                     {
                         try {
@@ -415,18 +417,18 @@ public class Connection {
                     }
                     if(str[0].equals("21"))//部件信息
                      {
-                         if(str[2].equals("0"))//舵机
+                         if(str[2].equals("00"))//舵机
                          {
                              switch (str[3])
                              {
-                                 case "0"://当前位置
+                                 case "00"://当前位置
                                      try {
                                          //对舵机位置信息进行整理
-                                         componentArray[0]=str[5];
-                                         componentArray[1]=str[7];
-                                         componentArray[2]=str[9];
-                                         componentArray[3]=str[11];
-                                         componentArray[4]=str[13];
+                                         componentArray[0]=Integer.parseInt(str[5],16)+"";
+                                         componentArray[1]=Integer.parseInt(str[7],16)+"";
+                                         componentArray[2]=Integer.parseInt(str[9],16)+"";
+                                         componentArray[3]=Integer.parseInt(str[11],16)+"";
+                                         componentArray[4]=Integer.parseInt(str[13],16)+"";
                                          Log.e("componentArray", "-----------------------------------");
                                          for (int i = 0; i < 5; i++) {
                                              Log.e("componentArray", "The Array Contains " + componentArray[i]);
@@ -436,15 +438,15 @@ public class Connection {
                                          Log.e("componentArray", String.valueOf(e));
                                      }
                                      break;
-                                 case "1"://当前速度
+                                 case "01"://当前速度
                                      break;
-                                 case "2"://当前负载
+                                 case "02"://当前负载
                                      break;
-                                 case "3"://舵机错误状态
+                                 case "03"://舵机错误状态
                                      break;
-                                 case "4"://当前温度
+                                 case "04"://当前温度
                                      break;
-                                 case "5"://当前电压
+                                 case "05"://当前电压
                                      break;
                              }
                          }
@@ -604,6 +606,16 @@ public class Connection {
         b[0]=(byte)0xff;
         b[1]=(byte)0xff;
         b[2]=(byte)0x04;//ID
+        b[3]=(byte)0x05;//长度
+        b[4]=(byte) ~(b[2]+b[3]);
+        return b;
+    }
+    //AWS向GCU发送配置报文请求
+    public byte[] rConfigData(){
+        byte[]b=new byte[5];
+        b[0]=(byte)0xff;
+        b[1]=(byte)0xff;
+        b[2]=(byte)0x25;//ID
         b[3]=(byte)0x05;//长度
         b[4]=(byte) ~(b[2]+b[3]);
         return b;

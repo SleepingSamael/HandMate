@@ -107,16 +107,23 @@ public class ComService extends Service {
             return u3d.getScore();
         }
 
+        //向u3d发送手指角度
         @Override
         public String[] getFingerArray() {
             return connection.fingerArray;
         }
 
+        //向u3d发送舵机状态
         @Override
         public String[] getComponentStatus() {
             return connection.componentArray;
         }
 
+        //向u3d发送配置数据
+        @Override
+        public String[] getConfigArray(){
+            return connection.configArray;
+        }
         //向下位机发送角度数据报文
         @Override
         public void setCurrentAngle(String strAngles) {
@@ -371,6 +378,7 @@ public class ComService extends Service {
                     Log.e("ComService", "SoftwareException");
                     connection.machineException = false;
                 }
+                connection.sendData(connection.rConfigData());//请求配置信息
 
                 Intent intent = new Intent("com.example.broadcasttest.LOCAL_BROADCAST");
                 intent.putExtra("Connection","check_heart_beat");
@@ -481,6 +489,7 @@ public class ComService extends Service {
         //服务被创造时启动WIFI连接线程
         connection.connectThread();
         connection.sendData(connection.rConnectGCU());
+        connection.sendData(connection.rConfigData());
         mContext = this;
     }
 

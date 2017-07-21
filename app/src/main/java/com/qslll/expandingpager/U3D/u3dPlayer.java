@@ -134,11 +134,22 @@ public class u3dPlayer extends UnityPlayerActivity {
     }
 
 
+    //u3d调取舵机状态
+    public String[] getComponentStatus(){
+        if (iMyAidlInterface!=null){
+            try {
+                return iMyAidlInterface.getComponentStatus();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+    //u3d调取手指角度
     public String[]  getFingerArray(){
 
         if (iMyAidlInterface!=null){
             try {
-
                 return iMyAidlInterface.getFingerArray();
             } catch (RemoteException e) {
                 e.printStackTrace();
@@ -147,12 +158,12 @@ public class u3dPlayer extends UnityPlayerActivity {
 
         return null;
     }
-
-    public String[]  getConnectionStatus(){
+    //u3d调取配置数据
+    public String[]  getConfigArray(){
 
         if (iMyAidlInterface!=null){
             try {
-                return iMyAidlInterface.getComponentStatus();
+                return iMyAidlInterface.getConfigArray();
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -161,8 +172,10 @@ public class u3dPlayer extends UnityPlayerActivity {
         return null;
     }
 
+
+
     /**
-     * aidl不能传输数组，将int数组转成String传递后再分解处理
+     * aidl不能传输int数组，将int数组转成String传递后再分解处理
      * @param angles
      * @return
      */
@@ -237,7 +250,11 @@ public class u3dPlayer extends UnityPlayerActivity {
     }
     //暂停
     public  static void  pauseUnity(){
-        UnityPlayer.UnitySendMessage("ALL", "PressStop", "");
+        try {
+            UnityPlayer.UnitySendMessage("ALL", "PressStop", "");
+        }catch(Exception e) {
+            Log.e("pauseUnity", String.valueOf(e));
+        }
     }
     //退出unity界面
     public void makePauseUnity() {
