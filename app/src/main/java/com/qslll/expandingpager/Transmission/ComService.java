@@ -284,7 +284,7 @@ public class ComService extends Service {
                 String WIFISSID = wifiInfo.getSSID();
 
                 //判定WIFI是否为指定的WIFI
-                if (WIFISSID.equals("\""+WifiName+"\"")) {
+               // if (WIFISSID.equals("\""+WifiName+"\"")) {
 
                     connection.connectThread();
 
@@ -320,12 +320,12 @@ public class ComService extends Service {
                         }
                     }).start();
 
-                } else {
+               // } else {
 
-                    dialogOne();
+               //     dialogOne();
                     //sendMsgToMain("CHECK_WIFI_STATUS");
 
-                }
+              //  }
 
                 break;
 

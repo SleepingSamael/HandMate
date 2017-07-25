@@ -161,6 +161,7 @@ public class u3dPlayer extends UnityPlayerActivity {
     //u3d调取配置数据
     public String[]  getConfigArray(){
 
+        Log.e("getConfigArray","in");
         if (iMyAidlInterface!=null){
             try {
                 return iMyAidlInterface.getConfigArray();
@@ -172,22 +173,13 @@ public class u3dPlayer extends UnityPlayerActivity {
         return null;
     }
 
-
-
-    /**
-     * aidl不能传输int数组，将int数组转成String传递后再分解处理
-     * @param angles
-     * @return
-     */
-
     //向下位机传递(U3D调用)
-   public void sendToLowerComputer(int[] angles)//U3d传来角度数据,转换成报文传给下位机
+   public void sendToLowerComputer(String angles)//U3d传来角度数据,转换成报文传给下位机
    {
-       String shenjingbing = angles[0]+" "+angles[1]+" "+angles[2]+" "+angles[3]+" "+angles[4];
-       Log.e("u3dPlayer","I'm receving from Unity "+"   "+ shenjingbing);
+       Log.e("u3dPlayer","I'm receving from Unity "+"   "+ angles);
        if (iMyAidlInterface!=null){
            try {
-             iMyAidlInterface.setCurrentAngle(shenjingbing);
+             iMyAidlInterface.setCurrentAngle(angles);
            } catch (RemoteException e) {
                e.printStackTrace();
            }
@@ -211,7 +203,7 @@ public class u3dPlayer extends UnityPlayerActivity {
     //返回游戏分数
     public void sendToAndroidGameResult(int result){
 
-        Log.e("u3dPlayer","I'm receving from Unity "+"   "+ result);
+        Log.e("u3dPlayer","result: "+"   "+ result);
         mhistoryDataManager.updateUserData(hid,result);//游戏分数存入数据库
         score=result;
 

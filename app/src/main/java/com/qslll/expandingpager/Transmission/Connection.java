@@ -66,7 +66,7 @@ public class Connection {
     public byte[] messageToDevice;//向下位机发送的角度报文
     public String[] fingerArray = {"0","0","0","0","0"};
     public String[] componentArray = {"0","0","0","0","0"};
-    public String[] configArray =new String[15];
+    public String[] configArray ={"10","10","10","10","10","110","110","110","110","110","140","140","140","140","140"};
     String strResult=null;//接收报文十进制
     String hexResult=null;//接收报文十六进制
 
@@ -118,6 +118,7 @@ public class Connection {
                 mSocket = new Socket();
                 //尝试连接socket, socket连接超时设置为1000ms
                 mSocket.connect(sockaddr, 1000);
+                mSocket.setKeepAlive(true);
                 isConnected=true;
 
             }catch (IOException e1) {
@@ -392,7 +393,25 @@ public class Connection {
                     }
                     if (str[0].equals("fc"))//配置文件
                     {
-                        System.arraycopy(str, 2, fingerArray, 0, 15);
+                        configArray[0]=Integer.parseInt(str[2],16)+"";
+                        configArray[1]=Integer.parseInt(str[3],16)+"";
+                        configArray[2]=Integer.parseInt(str[4],16)+"";
+                        configArray[3]=Integer.parseInt(str[5],16)+"";
+                        configArray[4]=Integer.parseInt(str[6],16)+"";
+                        configArray[5]=Integer.parseInt(str[7],16)+"";
+                        configArray[6]=Integer.parseInt(str[8],16)+"";
+                        configArray[7]=Integer.parseInt(str[9],16)+"";
+                        configArray[8]=Integer.parseInt(str[10],16)+"";
+                        configArray[9]=Integer.parseInt(str[11],16)+"";
+                        configArray[10]=Integer.parseInt(str[12],16)+"";
+                        configArray[11]=Integer.parseInt(str[13],16)+"";
+                        configArray[12]=Integer.parseInt(str[14],16)+"";
+                        configArray[13]=Integer.parseInt(str[15],16)+"";
+                        configArray[14]=Integer.parseInt(str[16],16)+"";
+                      //  System.arraycopy(str, 2, configArray, 0, 15);
+                        for (int i = 0; i < 15; i++) {
+                            Log.e("FC", "The Array Contains " + configArray[i]);
+                        }
                     }
                     if (str[0].equals("10"))//下位机向上位机发送角度信息
                     {
