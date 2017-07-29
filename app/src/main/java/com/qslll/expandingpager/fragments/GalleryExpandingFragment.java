@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
-import com.qslll.expandingpager.Model.Travel;
+import com.qslll.expandingpager.Model.GalleryItems;
 import com.qslll.library.fragments.ExpandingFragment;
 
 /**
@@ -12,15 +12,15 @@ import com.qslll.library.fragments.ExpandingFragment;
  *
  * Created by florentchampigny on 21/06/2016.
  */
-public class TravelExpandingFragment extends ExpandingFragment {
+public class GalleryExpandingFragment extends ExpandingFragment {
 
     static final String ARG_TRAVEL = "ARG_TRAVEL";
-    Travel travel;
+    GalleryItems galleryItems;
 
-    public static TravelExpandingFragment newInstance(Travel travel){
-        TravelExpandingFragment fragment = new TravelExpandingFragment();
+    public static GalleryExpandingFragment newInstance(GalleryItems galleryItems){
+        GalleryExpandingFragment fragment = new GalleryExpandingFragment();
         Bundle args = new Bundle();
-        args.putParcelable(ARG_TRAVEL, travel);
+        args.putParcelable(ARG_TRAVEL, galleryItems);
         fragment.setArguments(args);
         return fragment;
     }
@@ -30,7 +30,7 @@ public class TravelExpandingFragment extends ExpandingFragment {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
         if(args != null) {
-            travel = args.getParcelable(ARG_TRAVEL);
+            galleryItems = args.getParcelable(ARG_TRAVEL);
         }
     }
 
@@ -40,7 +40,7 @@ public class TravelExpandingFragment extends ExpandingFragment {
      */
     @Override
     public Fragment getFragmentTop() {
-        return FragmentTop.newInstance(travel);
+        return FragmentTop.newInstance(galleryItems);
     }
 
     /**

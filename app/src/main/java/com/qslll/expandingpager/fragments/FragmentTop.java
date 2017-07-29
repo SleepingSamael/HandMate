@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.qslll.expandingpager.Model.GalleryItems;
 import com.qslll.expandingpager.R;
-import com.qslll.expandingpager.Model.Travel;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -18,15 +18,15 @@ import butterknife.ButterKnife;
 public class FragmentTop extends Fragment {
 
     static final String ARG_TRAVEL = "ARG_TRAVEL";
-    Travel travel;
+    GalleryItems galleryItems;
 
     @Bind(R.id.image) ImageView image;
     @Bind(R.id.title) TextView title;
 
-    public static FragmentTop newInstance(Travel travel) {
+    public static FragmentTop newInstance(GalleryItems galleryItems) {
         Bundle args = new Bundle();
         FragmentTop fragmentTop = new FragmentTop();
-        args.putParcelable(ARG_TRAVEL, travel);
+        args.putParcelable(ARG_TRAVEL, galleryItems);
         fragmentTop.setArguments(args);
         return fragmentTop;
     }
@@ -36,7 +36,7 @@ public class FragmentTop extends Fragment {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
         if (args != null) {
-            travel = args.getParcelable(ARG_TRAVEL);
+            galleryItems = args.getParcelable(ARG_TRAVEL);
         }
     }
 
@@ -50,9 +50,9 @@ public class FragmentTop extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        if (travel != null) {
-            image.setImageResource(travel.getImage());
-            title.setText(travel.getName());
+        if (galleryItems != null) {
+            image.setImageResource(galleryItems.getImage());
+            title.setText(galleryItems.getName());
         }
 
     }

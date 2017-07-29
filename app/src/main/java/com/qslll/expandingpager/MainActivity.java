@@ -9,7 +9,6 @@ import android.content.ServiceConnection;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.os.PowerManager;
 import android.os.RemoteException;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
@@ -29,9 +28,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.qslll.expandingpager.Adapter.TravelViewPagerAdapter;
+import com.qslll.expandingpager.Adapter.GalleryViewPagerAdapter;
+import com.qslll.expandingpager.Model.GalleryItems;
 import com.qslll.expandingpager.Model.SysApplication;
-import com.qslll.expandingpager.Model.Travel;
 import com.qslll.expandingpager.Model.users.UserData;
 import com.qslll.expandingpager.Transmission.ComService;
 import com.qslll.library.ExpandingPagerFactory;
@@ -123,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
             }
         });
 
-        TravelViewPagerAdapter adapter = new TravelViewPagerAdapter(getSupportFragmentManager());
+        GalleryViewPagerAdapter adapter = new GalleryViewPagerAdapter(getSupportFragmentManager());
         adapter.addAll(generateTravelList());
         viewPager.setAdapter(adapter);
 
@@ -215,16 +214,16 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
         getWindow().setExitTransition(slideTransition);
     }
 
-    private List<Travel> generateTravelList() {
-        List<Travel> travels = new ArrayList<>();
+    private List<GalleryItems> generateTravelList() {
+        List<GalleryItems> galleryItemses = new ArrayList<>();
         for (int i = 0; i < 1; ++i) {
-            travels.add(new Travel("主从模式", R.drawable.masterslave, null));
-            travels.add(new Travel("游戏模式", R.drawable.game, null));
-            travels.add(new Travel("手套操", R.drawable.exercise, null));
-            travels.add(new Travel("评估", R.drawable.evaluate, null));
-            travels.add(new Travel("历史记录", R.drawable.history, null));
+            galleryItemses.add(new GalleryItems("主从模式", R.drawable.masterslave, null));
+            galleryItemses.add(new GalleryItems("游戏模式", R.drawable.game, null));
+            galleryItemses.add(new GalleryItems("手套操", R.drawable.exercise, null));
+            galleryItemses.add(new GalleryItems("评估", R.drawable.evaluate, null));
+            galleryItemses.add(new GalleryItems("历史记录", R.drawable.history, null));
         }
-        return travels;
+        return galleryItemses;
     }
 
 
@@ -232,9 +231,9 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
     @Override
     public void onExpandingClick(View v) {
 
-        Travel travel = generateTravelList().get(viewPager.getCurrentItem());
+        GalleryItems galleryItems = generateTravelList().get(viewPager.getCurrentItem());
         Bundle mbundle = new Bundle();//存menu点击值
-        if (travel.getName() == "游戏模式") {
+        if (galleryItems.getName() == "游戏模式") {
             Intent i = new Intent(MainActivity.this, GameItemActivity.class);
             mbundle.putInt("Mode", 3);
             i.putExtras(mbundle);
@@ -243,7 +242,7 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
             startActivity(i);
             finish();
         }
-        if (travel.getName() == "主从模式") {
+        if (galleryItems.getName() == "主从模式") {
             Intent i = new Intent(MainActivity.this, MasterSlaveActivity.class);
             mbundle.putInt("Mode", 3);
             i.putExtras(mbundle);
@@ -252,7 +251,7 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
             startActivity(i);
             finish();
         }
-        if (travel.getName() == "手套操") {
+        if (galleryItems.getName() == "手套操") {
             Intent i = new Intent(MainActivity.this, ExerciseActivity.class);
             mbundle.putInt("Mode", 3);
             i.putExtras(mbundle);
@@ -261,7 +260,7 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
             startActivity(i);
             finish();
         }
-        if (travel.getName() == "评估") {
+        if (galleryItems.getName() == "评估") {
             Intent i = new Intent(MainActivity.this, EvaluateActivity.class);
             mbundle.putInt("Mode", 3);
             i.putExtras(mbundle);
@@ -269,7 +268,7 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
             startActivity(i);
             finish();
         }
-        if (travel.getName() == "历史记录") {
+        if (galleryItems.getName() == "历史记录") {
             Intent i = new Intent(MainActivity.this, HistoryActivity.class);
             mbundle.putInt("Mode", 3);
             i.putExtras(mbundle);

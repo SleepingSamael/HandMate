@@ -29,9 +29,9 @@ import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.Toast;
 
 import com.qslll.expandingpager.Database.HistoryDataManager;
-import com.qslll.expandingpager.Adapter.TravelViewPagerAdapter;
+import com.qslll.expandingpager.Adapter.GalleryViewPagerAdapter;
+import com.qslll.expandingpager.Model.GalleryItems;
 import com.qslll.expandingpager.Model.SysApplication;
-import com.qslll.expandingpager.Model.Travel;
 import com.qslll.expandingpager.Model.history.HistoryData;
 import com.qslll.expandingpager.Model.users.UserData;
 import com.qslll.expandingpager.Transmission.ComService;
@@ -128,7 +128,7 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
                 return viewPager.dispatchTouchEvent(event);
             }
         });
-        TravelViewPagerAdapter adapter = new TravelViewPagerAdapter(getSupportFragmentManager());
+        GalleryViewPagerAdapter adapter = new GalleryViewPagerAdapter(getSupportFragmentManager());
         adapter.addAll(generateTravelList());
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);//设置当前viewpage是第几页
@@ -139,10 +139,10 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
         /**
          * 载入时设置详情图片和介绍
          */
-        Travel travel = generateTravelList().get(viewPager.getCurrentItem());
-        DetailPhoto.setImageResource(travel.getImage());
-        title.setText(travel.getName());
-        introduce.setText(travel.getIntroduce());
+        GalleryItems galleryItems = generateTravelList().get(viewPager.getCurrentItem());
+        DetailPhoto.setImageResource(galleryItems.getImage());
+        title.setText(galleryItems.getName());
+        introduce.setText(galleryItems.getIntroduce());
         //home键
         home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -194,10 +194,10 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
 
             @Override
             public void onPageSelected(int position) {
-                Travel travel = generateTravelList().get(viewPager.getCurrentItem());
-                DetailPhoto.setImageResource(travel.getImage());
-                title.setText(travel.getName());
-                introduce.setText(travel.getIntroduce());
+                GalleryItems galleryItems = generateTravelList().get(viewPager.getCurrentItem());
+                DetailPhoto.setImageResource(galleryItems.getImage());
+                title.setText(galleryItems.getName());
+                introduce.setText(galleryItems.getIntroduce());
             }
 
             @Override
@@ -270,17 +270,17 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
         getWindow().setExitTransition(slideTransition);
     }
 
-    private List<Travel> generateTravelList(){
-        List<Travel> travels = new ArrayList<>();
+    private List<GalleryItems> generateTravelList(){
+        List<GalleryItems> galleryItemses = new ArrayList<>();
         for(int i=0;i<1;++i){
-            travels.add(new Travel("评估模式", R.drawable.game3,"评估模式旨在对患者的手指活动能力作出评估，" +
+            galleryItemses.add(new GalleryItems("评估模式", R.drawable.game3,"评估模式旨在对患者的手指活动能力作出评估，" +
                     "患者通过屏幕上的提示尽力做出相应动作，" +
                     "程序根据患者动作的时间与到位程度进行打分，协助医生对患者病情评估。"));
-            travels.add(new Travel("评估量表", R.drawable.evaluatetable,"评估量表提供手部活动能力的评估量表让医生对患者进行打分，" +
+            galleryItemses.add(new GalleryItems("评估量表", R.drawable.evaluatetable,"评估量表提供手部活动能力的评估量表让医生对患者进行打分，" +
                     "从而协助医生对患者病情评估。"));
 
         }
-        return travels;
+        return galleryItemses;
     }
 
 
@@ -293,7 +293,7 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
     public void onExpandingClick(View v) {
         //v is expandingfragment layout
         View view = v.findViewById(R.id.image);
-        Travel travel = generateTravelList().get(viewPager.getCurrentItem());
+        GalleryItems travel = generateTravelList().get(viewPager.getCurrentItem());
         startInfoActivity(view,travel);
     }*/
 

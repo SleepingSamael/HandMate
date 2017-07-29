@@ -359,22 +359,24 @@ public class Connection {
                     strFF[ff].trim();
                     Log.e("Receiver", "I am receiving " + strFF[ff]);
                     String[] str = strFF[ff].split("\\ ");
-                    Log.e("Receiver", "ID=    " + str[0]);
                     /**
                      * 判断收到报文类型
                      */
                     if (str[0].equals("03"))//心跳检测
                     {
+                        Log.e("Receiver", "ID=    " + str[0]);
                         beatTime=refFormatNowDate();
                         heartBeat=true;
                         sendData(rHeartBeat());
                     }
                     if (str[0].equals("05"))//关机
                     {
+                        Log.e("Receiver", "ID=    " + str[0]);
                         ShutDownActivity.shutDownStart(UserData.getContext());
                     }
                     if (str[0].equals("09"))//dButtonInfo改变模式
                     {
+                        Log.e("Receiver", "ID=    " + str[0]);
                         try {
                             ButtonMode(Integer.valueOf(str[2]).intValue());
                         } catch (Exception e){
@@ -383,6 +385,7 @@ public class Connection {
                     }
                     if (str[0].equals("20"))//dPowerinfo下位机电量
                     {
+                        Log.e("Receiver", "ID=    " + str[0]);
                         try {
                             int a =Integer.parseInt(str[2], 16);
                             powerInfo = Integer.valueOf(a).intValue();
@@ -393,6 +396,7 @@ public class Connection {
                     }
                     if (str[0].equals("fc"))//配置文件
                     {
+                        Log.e("Receiver", "ID=    " + str[0]);
                         configArray[0]=Integer.parseInt(str[2],16)+"";
                         configArray[1]=Integer.parseInt(str[3],16)+"";
                         configArray[2]=Integer.parseInt(str[4],16)+"";
@@ -415,22 +419,37 @@ public class Connection {
                     }
                     if (str[0].equals("10"))//下位机向上位机发送角度信息
                     {
-                        try {
-                            String[] str2 = msg.getData().get("msg").toString().split("\\ ");
-                            //手指序号
-                            fingerNumber = Integer.parseInt(str2[2]);
-                            //手指运动角度
-                            angleFromDownStream = Float.parseFloat(str2[5]);
-                            //对手指信息进行整理
-                            System.arraycopy(str2, 4, fingerArray, 0, 5);
+                            try {
+                                Log.e("Receiver", "ID=    " + str[0]);
+                                if (str[2].equals("00")&&str[3].equals("00")&&str[4].equals("00")&&str[5].equals("00")&&str[6].equals("00"))
+                                {
 
-                            Log.e("Connection", "-----------------------------------");
+                                }
+                                else {
+                                    String[] str2 = msg.getData().get("msg").toString().split("\\ ");
+                                    //手指序号
+                                    fingerNumber = Integer.parseInt(str2[2]);
+                                    //手指运动角度
+                                    angleFromDownStream = Float.parseFloat(str2[5]);
+                                    //对手指信息进行整理
+                                    fingerArray[0] = Integer.parseInt(str[2], 16) + "";
+                                    fingerArray[1] = Integer.parseInt(str[3], 16) + "";
+                                    fingerArray[2] = Integer.parseInt(str[4], 16) + "";
+                                    fingerArray[3] = Integer.parseInt(str[5], 16) + "";
+                                    fingerArray[4] = Integer.parseInt(str[6], 16) + "";
+                                    //System.arraycopy(str2, 4, fingerArray, 0, 5);
 
-                            for (int i = 0; i < 5; i++) {
-                                Log.e("Connection", "The Array Contains " + fingerArray[i]);
-                            }
-                            Log.e("Connection", "-----------------------------------");
-                        }catch (Exception e){
+                                    Log.e("Connection", "-----------------------------------");
+                                    for (int j = 0; j < str.length; j++) {
+                                        Log.e("Connection", str[j]);
+                                    }
+                                    for (int i = 0; i < 5; i++) {
+                                        Log.e("Connection", "The Array Contains " + fingerArray[i]);
+                                    }
+                                    Log.e("Connection", "-----------------------------------");
+                                }
+
+                            } catch (Exception e){
                             Log.e("Connection", String.valueOf(e));
                         }
                     }

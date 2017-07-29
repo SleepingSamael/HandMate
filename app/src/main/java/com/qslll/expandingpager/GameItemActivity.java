@@ -28,9 +28,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qslll.expandingpager.Database.HistoryDataManager;
-import com.qslll.expandingpager.Adapter.TravelViewPagerAdapter;
+import com.qslll.expandingpager.Adapter.GalleryViewPagerAdapter;
+import com.qslll.expandingpager.Model.GalleryItems;
 import com.qslll.expandingpager.Model.SysApplication;
-import com.qslll.expandingpager.Model.Travel;
 import com.qslll.expandingpager.Model.history.HistoryData;
 import com.qslll.expandingpager.Model.users.UserData;
 import com.qslll.expandingpager.Transmission.ComService;
@@ -124,7 +124,7 @@ public class GameItemActivity extends AppCompatActivity implements ExpandingFrag
             }
         });
 
-        TravelViewPagerAdapter adapter = new TravelViewPagerAdapter(getSupportFragmentManager());
+        GalleryViewPagerAdapter adapter = new GalleryViewPagerAdapter(getSupportFragmentManager());
         adapter.addAll(generateTravelList());
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(1);//设置当前viewpage是第几页
@@ -135,10 +135,10 @@ public class GameItemActivity extends AppCompatActivity implements ExpandingFrag
         /**
          * 载入时设置详情图片和介绍
          */
-        Travel travel = generateTravelList().get(viewPager.getCurrentItem());
-        DetailPhoto.setImageResource(travel.getImage());
-        title.setText(travel.getName());
-        introduce.setText(travel.getIntroduce());
+        GalleryItems galleryItems = generateTravelList().get(viewPager.getCurrentItem());
+        DetailPhoto.setImageResource(galleryItems.getImage());
+        title.setText(galleryItems.getName());
+        introduce.setText(galleryItems.getIntroduce());
         introduce.setMovementMethod(ScrollingMovementMethod.getInstance());
 
         //home键
@@ -208,10 +208,10 @@ public class GameItemActivity extends AppCompatActivity implements ExpandingFrag
 
             @Override
             public void onPageSelected(int position) {
-                Travel travel = generateTravelList().get(viewPager.getCurrentItem());
-                DetailPhoto.setImageResource(travel.getImage());
-                title.setText(travel.getName());
-                introduce.setText(travel.getIntroduce());
+                GalleryItems galleryItems = generateTravelList().get(viewPager.getCurrentItem());
+                DetailPhoto.setImageResource(galleryItems.getImage());
+                title.setText(galleryItems.getName());
+                introduce.setText(galleryItems.getIntroduce());
             }
 
             @Override
@@ -285,14 +285,14 @@ public class GameItemActivity extends AppCompatActivity implements ExpandingFrag
         getWindow().setExitTransition(slideTransition);
     }
 
-    private List<Travel> generateTravelList(){
-        List<Travel> travels = new ArrayList<>();
+    private List<GalleryItems> generateTravelList(){
+        List<GalleryItems> galleryItemses = new ArrayList<>();
         for(int i=0;i<1;++i){
-            travels.add(new Travel("丰收果园", R.drawable.applegame,"在金黄色的秋季里，没有什么比收获果实更让人心情愉悦的事了。作为农场之主的你，在今日决定去采摘下苹果，那么，出发吧！向着丰收，前进！"));
-            travels.add(new Travel("欢乐大熊猫", R.drawable.pandagame,"身为一只在树林里快乐生活的大熊猫，今天又到了进食的时间了。饥肠辘辘的你无意之间进入了树林中的一片竹林，看见天上掉的满满的竹子，高兴坏了，口水直流，到底能吃到多少的竹子就看你的表现了。"));
-            travels.add(new Travel("钢琴大师", R.drawable.pianogame,"你是百年一遇的钢琴天才，应广大媒体的要求，在上海进行了一场巡回演出。接下里，就开始你的表演吧！"));
+            galleryItemses.add(new GalleryItems("丰收果园", R.drawable.applegame,"在金黄色的秋季里，没有什么比收获果实更让人心情愉悦的事了。作为农场之主的你，在今日决定去采摘下苹果，那么，出发吧！向着丰收，前进！"));
+            galleryItemses.add(new GalleryItems("欢乐大熊猫", R.drawable.pandagame,"身为一只在树林里快乐生活的大熊猫，今天又到了进食的时间了。饥肠辘辘的你无意之间进入了树林中的一片竹林，看见天上掉的满满的竹子，高兴坏了，口水直流，到底能吃到多少的竹子就看你的表现了。"));
+            galleryItemses.add(new GalleryItems("钢琴大师", R.drawable.pianogame,"你是百年一遇的钢琴天才，应广大媒体的要求，在上海进行了一场巡回演出。接下里，就开始你的表演吧！"));
         }
-        return travels;
+        return galleryItemses;
     }
 
 
@@ -392,7 +392,7 @@ public class GameItemActivity extends AppCompatActivity implements ExpandingFrag
     public void onExpandingClick(View v) {
         //v is expandingfragment layout
         View view = v.findViewById(R.id.image);
-        Travel travel = generateTravelList().get(viewPager.getCurrentItem());
+        GalleryItems travel = generateTravelList().get(viewPager.getCurrentItem());
         startInfoActivity(view,travel);
     }*/
    //绑定ComService

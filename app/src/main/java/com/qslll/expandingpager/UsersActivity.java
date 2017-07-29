@@ -641,7 +641,6 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
             allDate[position] = str3;
             allSex[position] = str4;
             allAge[position] = str5;
-
         }
 
         SourceDateList = filledData(allName,allID,allDate,allSex,allAge);

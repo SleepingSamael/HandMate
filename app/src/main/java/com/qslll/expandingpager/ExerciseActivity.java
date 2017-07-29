@@ -27,9 +27,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qslll.expandingpager.Database.HistoryDataManager;
-import com.qslll.expandingpager.Adapter.TravelViewPagerAdapter;
+import com.qslll.expandingpager.Adapter.GalleryViewPagerAdapter;
+import com.qslll.expandingpager.Model.GalleryItems;
 import com.qslll.expandingpager.Model.SysApplication;
-import com.qslll.expandingpager.Model.Travel;
 import com.qslll.expandingpager.Model.history.HistoryData;
 import com.qslll.expandingpager.Model.users.UserData;
 import com.qslll.expandingpager.Transmission.ComService;
@@ -133,7 +133,7 @@ public class ExerciseActivity extends AppCompatActivity implements ExpandingFrag
             }
         });
 
-        TravelViewPagerAdapter adapter = new TravelViewPagerAdapter(getSupportFragmentManager());
+        GalleryViewPagerAdapter adapter = new GalleryViewPagerAdapter(getSupportFragmentManager());
         adapter.addAll(generateTravelList());
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);//设置当前viewpage是第几页
@@ -144,10 +144,10 @@ public class ExerciseActivity extends AppCompatActivity implements ExpandingFrag
         /**
          * 载入时设置详情图片和介绍
          */
-        Travel travel = generateTravelList().get(viewPager.getCurrentItem());
-        DetailPhoto.setImageResource(travel.getImage());
-        title.setText(travel.getName());
-        introduce.setText(travel.getIntroduce());
+        GalleryItems galleryItems = generateTravelList().get(viewPager.getCurrentItem());
+        DetailPhoto.setImageResource(galleryItems.getImage());
+        title.setText(galleryItems.getName());
+        introduce.setText(galleryItems.getIntroduce());
 
         //home键
         home.setOnClickListener(new View.OnClickListener() {
@@ -194,9 +194,9 @@ public class ExerciseActivity extends AppCompatActivity implements ExpandingFrag
 
             @Override
             public void onPageSelected(int position) {
-                Travel travel = generateTravelList().get(viewPager.getCurrentItem());
-                DetailPhoto.setImageResource(travel.getImage());
-                title.setText(travel.getName());
+                GalleryItems galleryItems = generateTravelList().get(viewPager.getCurrentItem());
+                DetailPhoto.setImageResource(galleryItems.getImage());
+                title.setText(galleryItems.getName());
             }
 
             @Override
@@ -269,13 +269,13 @@ public class ExerciseActivity extends AppCompatActivity implements ExpandingFrag
         getWindow().setExitTransition(slideTransition);
     }
 
-    private List<Travel> generateTravelList(){
-        List<Travel> travels = new ArrayList<>();
+    private List<GalleryItems> generateTravelList(){
+        List<GalleryItems> galleryItemses = new ArrayList<>();
         for(int i=0;i<1;++i){
-            travels.add(new Travel("手套操", R.drawable.exerciseitem,"手套操是专业康复医生根据患者康复需要所编成的训练操，患者通过手套带动进行动作连续，屏幕上显示当前进行的动作给患者直观视觉体验。"));
+            galleryItemses.add(new GalleryItems("手套操", R.drawable.exerciseitem,"手套操是专业康复医生根据患者康复需要所编成的训练操，患者通过手套带动进行动作连续，屏幕上显示当前进行的动作给患者直观视觉体验。"));
 
         }
-        return travels;
+        return galleryItemses;
     }
 
 
@@ -376,7 +376,7 @@ public class ExerciseActivity extends AppCompatActivity implements ExpandingFrag
     public void onExpandingClick(View v) {
         //v is expandingfragment layout
         View view = v.findViewById(R.id.image);
-        Travel travel = generateTravelList().get(viewPager.getCurrentItem());
+        GalleryItems travel = generateTravelList().get(viewPager.getCurrentItem());
         startInfoActivity(view,travel);
     }*/
    //绑定ComService

@@ -27,9 +27,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qslll.expandingpager.Database.HistoryDataManager;
-import com.qslll.expandingpager.Adapter.TravelViewPagerAdapter;
+import com.qslll.expandingpager.Adapter.GalleryViewPagerAdapter;
+import com.qslll.expandingpager.Model.GalleryItems;
 import com.qslll.expandingpager.Model.SysApplication;
-import com.qslll.expandingpager.Model.Travel;
 import com.qslll.expandingpager.Model.history.HistoryData;
 import com.qslll.expandingpager.Model.users.UserData;
 import com.qslll.expandingpager.Transmission.ComService;
@@ -133,7 +133,7 @@ public class MasterSlaveActivity extends AppCompatActivity implements ExpandingF
                 return viewPager.dispatchTouchEvent(event);
             }
         });
-        TravelViewPagerAdapter adapter = new TravelViewPagerAdapter(getSupportFragmentManager());
+        GalleryViewPagerAdapter adapter = new GalleryViewPagerAdapter(getSupportFragmentManager());
         adapter.addAll(generateTravelList());
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(1);//设置当前viewpage是第几页
@@ -144,10 +144,10 @@ public class MasterSlaveActivity extends AppCompatActivity implements ExpandingF
         /**
          * 载入时设置详情图片和介绍
          */
-        Travel travel = generateTravelList().get(viewPager.getCurrentItem());
-        DetailPhoto.setImageResource(travel.getImage());
-        title.setText(travel.getName());
-        introduce.setText(travel.getIntroduce());
+        GalleryItems galleryItems = generateTravelList().get(viewPager.getCurrentItem());
+        DetailPhoto.setImageResource(galleryItems.getImage());
+        title.setText(galleryItems.getName());
+        introduce.setText(galleryItems.getIntroduce());
 
         //home键
         home.setOnClickListener(new View.OnClickListener() {
@@ -222,9 +222,9 @@ public class MasterSlaveActivity extends AppCompatActivity implements ExpandingF
 
             @Override
             public void onPageSelected(int position) {
-                Travel travel = generateTravelList().get(viewPager.getCurrentItem());
-                DetailPhoto.setImageResource(travel.getImage());
-                title.setText(travel.getName());
+                GalleryItems galleryItems = generateTravelList().get(viewPager.getCurrentItem());
+                DetailPhoto.setImageResource(galleryItems.getImage());
+                title.setText(galleryItems.getName());
             }
 
             @Override
@@ -298,15 +298,15 @@ public class MasterSlaveActivity extends AppCompatActivity implements ExpandingF
         getWindow().setExitTransition(slideTransition);
     }
 
-    private List<Travel> generateTravelList(){
-        List<Travel> travels = new ArrayList<>();
+    private List<GalleryItems> generateTravelList(){
+        List<GalleryItems> galleryItemses = new ArrayList<>();
         for(int i=0;i<1;++i){
-            travels.add(new Travel("海岛", R.drawable.game1,"主从模式通过主手带动从手运动，并在屏幕上显示当前手部的动作，给患者直观的视觉感受。"));
-            travels.add(new Travel("丛林", R.drawable.game2,"主从模式通过主手带动从手运动，并在屏幕上显示当前手部的动作，给患者直观的视觉感受。"));
-            travels.add(new Travel("海滩", R.drawable.game3,"主从模式通过主手带动从手运动，并在屏幕上显示当前手部的动作，给患者直观的视觉感受。"));
-            travels.add(new Travel("客厅", R.drawable.game4,"主从模式通过主手带动从手运动，并在屏幕上显示当前手部的动作，给患者直观的视觉感受。"));
+            galleryItemses.add(new GalleryItems("海岛", R.drawable.game1,"主从模式通过主手带动从手运动，并在屏幕上显示当前手部的动作，给患者直观的视觉感受。"));
+            galleryItemses.add(new GalleryItems("丛林", R.drawable.game2,"主从模式通过主手带动从手运动，并在屏幕上显示当前手部的动作，给患者直观的视觉感受。"));
+            galleryItemses.add(new GalleryItems("海滩", R.drawable.game3,"主从模式通过主手带动从手运动，并在屏幕上显示当前手部的动作，给患者直观的视觉感受。"));
+            galleryItemses.add(new GalleryItems("客厅", R.drawable.game4,"主从模式通过主手带动从手运动，并在屏幕上显示当前手部的动作，给患者直观的视觉感受。"));
         }
-        return travels;
+        return galleryItemses;
     }
 
 
@@ -407,7 +407,7 @@ default:
     public void onExpandingClick(View v) {
         //v is expandingfragment layout
         View view = v.findViewById(R.id.image);
-        Travel travel = generateTravelList().get(viewPager.getCurrentItem());
+        GalleryItems travel = generateTravelList().get(viewPager.getCurrentItem());
         startInfoActivity(view,travel);
     }*/
    //绑定ComService

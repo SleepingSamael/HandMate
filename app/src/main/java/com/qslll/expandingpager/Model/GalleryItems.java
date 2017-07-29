@@ -1,34 +1,37 @@
 package com.qslll.expandingpager.Model;
 
+/*
+Gallery滑动效果的parcelable类
+ */
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Travel implements Parcelable{
+public class GalleryItems implements Parcelable{
     String name;
     String introduce;
     int image;
 
-    public Travel(String name, int image,String introduce) {
+    public GalleryItems(String name, int image, String introduce) {
         this.name = name;
         this.image = image;
         this.introduce=introduce;
     }
 
-    protected Travel(Parcel in) {
+    protected GalleryItems(Parcel in) {
         name = in.readString();
         image = in.readInt();
         introduce = in.readString();
     }
 
-    public static final Creator<Travel> CREATOR = new Creator<Travel>() {
+    public static final Creator<GalleryItems> CREATOR = new Creator<GalleryItems>() {
         @Override
-        public Travel createFromParcel(Parcel in) {
-            return new Travel(in);
+        public GalleryItems createFromParcel(Parcel in) {
+            return new GalleryItems(in);
         }
 
         @Override
-        public Travel[] newArray(int size) {
-            return new Travel[size];
+        public GalleryItems[] newArray(int size) {
+            return new GalleryItems[size];
         }
     };
 
