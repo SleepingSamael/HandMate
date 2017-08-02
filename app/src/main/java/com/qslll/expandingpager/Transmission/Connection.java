@@ -583,6 +583,8 @@ public class Connection {
     public void ButtonMode(int buttonType) {
         Log.e("ChangeMode",getRunningActivityName() );
         if(!getRunningActivityName().equals(".U3D.u3dPlayer")) {
+            u3dPlayer.stopUnity();
+        }
             if (buttonType == 1) //主从模式
             {
                 MasterSlaveActivity.MSActionStart(UserData.getContext());
@@ -601,10 +603,7 @@ public class Connection {
                 u3dPlayer.pauseUnity();
                 Log.e("ChangeMode", "暂停");
             }
-        }
-        else{
 
-        }
 
     }
 

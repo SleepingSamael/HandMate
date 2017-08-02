@@ -124,7 +124,6 @@ public class u3dPlayer extends UnityPlayerActivity {
     }
 
 
-
     public String getName() {
 
         return "This is the message that Unity call Android";
@@ -247,6 +246,11 @@ public class u3dPlayer extends UnityPlayerActivity {
         }catch(Exception e) {
             Log.e("pauseUnity", String.valueOf(e));
         }
+    }
+    //退出unity界面(外部调用)
+    public static void stopUnity(){
+        u3dPlayer u3dPlayerNow=new u3dPlayer();
+        u3dPlayerNow.makePauseUnity();
     }
     //退出unity界面
     public void makePauseUnity() {

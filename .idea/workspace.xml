@@ -28,18 +28,14 @@
     <bookmark url="file://$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Transmission/Connection.java" line="380" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="800439c1-3e9e-4e17-a0f5-cd09de8e77f6" name="Default" comment="">
+    <list default="true" id="800439c1-3e9e-4e17-a0f5-cd09de8e77f6" name="Default" comment="add static class&#10;stopUnity">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Transmission/Connection.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Transmission/Connection.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/U3D/u3dPlayer.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/U3D/u3dPlayer.java" />
     </list>
-    <list id="f5efe554-41ac-4208-8384-0fbbf17b840c" name="1.6.1beta 屏蔽全零报文  (cherry picked from commit 2b4d2bf)" comment="1.6.1beta&#10;屏蔽全零报文&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
-    <list id="98bce889-e71a-4a90-88dc-6376f0557177" name="brunch1" comment="add static class&#10;stopUnity" />
     <ignored path="expandingpager-master.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <file path="$PROJECT_DIR$/.idea/workspace.xml" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,7 +179,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="113e69688db7971c584c5ef2c4cd82dfad370205" />
+        <entry key="$PROJECT_DIR$" value="b6f0e3b41b0fe55972213cc212c5df7b17e84ec7" />
       </map>
     </option>
   </component>
@@ -3418,7 +3414,7 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="800439c1-3e9e-4e17-a0f5-cd09de8e77f6" name="Default" comment="" />
-      <changelist id="98bce889-e71a-4a90-88dc-6376f0557177" name="brunch1" comment="add static class&#10;stopUnity" />
+      <changelist id="" name="brunch1" comment="add static class&#10;stopUnity" />
       <created>1493689343304</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -3501,7 +3497,14 @@
       <option name="project" value="LOCAL" />
       <updated>1501320524080</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="add static class&#10;stopUnity">
+      <created>1501640213684</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1501640213684</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TodoView">
@@ -3525,7 +3528,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7740806" sideWeight="0.35817888" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3441331" sideWeight="0.6418211" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.561296" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42381787" sideWeight="0.66196615" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.41243434" sideWeight="0.66196615" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22416812" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -3587,7 +3590,8 @@
     <MESSAGE value="1.6beta" />
     <MESSAGE value="1.6.1beta&#10;屏蔽全零报文" />
     <MESSAGE value="1.6.1beta&#10;屏蔽全零报文&#10;&#10;(cherry picked from commit 2b4d2bf)" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.6.1beta&#10;屏蔽全零报文&#10;&#10;(cherry picked from commit 2b4d2bf)" />
+    <MESSAGE value="add static class&#10;stopUnity" />
+    <option name="LAST_COMMIT_MESSAGE" value="add static class&#10;stopUnity" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
