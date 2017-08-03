@@ -34,8 +34,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 //建立U3D连接
-public class u3dPlayer extends UnityPlayerActivity {
-    private String tag = "";
+public class u3dPlayer extends UnityPlayerNativeActivity {
+    public u3dPlayer u3dPlayerNow =this;
     private LinearLayout u3dLayout;
     private float angle = 0;
     private int scenenum = 1;//场景变量
@@ -195,7 +195,7 @@ public class u3dPlayer extends UnityPlayerActivity {
    }
 
     public void sendDataToAndroid(String input) {
-        Log.d(tag,input);
+        Log.d("",input);
     }
 
 
@@ -218,7 +218,7 @@ public class u3dPlayer extends UnityPlayerActivity {
 
     public void getmsg() {
 
-        Log.d(tag,"I got the trigger!");
+        Log.d("","I got the trigger!");
 
 
     }
@@ -240,18 +240,16 @@ public class u3dPlayer extends UnityPlayerActivity {
 
     }
     //暂停
-    public  static void  pauseUnity(){
+    public  void  pauseUnity(){
         try {
-            UnityPlayer.UnitySendMessage("ALL", "PressStop", "");
+            UnityPlayer.UnitySendMessage("ALL", "PressStopUpToDown", "str");
+            Log.e("pauseUnity", "u3d");
+
         }catch(Exception e) {
             Log.e("pauseUnity", String.valueOf(e));
         }
     }
-    //退出unity界面(外部调用)
-    public static void stopUnity(){
-        u3dPlayer u3dPlayerNow=new u3dPlayer();
-        u3dPlayerNow.makePauseUnity();
-    }
+
     //退出unity界面
     public void makePauseUnity() {
         switch (scenenum/1000){

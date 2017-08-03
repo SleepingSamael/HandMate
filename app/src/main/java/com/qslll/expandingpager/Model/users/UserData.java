@@ -3,6 +3,8 @@ package com.qslll.expandingpager.Model.users;
 import android.app.Application;
 import android.content.Context;
 
+import com.qslll.expandingpager.U3D.u3dPlayer;
+
 /**
  * 用户信息类
  */

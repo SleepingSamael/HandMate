@@ -1,5 +1,6 @@
 package com.qslll.expandingpager.Transmission;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Bundle;
@@ -253,6 +254,17 @@ public class Connection {
             }        }
 
         return score;
+    }
+    //u3d退出
+    public void stopU3D()
+    {
+        if (iMyAidlInterface!=null){
+            try {
+               iMyAidlInterface.stopUnity();
+            } catch (RemoteException e) {
+                Log.e("stopU3d", e.toString());
+            }
+        }
     }
 
 
@@ -581,28 +593,42 @@ public class Connection {
      * @param buttonType
      */
     public void ButtonMode(int buttonType) {
-        Log.e("ChangeMode",getRunningActivityName() );
-        if(!getRunningActivityName().equals(".U3D.u3dPlayer")) {
-            u3dPlayer.stopUnity();
-        }
-            if (buttonType == 1) //主从模式
-            {
-                MasterSlaveActivity.MSActionStart(UserData.getContext());
-                Log.e("ChangeMode", "主从模式");
-            } else if (buttonType == 2) //手套操
-            {
-                ExerciseActivity.ExerciseActionStart(UserData.getContext());//切换手套操主从模式
-                Log.e("ChangeMode", "手套操");
-            }
-            else if (buttonType == 3) //开始
-            {
+       /* if(getRunningActivityName().equals(".U3D.u3dPlayer")) {
+            try {
 
+                stopU3D();
+            }catch(Exception e){
+
+                Log.e("ChangeMode",e.toString());
             }
-            else if (buttonType == 4) //停止
-            {
-                u3dPlayer.pauseUnity();
-                Log.e("ChangeMode", "暂停");
+            Log.e("ChangeMode", "stop");
+        }*/
+        if (buttonType == 1) //主从模式
+        {
+            MasterSlaveActivity.MSActionStart(UserData.getContext());
+            Log.e("ChangeMode", "主从模式");
+        } else if (buttonType == 2) //手套操
+        {
+            ExerciseActivity.ExerciseActionStart(UserData.getContext());//切换手套操主从模式
+            Log.e("ChangeMode", "手套操");
+        }
+        else if (buttonType == 3) //开始
+        {
+
+        }
+        else if (buttonType == 4) //停止
+        {
+            if (iMyAidlInterface!=null){
+                try {
+                    Log.e("pauseUnity", "conn");
+                    iMyAidlInterface.pauseUnity();
+                    Log.e("pauseUnity", "conn2");
+                } catch (RemoteException e) {
+                    Log.e("pauseUnity", e.toString());
+                }
             }
+            Log.e("pauseUnity", "暂停");
+        }
 
 
     }

@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.qslll.expandingpager">
-    android:sharedUserId="android.uid.system"
     <uses-permission android:name="android.permission.SHUTDOWN" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.MOUNT_FORMAT_FILESYSTEMS" />
@@ -76,14 +75,14 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:launchMode="singleTask"
-            android:process=":Kill"
+            android:process=":U3D"
             android:screenOrientation="landscape" />
 
         <service
             android:name=".Transmission.ComService"
             android:enabled="true"
             android:exported="true"
-            android:process=":to" />
+            android:process=":Service" />
 
         <meta-data
             android:name="com.google.android.gms.version"
