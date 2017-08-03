@@ -2,9 +2,13 @@ package com.qslll.expandingpager.Transmission;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
@@ -23,7 +27,9 @@ import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.List;
 
+import com.qslll.expandingpager.Entity;
 import com.qslll.expandingpager.ExerciseActivity;
+import com.qslll.expandingpager.ICallBack;
 import com.qslll.expandingpager.IMyAidlInterface;
 import com.qslll.expandingpager.MasterSlaveActivity;
 import com.qslll.expandingpager.Model.users.UserData;
@@ -240,33 +246,6 @@ public class Connection {
 
             }
         }
-
-
-
-    //从u3d获取score
-    public int getScore() {
-
-        if (iMyAidlInterface!=null){
-            try {
-                score = iMyAidlInterface.getScore();
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }        }
-
-        return score;
-    }
-    //u3d退出
-    public void stopU3D()
-    {
-        if (iMyAidlInterface!=null){
-            try {
-               iMyAidlInterface.stopUnity();
-            } catch (RemoteException e) {
-                Log.e("stopU3d", e.toString());
-            }
-        }
-    }
-
 
 
     //接受下位机发送数据线程
@@ -531,10 +510,9 @@ public class Connection {
             Log.e("MainActivity", "--->>socket 连接成功!");
             Log.e("MainActivity", "--->>socket 连接成功!");
             Log.e("MainActivity", "--->>socket 连接成功!");
-            //btnConn.setText("Disconnect");
 
             isConnected = true;
-            // mTask.execute(null);
+
         }
 
     }
@@ -593,41 +571,67 @@ public class Connection {
      * @param buttonType
      */
     public void ButtonMode(int buttonType) {
-       /* if(getRunningActivityName().equals(".U3D.u3dPlayer")) {
-            try {
-
-                stopU3D();
-            }catch(Exception e){
-
-                Log.e("ChangeMode",e.toString());
-            }
-            Log.e("ChangeMode", "stop");
-        }*/
         if (buttonType == 1) //主从模式
         {
-            MasterSlaveActivity.MSActionStart(UserData.getContext());
-            Log.e("ChangeMode", "主从模式");
+            if(getRunningActivityName().equals(".U3D.u3dPlayer")) {
+                try {
+                    //发送退出u3d广播
+                    Intent i = new Intent("com.example.U3D_BROADCAST");
+                    i.putExtra("U3D", "stopU3D");
+                    i.putExtra("buttonType","1");
+                    UserData.getContext().sendBroadcast(i);
+                }catch(Exception e){
+                    Log.e("u3d",e.toString());
+                }
+            }else {
+                MasterSlaveActivity.MSActionStart(UserData.getContext());
+                Log.e("ChangeMode", "主从模式");
+            }
         } else if (buttonType == 2) //手套操
         {
-            ExerciseActivity.ExerciseActionStart(UserData.getContext());//切换手套操主从模式
-            Log.e("ChangeMode", "手套操");
+            if(getRunningActivityName().equals(".U3D.u3dPlayer")) {
+                try {
+                    //发送退出u3d广播
+                    Intent i = new Intent("com.example.U3D_BROADCAST");
+                    i.putExtra("U3D", "stopU3D");
+                    i.putExtra("buttonType","2");
+                    UserData.getContext().sendBroadcast(i);
+                }catch(Exception e){
+                    Log.e("u3d",e.toString());
+                }
+            }else {
+                ExerciseActivity.ExerciseActionStart(UserData.getContext());//切换手套操主从模式
+                Log.e("ChangeMode", "手套操");
+            }
         }
         else if (buttonType == 3) //开始
         {
+            if(getRunningActivityName().equals(".U3D.u3dPlayer")) {
+                try {
+                    //暂停广播
+                    Intent i = new Intent("com.example.U3D_BROADCAST");
+                    i.putExtra("U3D", "pauseU3D");
+                    UserData.getContext().sendBroadcast(i);
+                }catch(Exception e){
+                    Log.e("u3d",e.toString());
+                }
+            }
+            Log.e("u3d", "开始");
 
         }
         else if (buttonType == 4) //停止
         {
-            if (iMyAidlInterface!=null){
+            if(getRunningActivityName().equals(".U3D.u3dPlayer")) {
                 try {
-                    Log.e("pauseUnity", "conn");
-                    iMyAidlInterface.pauseUnity();
-                    Log.e("pauseUnity", "conn2");
-                } catch (RemoteException e) {
-                    Log.e("pauseUnity", e.toString());
+                    //暂停广播
+                    Intent i = new Intent("com.example.U3D_BROADCAST");
+                    i.putExtra("U3D", "pauseU3D");
+                    UserData.getContext().sendBroadcast(i);
+                }catch(Exception e){
+                    Log.e("u3d",e.toString());
                 }
             }
-            Log.e("pauseUnity", "暂停");
+            Log.e("u3d", "暂停");
         }
 
 
@@ -683,4 +687,6 @@ public class Connection {
         b[4]=(byte) ~(b[2]+b[3]);
         return b;
     }
+
+
 }

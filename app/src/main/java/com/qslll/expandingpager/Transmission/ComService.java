@@ -101,26 +101,7 @@ public class ComService extends Service {
             }
         }
 
-
-        //获取分数
-        @Override
-        public int getScore() {
-            return u3d.getScore();
-        }
-
-        @Override
-        public void stopUnity(){
-            Log.e("stopU3d", "in1");
-            u3d.makePauseUnity();
-            Log.e("stopU3d", "in");
-        }
-        @Override
-        public void pauseUnity()
-        {
-            Log.e("pauseUnity", "com1");
-            u3d.pauseUnity();
-            Log.e("pauseUnity", "com2");
-        }
+        
 
         //向u3d发送手指角度
         @Override

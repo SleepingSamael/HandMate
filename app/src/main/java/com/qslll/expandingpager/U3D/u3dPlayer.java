@@ -6,6 +6,10 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.qslll.expandingpager.ExerciseActivity;
+import com.qslll.expandingpager.MasterSlaveActivity;
+import com.qslll.expandingpager.Model.users.UserData;
+import com.qslll.expandingpager.ShutDownActivity;
 import com.qslll.expandingpager.Transmission.ComService;
 import com.qslll.expandingpager.Database.HistoryDataManager;
 import com.qslll.expandingpager.Entity;
@@ -18,6 +22,7 @@ import com.unity3d.player.UnityPlayer;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
@@ -25,6 +30,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.LinearLayout;
@@ -55,6 +61,8 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
 
     private HistoryDataManager mhistoryDataManager;
     HistoryData historyData=new HistoryData();
+
+    private U3DBroadCastReceiver u3DBroadCastReceiver;
 /*
     private ComService backgroundService;
     private ServiceConnection serviceConnection = new ServiceConnection() {
@@ -99,8 +107,9 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
 
         }
 
-        IntentFilter filter = new IntentFilter("com.example.updateUI");
-        this.registerReceiver(new u3dPlayer.MyBroadCaseReceiver(), filter);
+        u3DBroadCastReceiver=new U3DBroadCastReceiver();
+        IntentFilter filter = new IntentFilter("com.example.U3D_BROADCAST");
+        this.registerReceiver(new u3dPlayer.U3DBroadCastReceiver(), filter);// 注册本地广播监听器
 
         u3dLayout = (LinearLayout) findViewById(R.id.u3d_layout);
         u3dLayout.addView(mUnityPlayer);
@@ -110,15 +119,18 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-
-
-    class MyBroadCaseReceiver extends BroadcastReceiver {
+    //U3D广播接收器
+    class U3DBroadCastReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context arg0, Intent intent) {
-            String i = intent.getStringExtra("currentEvent");
-            if(i == "CloseAcitivity"){
-                Log.d("MainActivity", "I'm closing the activity");
-                makePauseUnity();
+            String buttonType = intent.getStringExtra("buttonType");
+            if (intent.getStringExtra("U3D").equals("stopU3D")){//退出U3D界面
+                Log.e("u3d", "I'm closing the activity");
+                u3dDialog("stop",buttonType);
+            }
+            else if(intent.getStringExtra("U3D").equals("pauseU3D")){//暂停
+                Log.e("u3d", "pause");
+                u3dDialog("pause",buttonType);
             }
         }
     }
@@ -160,7 +172,6 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
     //u3d调取配置数据
     public String[]  getConfigArray(){
 
-        Log.e("getConfigArray","in");
         if (iMyAidlInterface!=null){
             try {
                 return iMyAidlInterface.getConfigArray();
@@ -243,10 +254,10 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
     public  void  pauseUnity(){
         try {
             UnityPlayer.UnitySendMessage("ALL", "PressStopUpToDown", "str");
-            Log.e("pauseUnity", "u3d");
+            Log.e("u3d", "pauseUnity");
 
         }catch(Exception e) {
-            Log.e("pauseUnity", String.valueOf(e));
+            Log.e("u3d", "pauseUnity"+String.valueOf(e));
         }
     }
 
@@ -401,5 +412,39 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
         }
     };
 
+    //退出弹窗
+    private void u3dDialog(final String item, final String buttonType) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(u3dPlayer.this);
+        builder.setMessage("确定要退出吗？");
+        builder.setTitle("提示");
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(item.equals("stop")) {
+                    makePauseUnity();
+                    if (buttonType.equals("1"))
+                    {
+                        MasterSlaveActivity.MSActionStart(UserData.getContext());
+                        Log.e("ChangeMode", "主从模式");
+                    }
+                    else if(buttonType.equals("2"))
+                    {
+                        ExerciseActivity.ExerciseActionStart(UserData.getContext());//切换手套操主从模式
+                        Log.e("ChangeMode", "手套操");
+                    }
+                }else if(item.equals("pause"))
+                {
+                    pauseUnity();
+                }
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
+    }
 
 }

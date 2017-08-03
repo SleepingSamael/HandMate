@@ -17,9 +17,6 @@ interface IMyAidlInterface {
     String [] getFingerArray();
     String[] getComponentStatus();
     String[] getConfigArray();
-    int getScore();
-    void stopUnity();
-    void pauseUnity();
 
     //向下位机发送角度数据报文
     void setCurrentAngle(String strAngles);
