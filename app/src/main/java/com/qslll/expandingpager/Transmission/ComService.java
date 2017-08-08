@@ -126,7 +126,7 @@ public class ComService extends Service {
             String[] str = strAngles.split("\\ ");
             int[] angles = {Integer.parseInt(str[0]), Integer.parseInt(str[1]), Integer.parseInt(str[2])
                     , Integer.parseInt(str[3]), Integer.parseInt(str[4])};
-            byte[] bAngles = {(byte) 0xff, (byte) 0xff, (byte) 0x20, (byte) 0x10,
+            byte[] bAngles = {(byte) 0xff, (byte) 0xff, (byte) 0x24, (byte) 0x10,
                     (byte) 0xb4, (byte) 0xb4, (byte) 0xb4, (byte) 0xb4, (byte) 0xb4,
                     (byte) ~(0x10 + 0x10 + 0xb4 + 0xb4 + 0xb4 + 0xb4 + 0xb4)};
             bAngles[0] = (byte) 0xff;
@@ -140,8 +140,8 @@ public class ComService extends Service {
             bAngles[8] = (byte) angles[4];
             bAngles[9] = (byte) ~(bAngles[2] + bAngles[3] + bAngles[4] + bAngles[5] +
                     bAngles[6] + bAngles[7] + bAngles[8]);
-            connection.sendData(bAngles);
-            Log.e("发送下位机", strAngles);
+            connection.sendExercise(bAngles);
+            Log.e("手套操", connection.bytesToString(bAngles));
 
         }
 
@@ -158,7 +158,7 @@ public class ComService extends Service {
             0：游戏模式1：主动模式2：被动模式3：评估模式
              */
             bytes[5] = (byte) ~(bytes[2] + bytes[3] + bytes[4]);
-            connection.sendExercise(bytes);
+            connection.sendData(bytes);
             Log.e("切换模式", mode + "");
         }
 

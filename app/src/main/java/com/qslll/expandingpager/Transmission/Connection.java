@@ -2,8 +2,10 @@ package com.qslll.expandingpager.Transmission;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
@@ -12,7 +14,9 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.WindowManager;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -29,6 +33,7 @@ import java.util.List;
 
 import com.qslll.expandingpager.Entity;
 import com.qslll.expandingpager.ExerciseActivity;
+import com.qslll.expandingpager.GameItemActivity;
 import com.qslll.expandingpager.ICallBack;
 import com.qslll.expandingpager.IMyAidlInterface;
 import com.qslll.expandingpager.MasterSlaveActivity;
@@ -58,7 +63,7 @@ public class Connection {
     Socket mSocket = null;
     PrintWriter printWriter = null;
     InputStream in;
-    OutputStream out;
+    OutputStream out=null;
 
     private ReceiveHandler receiveHandler = new ReceiveHandler();
     private BackHandler backHandler=new BackHandler();
@@ -66,6 +71,7 @@ public class Connection {
 
     Thread receiverThread;
     Thread sendThread;
+    Thread ExerciseThread;
     public static float angleFromDownStream = 0;
     public int fingerNumber =0;
     private int score = 0;
@@ -210,17 +216,15 @@ public class Connection {
                 out.write(context);//按字节发送
                 out.flush();
                 Log.e("SEND", "发送成功");
+                Log.e("SEND", bytesToHexString(context));
             } else {
                 Log.e("SEND", "连接不存在重新连接");
                 connectServer(ip,port);
             }
         } catch (Exception e) {
-            Log.e("SEND", "send error");
+            Log.e("SEND", "发送失败");
             Log.e("SEND", String.valueOf(e));
             e.printStackTrace();
-        } finally {
-            Log.e("SEND", "发送完毕");
-
         }
     }
 
@@ -235,11 +239,11 @@ public class Connection {
         public void run() {
 
             try {
-                if (!sendData.equals("")) {
+               // if (!sendData.equals("")) {
                     SendByte(sendData);
 
-                    Log.e("SEND", "---->>已发送至下位机....");
-                }
+                    Log.e("SendRunnable", "---->>已发送至下位机....");
+              //  }
             } catch (Exception e) {
                 Log.e("SendRunnable", "--->>read failure!" + e.toString());
             }
@@ -362,8 +366,18 @@ public class Connection {
                     }
                     if (str[0].equals("05"))//关机
                     {
+                        if(getRunningActivityName().equals(".U3D.u3dPlayer")) {
+                            try {
+                                //暂停广播
+                                Intent i = new Intent("com.example.U3D_BROADCAST");
+                                i.putExtra("U3D", "pauseU3D");
+                                UserData.getContext().sendBroadcast(i);
+                            }catch(Exception e){
+                                Log.e("u3d",e.toString());
+                            }
+                        }
                         Log.e("Receiver", "ID=    " + str[0]);
-                        ShutDownActivity.shutDownStart(UserData.getContext());
+                        dialogShutDown();
                     }
                     if (str[0].equals("09"))//dButtonInfo改变模式
                     {
@@ -412,11 +426,6 @@ public class Connection {
                     {
                             try {
                                 Log.e("Receiver", "ID=    " + str[0]);
-                                if (str[2].equals("00")&&str[3].equals("00")&&str[4].equals("00")&&str[5].equals("00")&&str[6].equals("00"))
-                                {
-
-                                }
-                                else {
                                     String[] str2 = msg.getData().get("msg").toString().split("\\ ");
                                     //手指序号
                                     fingerNumber = Integer.parseInt(str2[2]);
@@ -428,17 +437,14 @@ public class Connection {
                                     fingerArray[2] = Integer.parseInt(str[4], 16) + "";
                                     fingerArray[3] = Integer.parseInt(str[5], 16) + "";
                                     fingerArray[4] = Integer.parseInt(str[6], 16) + "";
-                                    //System.arraycopy(str2, 4, fingerArray, 0, 5);
-
-                                    Log.e("Connection", "-----------------------------------");
+                                    Log.e("fingerArray", "-----------------------------------");
                                     for (int j = 0; j < str.length; j++) {
-                                        Log.e("Connection", str[j]);
+                                        Log.e("fingerArray", str[j]);
                                     }
                                     for (int i = 0; i < 5; i++) {
-                                        Log.e("Connection", "The Array Contains " + fingerArray[i]);
+                                        Log.e("fingerArray", "The Array Contains " + fingerArray[i]);
                                     }
-                                    Log.e("Connection", "-----------------------------------");
-                                }
+                                    Log.e("fingerArray", "-----------------------------------");
 
                             } catch (Exception e){
                             Log.e("Connection", String.valueOf(e));
@@ -530,10 +536,9 @@ public class Connection {
     //开启新线程发送手套操（上→下）
     public void sendExercise(byte[] data) {
         MySendRunnable mySendRunnable=new MySendRunnable(data);
-        Thread ExerciseThread=new Thread(mySendRunnable);
+        ExerciseThread=new Thread(mySendRunnable);
         //ExerciseThread = new Thread(new MySendRunnable(data));
         ExerciseThread.start();
-
     }
 
     //底层消息处理，如果消息在等待，则进行相应处理
@@ -644,6 +649,38 @@ public class Connection {
         return runningActivity;
     }
 
+    protected void dialogShutDown() {
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(UserData.getContext());
+        builder.setMessage("确定要关机吗？");
+        builder.setTitle("提示");
+        builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(getRunningActivityName().equals(".U3D.u3dPlayer")) {
+                    try {
+                        //关机广播
+                        Intent i = new Intent("com.example.U3D_BROADCAST");
+                        i.putExtra("U3D", "shutDown");
+                        UserData.getContext().sendBroadcast(i);
+                    }catch(Exception e){
+                        Log.e("u3d",e.toString());
+                    }
+                }
+                ShutDownActivity.shutDownStart(UserData.getContext());
+            }
+        });
+        builder.setNegativeButton("否", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+
+            }
+        });
+        Dialog dialog=builder.create();
+        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+        //builder.create().show();
+        dialog.show();
+    }
     /**
      * rConnectGCU
      * 请求连接报文
