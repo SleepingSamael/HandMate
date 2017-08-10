@@ -5,7 +5,7 @@ android {
     buildToolsVersion '25.0.2'
 
     defaultConfig {
-        applicationId "com.qslll.expandingpager"
+        applicationId "com.chej.HandMate"
         minSdkVersion 14
         targetSdkVersion 25
         versionCode 1

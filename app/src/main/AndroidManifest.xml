@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.qslll.expandingpager">
+    package="com.chej.HandMate">
     <uses-permission android:name="android.permission.SHUTDOWN" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.MOUNT_FORMAT_FILESYSTEMS" />
@@ -17,20 +17,20 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
-        android:name=".Model.users.UserData"
+        android:name="com.chej.HandMate.Model.users.UserData"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <receiver android:name=".Transmission.BootBroadcastReceiver">
+        <receiver android:name="com.chej.HandMate.Transmission.BootBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
         <activity
-            android:name=".Welcome"
+            android:name="com.chej.HandMate.Welcome"
             android:configChanges="keyboardHidden"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
@@ -41,37 +41,37 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.chej.HandMate.MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".GameItemActivity"
+            android:name="com.chej.HandMate.GameItemActivity"
             android:launchMode="singleTop"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".HistoryActivity"
+            android:name="com.chej.HandMate.HistoryActivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".Hardwarectivity"
+            android:name="com.chej.HandMate.Hardwarectivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".MasterSlaveActivity"
+            android:name="com.chej.HandMate.MasterSlaveActivity"
             android:launchMode="singleTop"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".EvaluateActivity"
+            android:name="com.chej.HandMate.EvaluateActivity"
             android:launchMode="singleTop"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".U3D.u3dPlayer"
+            android:name="com.chej.HandMate.U3D.u3dPlayer"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:launchMode="singleTask"
@@ -79,7 +79,7 @@
             android:screenOrientation="landscape" />
 
         <service
-            android:name=".Transmission.ComService"
+            android:name="com.chej.HandMate.Transmission.ComService"
             android:enabled="true"
             android:exported="true"
             android:process=":Service" />
@@ -89,7 +89,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".ExerciseActivity"
+            android:name="com.chej.HandMate.ExerciseActivity"
             android:launchMode="singleTop"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
@@ -100,43 +100,43 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".UsersActivity"
+            android:name="com.chej.HandMate.UsersActivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".EvaluateTableActivity"
+            android:name="com.chej.HandMate.EvaluateTableActivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".SystemSetActivity"
+            android:name="com.chej.HandMate.SystemSetActivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".ReportActivity"
+            android:name="com.chej.HandMate.ReportActivity"
             android:configChanges="keyboardHidden"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".UserEditActivity"
+            android:name="com.chej.HandMate.UserEditActivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".AdminActivity"
+            android:name="com.chej.HandMate.AdminActivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".SeniorSetActivity"
+            android:name="com.chej.HandMate.SeniorSetActivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".ShutDownActivity"
+            android:name="com.chej.HandMate.ShutDownActivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
