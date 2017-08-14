@@ -26,86 +26,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="800439c1-3e9e-4e17-a0f5-cd09de8e77f6" name="Default" comment="加入舵机报错提示&#10;自定义对话框&#10;重命名项目域和包">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/aidl/com/chej/HandMate/Entity.aidl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Model/MyCustomDialog.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/bg_bombbox.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/btn_cancel_selector.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/btn_ok_selector.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/dialog_bottom_bg.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/dialog_normal_layout.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/aidl/com/qslll/expandingpager/Entity.aidl" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/qslll/expandingpager/ApplicationTest.java" afterPath="$PROJECT_DIR$/library/src/androidTest/java/com/chej/library/ApplicationTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/aidl/com/qslll/expandingpager/ICallBack.aidl" afterPath="$PROJECT_DIR$/app/src/main/aidl/com/chej/HandMate/ICallBack.aidl" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/aidl/com/qslll/expandingpager/IMyAidlInterface.aidl" afterPath="$PROJECT_DIR$/app/src/main/aidl/com/chej/HandMate/IMyAidlInterface.aidl" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Adapter/GalleryViewPagerAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Adapter/GalleryViewPagerAdapter.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Adapter/UserAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Adapter/UserAdapter.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/AdminActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/AdminActivity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Database/HistoryDataManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Database/HistoryDataManager.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Database/SQLdm.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Database/SQLdm.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Database/UserDataManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Database/UserDataManager.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Entity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Entity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/EvaluateActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/EvaluateActivity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/EvaluateTableActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/EvaluateTableActivity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/ExerciseActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/ExerciseActivity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/GameItemActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/GameItemActivity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Hardwarectivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Hardwarectivity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/HistoryActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/HistoryActivity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Log/FileHelper.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Log/FileHelper.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/MainActivity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/MasterSlaveActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/MasterSlaveActivity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Model/GalleryItems.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Model/GalleryItems.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Model/SysApplication.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Model/SysApplication.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Model/history/HistoryConstant.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Model/history/HistoryConstant.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Model/history/HistoryData.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Model/history/HistoryData.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Model/users/UserData.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Model/users/UserData.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Model/users/UsersConstant.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Model/users/UsersConstant.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/ReportActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/ReportActivity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Search/CharacterParser.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Search/CharacterParser.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Search/PinyinComparator.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Search/PinyinComparator.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Search/SortAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Search/SortAdapter.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Search/SortModel.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Search/SortModel.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/SeniorSetActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/SeniorSetActivity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/ShutDownActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/ShutDownActivity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/SystemSetActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/SystemSetActivity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Timeline/HorizontalListView.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Timeline/HorizontalListView.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Timeline/ItemBean.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Timeline/ItemBean.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Timeline/TimeLineAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Timeline/TimeLineAdapter.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Transmission/BootBroadcastReceiver.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/BootBroadcastReceiver.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Transmission/ComService.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/ComService.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Transmission/Connection.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/Connection.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/U3D/UnityPlayerActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/U3D/UnityPlayerActivity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/U3D/UnityPlayerNativeActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/U3D/UnityPlayerNativeActivity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/U3D/u3dPlayer.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/U3D/u3dPlayer.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/UserEditActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/UserEditActivity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/UsersActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/UsersActivity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Welcome.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Welcome.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/fragments/FragmentBottom.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/fragments/FragmentBottom.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/fragments/FragmentTop.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/fragments/FragmentTop.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/fragments/GalleryExpandingFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/fragments/GalleryExpandingFragment.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/test/java/com/qslll/expandingpager/ExampleUnitTest.java" afterPath="$PROJECT_DIR$/library/src/test/java/com/chej/library/ExampleUnitTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/library/src/androidTest/java/com/qslll/library/ApplicationTest.java" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/chej/HandMate/ApplicationTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/library/src/main/java/com/qslll/library/ExpandingPagerFactory.java" afterPath="$PROJECT_DIR$/library/src/main/java/com/chej/library/ExpandingPagerFactory.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/library/src/main/java/com/qslll/library/ExpandingViewPagerAdapter.java" afterPath="$PROJECT_DIR$/library/src/main/java/com/chej/library/ExpandingViewPagerAdapter.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/library/src/main/java/com/qslll/library/ExpandingViewPagerTransformer.java" afterPath="$PROJECT_DIR$/library/src/main/java/com/chej/library/ExpandingViewPagerTransformer.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/library/src/main/java/com/qslll/library/fragments/ExpandingFragment.java" afterPath="$PROJECT_DIR$/library/src/main/java/com/chej/library/fragments/ExpandingFragment.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/library/src/test/java/com/qslll/library/ExampleUnitTest.java" afterPath="$PROJECT_DIR$/app/src/test/java/com/chej/HandMate/ExampleUnitTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/values/array.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/GameItemActivity.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_admin.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_admin.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_history.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_history.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_shut_down.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_shut_down.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_u3d_player.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_u3d_player.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_welcome.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_welcome.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_bottom.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_bottom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/aidl/com/chej/HandMate/IMyAidlInterface.aidl" afterPath="$PROJECT_DIR$/app/src/main/aidl/com/chej/HandMate/IMyAidlInterface.aidl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/EvaluateActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/EvaluateActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/MainActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/MasterSlaveActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/MasterSlaveActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/ComService.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/ComService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/Connection.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/Connection.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/U3D/u3dPlayer.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/U3D/u3dPlayer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/fragments/GalleryExpandingFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/fragments/GalleryExpandingFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_game_item.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_game_item.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_front.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_front.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/expandingpager-master.iml" afterPath="$PROJECT_DIR$/expandingpager-master.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/library/library.iml" afterPath="$PROJECT_DIR$/library/library.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/library/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/library/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/library/src/main/java/com/chej/library/ExpandingPagerFactory.java" afterPath="$PROJECT_DIR$/library/src/main/java/com/chej/library/ExpandingPagerFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/library/src/main/java/com/chej/library/ExpandingViewPagerTransformer.java" afterPath="$PROJECT_DIR$/library/src/main/java/com/chej/library/ExpandingViewPagerTransformer.java" />
     </list>
     <ignored path="expandingpager-master.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -136,7 +75,148 @@
     <favorites_list name="expandingpager-master" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="450" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
+      <file leaf-file-name="MasterSlaveActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/MasterSlaveActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="750">
+              <caret line="120" column="27" selection-start-line="120" selection-start-column="27" selection-end-line="120" selection-end-column="27" />
+              <folding>
+                <element signature="e#5183#5499#0" expanded="true" />
+                <element signature="e#5498#5499#0" expanded="true" />
+                <element signature="e#6156#6431#0" expanded="true" />
+                <element signature="e#6430#6431#0" expanded="true" />
+                <element signature="e#6507#10772#0" expanded="true" />
+                <element signature="e#10771#10772#0" expanded="true" />
+                <element signature="e#11669#11938#0" expanded="true" />
+                <element signature="e#11937#11938#0" expanded="true" />
+                <element signature="e#11974#12243#0" expanded="true" />
+                <element signature="e#12242#12243#0" expanded="true" />
+                <element signature="e#12280#12549#0" expanded="true" />
+                <element signature="e#12548#12549#0" expanded="true" />
+                <element signature="e#12584#12853#0" expanded="true" />
+                <element signature="e#12852#12853#0" expanded="true" />
+                <element signature="e#12893#13162#0" expanded="true" />
+                <element signature="e#13161#13162#0" expanded="true" />
+                <element signature="e#16242#16713#0" expanded="true" />
+                <element signature="e#16712#16713#0" expanded="true" />
+                <element signature="e#16756#16944#0" expanded="true" />
+                <element signature="e#16943#16944#0" expanded="true" />
+                <element signature="e#17205#17676#0" expanded="true" />
+                <element signature="e#17675#17676#0" expanded="true" />
+                <element signature="e#17719#17907#0" expanded="true" />
+                <element signature="e#17906#17907#0" expanded="true" />
+                <element signature="e#18865#19599#0" expanded="true" />
+                <element signature="e#19598#19599#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EvaluateActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/EvaluateActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="480">
+              <caret line="111" column="27" selection-start-line="111" selection-start-column="27" selection-end-line="111" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Connection.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/Connection.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="429">
+              <caret line="751" column="27" selection-start-line="751" selection-start-column="27" selection-end-line="751" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="14" column="32" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-manifest">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="u3dPlayer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/U3D/u3dPlayer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="191">
+              <caret line="247" column="33" selection-start-line="247" selection-start-column="33" selection-end-line="247" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ComService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/ComService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="667">
+              <caret line="147" column="8" selection-start-line="147" selection-start-column="8" selection-end-line="147" selection-end-column="88" />
+              <folding>
+                <element signature="e#3136#3137#0" expanded="true" />
+                <element signature="e#3189#3190#0" expanded="true" />
+                <element signature="e#4788#4789#0" expanded="true" />
+                <element signature="e#4865#4866#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IMyAidlInterface.aidl" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/aidl/com/chej/HandMate/IMyAidlInterface.aidl">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="828">
+              <caret line="30" column="53" selection-start-line="30" selection-start-column="53" selection-end-line="30" selection-end-column="53" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ExpandingPagerFactory.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/library/src/main/java/com/chej/library/ExpandingPagerFactory.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2484">
+              <caret line="51" column="21" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fragment_front.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_front.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1782">
+              <caret line="33" column="38" selection-start-line="33" selection-start-column="38" selection-end-line="33" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/MainActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="290">
+              <caret line="270" column="0" selection-start-line="270" selection-start-column="0" selection-end-line="270" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -144,6 +224,7 @@
         <option value="Class" />
         <option value="layoutResourceFile_vertical" />
         <option value="resourceFile" />
+        <option value="valueResourceFile" />
       </list>
     </option>
   </component>
@@ -2819,26 +2900,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Model/MyCommonDialog.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Model/MyCustomDialog.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/dialog_bottom_bg.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/btn_cancel_selector.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/btn_ok_selector.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/bg_bombbox.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_normal_layout.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/UsersActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/aidl/com/qslll/expandingpager/IMyAidlInterface.aidl" />
-        <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_switch.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/EvaluateActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/ExerciseActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/GameItemActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Hardwarectivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/HistoryActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/MasterSlaveActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/SeniorSetActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/SystemSetActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/U3D/u3dPlayer.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Welcome.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/qslll/expandingpager/Transmission/ComService.java" />
@@ -2865,11 +2926,31 @@
         <option value="$PROJECT_DIR$/app/build/generated/source/r/debug/com/chej/HandMate/R.java" />
         <option value="$PROJECT_DIR$/library/build.gradle" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/aidl/com/chej/HandMate/IMyAidlInterface.aidl" />
         <option value="$PROJECT_DIR$/app/src/main/aidl/com/chej/HandMate/ICallBack.aidl" />
         <option value="$PROJECT_DIR$/app/src/main/aidl/com/chej/HandMate/Entity.aidl" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Database/UserDataManager.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Database/SQLdm.java" />
+        <option value="$PROJECT_DIR$/app/app.iml" />
+        <option value="$PROJECT_DIR$/library/library.iml" />
+        <option value="$PROJECT_DIR$/ExpandingPager.iml" />
+        <option value="$PROJECT_DIR$/expandingpager-master.iml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/GameItemActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/game.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/array.xml" />
+        <option value="$PROJECT_DIR$/library/src/main/java/com/chej/library/ExpandingViewPagerTransformer.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_game_item.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/fragments/FragmentTop.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/fragments/GalleryExpandingFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_front.xml" />
+        <option value="$PROJECT_DIR$/library/src/main/java/com/chej/library/ExpandingPagerFactory.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/Connection.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/U3D/u3dPlayer.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/ComService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/aidl/com/chej/HandMate/IMyAidlInterface.aidl" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/EvaluateActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/MasterSlaveActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
       </list>
     </option>
   </component>
@@ -2907,7 +2988,6 @@
       <pane id="PackagesPane">
         <subPane />
       </pane>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -2936,7 +3016,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
+              <option name="myItemId" value="library" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2950,7 +3030,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
+              <option name="myItemId" value="library" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -2968,7 +3048,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
+              <option name="myItemId" value="library" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -2990,7 +3070,63 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
+              <option name="myItemId" value="library" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="expandingpager-master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="expandingpager-master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="library" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="expandingpager-master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="expandingpager-master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="library" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -3006,13 +3142,175 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="HandMate" />
+              <option name="myItemId" value="library" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="expandingpager-master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="expandingpager-master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="library" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="library" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fragments" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="expandingpager-master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="expandingpager-master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="expandingpager-master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="expandingpager-master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="expandingpager-master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="expandingpager-master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="expandingpager-master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="expandingpager-master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jniLibs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="expandingpager-master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="expandingpager-master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jniLibs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="x86" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="expandingpager-master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="expandingpager-master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -3175,6 +3473,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -3184,7 +3483,7 @@
     <property name="device.picker.selection" value="HandMate" />
     <property name="android.project.structure.last.selected" value="app" />
     <property name="android.project.structure.proportion" value="0.15" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../BaiduTtsSample" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -3200,7 +3499,7 @@
       <recent name="C:\Users\samael\Desktop\project\expandingpager-master\app" />
     </key>
   </component>
-  <component name="RunManager" selected="Android App.app">
+  <component name="RunManager" selected="JAR Application.com.baidu.tts_2.3.0.jar">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -3438,6 +3737,12 @@
       <listeners />
       <method />
     </configuration>
+    <configuration default="false" name="com.baidu.tts_2.3.0.jar" type="JarApplication" factoryName="JAR Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="JAR_PATH" value="$PROJECT_DIR$/app/libs/com.baidu.tts_2.3.0.jar" />
+      <envs />
+      <method />
+    </configuration>
     <configuration default="false" name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="app" />
       <option name="DEPLOY" value="true" />
@@ -3487,8 +3792,9 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method />
     </configuration>
-    <list size="1">
-      <item index="0" class="java.lang.String" itemvalue="Android App.app" />
+    <list size="2">
+      <item index="0" class="java.lang.String" itemvalue="JAR Application.com.baidu.tts_2.3.0.jar" />
+      <item index="1" class="java.lang.String" itemvalue="Android App.app" />
     </list>
     <configuration name="&lt;template&gt;" type="Applet" default="true" selected="false">
       <option name="MAIN_CLASS_NAME" />
@@ -3680,14 +3986,15 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37915936" sideWeight="0.50483483" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7486865" sideWeight="0.6377921" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.561296" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.49299476" sideWeight="0.6599516" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42294222" sideWeight="0.6377921" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3765324" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5420315" sideWeight="0.6599516" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22416812" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23771152" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23771152" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16812609" sideWeight="0.6136181" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24979855" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -3701,7 +4008,6 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.056946687" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37215412" sideWeight="0.6136181" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -3758,47 +4064,13 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/AdminActivity.java" />
-    <entry file="file://D:/Android/Sdk/sources/android-25/android/app/Dialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="951">
-          <caret line="279" column="24" selection-start-line="279" selection-start-column="24" selection-end-line="279" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Model/MyCustomDialog.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/radiobutton.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/progressbar.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/dialog_bottom_bg.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/edittext.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/btn_cancel_selector.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_bombbox.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/btn_ok_selector.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-v17/activity_main.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/user_list_item.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_u3d_player.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_normal_layout.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_switch.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/EvaluateTableActivity.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Hardwarectivity.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/HistoryActivity.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/ReportActivity.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_bottom.xml" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/SeniorSetActivity.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/SystemSetActivity.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/ExerciseActivity.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/EvaluateActivity.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/GameItemActivity.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Adapter/UserAdapter.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/MainActivity.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/MasterSlaveActivity.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/ShutDownActivity.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/ComService.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/U3D/u3dPlayer.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/Connection.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Welcome.java" />
     <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/com/chej/HandMate/ApplicationTest.java" />
     <entry file="file://$PROJECT_DIR$/app/src/test/java/com/chej/HandMate/ExampleUnitTest.java" />
@@ -3818,14 +4090,287 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/aidl/com/chej/HandMate/IMyAidlInterface.aidl" />
     <entry file="file://$PROJECT_DIR$/app/src/main/aidl/com/chej/HandMate/ICallBack.aidl" />
     <entry file="file://$PROJECT_DIR$/app/src/main/aidl/com/chej/HandMate/Entity.aidl" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
     <entry file="file://$PROJECT_DIR$/app/build.gradle" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Model/users/UsersConstant.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/UsersActivity.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Database/UserDataManager.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Database/SQLdm.java" />
+    <entry file="file://$PROJECT_DIR$/app/app.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2748">
+          <caret line="135" column="9" selection-start-line="135" selection-start-column="9" selection-end-line="135" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library/library.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="709">
+          <caret line="106" column="9" selection-start-line="106" selection-start-column="9" selection-end-line="106" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/expandingpager-master.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="2" column="31" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ExpandingPager.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="810">
+          <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/ExerciseActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1242">
+          <caret line="46" column="13" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Model/users/UserData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="28" selection-start-line="0" selection-start-column="28" selection-end-line="0" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/startbutton.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/array.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="5" column="25" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/attrs.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_game_item.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="385">
+          <caret line="95" column="41" selection-start-line="95" selection-start-column="41" selection-end-line="95" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library/src/main/res/layout/expanding_fragment.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library/src/main/java/com/chej/library/ExpandingViewPagerAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-594">
+          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library/src/main/java/com/chej/library/ExpandingViewPagerTransformer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="254">
+          <caret line="12" column="45" selection-start-line="12" selection-start-column="45" selection-end-line="12" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library/src/main/java/com/chej/library/fragments/ExpandingFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3489">
+          <caret line="82" column="46" selection-start-line="82" selection-start-column="4" selection-end-line="82" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/fragments/GalleryExpandingFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="43" column="51" selection-start-line="43" selection-start-column="51" selection-end-line="43" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/fragments/FragmentTop.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="402">
+          <caret line="54" column="50" selection-start-line="54" selection-start-column="50" selection-end-line="54" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Adapter/GalleryViewPagerAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="29" column="64" selection-start-line="29" selection-start-column="52" selection-end-line="29" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/EvaluateTableActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_front.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1782">
+          <caret line="33" column="38" selection-start-line="33" selection-start-column="38" selection-end-line="33" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library/src/main/java/com/chej/library/ExpandingPagerFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2484">
+          <caret line="51" column="21" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/U3D/u3dPlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="247" column="33" selection-start-line="247" selection-start-column="33" selection-end-line="247" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/aidl/com/chej/HandMate/IMyAidlInterface.aidl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="828">
+          <caret line="30" column="53" selection-start-line="30" selection-start-column="53" selection-end-line="30" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/ComService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="667">
+          <caret line="147" column="8" selection-start-line="147" selection-start-column="8" selection-end-line="147" selection-end-column="88" />
+          <folding>
+            <element signature="e#3136#3137#0" expanded="true" />
+            <element signature="e#3189#3190#0" expanded="true" />
+            <element signature="e#4788#4789#0" expanded="true" />
+            <element signature="e#4865#4866#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="270" column="0" selection-start-line="270" selection-start-column="0" selection-end-line="270" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/GameItemActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7398">
+          <caret line="187" column="49" selection-start-line="187" selection-start-column="45" selection-end-line="187" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/EvaluateActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="111" column="27" selection-start-line="111" selection-start-column="27" selection-end-line="111" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/MasterSlaveActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="750">
+          <caret line="120" column="27" selection-start-line="120" selection-start-column="27" selection-end-line="120" selection-end-column="27" />
+          <folding>
+            <element signature="e#5183#5499#0" expanded="true" />
+            <element signature="e#5498#5499#0" expanded="true" />
+            <element signature="e#6156#6431#0" expanded="true" />
+            <element signature="e#6430#6431#0" expanded="true" />
+            <element signature="e#6507#10772#0" expanded="true" />
+            <element signature="e#10771#10772#0" expanded="true" />
+            <element signature="e#11669#11938#0" expanded="true" />
+            <element signature="e#11937#11938#0" expanded="true" />
+            <element signature="e#11974#12243#0" expanded="true" />
+            <element signature="e#12242#12243#0" expanded="true" />
+            <element signature="e#12280#12549#0" expanded="true" />
+            <element signature="e#12548#12549#0" expanded="true" />
+            <element signature="e#12584#12853#0" expanded="true" />
+            <element signature="e#12852#12853#0" expanded="true" />
+            <element signature="e#12893#13162#0" expanded="true" />
+            <element signature="e#13161#13162#0" expanded="true" />
+            <element signature="e#16242#16713#0" expanded="true" />
+            <element signature="e#16712#16713#0" expanded="true" />
+            <element signature="e#16756#16944#0" expanded="true" />
+            <element signature="e#16943#16944#0" expanded="true" />
+            <element signature="e#17205#17676#0" expanded="true" />
+            <element signature="e#17675#17676#0" expanded="true" />
+            <element signature="e#17719#17907#0" expanded="true" />
+            <element signature="e#17906#17907#0" expanded="true" />
+            <element signature="e#18865#19599#0" expanded="true" />
+            <element signature="e#19598#19599#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/Connection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="429">
+          <caret line="751" column="27" selection-start-line="751" selection-start-column="27" selection-end-line="751" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="14" column="32" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
+    </entry>
   </component>
 </project>

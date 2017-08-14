@@ -2,6 +2,7 @@
  * U3D界面
  */
 package com.chej.HandMate.U3D;
+import com.chej.HandMate.Transmission.Connection;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
@@ -44,6 +45,8 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
     private LinearLayout u3dLayout;
     private float angle = 0;
     private int scenenum = 1;//场景变量
+    private String handID = "1";//患侧手：左0右1
+    private String gloveID="0";//手套ID: 主从0评估1
     private int hid = 0;//历史id
     private int score = 0;
     private String[] upangles;//手套操发送的角度
@@ -97,6 +100,7 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
         Bundle bundle = this.getIntent().getExtras();
         hid = bundle.getInt("ID");
         scenenum = bundle.getInt("Mode") ;
+        gloveID = bundle.getString("Glove");
 
 
         try {
@@ -236,8 +240,14 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
 
 
     }
+    //
     public int getSceneNum() {
         return scenenum;
+    }
+    //
+    public String getGloveMode(){
+        String str=handID+" "+gloveID;//id1:患侧手左右0左1右id2：主从手或评估手0主从1评估
+        return str;
     }
 
     //向下位机发送结束信号

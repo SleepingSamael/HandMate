@@ -79,7 +79,26 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
                 e.printStackTrace();
             }
         }
-
+    }
+    //通知下位机开始发手套数据  0无手套数据 1 左手套数据 2 右手套数据
+    public void senddGloveSelect(int gloveNum){
+        if (iMyAidlInterface!=null){
+            try {
+                iMyAidlInterface.senddGloveSelect(gloveNum);
+            } catch (RemoteException e) {
+                Log.e("sendTrainMode",e.toString());
+            }
+        }
+    }
+    //请求网络状态
+    public void sendrNetStatus(){
+        if (iMyAidlInterface!=null){
+            try {
+                iMyAidlInterface.sendrNetStatus();
+            } catch (RemoteException e) {
+                Log.e("sendTrainMode",e.toString());
+            }
+        }
     }
 
     @Override
@@ -90,8 +109,9 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
         ButterKnife.bind(this);
         setupWindowAnimations();
 
-        //获取系统时间
+        sendrNetStatus();//载入时获取zigbee连接状态
 
+        //获取系统时间
         SimpleDateFormat sDateFormat = new    SimpleDateFormat("yyyy-MM-dd  HH:mm");
         String  sysDate = sDateFormat.format(new java.util.Date());
         String [] arr = sysDate.split("\\s+");
@@ -161,6 +181,7 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
         start.setOnClickListener(new Button.OnClickListener(){//创建监听
             public void onClick(View v) {
                 Intent i;
+                i = new Intent(EvaluateActivity.this, u3dPlayer.class);
                 switch (title.getText().toString()) {
                     case "评估模式":
                         historyData.setPid(userData.getUserId());
@@ -169,10 +190,55 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
                         historyData.setDate(sdate);
                         historyData.setTime(stime);
                         mhistoryDataManager.inserHistorytData(historyData);
-                        i = new Intent(EvaluateActivity.this, u3dPlayer.class);
                         mbundle.putInt("Mode", 3001);
                         i.putExtras(mbundle);
                         sendTrainAck(3);
+                        senddGloveSelect(2);
+                        startActivity(i);
+                        break;
+                    case "丰收果园":
+                        historyData.setPid(userData.getUserId());
+                        historyData.setHid(mhistoryDataManager.countData()+1);
+                        historyData.setItem("评估模式 丰收果园");
+                        historyData.setDate(sdate);
+                        historyData.setTime(stime);
+                        mhistoryDataManager.inserHistorytData(historyData);
+                        mbundle.putInt("ID",historyData.getHid());
+                        mbundle.putInt("Mode", 4001);
+                        mbundle.putString("Glove","1");
+                        i.putExtras(mbundle);
+                        sendTrainAck(3);
+                        senddGloveSelect(2);
+                        startActivity(i);
+                        break;
+                    case "欢乐大熊猫":
+                        historyData.setPid(userData.getUserId());
+                        historyData.setHid(mhistoryDataManager.countData()+1);
+                        historyData.setItem("评估模式 欢乐大熊猫");
+                        historyData.setDate(sdate);
+                        historyData.setTime(stime);
+                        mhistoryDataManager.inserHistorytData(historyData);
+                        mbundle.putInt("ID",historyData.getHid());
+                        mbundle.putInt("Mode", 4002);
+                        mbundle.putString("Glove","1");
+                        i.putExtras(mbundle);
+                        sendTrainAck(3);
+                        senddGloveSelect(2);
+                        startActivity(i);
+                        break;
+                    case "钢琴大师":
+                        historyData.setPid(userData.getUserId());
+                        historyData.setHid(mhistoryDataManager.countData()+1);
+                        historyData.setItem("评估模式 钢琴大师");
+                        historyData.setDate(sdate);
+                        historyData.setTime(stime);
+                        mhistoryDataManager.inserHistorytData(historyData);
+                        mbundle.putInt("ID",historyData.getHid());
+                        mbundle.putInt("Mode", 4003);
+                        mbundle.putString("Glove","1");
+                        i.putExtras(mbundle);
+                        sendTrainAck(3);
+                        senddGloveSelect(2);
                         startActivity(i);
                         break;
                     case "评估量表":
@@ -276,7 +342,10 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
         for(int i=0;i<1;++i){
             galleryItemses.add(new GalleryItems("评估模式", R.drawable.game3,"评估模式旨在对患者的手指活动能力作出评估，" +
                     "患者通过屏幕上的提示尽力做出相应动作，" +
-                    "程序根据患者动作的时间与到位程度进行打分，协助医生对患者病情评估。"));
+                    "程序根据患者动作的时间与到位程度进行打分，协助医生对患者病情评估。（使用评估手套）"));
+            galleryItemses.add(new GalleryItems("丰收果园", R.drawable.applegame,"在金黄色的秋季里，没有什么比收获果实更让人心情愉悦的事了。作为农场之主的你，在今日决定去采摘下苹果，那么，出发吧！向着丰收，前进！（使用评估手套）"));
+            galleryItemses.add(new GalleryItems("欢乐大熊猫", R.drawable.pandagame,"身为一只在树林里快乐生活的大熊猫，今天又到了进食的时间了。饥肠辘辘的你无意之间进入了树林中的一片竹林，看见天上掉的满满的竹子，高兴坏了，口水直流，到底能吃到多少的竹子就看你的表现了。（使用评估手套）"));
+            galleryItemses.add(new GalleryItems("钢琴大师", R.drawable.pianogame,"你是百年一遇的钢琴天才，应广大媒体的要求，在上海进行了一场巡回演出。接下里，就开始你的表演吧！（使用评估手套）"));
             galleryItemses.add(new GalleryItems("评估量表", R.drawable.evaluatetable,"评估量表提供手部活动能力的评估量表让医生对患者进行打分，" +
                     "从而协助医生对患者病情评估。"));
 

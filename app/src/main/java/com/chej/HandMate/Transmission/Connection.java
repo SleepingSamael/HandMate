@@ -67,7 +67,7 @@ public class Connection {
     public byte[] messageToDevice;//向下位机发送的角度报文
     public String[] fingerArray = {"0","0","0","0","0"};
     public String[] componentArray = {"0","0","0","0","0"};
-    public String[] configArray ={"0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"};
+    public String[] configArray ={"1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"};
     String strResult=null;//接收报文十进制
     String hexResult=null;//接收报文十六进制
 
@@ -227,17 +227,17 @@ public class Connection {
         public void run() {
 
             try {
-               // if (!sendData.equals("")) {
-                    SendByte(sendData);
+                // if (!sendData.equals("")) {
+                SendByte(sendData);
 
-                    Log.e("SendRunnable", "---->>已发送至下位机....");
-              //  }
+                Log.e("SendRunnable", "---->>已发送至下位机....");
+                //  }
             } catch (Exception e) {
                 Log.e("SendRunnable", "--->>read failure!" + e.toString());
             }
 
-            }
         }
+    }
 
 
     //接受下位机发送数据线程
@@ -376,6 +376,29 @@ public class Connection {
                             Log.e("Connection", String.valueOf(e));
                         }
                     }
+                    if (str[0].equals("19"))//dNetStatus网络状态
+                    {
+                        String NetType = null;//网络类型
+                        switch (str[2]){
+                            case "00":NetType="WIFI";
+                                break;
+                            case "01":NetType="Zigbee";
+                                break;
+                            case "02":NetType="AX-12Bus";
+                                break;
+                        }
+                        String rightStatus = "未连接";
+                        String leftStatus ="未连接";
+                        if(str[3].equals("01"))
+                        {
+                            rightStatus="连接正常";
+                        }
+                        if(str[4].equals("00"))
+                        {
+                            leftStatus="连接正常";
+                        }
+                        dialogError("手套"+NetType+"连接状态","右手："+rightStatus+"\n"+"左手："+leftStatus);
+                    }
                     if (str[0].equals("20"))//dPowerinfo下位机电量
                     {
                         Log.e("Receiver", "ID=    " + str[0]);
@@ -405,81 +428,81 @@ public class Connection {
                         configArray[12]=Integer.parseInt(str[14],16)+"";
                         configArray[13]=Integer.parseInt(str[15],16)+"";
                         configArray[14]=Integer.parseInt(str[16],16)+"";
-                      //  System.arraycopy(str, 2, configArray, 0, 15);
+                        //  System.arraycopy(str, 2, configArray, 0, 15);
                         for (int i = 0; i < 15; i++) {
                             Log.e("FC", "The Array Contains " + configArray[i]);
                         }
                     }
                     if (str[0].equals("10"))//下位机向上位机发送角度信息
                     {
-                            try {
-                                Log.e("Receiver", "ID=    " + str[0]);
-                                    String[] str2 = msg.getData().get("msg").toString().split("\\ ");
-                                    //手指序号
-                                    fingerNumber = Integer.parseInt(str2[2]);
-                                    //手指运动角度
-                                    angleFromDownStream = Float.parseFloat(str2[5]);
-                                    //对手指信息进行整理
-                                    fingerArray[0] = Integer.parseInt(str[2], 16) + "";
-                                    fingerArray[1] = Integer.parseInt(str[3], 16) + "";
-                                    fingerArray[2] = Integer.parseInt(str[4], 16) + "";
-                                    fingerArray[3] = Integer.parseInt(str[5], 16) + "";
-                                    fingerArray[4] = Integer.parseInt(str[6], 16) + "";
-                                    Log.e("fingerArray", "-----------------------------------");
-                                    for (int j = 0; j < str.length; j++) {
-                                        Log.e("fingerArray", str[j]);
-                                    }
-                                    for (int i = 0; i < 5; i++) {
-                                        Log.e("fingerArray", "The Array Contains " + fingerArray[i]);
-                                    }
-                                    Log.e("fingerArray", "-----------------------------------");
+                        try {
+                            Log.e("Receiver", "ID=    " + str[0]);
+                            String[] str2 = msg.getData().get("msg").toString().split("\\ ");
+                            //手指序号
+                            fingerNumber = Integer.parseInt(str2[2]);
+                            //手指运动角度
+                            angleFromDownStream = Float.parseFloat(str2[5]);
+                            //对手指信息进行整理
+                            fingerArray[0] = Integer.parseInt(str[2], 16) + "";
+                            fingerArray[1] = Integer.parseInt(str[3], 16) + "";
+                            fingerArray[2] = Integer.parseInt(str[4], 16) + "";
+                            fingerArray[3] = Integer.parseInt(str[5], 16) + "";
+                            fingerArray[4] = Integer.parseInt(str[6], 16) + "";
+                            Log.e("fingerArray", "-----------------------------------");
+                            for (int j = 0; j < str.length; j++) {
+                                Log.e("fingerArray", str[j]);
+                            }
+                            for (int i = 0; i < 5; i++) {
+                                Log.e("fingerArray", "The Array Contains " + fingerArray[i]);
+                            }
+                            Log.e("fingerArray", "-----------------------------------");
 
-                            } catch (Exception e){
+                        } catch (Exception e){
                             Log.e("Connection", String.valueOf(e));
                         }
                     }
                     if(str[0].equals("21"))//部件信息
-                     {
-                         if(str[2].equals("00"))//舵机
-                         {
-                             switch (str[3])
-                             {
-                                 case "00"://当前位置
-                                     try {
-                                         //对舵机位置信息进行整理
-                                         componentArray[0]=Integer.parseInt(str[5],16)+"";
-                                         componentArray[1]=Integer.parseInt(str[7],16)+"";
-                                         componentArray[2]=Integer.parseInt(str[9],16)+"";
-                                         componentArray[3]=Integer.parseInt(str[11],16)+"";
-                                         componentArray[4]=Integer.parseInt(str[13],16)+"";
-                                         Log.e("componentArray", "-----------------------------------");
-                                         for (int i = 0; i < 5; i++) {
-                                             Log.e("componentArray", "The Array Contains " + componentArray[i]);
-                                         }
-                                         Log.e("componentArray", "-----------------------------------");
-                                     }catch (Exception e){
-                                         Log.e("componentArray", String.valueOf(e));
-                                     }
-                                     break;
-                                 case "01"://当前速度
-                                     break;
-                                 case "02"://当前负载
-                                     break;
-                                 case "03"://舵机错误状态
-                                     motorErrorHandler("1",Integer.parseInt(str[5],16));
-                                     motorErrorHandler("2",Integer.parseInt(str[7],16));
-                                     motorErrorHandler("3",Integer.parseInt(str[9],16));
-                                     motorErrorHandler("4",Integer.parseInt(str[11],16));
-                                     motorErrorHandler("5",Integer.parseInt(str[13],16));
-                                 break;
-                                 case "04"://当前温度
-                                     break;
-                                 case "05"://当前电压
-                                     break;
-                             }
-                         }
+                    {
+                        if(str[2].equals("00"))//舵机
+                        {
+                            switch (str[3])
+                            {
+                                case "00"://当前位置
+                                    try {
+                                        //对舵机位置信息进行整理
+                                        componentArray[0]=Integer.parseInt(str[5],16)+"";
+                                        componentArray[1]=Integer.parseInt(str[7],16)+"";
+                                        componentArray[2]=Integer.parseInt(str[9],16)+"";
+                                        componentArray[3]=Integer.parseInt(str[11],16)+"";
+                                        componentArray[4]=Integer.parseInt(str[13],16)+"";
+                                        Log.e("componentArray", "-----------------------------------");
+                                        for (int i = 0; i < 5; i++) {
+                                            Log.e("componentArray", "The Array Contains " + componentArray[i]);
+                                        }
+                                        Log.e("componentArray", "-----------------------------------");
+                                    }catch (Exception e){
+                                        Log.e("componentArray", String.valueOf(e));
+                                    }
+                                    break;
+                                case "01"://当前速度
+                                    break;
+                                case "02"://当前负载
+                                    break;
+                                case "03"://舵机错误状态
+                                    motorErrorHandler("1",Integer.parseInt(str[5],16));
+                                    motorErrorHandler("2",Integer.parseInt(str[7],16));
+                                    motorErrorHandler("3",Integer.parseInt(str[9],16));
+                                    motorErrorHandler("4",Integer.parseInt(str[11],16));
+                                    motorErrorHandler("5",Integer.parseInt(str[13],16));
+                                    break;
+                                case "04"://当前温度
+                                    break;
+                                case "05"://当前电压
+                                    break;
+                            }
+                        }
 
-                     }
+                    }
                 }
             }
         }
@@ -490,35 +513,35 @@ public class Connection {
     {
         if((code&1)==1)
         {
-            dialogError(motorNum,"输入电压错误");
+            dialogError("舵机错误","舵机"+motorNum+"号发生错误\n"+"错误原因："+"输入电压错误");
         }
         else if((code&2)==2)
         {
-            dialogError(motorNum,"目标角度超出范围");
+            dialogError("舵机错误","舵机"+motorNum+"号发生错误\n"+"错误原因："+"目标角度超出范围");
         }
         else if((code&4)==4)
         {
-            dialogError(motorNum,"舵机温度过高");
+            dialogError("舵机错误","舵机"+motorNum+"号发生错误\n"+"错误原因："+"舵机温度过高");
         }
         else if((code&8)==8)
         {
-            dialogError(motorNum,"角度范围设置错误");
+            dialogError("舵机错误","舵机"+motorNum+"号发生错误\n"+"错误原因："+"角度范围设置错误");
         }
         else if((code&16)==16)
         {
-            dialogError(motorNum,"校验和错误");
+            dialogError("舵机错误","舵机"+motorNum+"号发生错误\n"+"错误原因："+"校验和错误");
         }
         else if((code&32)==32)
         {
-            dialogError(motorNum,"舵机超负荷");
+            dialogError("舵机错误","舵机"+motorNum+"号发生错误\n"+"错误原因："+"舵机超负荷");
         }
         else if((code&64)==64)
         {
-            dialogError(motorNum,"舵机超负荷");
+            dialogError("舵机错误","舵机"+motorNum+"号发生错误\n"+"错误原因："+"舵机超负荷");
         }
         else if((code&128)==128)
         {
-            dialogError(motorNum,"发生指令错误");
+            dialogError("舵机错误","舵机"+motorNum+"号发生错误\n"+"错误原因："+"发生指令错误");
         }
     }
     //反向处理 U3D→下位机
@@ -724,10 +747,10 @@ public class Connection {
         dialog.show();
     }
     //报错信息
-    protected void dialogError(String motorNum,String errorMessage) {
+    protected void dialogError(String errorTitle,String errorMessage) {
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(UserData.getContext());
-        builder.setMessage("舵机"+motorNum+"号发生错误\n"+"错误原因："+errorMessage);
-        builder.setTitle("错误");
+        builder.setTitle(errorTitle);
+        builder.setMessage(errorMessage);
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -757,7 +780,6 @@ public class Connection {
      2	       1	   ID	      0x01	       报文ID
      3	       1	  Size	      0x05	       报文长度
      4	       1	Check Code 	               校验码
-     接口：WIFI
      */
     public byte[] rConnectGCU(){
         byte[]b=new byte[5];
@@ -789,6 +811,35 @@ public class Connection {
         b[4]=(byte) ~(b[2]+b[3]);
         return b;
     }
+    //向GCU请求当前网络状态
+    public byte[] rNetStatus()
+    {
+        byte[]b=new byte[6];
+        b[0]=(byte)0xff;
+        b[1]=(byte)0xff;
+        b[2]=(byte)0x18;//ID
+        b[3]=(byte)0x06;//长度
+        b[4]=(byte)0x01;//网络类型:  0：WIFI 1：Zigbee 2：AX-12Bus
+        b[5]=(byte) ~(b[2]+b[3]+b[4]);
+        return b;
+    }
 
+    /**
+     * 用户选择手套类型时，上位机通知下位机传送选择的手套数据
+     * @param gloveNum 手套编号，0无手套数据 1 左手套数据 2 右手套数据
+     * @return 报文
+     */
+    public  byte[] dGloveSelect(int gloveNum)
+    {
+        byte[]b=new byte[6];
+        b[0]=(byte)0xff;
+        b[1]=(byte)0xff;
+        b[2]=(byte)0x27;//ID
+        b[3]=(byte)0x06;//长度
+        b[4]=(byte)gloveNum;//当前手套选择: 0x00 无手套选择 0x01 左手套选择 0x02 右手套选择
+        b[5]=(byte) ~(b[2]+b[3]+b[4]);
+        return b;
+
+    }
 
 }

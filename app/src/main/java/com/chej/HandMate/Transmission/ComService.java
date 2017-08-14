@@ -139,7 +139,16 @@ public class ComService extends Service {
             Log.e("手套操", connection.bytesToString(bAngles));
 
         }
-
+        @Override
+        public void sendrNetStatus()//请求网络状态
+        {
+            connection.sendData(connection.rNetStatus());
+        }
+        @Override
+        public void senddGloveSelect(int gloveNum)//通知下位机开始发手套数据  0无手套数据 1 左手套数据 2 右手套数据
+        {
+            connection.sendData((connection.dGloveSelect(gloveNum)));
+        }
         @Override
         public void sendrConfigData(){//请求配置信息
             connection.sendData(connection.rConfigData());

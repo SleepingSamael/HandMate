@@ -16,6 +16,9 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+
     <application
         android:name="com.chej.HandMate.Model.users.UserData"
         android:allowBackup="true"
@@ -43,11 +46,6 @@
         <activity
             android:name="com.chej.HandMate.MainActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
-        <activity
-            android:name="com.chej.HandMate.GameItemActivity"
-            android:launchMode="singleTop"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
@@ -93,11 +91,6 @@
             android:launchMode="singleTop"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
-            <intent-filter>
-                <action android:name="com.qslll.expandingpager.exercise" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.chej.HandMate.UsersActivity"

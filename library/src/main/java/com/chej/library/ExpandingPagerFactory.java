@@ -26,11 +26,11 @@ public class ExpandingPagerFactory {
         ViewGroup.LayoutParams layoutParams = viewPager.getLayoutParams();
         layoutParams.width = ((Activity) viewPager.getContext()).getWindowManager().getDefaultDisplay().getWidth() / 4;
        // layoutParams.width = ((Activity) viewPager.getContext()).getWindowManager().getDefaultDisplay().getWidth() / 7 * 5;
-        layoutParams.height = (int) ((layoutParams.width / 0.65));
+        layoutParams.height = (int) ((layoutParams.width / 0.35));
 
 
-        viewPager.setOffscreenPageLimit(5);
-
+        viewPager.setOffscreenPageLimit(4);
+        viewPager.setPageMargin(1);
 
         if (viewPager.getParent() instanceof ViewGroup) {
             ViewGroup viewParent = ((ViewGroup) viewPager.getParent());
@@ -45,12 +45,12 @@ public class ExpandingPagerFactory {
     public static void setupViewPager2(final ViewPager viewPager) {
         ViewGroup.LayoutParams layoutParams = viewPager.getLayoutParams();
         layoutParams.width = ((Activity) viewPager.getContext()).getWindowManager().getDefaultDisplay().getWidth() / 15* 3;
-        layoutParams.height = (int) ((layoutParams.width / 1.2));//0.75
+        layoutParams.height = (int) ((layoutParams.width / 1.3));//0.75
 
         //设置预加载数量
-        viewPager.setOffscreenPageLimit(5);
+        viewPager.setOffscreenPageLimit(4);
         //设置每页之间的左右间隔
-        viewPager.setPageMargin(1);
+        viewPager.setPageMargin(2);
 
         if (viewPager.getParent() instanceof ViewGroup) {
             ViewGroup viewParent = ((ViewGroup) viewPager.getParent());

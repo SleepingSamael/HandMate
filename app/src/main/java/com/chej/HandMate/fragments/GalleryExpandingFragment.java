@@ -16,6 +16,7 @@ public class GalleryExpandingFragment extends ExpandingFragment {
 
     static final String ARG_TRAVEL = "ARG_TRAVEL";
     GalleryItems galleryItems;
+    boolean TextVisible;
 
     public static GalleryExpandingFragment newInstance(GalleryItems galleryItems){
         GalleryExpandingFragment fragment = new GalleryExpandingFragment();
