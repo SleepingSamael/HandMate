@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.chej.HandMate.Model.MyCustomDialog;
 import com.chej.HandMate.Model.SysApplication;
 import com.chej.HandMate.Model.users.UserData;
+import com.chej.HandMate.TTS.SpeechUtil;
 
 import java.text.SimpleDateFormat;
 
@@ -31,12 +32,15 @@ public class Hardwarectivity extends AppCompatActivity implements View.OnClickLi
     private ImageView wifi;
     private ImageView bluetooth;
 
+    private SpeechUtil speechUtil;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hardwarectivity);
 
         SysApplication.getInstance().addActivity(this);
+        speechUtil = new SpeechUtil(this);
+        speechUtil.speak("硬件信息");
 
         //获取系统时间
         SimpleDateFormat sDateFormat = new    SimpleDateFormat("yyyy-MM-dd  HH:mm");
@@ -68,7 +72,7 @@ public class Hardwarectivity extends AppCompatActivity implements View.OnClickLi
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                speechUtil.speak("返回主界面");
                 Intent mintent = new Intent(Hardwarectivity.this, MainActivity.class);
                 startActivity(mintent);
                 finish();
@@ -168,6 +172,7 @@ public class Hardwarectivity extends AppCompatActivity implements View.OnClickLi
         return false;
     }
     private void shutDownDialog() {
+        speechUtil.speak("确定要关机吗");
         MyCustomDialog.Builder builder=new MyCustomDialog.Builder(this);
         builder.setMessage("确定要关机吗？");
         builder.setTitle("提示");
@@ -192,6 +197,7 @@ public class Hardwarectivity extends AppCompatActivity implements View.OnClickLi
         builder.create().show();
     }
     private void restartDialog() {
+        speechUtil.speak("确定要重启吗");
         MyCustomDialog.Builder builder=new MyCustomDialog.Builder(this);
         builder.setMessage("确定要重启吗？");
         builder.setTitle("提示");

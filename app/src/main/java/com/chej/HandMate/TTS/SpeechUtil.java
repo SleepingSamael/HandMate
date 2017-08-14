@@ -122,22 +122,21 @@ public class SpeechUtil implements SpeechSynthesizerListener {
         this.mSpeechSynthesizer.setApiKey("Gk7tKvpHWhHUmDIrxAF8XYXF",
                 "8e44a2c026d72415bd2d4525c8fc3654");
         setParams();
-        // 授权检测接口(只是通过AuthInfo进行检验授权是否成功。)
-        // AuthInfo接口用于测试开发者是否成功申请了在线或者离线授权，如果测试授权成功了，可以删除AuthInfo部分的代码（该接口首次验证时比较耗时），不会影响正常使用（合成使用时SDK内部会自动验证授权）
-        AuthInfo authInfo = this.mSpeechSynthesizer.auth(TtsMode.MIX);
-        // 判断授权信息是否正确，如果正确则初始化语音合成器并开始语音合成，如果失败则做错误处理
-        if (authInfo.isSuccess()) {
-            Log.e(tag,"百度语音合成示例程序正在运行");
-        } else {
-            String errorMsg = authInfo.getTtsError().getDetailMessage();
-            Log.e(tag,"授权失败 "+ errorMsg);
-        }
+        // 初始化tts
+        mSpeechSynthesizer.initTts(TtsMode.MIX);
     }
     /**
      * 开始文本合成并朗读
      */
-    public void speak(final String content) {
-        new Thread(new Runnable() {
+    public void speak(String content) {
+        if (!content.isEmpty()) {
+            mSpeechSynthesizer.speak(content.toString());
+            Log.e(tag,"开始合成器："+content);
+        }else{
+            Log.e(tag,"开始合成器失败："+content);
+        }
+
+      /*  new Thread(new Runnable() {
             @Override
             public void run() {
 //                 setParams();
@@ -146,7 +145,7 @@ public class SpeechUtil implements SpeechSynthesizerListener {
                     Log.e(tag,"开始合成器失败："+result);
                 }
             }
-        }).start();
+        }).start();*/
     }
 
     /**

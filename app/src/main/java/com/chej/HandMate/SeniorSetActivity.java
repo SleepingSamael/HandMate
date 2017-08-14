@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.chej.HandMate.Model.MyCustomDialog;
 import com.chej.HandMate.Model.SysApplication;
 import com.chej.HandMate.Model.users.UserData;
+import com.chej.HandMate.TTS.SpeechUtil;
 
 import java.text.SimpleDateFormat;
 
@@ -34,12 +35,17 @@ public class SeniorSetActivity extends AppCompatActivity implements View.OnClick
     private ImageView wifi;
     private ImageView bluetooth;
 
+    private SpeechUtil speechUtil;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_senior_set);
 
         SysApplication.getInstance().addActivity(this);
+
+        speechUtil = new SpeechUtil(this);
+        speechUtil.speak("高级设置");
 
         printSet=(CardView)findViewById(R.id.print_set);
         bluetoothSet=(CardView)findViewById(R.id.bluetooth_set);
@@ -84,6 +90,7 @@ public class SeniorSetActivity extends AppCompatActivity implements View.OnClick
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                speechUtil.speak("回到主界面");
                 Intent mintent = new Intent(SeniorSetActivity.this, MainActivity.class);
                 startActivity(mintent);
                 finish();
@@ -176,6 +183,7 @@ public class SeniorSetActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void shutDownDialog() {
+        speechUtil.speak("确定要关机吗");
         MyCustomDialog.Builder builder=new MyCustomDialog.Builder(this);
         builder.setMessage("确定要关机吗？");
         builder.setTitle("提示");
@@ -200,6 +208,7 @@ public class SeniorSetActivity extends AppCompatActivity implements View.OnClick
         builder.create().show();
     }
     private void restartDialog() {
+        speechUtil.speak("确定要重启吗");
         MyCustomDialog.Builder builder=new MyCustomDialog.Builder(this);
         builder.setMessage("确定要重启吗？");
         builder.setTitle("提示");

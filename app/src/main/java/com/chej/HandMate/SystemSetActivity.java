@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.chej.HandMate.Model.MyCustomDialog;
 import com.chej.HandMate.Model.SysApplication;
 import com.chej.HandMate.Model.users.UserData;
+import com.chej.HandMate.TTS.SpeechUtil;
 
 import java.text.SimpleDateFormat;
 
@@ -46,6 +47,8 @@ public class SystemSetActivity extends AppCompatActivity implements View.OnClick
     private int currentVolume;
     private static final int REQUEST_CODE_WRITE_SETTINGS = 2;
 
+    private SpeechUtil speechUtil;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +62,8 @@ public class SystemSetActivity extends AppCompatActivity implements View.OnClick
         senior = (ImageView)findViewById(R.id.senior_set);
         set = (Button)findViewById(R.id.set);
 
-
+        speechUtil = new SpeechUtil(this);
+        speechUtil.speak("系统设置");
         //获取系统时间
         SimpleDateFormat sDateFormat = new    SimpleDateFormat("yyyy-MM-dd  HH:mm");
         String  sysDate = sDateFormat.format(new java.util.Date());
@@ -86,8 +90,10 @@ public class SystemSetActivity extends AppCompatActivity implements View.OnClick
                                          boolean isChecked) {
                 // TODO Auto-generated method stub
                 if (isChecked) {
+                    speechUtil.speak("语音功能已开启");
 
                 } else {
+                    speechUtil.speak("语音功能已关闭");
 
                 }
             }
@@ -109,7 +115,7 @@ public class SystemSetActivity extends AppCompatActivity implements View.OnClick
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                speechUtil.speak("返回主界面");
                 Intent mintent = new Intent(SystemSetActivity.this, MainActivity.class);
                 startActivity(mintent);
                 finish();
@@ -168,6 +174,7 @@ public class SystemSetActivity extends AppCompatActivity implements View.OnClick
         return false;
     }
     private void shutDownDialog() {
+        speechUtil.speak("确定要关机吗");
         MyCustomDialog.Builder builder=new MyCustomDialog.Builder(this);
         builder.setMessage("确定要关机吗？");
         builder.setTitle("提示");
@@ -192,6 +199,7 @@ public class SystemSetActivity extends AppCompatActivity implements View.OnClick
         builder.create().show();
     }
     private void restartDialog() {
+        speechUtil.speak("确定要重启吗");
         MyCustomDialog.Builder builder=new MyCustomDialog.Builder(this);
         builder.setMessage("确定要重启吗？");
         builder.setTitle("提示");
@@ -318,8 +326,10 @@ public class SystemSetActivity extends AppCompatActivity implements View.OnClick
         // 获取到当前 设备的音量
         currentVolume = mAudioManager
                 .getStreamVolume(AudioManager.STREAM_MUSIC);
+        Log.e("currentVolume", String.valueOf(currentVolume));
         // 显示音量
-       // voice_tv.setText("当前音量百分比：" + currentVolume * 100 / maxVolume + " %");
+      // Log.e("当前音量百分比：" , currentVolume * 100 / maxVolume + " %");
+        volum.setProgress(maxVolume);
     }
 
     //申请权限
@@ -335,7 +345,7 @@ public class SystemSetActivity extends AppCompatActivity implements View.OnClick
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_WRITE_SETTINGS) {
             if (Settings.System.canWrite(this)) {
-                Log.i("ERRRRRRRRRRRRR", "onActivityResult write settings granted");
+                Log.e("ERRRRRRRRRRRRR", "onActivityResult write settings granted");
             }
         }
     }

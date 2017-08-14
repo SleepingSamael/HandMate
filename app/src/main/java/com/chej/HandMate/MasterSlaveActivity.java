@@ -32,6 +32,7 @@ import com.chej.HandMate.Model.MyCustomDialog;
 import com.chej.HandMate.Model.SysApplication;
 import com.chej.HandMate.Model.history.HistoryData;
 import com.chej.HandMate.Model.users.UserData;
+import com.chej.HandMate.TTS.SpeechUtil;
 import com.chej.HandMate.Transmission.ComService;
 import com.chej.HandMate.U3D.u3dPlayer;
 import com.chej.library.ExpandingPagerFactory;
@@ -67,6 +68,7 @@ public class MasterSlaveActivity extends AppCompatActivity implements ExpandingF
     int mode;//存储menu点击值
 
     private IMyAidlInterface iMyAidlInterface;
+    private SpeechUtil speechUtil;
     //向下位机发送开始信号
     public void sendTrainAck(int mode) {
 
@@ -113,6 +115,7 @@ public class MasterSlaveActivity extends AppCompatActivity implements ExpandingF
         setContentView(R.layout.activity_game_item);
 
         SysApplication.getInstance().addActivity(this);
+        speechUtil = new SpeechUtil(this);
 
         ButterKnife.bind(this);
 
@@ -175,7 +178,7 @@ public class MasterSlaveActivity extends AppCompatActivity implements ExpandingF
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                speechUtil.speak("返回主界面");
                 Intent mintent = new Intent(MasterSlaveActivity.this, MainActivity.class);
                 startActivity(mintent);
                 finish();
@@ -187,6 +190,7 @@ public class MasterSlaveActivity extends AppCompatActivity implements ExpandingF
          */
         start.setOnClickListener(new Button.OnClickListener(){//创建监听
             public void onClick(View v) {
+                speechUtil.speak("开始训练");
                 Intent i = new Intent(MasterSlaveActivity.this, u3dPlayer.class);
                 switch (title.getText().toString()) {
                     case "海岛":
@@ -282,6 +286,7 @@ public class MasterSlaveActivity extends AppCompatActivity implements ExpandingF
                 DetailPhoto.setImageResource(galleryItems.getImage());
                 title.setText(galleryItems.getName());
                 introduce.setText(galleryItems.getIntroduce());
+                speechUtil.speak(galleryItems.getName());
             }
 
             @Override
@@ -415,6 +420,7 @@ default:
         return false;
         }
     private void shutDownDialog() {
+        speechUtil.speak("确定要关机吗");
         MyCustomDialog.Builder builder=new MyCustomDialog.Builder(this);
         builder.setMessage("确定要关机吗？");
         builder.setTitle("提示");
@@ -439,6 +445,7 @@ default:
         builder.create().show();
     }
     private void restartDialog() {
+        speechUtil.speak("确定要重启吗");
         MyCustomDialog.Builder builder=new MyCustomDialog.Builder(this);
         builder.setMessage("确定要重启吗？");
         builder.setTitle("提示");

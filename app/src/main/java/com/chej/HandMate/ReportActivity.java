@@ -18,6 +18,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import com.chej.HandMate.TTS.SpeechUtil;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
@@ -40,6 +41,7 @@ public class ReportActivity extends AppCompatActivity {
     private TextView his_Level;
     private TextView his_Dur;
     private HistoryDataManager mHistoryDataManager;
+    private SpeechUtil speechUtil;
     Document doc=new Document();
     FileOutputStream fos;
 
@@ -49,6 +51,8 @@ public class ReportActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report);
         SysApplication.getInstance().addActivity(this);
+
+        speechUtil = new SpeechUtil(this);
 
         back=(Button) findViewById(R.id.btn_back);
         save=(Button) findViewById(R.id.btn_save);
@@ -92,6 +96,7 @@ public class ReportActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+                speechUtil.speak("返回");
                 finish();
             }
         });
@@ -134,6 +139,7 @@ public class ReportActivity extends AppCompatActivity {
                     fos.close();
                     Toast.makeText(getApplicationContext(), "已保存",
                             Toast.LENGTH_SHORT).show();
+                    speechUtil.speak("报告已保存");
                 } catch (FileNotFoundException e1) {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();

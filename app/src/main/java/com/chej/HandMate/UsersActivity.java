@@ -51,8 +51,7 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
     private TextView clock;
     Bundle userbundle = new Bundle();//区分修改信息和新增用户界面
 
-
-
+    private SpeechUtil speechUtil;
     /**
      * 汉字转换成拼音的类
      */
@@ -80,6 +79,8 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
 
         SysApplication.getInstance().addActivity(this);
 
+        speechUtil = new SpeechUtil(this);
+        speechUtil.speak("请选择用户");
 
         //获取系统时间
         SimpleDateFormat sDateFormat = new    SimpleDateFormat("yyyy-MM-dd  HH:mm");
@@ -326,6 +327,7 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
         //添加用户
         add.setOnClickListener(new Button.OnClickListener(){
             public void onClick(View v) {
+                speechUtil.speak("添加新用户");
                 Intent i;
                 i = new Intent(UsersActivity.this, UserEditActivity.class);
                 userbundle.putInt("Mode", 0);
@@ -395,6 +397,7 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
     }
 
     protected void deleteDialog() {
+        speechUtil.speak("确认要删除吗");
         MyCustomDialog.Builder builder=new MyCustomDialog.Builder(this);
         builder.setMessage("确认删除吗？");
         builder.setTitle("提示");
@@ -417,6 +420,7 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void shutDownDialog() {
+        speechUtil.speak("确定要关机吗");
         MyCustomDialog.Builder builder=new MyCustomDialog.Builder(this);
         builder.setMessage("确定要关机吗？");
         builder.setTitle("提示");
@@ -442,6 +446,7 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void restartDialog(){//弹出第一个对话框
+        speechUtil.speak("确定要重启吗");
         MyCustomDialog.Builder dialog=new MyCustomDialog.Builder(this);
         dialog.setTitle("提示")
                 .setMessage("确定要重启吗？")

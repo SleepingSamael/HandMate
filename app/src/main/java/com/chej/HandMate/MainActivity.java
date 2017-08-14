@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
 
 
         speechUtil = new SpeechUtil(this);
-        speechUtil.speak("请选择用户");
+
         //获取系统时间
         SimpleDateFormat sDateFormat = new    SimpleDateFormat("yyyy-MM-dd  HH:mm");
         String  sysDate = sDateFormat.format(new java.util.Date());
@@ -141,11 +141,20 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 // ExpandingFragment expandingFragment = ExpandingPagerFactory.getCurrentFragment(viewPager);
-
             }
 
             @Override
             public void onPageSelected(int position) {
+                switch (position){
+                    case 0: speechUtil.speak("主从模式");
+                        break;
+                    case 1: speechUtil.speak("手套操");
+                        break;
+                    case 2: speechUtil.speak("评估");
+                        break;
+                    case 3: speechUtil.speak("历史记录");
+                        break;
+                }
             }
 
             @Override
@@ -337,6 +346,7 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
         return false;
     }
     private void shutDownDialog() {
+        speechUtil.speak("确定要关机吗");
         MyCustomDialog.Builder builder = new MyCustomDialog.Builder(MainActivity.this);
         builder.setMessage("确定要关机吗？");
         builder.setTitle("提示");
@@ -361,6 +371,7 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
         builder.create().show();
     }
     private void restartDialog() {
+        speechUtil.speak("确定要重启吗");
         MyCustomDialog.Builder builder = new MyCustomDialog.Builder(MainActivity.this);
         builder.setMessage("确定要重启吗？");
         builder.setTitle("提示");

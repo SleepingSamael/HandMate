@@ -32,6 +32,7 @@ import com.chej.HandMate.Model.MyCustomDialog;
 import com.chej.HandMate.Model.SysApplication;
 import com.chej.HandMate.Model.history.HistoryData;
 import com.chej.HandMate.Model.users.UserData;
+import com.chej.HandMate.TTS.SpeechUtil;
 import com.chej.HandMate.Transmission.ComService;
 import com.chej.HandMate.U3D.u3dPlayer;
 import com.chej.library.ExpandingPagerFactory;
@@ -67,6 +68,8 @@ public class ExerciseActivity extends AppCompatActivity implements ExpandingFrag
     int mode;//存储menu点击值
 
     private IMyAidlInterface iMyAidlInterface;
+
+    private SpeechUtil speechUtil;
     //向下位机发送开始信号
     public void sendTrainAck(int mode) {
 
@@ -96,6 +99,8 @@ public class ExerciseActivity extends AppCompatActivity implements ExpandingFrag
         SysApplication.getInstance().addActivity(this);
         ButterKnife.bind(this);
         setupWindowAnimations();
+
+        speechUtil = new SpeechUtil(this);
 
         //获取系统时间
 
@@ -154,7 +159,7 @@ public class ExerciseActivity extends AppCompatActivity implements ExpandingFrag
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                speechUtil.speak("返回主界面");
                 Intent mintent = new Intent(ExerciseActivity.this, MainActivity.class);
                 startActivity(mintent);
                 finish();
@@ -166,6 +171,7 @@ public class ExerciseActivity extends AppCompatActivity implements ExpandingFrag
          */
         start.setOnClickListener(new Button.OnClickListener(){//创建监听
             public void onClick(View v) {
+                speechUtil.speak("开始训练");
                 Intent i = new Intent(ExerciseActivity.this, u3dPlayer.class);
                 switch (title.getText().toString()) {
                     case "手套操":
@@ -325,6 +331,7 @@ public class ExerciseActivity extends AppCompatActivity implements ExpandingFrag
         return false;
     }
     private void shutDownDialog() {
+        speechUtil.speak("确定要关机吗");
         MyCustomDialog.Builder builder=new MyCustomDialog.Builder(this);
         builder.setMessage("确定要关机吗？");
         builder.setTitle("提示");
@@ -349,6 +356,7 @@ public class ExerciseActivity extends AppCompatActivity implements ExpandingFrag
         builder.create().show();
     }
     private void restartDialog() {
+        speechUtil.speak("确定要重启吗");
         MyCustomDialog.Builder builder=new MyCustomDialog.Builder(this);
         builder.setMessage("确定要重启吗？");
         builder.setTitle("提示");

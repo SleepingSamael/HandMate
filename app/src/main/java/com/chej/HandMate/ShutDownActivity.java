@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.chej.HandMate.TTS.SpeechUtil;
 import com.chej.HandMate.Transmission.ComService;
 
 import java.util.Timer;
@@ -20,6 +21,7 @@ public class ShutDownActivity extends AppCompatActivity {
 
     private IMyAidlInterface iMyAidlInterface;
     private int sdid;
+    private SpeechUtil speechUtil;
 
     //下位机关机调用
     public static void shutDownStart(Context context) {
@@ -42,7 +44,8 @@ public class ShutDownActivity extends AppCompatActivity {
         bindService(myServiceIntent, serviceConnection,
                 Context.BIND_AUTO_CREATE);
 
-
+        speechUtil = new SpeechUtil(this);
+        speechUtil.speak("正在关机，请稍候");
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {

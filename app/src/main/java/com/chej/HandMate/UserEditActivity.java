@@ -1,6 +1,7 @@
 package com.chej.HandMate;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,8 +15,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chej.HandMate.Database.UserDataManager;
+import com.chej.HandMate.Model.MyCustomDialog;
 import com.chej.HandMate.Model.SysApplication;
 import com.chej.HandMate.Model.users.UserData;
+import com.chej.HandMate.TTS.SpeechUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -35,7 +38,7 @@ public class UserEditActivity extends AppCompatActivity {
     private TextView clock;
     private UserDataManager mUserDataManager;
 
-
+    private SpeechUtil speechUtil;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +58,7 @@ public class UserEditActivity extends AppCompatActivity {
 
         SysApplication.getInstance().addActivity(this);
 
+        speechUtil = new SpeechUtil(this);
         //获取系统时间
         SimpleDateFormat sDateFormat = new    SimpleDateFormat("yyyy-MM-dd  HH:mm");
         String  sysDate = sDateFormat.format(new java.util.Date());
@@ -145,9 +149,15 @@ public class UserEditActivity extends AppCompatActivity {
                             || age.getText().toString().trim().equals("")
                             || (male.isChecked() == false && female.isChecked() == false)) {
 
-                        new AlertDialog.Builder(UserEditActivity.this)
+                        speechUtil.speak("带*项目不能为空，请重新输入");
+                        new MyCustomDialog.Builder(UserEditActivity.this)
                                 .setTitle("警告").setMessage("带*项目不能为空，请重新输入！")
-                                .setPositiveButton("确定", null).show();
+                                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.dismiss();
+                                    }
+                                }).create().show();
                         return;
                     }
                     else
@@ -167,6 +177,7 @@ public class UserEditActivity extends AppCompatActivity {
                         mUserDataManager.updateUserData(userData);
                         Toast.makeText(getApplicationContext(), "信息已保存",
                                 Toast.LENGTH_SHORT).show();
+                        speechUtil.speak("信息已保存");
                         Intent i;
                         i = new Intent(UserEditActivity.this, UsersActivity.class);
                         startActivity(i);
@@ -180,9 +191,15 @@ public class UserEditActivity extends AppCompatActivity {
                             || age.getText().toString().trim().equals("")
                             || (male.isChecked() == false && female.isChecked() == false)) {
 
-                        new AlertDialog.Builder(UserEditActivity.this)
+                        speechUtil.speak("带*项目不能为空，请重新输入");
+                        new MyCustomDialog.Builder(UserEditActivity.this)
                                 .setTitle("警告").setMessage("带*项目不能为空，请重新输入！")
-                                .setPositiveButton("确定", null).show();
+                                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.dismiss();
+                                    }
+                                }).create().show();
                         return;
                     }
                     else
@@ -202,6 +219,7 @@ public class UserEditActivity extends AppCompatActivity {
                         mUserDataManager.insertUserData(userData);
                         Toast.makeText(getApplicationContext(), "信息已保存",
                                 Toast.LENGTH_SHORT).show();
+                            speechUtil.speak("信息已保存");
                         Intent i;
                         i = new Intent(UserEditActivity.this, UsersActivity.class);
                         startActivity(i);
