@@ -32,6 +32,7 @@ import com.chej.HandMate.Model.GalleryItems;
 import com.chej.HandMate.Model.MyCustomDialog;
 import com.chej.HandMate.Model.SysApplication;
 import com.chej.HandMate.Model.users.UserData;
+import com.chej.HandMate.TTS.SpeechUtil;
 import com.chej.HandMate.Transmission.ComService;
 import com.chej.library.ExpandingPagerFactory;
 import com.chej.library.fragments.ExpandingFragment;
@@ -63,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
 
     private IMyAidlInterface iMyAidlInterface;
 
+    private SpeechUtil speechUtil;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +76,8 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
         SysApplication.getInstance().addActivity(this);
 
 
+        speechUtil = new SpeechUtil(this);
+        speechUtil.speak("请选择用户");
         //获取系统时间
         SimpleDateFormat sDateFormat = new    SimpleDateFormat("yyyy-MM-dd  HH:mm");
         String  sysDate = sDateFormat.format(new java.util.Date());

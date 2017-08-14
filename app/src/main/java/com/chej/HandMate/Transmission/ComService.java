@@ -28,7 +28,7 @@ import java.util.TimerTask;
 
 
 //建立Android服务层，为下位机和UNITY提供通讯服务
-public class ComService extends Service {
+public  class ComService extends Service {
 
     private String WifiName ="chej_glove";
     private int updateNUM = 0;

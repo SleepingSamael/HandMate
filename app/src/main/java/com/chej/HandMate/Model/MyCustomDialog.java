@@ -1,3 +1,6 @@
+/*
+自定义dialog
+ */
 package com.chej.HandMate.Model;
 
 import android.app.Dialog;
