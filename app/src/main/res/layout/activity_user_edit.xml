@@ -402,7 +402,8 @@
             android:text="保存信息"
             android:textAlignment="center"
             android:textColor="@color/whitesmoke"
-            android:textSize="42px" />
+            android:textSize="42px"
+            android:stateListAnimator="@animator/selector_animators_102"/>
 
         <Button
             android:id="@+id/btn_quit"
@@ -414,7 +415,8 @@
             android:text="放弃修改"
             android:textAlignment="center"
             android:textColor="@color/gray"
-            android:textSize="42px" />
+            android:textSize="42px"
+            android:stateListAnimator="@animator/selector_animators_102"/>
 
 
     </RelativeLayout>

@@ -449,9 +449,6 @@ public class Connection {
                             fingerArray[3] = Integer.parseInt(str[5], 16) + "";
                             fingerArray[4] = Integer.parseInt(str[6], 16) + "";
                             Log.e("fingerArray", "-----------------------------------");
-                            for (int j = 0; j < str.length; j++) {
-                                Log.e("fingerArray", str[j]);
-                            }
                             for (int i = 0; i < 5; i++) {
                                 Log.e("fingerArray", "The Array Contains " + fingerArray[i]);
                             }
@@ -463,44 +460,49 @@ public class Connection {
                     }
                     if(str[0].equals("21"))//部件信息
                     {
-                        if(str[2].equals("00"))//舵机
+                        if (str.length == 15)
                         {
-                            switch (str[3])
+                            if (str[2].equals("00"))//舵机
                             {
-                                case "00"://当前位置
-                                    try {
-                                        //对舵机位置信息进行整理
-                                        componentArray[0]=Integer.parseInt(str[5],16)+"";
-                                        componentArray[1]=Integer.parseInt(str[7],16)+"";
-                                        componentArray[2]=Integer.parseInt(str[9],16)+"";
-                                        componentArray[3]=Integer.parseInt(str[11],16)+"";
-                                        componentArray[4]=Integer.parseInt(str[13],16)+"";
-                                        Log.e("componentArray", "-----------------------------------");
-                                        for (int i = 0; i < 5; i++) {
-                                            Log.e("componentArray", "The Array Contains " + componentArray[i]);
+
+                                switch (str[3]) {
+                                    case "00"://当前位置
+                                        try {
+                                            //对舵机位置信息进行整理
+                                            componentArray[0] = Integer.parseInt(str[5], 16) + "";
+                                            componentArray[1] = Integer.parseInt(str[7], 16) + "";
+                                            componentArray[2] = Integer.parseInt(str[9], 16) + "";
+                                            componentArray[3] = Integer.parseInt(str[11], 16) + "";
+                                            componentArray[4] = Integer.parseInt(str[13], 16) + "";
+                                            Log.e("componentArray", "-----------------------------------");
+                                            for (int i = 0; i < 5; i++) {
+                                                Log.e("componentArray", "The Array Contains " + componentArray[i]);
+                                            }
+                                            Log.e("componentArray", "-----------------------------------");
+                                        } catch (Exception e) {
+                                            Log.e("componentArray", String.valueOf(e));
                                         }
-                                        Log.e("componentArray", "-----------------------------------");
-                                    }catch (Exception e){
-                                        Log.e("componentArray", String.valueOf(e));
-                                    }
-                                    break;
-                                case "01"://当前速度
-                                    break;
-                                case "02"://当前负载
-                                    break;
-                                case "03"://舵机错误状态
-                                    motorErrorHandler("1",Integer.parseInt(str[5],16));
-                                    motorErrorHandler("2",Integer.parseInt(str[7],16));
-                                    motorErrorHandler("3",Integer.parseInt(str[9],16));
-                                    motorErrorHandler("4",Integer.parseInt(str[11],16));
-                                    motorErrorHandler("5",Integer.parseInt(str[13],16));
-                                    break;
-                                case "04"://当前温度
-                                    break;
-                                case "05"://当前电压
-                                    break;
+                                        break;
+                                    case "01"://当前速度
+                                        break;
+                                    case "02"://当前负载
+                                        break;
+                                    case "03"://舵机错误状态
+                                        motorErrorHandler("1", Integer.parseInt(str[5], 16));
+                                        motorErrorHandler("2", Integer.parseInt(str[7], 16));
+                                        motorErrorHandler("3", Integer.parseInt(str[9], 16));
+                                        motorErrorHandler("4", Integer.parseInt(str[11], 16));
+                                        motorErrorHandler("5", Integer.parseInt(str[13], 16));
+                                        break;
+                                    case "04"://当前温度
+                                        break;
+                                    case "05"://当前电压
+                                        break;
+                                    default:
+                                        break;
+                                }
                             }
-                        }
+                    }
 
                     }
                 }

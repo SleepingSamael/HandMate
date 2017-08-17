@@ -154,6 +154,7 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
 
     //u3d调取舵机状态
     public String[] getComponentStatus(){
+        Log.e("U3d","getComponentStatus");
         if (iMyAidlInterface!=null){
             try {
                 return iMyAidlInterface.getComponentStatus();
@@ -220,10 +221,15 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
     //返回游戏分数
     public void sendToAndroidGameResult(int result){
 
-        Log.e("u3dPlayer","result: "+"   "+ result);
+        Log.e("u3dPlayer","sendToAndroidGameResult "+"   "+ result);
         mhistoryDataManager.updateUserData(hid,result);//游戏分数存入数据库
         score=result;
 
+    }
+    //呼吸灯
+    public void sendToAndroidBreath(int breath){
+
+        Log.e("u3dPlayer","sendToAndroidBreath");
     }
     public void sendToAndroidEvaluateResult( float[] result) {
 
@@ -247,6 +253,7 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
     //
     public String getGloveMode(){
         String str=handID+" "+gloveID;//id1:患侧手左右0左1右id2：主从手或评估手0主从1评估
+        Log.e("u3d","getGloveMode");
         return str;
     }
 
@@ -318,6 +325,7 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
             case 4:sendTrainAckoff(4);//游戏
                 break;
         }
+        senddGloveSelect(0);
         unbindService(serviceConnection);
         finish();
        /* runOnUiThread(new Runnable() {
@@ -465,23 +473,25 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
         builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                    //游戏返回分数
-                    if(scenenum/1000==4){
-                        getScore();
-                    }
-                    makePauseUnity();
-                    if (buttonType.equals("1"))
-                    {
-                        sendTrainMode(1);
-                        MasterSlaveActivity.MSActionStart(UserData.getContext());
-                        Log.e("ChangeMode", "主从模式");
-                    }
-                    else if(buttonType.equals("2"))
-                    {
-                        sendTrainMode(2);
-                        ExerciseActivity.ExerciseActionStart(UserData.getContext());//切换手套操主从模式
-                        Log.e("ChangeMode", "手套操");
-                    }
+                senddGloveSelect(0);
+                //游戏返回分数
+                if(scenenum/1000==4){
+                    getScore();
+                }
+                makePauseUnity();
+                if (buttonType.equals("1"))
+                {
+                    sendTrainMode(1);
+                    MasterSlaveActivity.MSActionStart(UserData.getContext());
+                    Log.e("ChangeMode", "主从模式");
+                }
+                else if(buttonType.equals("2"))
+                {
+                    sendTrainMode(2);
+                    ExerciseActivity.ExerciseActionStart(UserData.getContext());//切换手套操主从模式
+                    Log.e("ChangeMode", "手套操");
+                }
+
             }
         });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -504,5 +514,16 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
             }
         }
 
+    }
+    //通知下位机开始发手套数据  0无手套数据 1 左手套数据 2 右手套数据
+    //退出时发送0以结束数据传输
+    public void senddGloveSelect(int gloveNum){
+        if (iMyAidlInterface!=null){
+            try {
+                iMyAidlInterface.senddGloveSelect(gloveNum);
+            } catch (RemoteException e) {
+                Log.e("sendTrainMode",e.toString());
+            }
+        }
     }
 }

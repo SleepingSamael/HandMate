@@ -68,7 +68,8 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_below="@id/show_time"
-        android:src="@drawable/point2" />
+        android:src="@drawable/point2"
+        android:stateListAnimator="@animator/selector_animators_102"/>
     <View
         android:layout_toRightOf="@+id/image"
         android:id="@+id/line_highlight2"

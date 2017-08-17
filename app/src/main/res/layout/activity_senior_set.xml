@@ -20,6 +20,7 @@
         android:layout_marginLeft="70dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="1dp"
+        android:stateListAnimator="@animator/selector_animators_12"
         >
 
         <ImageView
@@ -101,7 +102,8 @@
         android:layout_marginRight="70dp"
         android:layout_marginLeft="70dp"
         app:cardCornerRadius="10dp"
-        app:cardElevation="1dp">
+        app:cardElevation="1dp"
+        android:stateListAnimator="@animator/selector_animators_102">
         <ImageView
             android:layout_width="5dp"
             android:layout_height="108dp"
@@ -147,7 +149,8 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
             android:id="@+id/user"
-            android:background="@drawable/user" />
+            android:background="@drawable/user"
+            android:stateListAnimator="@animator/selector_animators_12"/>
         <TextView
             android:id="@+id/tv_user"
             android:layout_width="wrap_content"
@@ -159,7 +162,8 @@
             android:layout_toRightOf="@+id/user"
             android:text="用户1"
             android:textColor="@color/darkgrey"
-            android:textSize="40px" />
+            android:textSize="40px"
+            />
 
         <ImageView
             android:id="@+id/home"
@@ -168,7 +172,8 @@
             android:layout_centerHorizontal="true"
             android:layout_centerInParent="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/logo" />
+            android:background="@drawable/btn_home"
+            android:stateListAnimator="@animator/selector_animators_102"/>
         <Button
             android:id="@+id/set"
             android:layout_width="70dp"
@@ -177,7 +182,8 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="30dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/setting" />
+            android:background="@drawable/setting"
+            android:stateListAnimator="@animator/selector_animators_12"/>
 
     </RelativeLayout>
 

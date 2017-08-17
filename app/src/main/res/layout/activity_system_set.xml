@@ -227,7 +227,8 @@
                     android:layout_width="0dp"
                     android:layout_height="82dp"
                     android:layout_weight="2"
-                    app:srcCompat="@drawable/arrowicon" />
+                    app:srcCompat="@drawable/arrowicon"
+                    android:stateListAnimator="@animator/selector_animators_12"/>
             </TableRow>
 
         </TableLayout>
@@ -251,7 +252,8 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
             android:id="@+id/user"
-            android:background="@drawable/user" />
+            android:background="@drawable/user"
+            android:stateListAnimator="@animator/selector_animators_12"/>
         <TextView
             android:id="@+id/tv_user"
             android:layout_width="wrap_content"
@@ -272,7 +274,8 @@
             android:layout_centerHorizontal="true"
             android:layout_centerInParent="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/logo" />
+            android:background="@drawable/btn_home"
+            android:stateListAnimator="@animator/selector_animators_102"/>
         <Button
             android:id="@+id/set"
             android:layout_width="70dp"
@@ -281,7 +284,8 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="30dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/setting" />
+            android:background="@drawable/setting"
+            android:stateListAnimator="@animator/selector_animators_12"/>
 
     </RelativeLayout>
 

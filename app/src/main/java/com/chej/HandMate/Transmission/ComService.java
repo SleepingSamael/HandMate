@@ -326,7 +326,7 @@ public  class ComService extends Service {
 
                 } else {
 
-                    //dialogOne();
+                    dialogOne();
                     sendMsgToMain("CHECK_WIFI_STATUS");
 
                 }

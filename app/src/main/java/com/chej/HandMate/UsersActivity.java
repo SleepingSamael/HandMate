@@ -12,6 +12,12 @@ import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
+import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
@@ -106,7 +112,6 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
          * 切换用户按钮
          */
         user.setOnClickListener(this);
-
 
         if (mUserDataManager == null) {
             mUserDataManager = new UserDataManager(this);
@@ -389,11 +394,35 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
     }
     //刷新显示列表项
     private void showlist(Cursor cursor){
+        users_gv.setLayoutAnimation(getAnimationController());
         SimpleCursorAdapter adapter=new SimpleCursorAdapter(this,R.layout.user_list_item,cursor,
                 new String[]{UsersConstant._ID, UsersConstant.NAME,UsersConstant.SEX,UsersConstant.DATE,UsersConstant.AGE},
                 new int[]{R.id.tv_id,R.id.tv_name,R.id.tv_sex,R.id.tv_indata,R.id.tv_age},
                 SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
         users_gv.setAdapter(adapter);
+    }
+    /**
+     * Layout动画
+     *
+     * @return
+     */
+    protected LayoutAnimationController getAnimationController() {
+        int duration=300;
+        AnimationSet set = new AnimationSet(true);
+
+        Animation animation = new AlphaAnimation(0.0f, 1.0f);
+        animation.setDuration(duration);
+        set.addAnimation(animation);
+
+        animation = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0.0f,
+                Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF,
+                -1.0f, Animation.RELATIVE_TO_SELF, 0.0f);
+        animation.setDuration(duration);
+        set.addAnimation(animation);
+
+        LayoutAnimationController controller = new LayoutAnimationController(set, 0.5f);
+        controller.setOrder(LayoutAnimationController.ORDER_NORMAL);
+        return controller;
     }
 
     protected void deleteDialog() {
@@ -560,6 +589,7 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
         Collections.sort(SourceDateList, pinyinComparator);
         adapter = new SortAdapter(this, SourceDateList);
         users_gv.setAdapter(adapter);
+        users_gv.setLayoutAnimation(getAnimationController());
 
     }
     /**

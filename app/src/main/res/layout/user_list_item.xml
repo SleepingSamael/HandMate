@@ -9,7 +9,8 @@
     android:layout_alignParentTop="true"
     app:cardCornerRadius="10dp"
     app:cardElevation="1dp"
-    android:background="@drawable/card">
+    android:background="@drawable/card"
+    android:stateListAnimator="@animator/selector_animators_102">
 <LinearLayout
     android:layout_width="432dp"
     android:layout_height="212dp"
