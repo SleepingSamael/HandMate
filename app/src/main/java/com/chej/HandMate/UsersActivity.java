@@ -4,14 +4,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.os.Bundle;
 
 import android.text.TextUtils;
+import android.util.TypedValue;
 import android.view.ContextMenu;
+import android.view.Gravity;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
@@ -21,11 +26,12 @@ import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.SearchView;
 
 import com.chej.HandMate.Database.UserDataManager;
 import com.chej.HandMate.Model.MyCustomDialog;
@@ -47,7 +53,7 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
     private GridView users_gv;
     private  Button user;
     private UserDataManager mUserDataManager;
-    private android.widget.SearchView searchView;
+    private SearchView  searchView;
     private SortAdapter adapter;
     private Button sortByID;
     private Button sortBySex;
@@ -75,7 +81,7 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_users);
         users_gv=(GridView) findViewById(R.id.users_lv);
         user=(Button)findViewById(R.id.user);
-        searchView=(android.widget.SearchView) findViewById(R.id.userSearchview);
+        searchView=(SearchView) findViewById(R.id.userSearchview);
         sortBySex=(Button) findViewById(R.id.sortBySex);
         sortByID=(Button) findViewById(R.id.sortByID);
         sortByDate=(Button) findViewById(R.id.sortByTime);
@@ -137,6 +143,8 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
 
         //3.将适配器的数据加载到控件
         users_gv.setAdapter(adapter);
+        //加载动画
+        users_gv.setLayoutAnimation(getAnimationController());
 
         users_gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -305,10 +313,38 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
 
         });
 
-        //根据输入框输入值的改变来过滤搜索
 
+        /**
+         * 修改Searchview字体大小颜色，同时需要重新布局使Text居中
+         */
+        // 根据id-search_src_text获取TextView
+        SearchView.SearchAutoComplete searchText = (SearchView.SearchAutoComplete) searchView.findViewById(R.id.search_src_text);
+        //修改字体大小
+        searchText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
+        //重新布局，使其居中
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lp.gravity = Gravity.CENTER_VERTICAL;
+        searchText.setLayoutParams(lp);
+        //修改字体颜色
+        searchText.setTextColor(ContextCompat.getColor(this, R.color.gray));
+        searchText.setHintTextColor(ContextCompat.getColor(this, R.color.gray));
+        /**
+         * 修改SearchView左边图标
+         */
+        // 根据id-search_mag_icon获取ImageView
+        ImageView searchButton = (ImageView) searchView.findViewById(R.id.search_mag_icon);
+        //重新设置ImageView的宽高
+        LinearLayout.LayoutParams lpimg = new LinearLayout.LayoutParams(45,45);
+        lpimg.gravity = Gravity.CENTER;
+        lpimg.leftMargin=10;
+        searchButton.setLayoutParams(lpimg);
+        searchButton.setBackgroundResource(R.drawable.search);
+        searchButton.setImageResource(R.drawable.searchblank);
+        /**
+         * 根据输入框输入值的改变来过滤搜索
+         */
         // 设置搜索文本监听
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        searchView.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
             // 当点击搜索按钮时触发该方法
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -328,6 +364,7 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
                 return false;
             }
         });
+
 
         //添加用户
         add.setOnClickListener(new Button.OnClickListener(){

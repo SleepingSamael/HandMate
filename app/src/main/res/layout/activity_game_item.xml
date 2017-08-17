@@ -77,10 +77,10 @@
                         android:layout_gravity="right"
                         android:background="@drawable/startbutton"
                         android:elevation="6dp"
+                        android:stateListAnimator="@animator/selector_animators_102"
                         android:text="开始"
                         android:textColor="@color/white"
-                        android:textSize="42px"
-                        android:stateListAnimator="@animator/selector_animators_102"/>
+                        android:textSize="42px" />
 
 
                 </LinearLayout>

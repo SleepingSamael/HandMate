@@ -26,6 +26,7 @@ import java.util.Date;
 import com.chej.HandMate.ExerciseActivity;
 import com.chej.HandMate.IMyAidlInterface;
 import com.chej.HandMate.MasterSlaveActivity;
+import com.chej.HandMate.Model.MyCustomDialog;
 import com.chej.HandMate.Model.users.UserData;
 import com.chej.HandMate.ShutDownActivity;
 
@@ -67,7 +68,7 @@ public class Connection {
     public byte[] messageToDevice;//向下位机发送的角度报文
     public String[] fingerArray = {"0","0","0","0","0"};
     public String[] componentArray = {"0","0","0","0","0"};
-    public String[] configArray ={"1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"};
+    public String[] configArray ={"1","1","1","1","1","1","1","1","1","1","180","180","180","180","180"};
     String strResult=null;//接收报文十进制
     String hexResult=null;//接收报文十六进制
 
@@ -717,7 +718,7 @@ public class Connection {
     }
 
     protected void dialogShutDown() {
-        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(UserData.getContext());
+        MyCustomDialog.Builder builder = new MyCustomDialog.Builder(UserData.getContext());
         builder.setMessage("确定要关机吗？");
         builder.setTitle("提示");
         builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
@@ -750,7 +751,7 @@ public class Connection {
     }
     //报错信息
     protected void dialogError(String errorTitle,String errorMessage) {
-        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(UserData.getContext());
+        MyCustomDialog.Builder builder = new MyCustomDialog.Builder(UserData.getContext());
         builder.setTitle(errorTitle);
         builder.setMessage(errorMessage);
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
