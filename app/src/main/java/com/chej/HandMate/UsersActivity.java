@@ -46,6 +46,7 @@ import com.chej.HandMate.TTS.SpeechUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -198,14 +199,15 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
                 if(!flag)
                 {
                     //升序
-                    PinYinViews();
+                    PinYinViews(true);
                     sortByName.setCompoundDrawables(null,null,upDrawable,null);
 
                 }
                 else
                 {
                     //降序
-                    showlist(mUserDataManager.orderByName());
+                    PinYinViews(false);
+                    //showlist(mUserDataManager.orderByName());
                     sortByName.setCompoundDrawables(null,null,downDrawable,null);
                 }
                 flag=!flag;
@@ -356,9 +358,9 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
                 if (!TextUtils.isEmpty(newText)){
                     users_gv.setFilterText(newText);
                     //当输入框里面的值为空，更新为原来的列表，否则为过滤数据列表
-                   filterData(newText);
+                    filterData(newText);
                 }else{
-                   // users_gv.clearTextFilter();
+                    // users_gv.clearTextFilter();
                     showlist(mUserDataManager.fetchAllUserDatas());//刷新列表
                 }
                 return false;
@@ -571,9 +573,8 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
         return false;
     }
 
-
     //按拼音排序
-    private void PinYinViews() {
+    private void PinYinViews(boolean mode) {//true 升序 false降序
 
         //实例化汉字转拼音类
         characterParser = CharacterParser.getInstance();
@@ -617,17 +618,19 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
             allDate[position] = str3;
             allSex[position] = str4;
             allAge[position] = str5;
-
         }
 
-        SourceDateList = filledData(allName,allID,allDate,allSex,allAge);
+        SourceDateList = filledData(allName, allID, allDate, allSex, allAge);
 
         // 根据a-z进行排序源数据
-        Collections.sort(SourceDateList, pinyinComparator);
+        if(mode) {
+            Collections.sort(SourceDateList, pinyinComparator);
+        }else {
+            Collections.sort(SourceDateList,Collections.reverseOrder(pinyinComparator));//逆序排列
+        }
         adapter = new SortAdapter(this, SourceDateList);
         users_gv.setAdapter(adapter);
         users_gv.setLayoutAnimation(getAnimationController());
-
     }
     /**
      * 为ListView填充数据

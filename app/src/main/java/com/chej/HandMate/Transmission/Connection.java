@@ -436,27 +436,29 @@ public class Connection {
                     }
                     if (str[0].equals("10"))//下位机向上位机发送角度信息
                     {
-                        try {
-                            Log.e("Receiver", "ID=    " + str[0]);
-                            String[] str2 = msg.getData().get("msg").toString().split("\\ ");
-                            //手指序号
-                            fingerNumber = Integer.parseInt(str2[2]);
-                            //手指运动角度
-                            angleFromDownStream = Float.parseFloat(str2[5]);
-                            //对手指信息进行整理
-                            fingerArray[0] = Integer.parseInt(str[2], 16) + "";
-                            fingerArray[1] = Integer.parseInt(str[3], 16) + "";
-                            fingerArray[2] = Integer.parseInt(str[4], 16) + "";
-                            fingerArray[3] = Integer.parseInt(str[5], 16) + "";
-                            fingerArray[4] = Integer.parseInt(str[6], 16) + "";
-                            Log.e("fingerArray", "-----------------------------------");
-                            for (int i = 0; i < 5; i++) {
-                                Log.e("fingerArray", "The Array Contains " + fingerArray[i]);
-                            }
-                            Log.e("fingerArray", "-----------------------------------");
+                        if(str.length==8) {
+                            try {
+                                Log.e("Receiver", "ID=    " + str[0]);
+                                String[] str2 = msg.getData().get("msg").toString().split("\\ ");
+                                //手指序号
+                                fingerNumber = Integer.parseInt(str2[2]);
+                                //手指运动角度
+                                angleFromDownStream = Float.parseFloat(str2[5]);
+                                //对手指信息进行整理
+                                fingerArray[0] = Integer.parseInt(str[2], 16) + "";
+                                fingerArray[1] = Integer.parseInt(str[3], 16) + "";
+                                fingerArray[2] = Integer.parseInt(str[4], 16) + "";
+                                fingerArray[3] = Integer.parseInt(str[5], 16) + "";
+                                fingerArray[4] = Integer.parseInt(str[6], 16) + "";
+                                Log.e("fingerArray", "-----------------------------------");
+                                for (int i = 0; i < 5; i++) {
+                                    Log.e("fingerArray", "The Array Contains " + fingerArray[i]);
+                                }
+                                Log.e("fingerArray", "-----------------------------------");
 
-                        } catch (Exception e){
-                            Log.e("Connection", String.valueOf(e));
+                            } catch (Exception e) {
+                                Log.e("Connection", String.valueOf(e));
+                            }
                         }
                     }
                     if(str[0].equals("21"))//部件信息
@@ -735,6 +737,7 @@ public class Connection {
                     }
                 }
                 ShutDownActivity.shutDownStart(UserData.getContext());
+                dialog.dismiss();
             }
         });
         builder.setNegativeButton("否", new DialogInterface.OnClickListener() {
