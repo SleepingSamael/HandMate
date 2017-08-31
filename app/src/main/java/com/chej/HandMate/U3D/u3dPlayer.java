@@ -322,7 +322,7 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
                 break;
             case 3:sendTrainAckoff(3);//评估
                 break;
-            case 4:sendTrainAckoff(4);//游戏
+            case 4:sendTrainAckoff(0);//游戏
                 break;
         }
         senddGloveSelect(0);

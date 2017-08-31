@@ -80,11 +80,13 @@ public class Hardwarectivity extends AppCompatActivity implements View.OnClickLi
             }
         });
         //进入管理员界面
-        logo_to_admin.setOnClickListener(new View.OnClickListener() {//创建监听
-            public void onClick(View v) {
+        logo_to_admin.setOnLongClickListener(new View.OnLongClickListener(){
+            @Override
+            public boolean onLongClick(View v) {
                 Intent i;
                 i = new Intent(Hardwarectivity.this, AdminActivity.class);
                 startActivity(i);
+                return false;
             }
         });
 

@@ -4,6 +4,7 @@ import android.app.ActivityManager;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -68,10 +69,29 @@ public class Connection {
     public byte[] messageToDevice;//向下位机发送的角度报文
     public String[] fingerArray = {"0","0","0","0","0"};
     public String[] componentArray = {"0","0","0","0","0"};
-    public String[] configArray ={"1","1","1","1","1","1","1","1","1","1","180","180","180","180","180"};
     String strResult=null;//接收报文十进制
     String hexResult=null;//接收报文十六进制
 
+    /**
+     * 获取配置信息
+     */
+    SharedPreferences userSettings= UserData.getContext().getSharedPreferences("setting", 0);
+    public String[] configArray={
+            userSettings.getString("thumbFlat","10"),
+            userSettings.getString("foreFlat","10"),
+            userSettings.getString("middleFlat","10"),
+            userSettings.getString("ringFlat","10"),
+            userSettings.getString("littleFlat","10"),
+            userSettings.getString("thumbMiddle","110"),
+            userSettings.getString("foreMiddle","110"),
+            userSettings.getString("middleMiddle","110"),
+            userSettings.getString("ringMiddle","110"),
+            userSettings.getString("littleMiddle","110"),
+            userSettings.getString("thumbFist","120"),
+            userSettings.getString("foreFist","140"),
+            userSettings.getString("middleFist","140"),
+            userSettings.getString("ringFist","140"),
+            userSettings.getString("littleFist","120")};
 
     private IMyAidlInterface iMyAidlInterface;
 
@@ -348,7 +368,6 @@ public class Connection {
                      */
                     if (str[0].equals("03"))//心跳检测
                     {
-                        Log.e("Receiver", "ID=    " + str[0]);
                         beatTime=refFormatNowDate();
                         heartBeat=true;
                         sendData(rHeartBeat());
@@ -411,28 +430,9 @@ public class Connection {
                             Log.e("PowerInfo", String.valueOf(e));
                         }
                     }
-                    if (str[0].equals("fc"))//配置文件
+                    if(str[0].equals("25"))//GCU向AWS发送配置报文请求。
                     {
-                        Log.e("Receiver", "ID=    " + str[0]);
-                        configArray[0]=Integer.parseInt(str[2],16)+"";
-                        configArray[1]=Integer.parseInt(str[3],16)+"";
-                        configArray[2]=Integer.parseInt(str[4],16)+"";
-                        configArray[3]=Integer.parseInt(str[5],16)+"";
-                        configArray[4]=Integer.parseInt(str[6],16)+"";
-                        configArray[5]=Integer.parseInt(str[7],16)+"";
-                        configArray[6]=Integer.parseInt(str[8],16)+"";
-                        configArray[7]=Integer.parseInt(str[9],16)+"";
-                        configArray[8]=Integer.parseInt(str[10],16)+"";
-                        configArray[9]=Integer.parseInt(str[11],16)+"";
-                        configArray[10]=Integer.parseInt(str[12],16)+"";
-                        configArray[11]=Integer.parseInt(str[13],16)+"";
-                        configArray[12]=Integer.parseInt(str[14],16)+"";
-                        configArray[13]=Integer.parseInt(str[15],16)+"";
-                        configArray[14]=Integer.parseInt(str[16],16)+"";
-                        //  System.arraycopy(str, 2, configArray, 0, 15);
-                        for (int i = 0; i < 15; i++) {
-                            Log.e("FC", "The Array Contains " + configArray[i]);
-                        }
+                        sendData(dConfigData());
                     }
                     if (str[0].equals("10"))//下位机向上位机发送角度信息
                     {
@@ -506,7 +506,6 @@ public class Connection {
                                 }
                             }
                     }
-
                     }
                 }
             }
@@ -807,16 +806,6 @@ public class Connection {
         b[4]=(byte) ~(b[2]+b[3]);
         return b;
     }
-    //AWS向GCU发送配置报文请求
-    public byte[] rConfigData(){
-        byte[]b=new byte[5];
-        b[0]=(byte)0xff;
-        b[1]=(byte)0xff;
-        b[2]=(byte)0x25;//ID
-        b[3]=(byte)0x05;//长度
-        b[4]=(byte) ~(b[2]+b[3]);
-        return b;
-    }
     //向GCU请求当前网络状态
     public byte[] rNetStatus()
     {
@@ -845,7 +834,48 @@ public class Connection {
         b[4]=(byte)gloveNum;//当前手套选择: 0x00 无手套选择 0x01 左手套选择 0x02 右手套选择
         b[5]=(byte) ~(b[2]+b[3]+b[4]);
         return b;
-
+    }
+    /**
+     * 向下位机发送配置信息
+     * @return 报文
+     */
+    public byte[] dConfigData()
+    {
+        byte[] bytes = new byte[30];
+        bytes[0] = (byte) 0xff;
+        bytes[1] = (byte) 0xff;
+        bytes[2] = (byte) 0x26;//ID
+        bytes[3] = (byte) 0x30;//长度
+        bytes[4] = (byte)Integer.parseInt(userSettings.getString("thumbFlat","10"));
+        bytes[5] = (byte)Integer.parseInt(userSettings.getString("foreFlat","10"));
+        bytes[6] = (byte)Integer.parseInt(userSettings.getString("middleFlat","10"));
+        bytes[7] = (byte)Integer.parseInt(userSettings.getString("ringFlat","10"));
+        bytes[8] = (byte)Integer.parseInt(userSettings.getString("littleFlat","10"));
+        bytes[9] = (byte)Integer.parseInt(userSettings.getString("thumbMiddle","110"));
+        bytes[10] = (byte)Integer.parseInt(userSettings.getString("foreMiddle","110"));
+        bytes[11] = (byte)Integer.parseInt(userSettings.getString("middleMiddle","110"));
+        bytes[12] = (byte)Integer.parseInt(userSettings.getString("ringMiddle","110"));
+        bytes[13] = (byte)Integer.parseInt(userSettings.getString("littleMiddle","110"));
+        bytes[14] = (byte)Integer.parseInt(userSettings.getString("thumbFist","120"));
+        bytes[15] = (byte)Integer.parseInt(userSettings.getString("foreFist","140"));
+        bytes[16] = (byte)Integer.parseInt(userSettings.getString("middleFist","140"));
+        bytes[17] = (byte)Integer.parseInt(userSettings.getString("ringFist","140"));
+        bytes[18] = (byte)Integer.parseInt(userSettings.getString("littleFist","120"));
+        bytes[19] = (byte)Integer.parseInt(userSettings.getString("thumbStretch","50"));
+        bytes[20] = (byte)Integer.parseInt(userSettings.getString("foreStretch","50"));
+        bytes[21] = (byte)Integer.parseInt(userSettings.getString("middleStretch","50"));
+        bytes[22] = (byte)Integer.parseInt(userSettings.getString("ringStretch","50"));
+        bytes[23] = (byte)Integer.parseInt(userSettings.getString("littleStretch","50"));
+        bytes[24] = (byte)Integer.parseInt(userSettings.getString("thumbMove","114"));
+        bytes[25] = (byte)Integer.parseInt(userSettings.getString("foreMove","114"));
+        bytes[26] = (byte)Integer.parseInt(userSettings.getString("middleMove","114"));
+        bytes[27] = (byte)Integer.parseInt(userSettings.getString("ringMove","114"));
+        bytes[28] = (byte)Integer.parseInt(userSettings.getString("littleMove","114"));
+        bytes[29] = (byte) ~(bytes[2] + bytes[3] + bytes[4] + bytes[5] + bytes[6] + bytes[7]
+                + bytes[8] + bytes[9] + bytes[10] + bytes[11] + bytes[12] + bytes[13] + bytes[14]
+                + bytes[15] + bytes[16] + bytes[17] + bytes[18] + bytes[19] + bytes[20] + bytes[21]
+                + bytes[22] + bytes[23] + bytes[24] + bytes[25] + bytes[26] + bytes[27] + bytes[28]);
+        return bytes;
     }
 
 }

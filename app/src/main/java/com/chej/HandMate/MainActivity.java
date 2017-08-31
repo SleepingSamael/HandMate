@@ -86,7 +86,6 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
         final String stime=arr[1];
         clock.setText(sdate+"   "+stime);
 
-        sendrConfigData();
 
         Intent myServiceIntent = new Intent(MainActivity.this, ComService.class);
         bindService(myServiceIntent, serviceConnection,
@@ -244,7 +243,6 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
 
     @Override
     public void onExpandingClick(View v) {
-        sendrConfigData();
         GalleryItems galleryItems = generateTravelList().get(viewPager.getCurrentItem());
         Bundle mbundle = new Bundle();//存menu点击值
         if (galleryItems.getName() == "主从模式") {
@@ -291,16 +289,6 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
                 iMyAidlInterface.sendTrainMode(mode);
             } catch (RemoteException e) {
                 Log.e("sendTrainMode",e.toString());
-            }
-        }
-    }
-    //请求配置信息
-    public void sendrConfigData(){
-        if (iMyAidlInterface!=null){
-            try {
-                iMyAidlInterface.sendrConfigData();
-            } catch (RemoteException e) {
-                Log.e("sendrConfigData",e.toString());
             }
         }
     }

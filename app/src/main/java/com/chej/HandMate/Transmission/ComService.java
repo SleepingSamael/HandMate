@@ -4,6 +4,7 @@ import com.chej.HandMate.Entity;
 import com.chej.HandMate.ICallBack;
 import com.chej.HandMate.IMyAidlInterface;
 import com.chej.HandMate.Model.MyCustomDialog;
+import com.chej.HandMate.Model.users.UserData;
 import com.chej.HandMate.U3D.u3dPlayer;
 
 import android.app.Dialog;
@@ -13,6 +14,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.IBinder;
@@ -47,6 +49,7 @@ public  class ComService extends Service {
     TimerTask heartBeatTimerTask;
     Timer timer2;
     TimerTask timer2task;
+
 
     //初始化connection对象，WIFI连接状态
     public ComService() {
@@ -150,10 +153,6 @@ public  class ComService extends Service {
             connection.sendData((connection.dGloveSelect(gloveNum)));
         }
         @Override
-        public void sendrConfigData(){//请求配置信息
-            connection.sendData(connection.rConfigData());
-        }
-        @Override
         public void sendTrainMode(int mode) {//向下位机发送训练模式
             //TrainMode报文
             byte[] bytes = new byte[6];
@@ -200,6 +199,12 @@ public  class ComService extends Service {
             bytes[5] = (byte) ~(bytes[2] + bytes[3] + bytes[4] );
             connection.sendData(bytes);
             Log.e("sendShutdown", "send");
+        }
+        @Override
+        public void sendConfigData(){
+            //收到GCU发送的rConfigData报文时，需要把配置数据发送给GCU。
+            connection.sendData(connection.dConfigData());
+            Log.e("sendConfigData", "send");
         }
 
     };
@@ -377,23 +382,7 @@ public  class ComService extends Service {
             case MACHINECONNECTED:
                 connection.sendData(connection.rConnectGCU());
                 //进入连接成功状态
-                connection.sendData(connection.rConfigData());//请求配置信息
-                boolean flag=false;
-                for(int i=0;i<connection.configArray.length;i++)
-                {
-                    if (!connection.configArray[i].equals("0"))
-                    {
-                        flag=true;
-                        break;
-                    }
-                    else {
-                        flag=false;
-                    }
-                }
-                if (!flag)
-                {
-                    dialogTwo();
-                }
+
                 Log.e("ComService", "I'm Connected in MACHINECONNECTED");
                 Intent intent = new Intent("com.example.broadcasttest.LOCAL_BROADCAST");
                 intent.putExtra("Connection","check_heart_beat");
@@ -531,43 +520,5 @@ public  class ComService extends Service {
         dialog.show();
     }
 
-    public void dialogTwo(){//弹出第一个对话框
-        MyCustomDialog.Builder builder = new MyCustomDialog.Builder(getApplicationContext());
-        builder.setMessage("配置未获取");
-        builder.setTitle("提示");
-        builder.setPositiveButton("重新获取", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                connection.sendData(connection.rConfigData());//请求配置信息
-                boolean flag=false;
-                for(int i=0;i<connection.configArray.length;i++)
-                {
-                    if (!connection.configArray[i].equals("0"))
-                    {
-                        flag=true;
-                        break;
-                    }
-                    else {
-                        flag=false;
-                    }
-                }
-                if (!flag)
-                {
-                    dialogTwo();
-                }
-                dialog.dismiss();
-            }
-        });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-
-            }
-        });
-        Dialog dialog=builder.create();
-        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
-        dialog.show();
-    }
 
 }
