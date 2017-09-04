@@ -15,19 +15,24 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.chej.HandMate.Model.MyCustomDialog;
 import com.chej.HandMate.Model.SysApplication;
 import com.chej.HandMate.Transmission.ComService;
+import com.chej.HandMate.Transmission.Connection;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AdminActivity extends AppCompatActivity {
+    public Connection connection;
+
     private EditText thumbFlat_et;//拇指
     private EditText thumbMiddle_et;
     private EditText thumbFist_et;
@@ -55,6 +60,7 @@ public class AdminActivity extends AppCompatActivity {
     private EditText littleFingerMove_et;
     private Button quit;
     private Button save;
+    private ToggleButton glove;
 
     private IMyAidlInterface iMyAidlInterface;
     @Override
@@ -68,6 +74,7 @@ public class AdminActivity extends AppCompatActivity {
         bindService(myServiceIntent, serviceConnection,
                 Context.BIND_AUTO_CREATE);
 
+        sendcSVCMode(4,1);
         TabHost th=(TabHost)findViewById(R.id.tabhost);
         th.setup();            //初始化TabHost容器
 
@@ -77,6 +84,7 @@ public class AdminActivity extends AppCompatActivity {
         th.addTab(th.newTabSpec("tab3").setIndicator("标签3",null).setContent(R.id.tab3));
         //上面的null可以为getResources().getDrawable(R.drawable.图片名)设置图标
 
+        glove=(ToggleButton)findViewById(R.id.glove_toggleButton) ;
         quit=(Button)findViewById(R.id.btn_quit) ;
         save=(Button)findViewById(R.id.btn_save) ;
         thumbFlat_et=(EditText)findViewById(R.id.thumbFlat);
@@ -132,10 +140,15 @@ public class AdminActivity extends AppCompatActivity {
         middleFingerMove_et.setText(userSettings.getString("middleMove","114"));
         ringFingerMove_et.setText(userSettings.getString("ringMove","114"));
         littleFingerMove_et.setText(userSettings.getString("littleMove","114"));
-
+        if(userSettings.getString("glove","右").equals("右")){
+            glove.setChecked(false);
+        }else{
+            glove.setChecked(true);
+        }
 
         quit.setOnClickListener(new Button.OnClickListener(){//创建监听
             public void onClick(View v) {
+                sendcSVCMode(4,0);
                 Intent i;
                 i = new Intent(AdminActivity.this, Hardwarectivity.class);
                 startActivity(i);
@@ -179,11 +192,11 @@ public class AdminActivity extends AppCompatActivity {
                         Integer.parseInt(ringFingerFist_et.getText().toString())>180 || Integer.parseInt(ringFingerStretch_et.getText().toString())>180 ||
                         Integer.parseInt(littleFingerFlat_et.getText().toString())>180 || Integer.parseInt(littleFingerMiddle_et.getText().toString())>180 ||
                         Integer.parseInt(littleFingerFist_et.getText().toString())>180 || Integer.parseInt(littleFingerStretch_et.getText().toString())>180 ||
-                        Integer.parseInt(thumbMove_et.getText().toString())>114 || Integer.parseInt(thumbMove_et.getText().toString())<80 ||
-                        Integer.parseInt(forefingerMove_et.getText().toString())>114 || Integer.parseInt(forefingerMove_et.getText().toString())<80 ||
-                        Integer.parseInt(middleFingerMove_et.getText().toString())>114 || Integer.parseInt(middleFingerMove_et.getText().toString())<80 ||
-                        Integer.parseInt(ringFingerMove_et.getText().toString())>114 || Integer.parseInt(ringFingerMove_et.getText().toString())<80 ||
-                        Integer.parseInt(littleFingerMove_et.getText().toString())>114 || Integer.parseInt(littleFingerMove_et.getText().toString())<80)
+                        Integer.parseInt(thumbMove_et.getText().toString())>114 || Integer.parseInt(thumbMove_et.getText().toString())<10 ||
+                        Integer.parseInt(forefingerMove_et.getText().toString())>114 || Integer.parseInt(forefingerMove_et.getText().toString())<10 ||
+                        Integer.parseInt(middleFingerMove_et.getText().toString())>114 || Integer.parseInt(middleFingerMove_et.getText().toString())<10 ||
+                        Integer.parseInt(ringFingerMove_et.getText().toString())>114 || Integer.parseInt(ringFingerMove_et.getText().toString())<10 ||
+                        Integer.parseInt(littleFingerMove_et.getText().toString())>114 || Integer.parseInt(littleFingerMove_et.getText().toString())<10)
                 {
                     new MyCustomDialog.Builder(AdminActivity.this)
                             .setTitle("警告").setMessage("数值超过有效范围，请重新输入！")
@@ -227,8 +240,38 @@ public class AdminActivity extends AppCompatActivity {
                     //d、完成提交
                     editor.commit();
                     Toast.makeText(getApplicationContext(), "信息已保存", Toast.LENGTH_SHORT).show();
-                    sendConfigData();
+                    String data = userSettings.getString("thumbFlat","10")+" "+userSettings.getString("foreFlat","10")+" "
+                            +userSettings.getString("middleFlat","10")+" "+userSettings.getString("ringFlat","10")+
+                            " "+userSettings.getString("littleFlat","10")+" "+userSettings.getString("thumbMiddle","110")
+                            +" "+userSettings.getString("foreMiddle","110")+" "+userSettings.getString("middleMiddle","110")
+                            +" "+userSettings.getString("ringMiddle","110")+" "+userSettings.getString("littleMiddle","110")
+                            +" "+userSettings.getString("thumbFist","120")+" "+userSettings.getString("foreFist","140")
+                            +" "+userSettings.getString("middleFist","140")+" "+userSettings.getString("ringFist","140")
+                            +" "+userSettings.getString("littleFist","120")+" "+userSettings.getString("thumbStretch","50")
+                            +" "+userSettings.getString("foreStretch","50")+" "+userSettings.getString("middleStretch","50")
+                            +" "+userSettings.getString("ringStretch","50")+" "+userSettings.getString("littleStretch","50")
+                            +" "+userSettings.getString("thumbMove","114")+" "+userSettings.getString("foreMove","114")
+                            +" "+userSettings.getString("middleMove","114")+" "+userSettings.getString("ringMove","114")
+                            +" "+userSettings.getString("littleMove","114");
+                    sendConfigData(data);
+                    Log.e("send",userSettings.getString("littleMove","114"));
                 }
+            }
+        });
+
+        glove.setOnCheckedChangeListener(new ToggleButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                //让setting处于编辑状态
+                SharedPreferences.Editor editor = userSettings.edit();
+                if(isChecked)
+                {//存放数据
+                    editor.putString("glove","左");
+                }else {
+                    editor.putString("glove","右");
+                }
+                //完成提交
+                editor.commit();
             }
         });
 
@@ -236,12 +279,28 @@ public class AdminActivity extends AppCompatActivity {
     }
 
     //向下位机发送配置信息
-    public void sendConfigData() {
+    public void sendConfigData(String Data) {
         if (iMyAidlInterface!=null){
             try {
-                iMyAidlInterface.sendConfigData();
+                iMyAidlInterface.sendConfigData(Data);
             } catch (RemoteException e) {
                 Log.e("sendConfigData",e.toString());
+            }
+        }
+    }
+
+    /*
+    当进入服务模式时，通知选择的服务模式和状态，此时下位机进入服务模式后停止运动。
+    当退出服务模式后恢复运动，并使能最后发送的配置项。
+    SVCMode 0：NULL1：版本升级2：网络状态3：部件状态4：运动配置
+    ModeStatus 0：退出 1：进入
+     */
+    public void sendcSVCMode(int SVCMode,int ModeStatus) {
+        if (iMyAidlInterface!=null){
+            try {
+                iMyAidlInterface.sendcSVCMode(SVCMode, ModeStatus);
+            } catch (RemoteException e) {
+                Log.e("sendcSVCMode",e.toString());
             }
         }
     }

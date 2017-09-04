@@ -201,10 +201,17 @@ public  class ComService extends Service {
             Log.e("sendShutdown", "send");
         }
         @Override
-        public void sendConfigData(){
+        public void sendConfigData(String Data){
             //收到GCU发送的rConfigData报文时，需要把配置数据发送给GCU。
-            connection.sendData(connection.dConfigData());
+            connection.sendData(connection.dConfigData(Data));
             Log.e("sendConfigData", "send");
+        }
+        @Override
+        public void sendcSVCMode(int SVCMode,int ModeStatus){
+            //SVCMode 0：NULL1：版本升级2：网络状态3：部件状态4：运动配置
+            // ModeStatus 0：退出 1：进入
+            connection.sendData(connection.cSVCMode(SVCMode,ModeStatus));
+            Log.e("sendcSVCMode", "send");
         }
 
     };

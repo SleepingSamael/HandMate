@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -122,6 +123,15 @@ public class MasterSlaveActivity extends AppCompatActivity implements ExpandingF
         setupWindowAnimations();
 
         sendrNetStatus();//载入时获取zigbee连接状态
+
+        //获取患侧手信息
+        SharedPreferences userSettings = getSharedPreferences("setting", 0);
+        final int gloveFlag;
+        if(userSettings.getString("glove","右").equals("右")){
+            gloveFlag = 1;
+        }else{
+            gloveFlag = 2;
+        }
 
         //获取系统时间
         SimpleDateFormat sDateFormat = new    SimpleDateFormat("yyyy-MM-dd  HH:mm");
@@ -265,7 +275,7 @@ public class MasterSlaveActivity extends AppCompatActivity implements ExpandingF
                 }
                 i.putExtras(mbundle);
                 sendTrainAck(1);
-                senddGloveSelect(1);
+                senddGloveSelect(gloveFlag);
                 startActivity(i);
 
             }

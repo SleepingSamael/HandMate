@@ -75,7 +75,7 @@ public class Connection {
     /**
      * 获取配置信息
      */
-    SharedPreferences userSettings= UserData.getContext().getSharedPreferences("setting", 0);
+    SharedPreferences userSettings = UserData.getContext().getSharedPreferences("setting", 0);
     public String[] configArray={
             userSettings.getString("thumbFlat","10"),
             userSettings.getString("foreFlat","10"),
@@ -432,7 +432,20 @@ public class Connection {
                     }
                     if(str[0].equals("25"))//GCU向AWS发送配置报文请求。
                     {
-                        sendData(dConfigData());
+                        String data = userSettings.getString("thumbFlat","10")+" "+userSettings.getString("foreFlat","10")+" "
+                                +userSettings.getString("middleFlat","10")+" "+userSettings.getString("ringFlat","10")+
+                                " "+userSettings.getString("littleFlat","10")+" "+userSettings.getString("thumbMiddle","110")
+                                +" "+userSettings.getString("foreMiddle","110")+" "+userSettings.getString("middleMiddle","110")
+                                +" "+userSettings.getString("ringMiddle","110")+" "+userSettings.getString("littleMiddle","110")
+                                +" "+userSettings.getString("thumbFist","120")+" "+userSettings.getString("foreFist","140")
+                                +" "+userSettings.getString("middleFist","140")+" "+userSettings.getString("ringFist","140")
+                                +" "+userSettings.getString("littleFist","120")+" "+userSettings.getString("thumbStretch","50")
+                                +" "+userSettings.getString("foreStretch","50")+" "+userSettings.getString("middleStretch","50")
+                                +" "+userSettings.getString("ringStretch","50")+" "+userSettings.getString("littleStretch","50")
+                                +" "+userSettings.getString("thumbMove","114")+" "+userSettings.getString("foreMove","114")
+                                +" "+userSettings.getString("middleMove","114")+" "+userSettings.getString("ringMove","114")
+                                +" "+userSettings.getString("littleMove","114");
+                        sendData(dConfigData(data));
                     }
                     if (str[0].equals("10"))//下位机向上位机发送角度信息
                     {
@@ -835,47 +848,66 @@ public class Connection {
         b[5]=(byte) ~(b[2]+b[3]+b[4]);
         return b;
     }
+
     /**
      * 向下位机发送配置信息
      * @return 报文
      */
-    public byte[] dConfigData()
+    public byte[] dConfigData(String data)
     {
+        String[] str = data.split("\\ ");
         byte[] bytes = new byte[30];
         bytes[0] = (byte) 0xff;
         bytes[1] = (byte) 0xff;
         bytes[2] = (byte) 0x26;//ID
         bytes[3] = (byte) 0x30;//长度
-        bytes[4] = (byte)Integer.parseInt(userSettings.getString("thumbFlat","10"));
-        bytes[5] = (byte)Integer.parseInt(userSettings.getString("foreFlat","10"));
-        bytes[6] = (byte)Integer.parseInt(userSettings.getString("middleFlat","10"));
-        bytes[7] = (byte)Integer.parseInt(userSettings.getString("ringFlat","10"));
-        bytes[8] = (byte)Integer.parseInt(userSettings.getString("littleFlat","10"));
-        bytes[9] = (byte)Integer.parseInt(userSettings.getString("thumbMiddle","110"));
-        bytes[10] = (byte)Integer.parseInt(userSettings.getString("foreMiddle","110"));
-        bytes[11] = (byte)Integer.parseInt(userSettings.getString("middleMiddle","110"));
-        bytes[12] = (byte)Integer.parseInt(userSettings.getString("ringMiddle","110"));
-        bytes[13] = (byte)Integer.parseInt(userSettings.getString("littleMiddle","110"));
-        bytes[14] = (byte)Integer.parseInt(userSettings.getString("thumbFist","120"));
-        bytes[15] = (byte)Integer.parseInt(userSettings.getString("foreFist","140"));
-        bytes[16] = (byte)Integer.parseInt(userSettings.getString("middleFist","140"));
-        bytes[17] = (byte)Integer.parseInt(userSettings.getString("ringFist","140"));
-        bytes[18] = (byte)Integer.parseInt(userSettings.getString("littleFist","120"));
-        bytes[19] = (byte)Integer.parseInt(userSettings.getString("thumbStretch","50"));
-        bytes[20] = (byte)Integer.parseInt(userSettings.getString("foreStretch","50"));
-        bytes[21] = (byte)Integer.parseInt(userSettings.getString("middleStretch","50"));
-        bytes[22] = (byte)Integer.parseInt(userSettings.getString("ringStretch","50"));
-        bytes[23] = (byte)Integer.parseInt(userSettings.getString("littleStretch","50"));
-        bytes[24] = (byte)Integer.parseInt(userSettings.getString("thumbMove","114"));
-        bytes[25] = (byte)Integer.parseInt(userSettings.getString("foreMove","114"));
-        bytes[26] = (byte)Integer.parseInt(userSettings.getString("middleMove","114"));
-        bytes[27] = (byte)Integer.parseInt(userSettings.getString("ringMove","114"));
-        bytes[28] = (byte)Integer.parseInt(userSettings.getString("littleMove","114"));
+        bytes[4] = (byte)Integer.parseInt(str[0]);
+        bytes[5] = (byte)Integer.parseInt(str[1]);
+        bytes[6] = (byte)Integer.parseInt(str[2]);
+        bytes[7] = (byte)Integer.parseInt(str[3]);
+        bytes[8] = (byte)Integer.parseInt(str[4]);
+        bytes[9] = (byte)Integer.parseInt(str[5]);
+        bytes[10] = (byte)Integer.parseInt(str[6]);
+        bytes[11] = (byte)Integer.parseInt(str[7]);
+        bytes[12] = (byte)Integer.parseInt(str[8]);
+        bytes[13] = (byte)Integer.parseInt(str[9]);
+        bytes[14] = (byte)Integer.parseInt(str[10]);
+        bytes[15] = (byte)Integer.parseInt(str[11]);
+        bytes[16] = (byte)Integer.parseInt(str[12]);
+        bytes[17] = (byte)Integer.parseInt(str[13]);
+        bytes[18] = (byte)Integer.parseInt(str[14]);
+        bytes[19] = (byte)Integer.parseInt(str[15]);
+        bytes[20] = (byte)Integer.parseInt(str[16]);
+        bytes[21] = (byte)Integer.parseInt(str[17]);
+        bytes[22] = (byte)Integer.parseInt(str[18]);
+        bytes[23] = (byte)Integer.parseInt(str[19]);
+        bytes[24] = (byte)Integer.parseInt(str[20]);
+        bytes[25] = (byte)Integer.parseInt(str[21]);
+        bytes[26] = (byte)Integer.parseInt(str[22]);
+        bytes[27] = (byte)Integer.parseInt(str[23]);
+        bytes[28] = (byte)Integer.parseInt(str[24]);
         bytes[29] = (byte) ~(bytes[2] + bytes[3] + bytes[4] + bytes[5] + bytes[6] + bytes[7]
                 + bytes[8] + bytes[9] + bytes[10] + bytes[11] + bytes[12] + bytes[13] + bytes[14]
                 + bytes[15] + bytes[16] + bytes[17] + bytes[18] + bytes[19] + bytes[20] + bytes[21]
                 + bytes[22] + bytes[23] + bytes[24] + bytes[25] + bytes[26] + bytes[27] + bytes[28]);
         return bytes;
     }
-
+    /**
+     * 当进入服务模式时，通知选择的服务模式和状态，此时下位机进入服务模式后停止运动。
+     当退出服务模式后恢复运动，并使能最后发送的配置项。
+     * @param SVCMode 0：NULL1：版本升级2：网络状态3：部件状态4：运动配置
+     * @param ModeStatus 0：退出 1：进入
+     * @return
+     */
+    public byte[] cSVCMode(int SVCMode,int ModeStatus){
+        byte[]b=new byte[7];
+        b[0]=(byte)0xff;
+        b[1]=(byte)0xff;
+        b[2]=(byte)0x14;//ID
+        b[3]=(byte)0x07;//长度
+        b[4]=(byte)SVCMode;
+        b[5]=(byte)ModeStatus;
+        b[6]=(byte) ~(b[2]+b[3]+b[4]+b[5]);
+        return b;
+    }
 }

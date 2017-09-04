@@ -535,6 +535,29 @@
                                     android:textSize="25dp"
                                     android:text="位置单位为°，范围0-180。速度单位为rmp，范围80-114。" />
                             </LinearLayout>
+                        <LinearLayout
+                            android:layout_marginTop="50dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_marginLeft="50dp"
+                                android:layout_gravity="center"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="选择患侧手："
+                                android:textSize="35dp"/>
+
+                            <ToggleButton
+                                android:id="@+id/glove_toggleButton"
+                                style="@style/AppTheme"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="30dp"
+                                android:textOff="右手"
+                                android:textOn="左手" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 

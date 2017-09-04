@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -112,6 +113,15 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
         ButterKnife.bind(this);
         setupWindowAnimations();
 
+        //获取患侧手信息
+        SharedPreferences userSettings = getSharedPreferences("setting", 0);
+        final int gloveFlag;
+        if(userSettings.getString("glove","右").equals("右")){
+             gloveFlag = 2;
+        }else{
+             gloveFlag = 1;
+        }
+
         speechUtil = new SpeechUtil(this);
 
         sendrNetStatus();//载入时获取zigbee连接状态
@@ -199,7 +209,7 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
                         mbundle.putInt("Mode", 3001);
                         i.putExtras(mbundle);
                         sendTrainAck(3);
-                        senddGloveSelect(2);
+                        senddGloveSelect(gloveFlag);
                         startActivity(i);
                         break;
                     case "丰收果园":
@@ -214,7 +224,7 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
                         mbundle.putString("Glove","1");
                         i.putExtras(mbundle);
                         sendTrainAck(3);
-                        senddGloveSelect(2);
+                        senddGloveSelect(gloveFlag);
                         startActivity(i);
                         break;
                     case "欢乐大熊猫":
@@ -229,7 +239,7 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
                         mbundle.putString("Glove","1");
                         i.putExtras(mbundle);
                         sendTrainAck(3);
-                        senddGloveSelect(2);
+                        senddGloveSelect(gloveFlag);
                         startActivity(i);
                         break;
                     case "钢琴大师":
@@ -244,7 +254,7 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
                         mbundle.putString("Glove","1");
                         i.putExtras(mbundle);
                         sendTrainAck(3);
-                        senddGloveSelect(2);
+                        senddGloveSelect(gloveFlag);
                         startActivity(i);
                         break;
                     case "评估量表":

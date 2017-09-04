@@ -27,6 +27,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -45,7 +46,7 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
     private LinearLayout u3dLayout;
     private float angle = 0;
     private int scenenum = 1;//场景变量
-    private String handID = "1";//患侧手：左0右1
+    private String handID = "0";//患侧手：左0右1
     private String gloveID="0";//手套ID: 主从0评估1
     private int hid = 0;//历史id
     private int score = 0;
@@ -90,6 +91,13 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_u3d_player);
+
+        final SharedPreferences userSettings = getSharedPreferences("setting", 0);
+        if(userSettings.getString("glove","右").equals("右")){
+            handID="1";
+        }else{
+            handID="0";
+        }
 
         if (mhistoryDataManager == null) {
             mhistoryDataManager = new HistoryDataManager(this);
