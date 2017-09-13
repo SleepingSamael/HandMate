@@ -171,7 +171,7 @@ public class MasterSlaveActivity extends AppCompatActivity implements ExpandingF
         GalleryViewPagerAdapter adapter = new GalleryViewPagerAdapter(getSupportFragmentManager());
         adapter.addAll(generateTravelList());
         viewPager.setAdapter(adapter);
-        viewPager.setCurrentItem(2);//设置当前viewpage是第几页
+        viewPager.setCurrentItem(1);//设置当前viewpage是第几页
 
 
         ExpandingPagerFactory.setupViewPager2(viewPager);
@@ -238,39 +238,6 @@ public class MasterSlaveActivity extends AppCompatActivity implements ExpandingF
                         historyData.setTime(stime);
                         mhistoryDataManager.inserHistorytData(historyData);
                         mbundle.putInt("Mode", 1004);
-                        break;
-                    case "丰收果园":
-                        historyData.setPid(userData.getUserId());
-                        historyData.setHid(mhistoryDataManager.countData()+1);
-                        historyData.setItem("主从模式 丰收果园");
-                        historyData.setDate(sdate);
-                        historyData.setTime(stime);
-                        mhistoryDataManager.inserHistorytData(historyData);
-                        mbundle.putInt("ID",historyData.getHid());
-                        mbundle.putInt("Mode", 4001);
-                        mbundle.putString("Glove","0");
-                        break;
-                    case "欢乐大熊猫":
-                        historyData.setPid(userData.getUserId());
-                        historyData.setHid(mhistoryDataManager.countData()+1);
-                        historyData.setItem("主从模式 欢乐大熊猫");
-                        historyData.setDate(sdate);
-                        historyData.setTime(stime);
-                        mhistoryDataManager.inserHistorytData(historyData);
-                        mbundle.putInt("ID",historyData.getHid());
-                        mbundle.putInt("Mode", 4002);
-                        mbundle.putString("Glove","0");
-                        break;
-                    case "钢琴大师":
-                        historyData.setPid(userData.getUserId());
-                        historyData.setHid(mhistoryDataManager.countData()+1);
-                        historyData.setItem("主从模式 钢琴大师");
-                        historyData.setDate(sdate);
-                        historyData.setTime(stime);
-                        mhistoryDataManager.inserHistorytData(historyData);
-                        mbundle.putInt("ID",historyData.getHid());
-                        mbundle.putInt("Mode", 4003);
-                        mbundle.putString("Glove","0");
                         break;
                 }
                 i.putExtras(mbundle);
@@ -377,9 +344,6 @@ public class MasterSlaveActivity extends AppCompatActivity implements ExpandingF
             galleryItemses.add(new GalleryItems("丛林", R.drawable.game2,"主从模式通过主手带动从手运动，并在屏幕上显示当前手部的动作，给患者直观的视觉感受。（使用主动手套）"));
             galleryItemses.add(new GalleryItems("海滩", R.drawable.game3,"主从模式通过主手带动从手运动，并在屏幕上显示当前手部的动作，给患者直观的视觉感受。（使用主动手套）"));
             galleryItemses.add(new GalleryItems("客厅", R.drawable.game4,"主从模式通过主手带动从手运动，并在屏幕上显示当前手部的动作，给患者直观的视觉感受。（使用主动手套）"));
-            galleryItemses.add(new GalleryItems("丰收果园", R.drawable.applegame,"在金黄色的秋季里，没有什么比收获果实更让人心情愉悦的事了。作为农场之主的你，在今日决定去采摘下苹果，那么，出发吧！向着丰收，前进！（使用主动手套）"));
-            galleryItemses.add(new GalleryItems("欢乐大熊猫", R.drawable.pandagame,"身为一只在树林里快乐生活的大熊猫，今天又到了进食的时间了。饥肠辘辘的你无意之间进入了树林中的一片竹林，看见天上掉的满满的竹子，高兴坏了，口水直流，到底能吃到多少的竹子就看你的表现了。（使用主动手套）"));
-            galleryItemses.add(new GalleryItems("钢琴大师", R.drawable.pianogame,"你是百年一遇的钢琴天才，应广大媒体的要求，在上海进行了一场巡回演出。接下里，就开始你的表演吧！（使用主动手套）"));
         }
         return galleryItemses;
     }

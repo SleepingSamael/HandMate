@@ -140,7 +140,6 @@ public  class ComService extends Service {
                     bAngles[6] + bAngles[7] + bAngles[8]);
             connection.sendExercise(bAngles);
             Log.e("手套操", connection.bytesToString(bAngles));
-
         }
         @Override
         public void sendrNetStatus()//请求网络状态

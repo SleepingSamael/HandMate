@@ -13,19 +13,18 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.transition.Explode;
 import android.util.Log;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View.OnClickListener;
 import android.widget.PopupMenu;
-import android.widget.PopupMenu.OnMenuItemClickListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chej.HandMate.Database.HistoryDataManager;
@@ -48,7 +47,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class EvaluateActivity extends AppCompatActivity implements ExpandingFragment.OnExpandingClickListener,OnClickListener,OnMenuItemClickListener {
+public class GameItemActivity extends AppCompatActivity implements ExpandingFragment.OnExpandingClickListener,View.OnClickListener,PopupMenu.OnMenuItemClickListener {
     @Bind(R.id.viewPager) ViewPager viewPager;
     @Bind(R.id.back1)ViewGroup back;
     @Bind(R.id.DetailPhoto)ImageView DetailPhoto;
@@ -56,7 +55,7 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
     @Bind(R.id.btn_start)Button start;
     @Bind(R.id.set2)Button set;
     @Bind(R.id.user)Button user;
-    @Bind(R.id.tv_user) TextView tv_user;
+    @Bind(R.id.tv_user)TextView tv_user;
     @Bind(R.id.introduce)TextView introduce;
     @Bind(R.id.clock)TextView clock;
     @Bind(R.id.home)ImageView home;
@@ -67,12 +66,13 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
     private HistoryDataManager mhistoryDataManager;
     HistoryData historyData=new HistoryData();
 
+
     Bundle mbundle = new Bundle();//存储menu点击值
     int mode;//存储menu点击值
 
     private IMyAidlInterface iMyAidlInterface;
-
     private SpeechUtil speechUtil;
+
     //向下位机发送开始信号
     public void sendTrainAck(int mode) {
 
@@ -83,6 +83,7 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
                 e.printStackTrace();
             }
         }
+
     }
     //通知下位机开始发手套数据  0无手套数据 1 左手套数据 2 右手套数据
     public void senddGloveSelect(int gloveNum){
@@ -104,7 +105,6 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
             }
         }
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,18 +113,18 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
         ButterKnife.bind(this);
         setupWindowAnimations();
 
+        speechUtil = new SpeechUtil(this);
+
+        sendrNetStatus();//载入时获取zigbee连接状态
+
         //获取患侧手信息
         SharedPreferences userSettings = getSharedPreferences("setting", 0);
         final int gloveFlag;
         if(userSettings.getString("glove","右").equals("右")){
-             gloveFlag = 2;
+            gloveFlag = 1;
         }else{
-             gloveFlag = 1;
+            gloveFlag = 2;
         }
-
-        speechUtil = new SpeechUtil(this);
-
-        sendrNetStatus();//载入时获取zigbee连接状态
 
         //获取系统时间
         SimpleDateFormat sDateFormat = new    SimpleDateFormat("yyyy-MM-dd  HH:mm");
@@ -134,8 +134,7 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
         final String stime=arr[1];
         clock.setText(sdate+"   "+stime);
 
-
-        Intent myServiceIntent = new Intent(EvaluateActivity.this, ComService.class);
+        Intent myServiceIntent = new Intent(GameItemActivity.this, ComService.class);
         bindService(myServiceIntent, serviceConnection,
                 Context.BIND_AUTO_CREATE);
 
@@ -151,10 +150,8 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
         Bundle bundle = this.getIntent().getExtras();//释放bundle
         mode = bundle.getInt("Mode") ;//释放bundle
 
-
         back.setClipChildren(false);
         viewPager.setClipChildren(false);
-
 
         //将容器的触摸事件反馈给ViewPager
         back.setOnTouchListener(new View.OnTouchListener() {
@@ -164,10 +161,11 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
                 return viewPager.dispatchTouchEvent(event);
             }
         });
+
         GalleryViewPagerAdapter adapter = new GalleryViewPagerAdapter(getSupportFragmentManager());
         adapter.addAll(generateTravelList());
         viewPager.setAdapter(adapter);
-        viewPager.setCurrentItem(2);//设置当前viewpage是第几页
+        viewPager.setCurrentItem(1);//设置当前viewpage是第几页
 
 
         ExpandingPagerFactory.setupViewPager2(viewPager);
@@ -179,15 +177,16 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
         DetailPhoto.setImageResource(galleryItems.getImage());
         title.setText(galleryItems.getName());
         introduce.setText(galleryItems.getIntroduce());
+        introduce.setMovementMethod(ScrollingMovementMethod.getInstance());
+
         //home键
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 speechUtil.speak("返回主界面");
-                Intent mintent = new Intent(EvaluateActivity.this, MainActivity.class);
+                Intent mintent = new Intent(GameItemActivity.this, MainActivity.class);
                 startActivity(mintent);
                 finish();
-
             }
         });
         /**
@@ -195,74 +194,46 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
          */
         start.setOnClickListener(new Button.OnClickListener(){//创建监听
             public void onClick(View v) {
-                speechUtil.speak("开始");
-                Intent i;
-                i = new Intent(EvaluateActivity.this, u3dPlayer.class);
+                Intent i = new Intent(GameItemActivity.this, u3dPlayer.class);
                 switch (title.getText().toString()) {
-                    case "评估模式":
-                        historyData.setPid(userData.getUserId());
-                        historyData.setHid(mhistoryDataManager.countData()+1);
-                        historyData.setItem("评估模式");
-                        historyData.setDate(sdate);
-                        historyData.setTime(stime);
-                        mhistoryDataManager.inserHistorytData(historyData);
-                        mbundle.putInt("Mode", 3001);
-                        i.putExtras(mbundle);
-                        sendTrainAck(3);
-                        senddGloveSelect(gloveFlag);
-                        startActivity(i);
-                        break;
                     case "丰收果园":
                         historyData.setPid(userData.getUserId());
                         historyData.setHid(mhistoryDataManager.countData()+1);
-                        historyData.setItem("评估模式 丰收果园");
+                        historyData.setItem("主从模式 丰收果园");
                         historyData.setDate(sdate);
                         historyData.setTime(stime);
                         mhistoryDataManager.inserHistorytData(historyData);
                         mbundle.putInt("ID",historyData.getHid());
                         mbundle.putInt("Mode", 4001);
-                        mbundle.putString("Glove","1");
-                        i.putExtras(mbundle);
-                        sendTrainAck(3);
-                        senddGloveSelect(gloveFlag);
-                        startActivity(i);
+                        mbundle.putString("Glove","0");
                         break;
                     case "欢乐大熊猫":
                         historyData.setPid(userData.getUserId());
                         historyData.setHid(mhistoryDataManager.countData()+1);
-                        historyData.setItem("评估模式 欢乐大熊猫");
+                        historyData.setItem("主从模式 欢乐大熊猫");
                         historyData.setDate(sdate);
                         historyData.setTime(stime);
                         mhistoryDataManager.inserHistorytData(historyData);
                         mbundle.putInt("ID",historyData.getHid());
                         mbundle.putInt("Mode", 4002);
-                        mbundle.putString("Glove","1");
-                        i.putExtras(mbundle);
-                        sendTrainAck(3);
-                        senddGloveSelect(gloveFlag);
-                        startActivity(i);
+                        mbundle.putString("Glove","0");
                         break;
                     case "钢琴大师":
                         historyData.setPid(userData.getUserId());
                         historyData.setHid(mhistoryDataManager.countData()+1);
-                        historyData.setItem("评估模式 钢琴大师");
+                        historyData.setItem("主从模式 钢琴大师");
                         historyData.setDate(sdate);
                         historyData.setTime(stime);
                         mhistoryDataManager.inserHistorytData(historyData);
                         mbundle.putInt("ID",historyData.getHid());
                         mbundle.putInt("Mode", 4003);
-                        mbundle.putString("Glove","1");
-                        i.putExtras(mbundle);
-                        sendTrainAck(3);
-                        senddGloveSelect(gloveFlag);
-                        startActivity(i);
-                        break;
-                    case "评估量表":
-                        i = new Intent(EvaluateActivity.this,EvaluateTableActivity.class);
-                        startActivity(i);
+                        mbundle.putString("Glove","0");
                         break;
                 }
-
+                i.putExtras(mbundle);
+                senddGloveSelect(gloveFlag);
+                sendTrainAck(0);
+                startActivity(i);
             }
 
         });
@@ -281,7 +252,6 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
                 DetailPhoto.setImageResource(galleryItems.getImage());
                 title.setText(galleryItems.getName());
                 introduce.setText(galleryItems.getIntroduce());
-                speechUtil.speak(galleryItems.getName());
             }
 
             @Override
@@ -296,7 +266,7 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
         set.setOnClickListener(new Button.OnClickListener(){//创建监听
             public void onClick(View v) {
                 Intent i;
-                i = new Intent(EvaluateActivity.this,SystemSetActivity.class);
+                i = new Intent(GameItemActivity.this,SystemSetActivity.class);
                 startActivity(i);
                 finish();
             }
@@ -304,7 +274,7 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
         power.setOnClickListener(new Button.OnClickListener(){//创建监听
             public void onClick(View v) {
                 Intent i;
-                i = new Intent(EvaluateActivity.this,SystemSetActivity.class);
+                i = new Intent(GameItemActivity.this,SystemSetActivity.class);
                 startActivity(i);
                 finish();
             }
@@ -312,7 +282,7 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
         volume.setOnClickListener(new Button.OnClickListener(){//创建监听
             public void onClick(View v) {
                 Intent i;
-                i = new Intent(EvaluateActivity.this,SystemSetActivity.class);
+                i = new Intent(GameItemActivity.this,SystemSetActivity.class);
                 startActivity(i);
                 finish();
             }
@@ -320,7 +290,7 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
         wifi.setOnClickListener(new Button.OnClickListener(){//创建监听
             public void onClick(View v) {
                 Intent i;
-                i = new Intent(EvaluateActivity.this,SystemSetActivity.class);
+                i = new Intent(GameItemActivity.this,SystemSetActivity.class);
                 startActivity(i);
                 finish();
             }
@@ -328,7 +298,7 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
         bluetooth.setOnClickListener(new Button.OnClickListener(){//创建监听
             public void onClick(View v) {
                 Intent i;
-                i = new Intent(EvaluateActivity.this,SystemSetActivity.class);
+                i = new Intent(GameItemActivity.this,SystemSetActivity.class);
                 startActivity(i);
                 finish();
             }
@@ -338,6 +308,7 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
          */
         user.setOnClickListener(this);
         tv_user.setOnClickListener(this);
+
     }
 
     @Override
@@ -357,15 +328,9 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
     private List<GalleryItems> generateTravelList(){
         List<GalleryItems> galleryItemses = new ArrayList<>();
         for(int i=0;i<1;++i){
-            galleryItemses.add(new GalleryItems("评估模式", R.drawable.game3,"评估模式旨在对患者的手指活动能力作出评估，" +
-                    "患者通过屏幕上的提示尽力做出相应动作，" +
-                    "程序根据患者动作的时间与到位程度进行打分，协助医生对患者病情评估。（使用评估手套）"));
-            galleryItemses.add(new GalleryItems("丰收果园", R.drawable.applegame,"在金黄色的秋季里，没有什么比收获果实更让人心情愉悦的事了。作为农场之主的你，在今日决定去采摘下苹果，那么，出发吧！向着丰收，前进！（使用评估手套）"));
-            galleryItemses.add(new GalleryItems("欢乐大熊猫", R.drawable.pandagame,"身为一只在树林里快乐生活的大熊猫，今天又到了进食的时间了。饥肠辘辘的你无意之间进入了树林中的一片竹林，看见天上掉的满满的竹子，高兴坏了，口水直流，到底能吃到多少的竹子就看你的表现了。（使用评估手套）"));
-            galleryItemses.add(new GalleryItems("钢琴大师", R.drawable.pianogame,"你是百年一遇的钢琴天才，应广大媒体的要求，在上海进行了一场巡回演出。接下里，就开始你的表演吧！（使用评估手套）"));
-            galleryItemses.add(new GalleryItems("评估量表", R.drawable.evaluatetable,"评估量表提供手部活动能力的评估量表让医生对患者进行打分，" +
-                    "从而协助医生对患者病情评估。"));
-
+            galleryItemses.add(new GalleryItems("丰收果园", R.drawable.applegame,"在金黄色的秋季里，没有什么比收获果实更让人心情愉悦的事了。作为农场之主的你，在今日决定去采摘下苹果，那么，出发吧！向着丰收，前进！（使用主动手套）"));
+            galleryItemses.add(new GalleryItems("欢乐大熊猫", R.drawable.pandagame,"身为一只在树林里快乐生活的大熊猫，今天又到了进食的时间了。饥肠辘辘的你无意之间进入了树林中的一片竹林，看见天上掉的满满的竹子，高兴坏了，口水直流，到底能吃到多少的竹子就看你的表现了。（使用主动手套）"));
+            galleryItemses.add(new GalleryItems("钢琴大师", R.drawable.pianogame,"你是百年一遇的钢琴天才，应广大媒体的要求，在上海进行了一场巡回演出。接下里，就开始你的表演吧！（使用主动手套）"));
         }
         return galleryItemses;
     }
@@ -375,14 +340,6 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
     public void onExpandingClick(View v) {
 
     }
-
-   /* @Override
-    public void onExpandingClick(View v) {
-        //v is expandingfragment layout
-        View view = v.findViewById(R.id.image);
-        GalleryItems travel = generateTravelList().get(viewPager.getCurrentItem());
-        startInfoActivity(view,travel);
-    }*/
 
     //点击按钮后，加载弹出式菜单
     @Override
@@ -408,7 +365,7 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
             case R.id.change:
                 Toast.makeText(this, "切换用户", Toast.LENGTH_SHORT).show();
                 Intent i;
-                i = new Intent(EvaluateActivity.this, UsersActivity.class);
+                i = new Intent(GameItemActivity.this, UsersActivity.class);
                 startActivity(i);
                 finish();
                 break;
@@ -424,7 +381,6 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
         return false;
     }
     private void shutDownDialog() {
-        speechUtil.speak("确定要关机吗");
         MyCustomDialog.Builder builder=new MyCustomDialog.Builder(this);
         builder.setMessage("确定要关机吗？");
         builder.setTitle("提示");
@@ -433,7 +389,7 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
             public void onClick(DialogInterface dialog, int which) {
                 Bundle sdbundle = new Bundle();//存重启、关机信息
                 Intent i;
-                i = new Intent(EvaluateActivity.this, ShutDownActivity.class);
+                i = new Intent(GameItemActivity.this, ShutDownActivity.class);
                 sdbundle.putInt("Mode", 0);
                 i.putExtras(sdbundle);
                 startActivity(i);
@@ -449,7 +405,6 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
         builder.create().show();
     }
     private void restartDialog() {
-        speechUtil.speak("确定要重启吗");
         MyCustomDialog.Builder builder=new MyCustomDialog.Builder(this);
         builder.setMessage("确定要重启吗？");
         builder.setTitle("提示");
@@ -458,7 +413,7 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
             public void onClick(DialogInterface dialog, int which) {
                 Bundle sdbundle = new Bundle();//存重启、关机信息
                 Intent i;
-                i = new Intent(EvaluateActivity.this, ShutDownActivity.class);
+                i = new Intent(GameItemActivity.this, ShutDownActivity.class);
                 sdbundle.putInt("Mode", 1);
                 i.putExtras(sdbundle);
                 startActivity(i);
@@ -473,6 +428,13 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
         });
         builder.create().show();
     }
+    /* @Override
+     public void onExpandingClick(View v) {
+         //v is expandingfragment layout
+         View view = v.findViewById(R.id.image);
+         GalleryItems travel = generateTravelList().get(viewPager.getCurrentItem());
+         startInfoActivity(view,travel);
+     }*/
     //绑定ComService
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
@@ -499,12 +461,7 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
         public void callBack(final Entity entity) throws RemoteException {
 
             Log.e("MainActivity","MainActivity receive the entity"+entity.getName());
-            Log.e("MainActivity","MainActivity receive the entity"+entity.getName());
-            Log.e("MainActivity","MainActivity receive the entity"+entity.getName());
-            Log.e("MainActivity","MainActivity receive the entity"+entity.getName());
-            Log.e("MainActivity","MainActivity receive the entity"+entity.getName());
-            Log.e("MainActivity","MainActivity receive the entity"+entity.getName());
-            Log.e("MainActivity","MainActivity receive the entity"+entity.getName());
+
         }
     };
     @Override
@@ -513,5 +470,3 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
         unbindService(serviceConnection);
     }
 }
-
-

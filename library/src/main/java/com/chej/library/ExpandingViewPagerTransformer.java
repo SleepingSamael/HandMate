@@ -10,7 +10,7 @@ import android.view.View;
         */
 public class ExpandingViewPagerTransformer implements ViewPager.PageTransformer {
 
-    public static final float MAX_SCALE = 0.9f;
+    public static final float MAX_SCALE = 0.8f;
     public static final float MIN_SCALE = 0.7f;
 
     @Override

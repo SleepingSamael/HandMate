@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
 
 
         ExpandingPagerFactory.setupViewPager(viewPager);
-        viewPager.setCurrentItem(1);//设置当前viewpage是第几页
+        viewPager.setCurrentItem(2);//设置当前viewpage是第几页
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -147,11 +147,13 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
                 switch (position){
                     case 0: speechUtil.speak("主从模式");
                         break;
-                    case 1: speechUtil.speak("手套操");
+                    case 1:speechUtil.speak("游戏模式");
                         break;
-                    case 2: speechUtil.speak("评估");
+                    case 2: speechUtil.speak("手套操");
                         break;
-                    case 3: speechUtil.speak("历史记录");
+                    case 3: speechUtil.speak("评估");
+                        break;
+                    case 4: speechUtil.speak("历史记录");
                         break;
                 }
             }
@@ -233,6 +235,7 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
         List<GalleryItems> galleryItemses = new ArrayList<>();
         for (int i = 0; i < 1; ++i) {
             galleryItemses.add(new GalleryItems("主从模式", R.drawable.masterslave, null));
+            galleryItemses.add(new GalleryItems("游戏模式", R.drawable.game, null));
             galleryItemses.add(new GalleryItems("手套操", R.drawable.exercise, null));
             galleryItemses.add(new GalleryItems("评估", R.drawable.evaluate, null));
             galleryItemses.add(new GalleryItems("历史记录", R.drawable.history, null));
@@ -245,11 +248,18 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
     public void onExpandingClick(View v) {
         GalleryItems galleryItems = generateTravelList().get(viewPager.getCurrentItem());
         Bundle mbundle = new Bundle();//存menu点击值
+        if (galleryItems.getName() == "游戏模式") {
+            Intent i = new Intent(MainActivity.this, GameItemActivity.class);
+            mbundle.putInt("Mode", 3);
+            i.putExtras(mbundle);
+            sendTrainMode(0);
+            startActivity(i);
+            finish();
+        }
         if (galleryItems.getName() == "主从模式") {
             Intent i = new Intent(MainActivity.this, MasterSlaveActivity.class);
             mbundle.putInt("Mode", 3);
             i.putExtras(mbundle);
-
             sendTrainMode(1);
             startActivity(i);
             finish();
@@ -258,7 +268,6 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
             Intent i = new Intent(MainActivity.this, ExerciseActivity.class);
             mbundle.putInt("Mode", 3);
             i.putExtras(mbundle);
-
             sendTrainMode(2);
             startActivity(i);
             finish();
