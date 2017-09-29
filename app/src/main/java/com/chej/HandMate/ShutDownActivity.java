@@ -12,7 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.chej.HandMate.TTS.SpeechUtil;
-import com.chej.HandMate.Transmission.ComService;
+import com.chej.HandMate.Transmission.Wifi.WifiService;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -40,7 +40,7 @@ public class ShutDownActivity extends AppCompatActivity {
         Bundle bundle = this.getIntent().getExtras();
         sdid = bundle.getInt("Mode") ;
 
-        Intent myServiceIntent = new Intent(ShutDownActivity.this, ComService.class);
+        Intent myServiceIntent = new Intent(ShutDownActivity.this, WifiService.class);
         bindService(myServiceIntent, serviceConnection,
                 Context.BIND_AUTO_CREATE);
 

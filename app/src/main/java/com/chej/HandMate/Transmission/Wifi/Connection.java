@@ -1,4 +1,4 @@
-package com.chej.HandMate.Transmission;
+package com.chej.HandMate.Transmission.Wifi;
 
 import android.app.ActivityManager;
 import android.app.Dialog;
@@ -23,9 +23,7 @@ import java.net.Socket;
 import java.net.SocketAddress;
 import java.nio.charset.Charset;
 import java.util.Date;
-
 import com.chej.HandMate.ExerciseActivity;
-import com.chej.HandMate.IMyAidlInterface;
 import com.chej.HandMate.MasterSlaveActivity;
 import com.chej.HandMate.Model.MyCustomDialog;
 import com.chej.HandMate.Model.users.UserData;
@@ -41,7 +39,6 @@ import static android.content.Context.ACTIVITY_SERVICE;
 public class Connection {
     private String ip ="192.168.4.1";//服务器ip
     private String port="6000";//服务器端口
-
 
     public boolean isConnected = false;
     public boolean heartBeat = false;
@@ -93,7 +90,6 @@ public class Connection {
             userSettings.getString("ringFist","140"),
             userSettings.getString("littleFist","120")};
 
-    private IMyAidlInterface iMyAidlInterface;
 
     /**
      * 启动连接线程.

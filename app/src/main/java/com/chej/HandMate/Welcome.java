@@ -4,7 +4,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,7 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.chej.HandMate.Model.SysApplication;
-import com.chej.HandMate.Transmission.ComService;
+import com.chej.HandMate.Transmission.Wifi.WifiService;
 
 
 public class Welcome extends Activity {
@@ -51,10 +50,10 @@ public class Welcome extends Activity {
             }
         }
         try {
-            Intent startIntent = new Intent(Welcome.this, ComService.class);
+            Intent startIntent = new Intent(Welcome.this, WifiService.class);
             startService(startIntent); // 启动服务
 
-            Intent intent = new Intent(Welcome.this, ComService.class);
+            Intent intent = new Intent(Welcome.this, WifiService.class);
             bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
         }catch(Exception e){
             e.printStackTrace();

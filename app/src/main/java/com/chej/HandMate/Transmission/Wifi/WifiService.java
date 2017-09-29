@@ -1,10 +1,9 @@
-package com.chej.HandMate.Transmission;
+package com.chej.HandMate.Transmission.Wifi;
 
 import com.chej.HandMate.Entity;
 import com.chej.HandMate.ICallBack;
 import com.chej.HandMate.IMyAidlInterface;
 import com.chej.HandMate.Model.MyCustomDialog;
-import com.chej.HandMate.Model.users.UserData;
 import com.chej.HandMate.U3D.u3dPlayer;
 
 import android.app.Dialog;
@@ -14,7 +13,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.IBinder;
@@ -30,7 +28,7 @@ import java.util.TimerTask;
 
 
 //建立Android服务层，为下位机和UNITY提供通讯服务
-public  class ComService extends Service {
+public  class WifiService extends Service {
 
     private String WifiName ="chej_glove";
     private int updateNUM = 0;
@@ -52,7 +50,7 @@ public  class ComService extends Service {
 
 
     //初始化connection对象，WIFI连接状态
-    public ComService() {
+    public WifiService() {
         connection = new Connection();
         state = States.SOCKETUNCONNECTED;
         heartBeatTimer = new Timer();
@@ -232,10 +230,10 @@ public  class ComService extends Service {
     private void sendMsgToMain(String msg) {
         int N = mCallbacks.beginBroadcast();
 
-        Log.e("ComService", "N is number " + Integer.toString(N));
-        Log.e("ComService", "N is number " + Integer.toString(N));
-        Log.e("ComService", "N is number " + Integer.toString(N));
-        Log.e("ComService", "N is number " + Integer.toString(N));
+        Log.e("WifiService", "N is number " + Integer.toString(N));
+        Log.e("WifiService", "N is number " + Integer.toString(N));
+        Log.e("WifiService", "N is number " + Integer.toString(N));
+        Log.e("WifiService", "N is number " + Integer.toString(N));
 
         if (N < 1)
             return;
@@ -254,8 +252,6 @@ public  class ComService extends Service {
     public void onCreate() {
         super.onCreate();
 
-        Log.e("ComService", "onCreate executed");
-
         localBroadcastManager = LocalBroadcastManager.getInstance(this); // 获取实例
         intentFilter = new IntentFilter();
         intentFilter.addAction("com.example.broadcasttest.LOCAL_BROADCAST");
@@ -272,7 +268,7 @@ public  class ComService extends Service {
     //服务启动时执行
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.d("ComService", "onStartCommand executed");
+        Log.d("WifiService", "onStartCommand executed");
 
         return super.onStartCommand(intent, flags, startId);
     }
@@ -282,7 +278,7 @@ public  class ComService extends Service {
     public void onDestroy() {
         super.onDestroy();
         mCallbacks.kill();
-        Log.d("ComService", "onDestroy executed");
+        Log.d("WifiService", "onDestroy executed");
     }
 
 
@@ -312,14 +308,14 @@ public  class ComService extends Service {
 
                                 if (connection.isConnected == false) {
 
-                                    Log.e("ComService", "Connection is not working");
+                                    Log.e("WifiService", "Connection is not working");
 
                                     //sendMsgToMain("CHECK_DEVICE_CONNECTION");
                                     dialogOne();
 
-                                    Log.e("ComService", "Deroute !!!!!!!!!!!!!");
+                                    Log.e("WifiService", "Deroute !!!!!!!!!!!!!");
                                 } else {
-                                    Log.e("ComService", "I'm in connetion is done");
+                                    Log.e("WifiService", "I'm in connetion is done");
                                     state = States.MACHINECONNECTED;
 
                                     Intent intent = new Intent("com.example.broadcasttest.LOCAL_BROADCAST");
@@ -346,7 +342,7 @@ public  class ComService extends Service {
 
             //WIFI硬件连接成功后，等待下位机发送接收确认回执
             case SOCKETCONNECTED:
-                Log.e("ComService", "I'm Connected in SOCKETCONNECTED");
+                Log.e("WifiService", "I'm Connected in SOCKETCONNECTED");
 
                 if (connection.machineConnection == true) {
 
@@ -389,7 +385,7 @@ public  class ComService extends Service {
                 connection.sendData(connection.rConnectGCU());
                 //进入连接成功状态
 
-                Log.e("ComService", "I'm Connected in MACHINECONNECTED");
+                Log.e("WifiService", "I'm Connected in MACHINECONNECTED");
                 Intent intent = new Intent("com.example.broadcasttest.LOCAL_BROADCAST");
                 intent.putExtra("Connection","check_heart_beat");
                 localBroadcastManager.sendBroadcast(intent); // 发送本地广播
@@ -397,7 +393,7 @@ public  class ComService extends Service {
                 break;
 
             default:
-                Log.e("ComService", "I'm execute no");
+                Log.e("WifiService", "I'm execute no");
                 break;
         }
     }
@@ -409,7 +405,7 @@ public  class ComService extends Service {
         @Override
         public void onReceive(Context context, Intent intent) {
             //Toast.makeText(context, "received local broadcast", Toast.LENGTH_SHORT).show();
-            Log.e("ComService", "I received local message!");
+            Log.e("WifiService", "I received local message!");
             if (intent.getStringExtra("Connection").equals("reconnect")) {
                  ServiceState();
             } else if (intent.getStringExtra("Connection").equals("check_heart_beat")) {
@@ -422,9 +418,9 @@ public  class ComService extends Service {
     //心跳检测
     private void checkHeartBeat() {
 
-        Log.e("ComService", "I'm checking my hearbeat");
+        Log.e("WifiService", "I'm checking my hearbeat");
         long time = connection.refFormatNowDate()-connection.beatTime;
-        Log.e("ComService", time+"");
+        Log.e("WifiService", time+"");
         if (time>10000)
         {
             connection.heartBeat=false;
@@ -477,7 +473,7 @@ public  class ComService extends Service {
     //重新初始化WIFI连接
     private void reinitializeConnection() {
 
-        Log.e("ComService", "I'm reinitializing Connnection");
+        Log.e("WifiService", "I'm reinitializing Connnection");
 
         state = States.SOCKETUNCONNECTED;
         try {

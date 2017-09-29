@@ -35,7 +35,7 @@ import com.chej.HandMate.Model.SysApplication;
 import com.chej.HandMate.Model.history.HistoryData;
 import com.chej.HandMate.Model.users.UserData;
 import com.chej.HandMate.TTS.SpeechUtil;
-import com.chej.HandMate.Transmission.ComService;
+import com.chej.HandMate.Transmission.Wifi.WifiService;
 import com.chej.HandMate.U3D.u3dPlayer;
 import com.chej.library.ExpandingPagerFactory;
 import com.chej.library.fragments.ExpandingFragment;
@@ -134,7 +134,7 @@ public class GameItemActivity extends AppCompatActivity implements ExpandingFrag
         final String stime=arr[1];
         clock.setText(sdate+"   "+stime);
 
-        Intent myServiceIntent = new Intent(GameItemActivity.this, ComService.class);
+        Intent myServiceIntent = new Intent(GameItemActivity.this, WifiService.class);
         bindService(myServiceIntent, serviceConnection,
                 Context.BIND_AUTO_CREATE);
 

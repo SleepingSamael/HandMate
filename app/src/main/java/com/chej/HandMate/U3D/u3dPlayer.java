@@ -2,7 +2,6 @@
  * U3D界面
  */
 package com.chej.HandMate.U3D;
-import com.chej.HandMate.Transmission.Connection;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
@@ -11,7 +10,7 @@ import com.chej.HandMate.ExerciseActivity;
 import com.chej.HandMate.MasterSlaveActivity;
 import com.chej.HandMate.Model.MyCustomDialog;
 import com.chej.HandMate.Model.users.UserData;
-import com.chej.HandMate.Transmission.ComService;
+import com.chej.HandMate.Transmission.Wifi.WifiService;
 import com.chej.HandMate.Database.HistoryDataManager;
 import com.chej.HandMate.Entity;
 import com.chej.HandMate.ICallBack;
@@ -67,7 +66,7 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
 
     private U3DBroadCastReceiver u3DBroadCastReceiver;
 /*
-    private ComService backgroundService;
+    private WifiService backgroundService;
     private ServiceConnection serviceConnection = new ServiceConnection() {
 
         @Override
@@ -76,7 +75,7 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
 
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            backgroundService = ((ComService.DownloadBinder) service).getService();
+            backgroundService = ((WifiService.DownloadBinder) service).getService();
             Log.e("MainActivity","I'm connected to Service");
         }
     };
@@ -112,7 +111,7 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
 
 
         try {
-            Intent bindIntent = new Intent(u3dPlayer.this, ComService.class);
+            Intent bindIntent = new Intent(u3dPlayer.this, WifiService.class);
             bindService(bindIntent, serviceConnection, BIND_AUTO_CREATE);
         }catch(Exception e){
 

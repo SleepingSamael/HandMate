@@ -10,28 +10,20 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TabHost;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.chej.HandMate.Model.MyCustomDialog;
 import com.chej.HandMate.Model.SysApplication;
-import com.chej.HandMate.Transmission.ComService;
-import com.chej.HandMate.Transmission.Connection;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.chej.HandMate.Transmission.Wifi.WifiService;
 
 public class AdminActivity extends AppCompatActivity {
-    public Connection connection;
 
     private EditText thumbFlat_et;//拇指
     private EditText thumbMiddle_et;
@@ -70,7 +62,7 @@ public class AdminActivity extends AppCompatActivity {
 
         SysApplication.getInstance().addActivity(this);
 
-        Intent myServiceIntent = new Intent(AdminActivity.this, ComService.class);
+        Intent myServiceIntent = new Intent(AdminActivity.this, WifiService.class);
         bindService(myServiceIntent, serviceConnection,
                 Context.BIND_AUTO_CREATE);
 
