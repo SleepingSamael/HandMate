@@ -25,7 +25,6 @@ import android.widget.Toast;
 import com.chej.HandMate.Model.SysApplication;
 import com.chej.HandMate.Transmission.USB.USBHelper;
 import com.chej.HandMate.Transmission.USB.UsbService;
-import com.chej.HandMate.Transmission.Wifi.WifiService;
 import com.chej.HandMate.utils.Debuger;
 
 import java.lang.ref.WeakReference;
@@ -46,6 +45,9 @@ public class Welcome extends Activity {
             switch (intent.getAction()) {
                 case UsbService.ACTION_USB_PERMISSION_GRANTED: // USB PERMISSION GRANTED
                     Toast.makeText(context, "USB Ready", Toast.LENGTH_SHORT).show();
+                    Intent mintent = new Intent(Welcome.this, UsersActivity.class);
+                    startActivity(mintent);
+                    finish();
                     break;
                 case UsbService.ACTION_USB_PERMISSION_NOT_GRANTED: // USB PERMISSION NOT GRANTED
                     Toast.makeText(context, "USB Permission not granted", Toast.LENGTH_SHORT).show();
@@ -94,6 +96,7 @@ public class Welcome extends Activity {
                 startActivityForResult(intent, 1);
             }
         }
+
         activity = this;
        /* try {
             Intent startIntent = new Intent(Welcome.this, UsbService.class);
@@ -109,48 +112,14 @@ public class Welcome extends Activity {
         enterGame = (Button) findViewById(R.id.enter_game);
         enterGame.setOnClickListener(new Button.OnClickListener(){//创建监听
             public void onClick(View v) {
-                try {
-                    //获取系统时间
-                    SimpleDateFormat sDateFormat = new    SimpleDateFormat("yyyy-MM-dd  HH:mm:ss");
-                    String  sysDate = sDateFormat.format(new java.util.Date());
-                    String [] arr = sysDate.split("\\s+");
-                    final String sdate=arr[0];
-                    final String stime=arr[1];
-                    String [] arr2 = stime.split(":");
-                    String hour=arr2[0];
-                    String min=arr2[1];
-                    String sec=arr2[2];
-                    String filePath= Environment.getExternalStorageDirectory()+"/LOG_"+sdate+"_"+hour+"h"+min+"m"+sec+"s"+".txt";
-
-                    Runtime  r = Runtime.getRuntime();
-                    r.exec("logcat -f "+ filePath);
-                    r.exec("logcat -c");
-                    r.freeMemory();
-                    //   Process proc =Runtime.getRuntime().exec(new String[]{"logcat *:E ","logcat -f "+ filePath,"logcat -c"});
-                    //    Thread.sleep(200);
-                    //   proc.destroy();
-                    // Runtime.getRuntime().exec("logcat -f "+ filePath);
-                    //Runtime.getRuntime().exec("logcat -c");
-                    Toast.makeText(getApplicationContext(), "LOG已保存"+filePath, Toast.LENGTH_SHORT).show();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    Log.e("LOG", String.valueOf(ex));
-                }
+                Intent mintent = new Intent(Welcome.this, UsersActivity.class);
+                startActivity(mintent);
             }
         });
 
-        size.setOnClickListener(new View.OnClickListener() {
+        setFilters();  // Start listening notifications from UsbService
 
-            @Override
-            public void onClick(View v) {
-
-                size.setText("");
-             /*   getScreenSizeOfDevice();
-                getDensity();
-                getDisplayInfomation();*/
-
-            }
-        });
+        startService(UsbService.class, serviceConnection, null);
     }
     private void startService(Class<?> service, ServiceConnection serviceConnection, Bundle extras) {
         if (!UsbService.SERVICE_CONNECTED) {
@@ -168,20 +137,6 @@ public class Welcome extends Activity {
         bindService(bindingIntent, serviceConnection, Context.BIND_AUTO_CREATE);
     }
 
-//系统向service发消息
-
-    /*    button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (iMyAidlInterface!=null){
-                    try {
-                        iMyAidlInterface.send2Service(new Entity("I am from Welcome",0));
-                    } catch (RemoteException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });*/
 
 
     @Override
@@ -204,9 +159,6 @@ public class Welcome extends Activity {
             } catch (RemoteException e) {
                 Log.e(tag,e.toString());
             }
-            Intent mintent = new Intent(Welcome.this, UsersActivity.class);
-            startActivity(mintent);
-            //finish();
         }
 
         @Override
@@ -237,36 +189,11 @@ public class Welcome extends Activity {
     @Override
     public void onResume() {
         super.onResume();
-        setFilters();  // Start listening notifications from UsbService
-
-        startService(UsbService.class, serviceConnection, null);
-
-        /*
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            public void run() {
-                if (iMyAidlInterface!=null){
-                    try {
-                        if(iMyAidlInterface.getMessage()!=null) {
-                            size.append(iMyAidlInterface.getMessage());
-                        }
-                    } catch (RemoteException e) {
-                        e.printStackTrace();
-                        Log.e("sendTranAck", String.valueOf(e));
-                    }
-                }
-            }
-        }, 200 , 100);
-*/
-    }
-    @Override
-    public void onPause() {
-        super.onPause();
-        unregisterReceiver(mUsbReceiver);
     }
     @Override
     protected void onDestroy() {
         unbindService(serviceConnection);
+        unregisterReceiver(mUsbReceiver);
         super.onDestroy();
     }
     private void setFilters() {

@@ -13,7 +13,6 @@ import android.util.Log;
 
 import com.chej.HandMate.TTS.SpeechUtil;
 import com.chej.HandMate.Transmission.USB.UsbService;
-import com.chej.HandMate.Transmission.Wifi.WifiService;
 
 import java.util.Timer;
 import java.util.TimerTask;

@@ -12,7 +12,6 @@ import com.chej.HandMate.ExerciseActivity;
 import com.chej.HandMate.MasterSlaveActivity;
 import com.chej.HandMate.Model.MyCustomDialog;
 import com.chej.HandMate.Model.users.UserData;
-import com.chej.HandMate.Transmission.Wifi.WifiService;
 import com.chej.HandMate.Database.HistoryDataManager;
 import com.chej.HandMate.Entity;
 import com.chej.HandMate.ICallBack;

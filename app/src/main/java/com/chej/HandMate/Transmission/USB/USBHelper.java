@@ -19,8 +19,6 @@ import com.chej.HandMate.Model.MyCustomDialog;
 import com.chej.HandMate.Model.SetConstant;
 import com.chej.HandMate.Model.users.UserData;
 import com.chej.HandMate.ShutDownActivity;
-import com.chej.HandMate.Transmission.Messages;
-import com.chej.HandMate.Transmission.Wifi.Connection;
 
 import java.io.BufferedWriter;
 import java.io.IOException;

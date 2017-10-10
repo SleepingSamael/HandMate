@@ -372,7 +372,6 @@ public class UsbService extends Service {
     @Override
     public void onCreate() {
         try{
-            Debuger.dialogError("UsbService","onCreate");
             this.context = this;
             serialPortConnected = false;
             UsbService.SERVICE_CONNECTED = true;
@@ -421,7 +420,6 @@ public class UsbService extends Service {
         try{
             // This snippet will try to open the first encountered usb device connected, excluding usb root hubs
             HashMap<String, UsbDevice> usbDevices = usbManager.getDeviceList();
-            Debuger.dialogError("UsbService",":findSerialPortDevice");
             if (!usbDevices.isEmpty()) {
                 boolean keep = true;
                 for (Map.Entry<String, UsbDevice> entry : usbDevices.entrySet()) {
@@ -470,10 +468,8 @@ public class UsbService extends Service {
      * Request user permission. The response will be received in the BroadcastReceiver
      */
     private void requestUserPermission() {
-        Debuger.dialogError("UsbService.requestUserPermission",":requestUserPermission1");
         PendingIntent mPendingIntent = PendingIntent.getBroadcast(this, 0, new Intent(ACTION_USB_PERMISSION), 0);
         usbManager.requestPermission(device, mPendingIntent);
-        Debuger.dialogError("UsbService.requestUserPermission","requestUserPermission:2");
     }
 
     public class UsbBinder extends Binder {
@@ -491,7 +487,6 @@ public class UsbService extends Service {
         public void run() {
             try{
                 serialPort = UsbSerialDevice.createUsbSerialDevice(device, connection);
-                Debuger.dialogError("ConnectionThread.run","ConnectionThread.run");
                 if (serialPort != null) {
                     if (serialPort.open()) {
                         serialPortConnected = true;
@@ -560,15 +555,11 @@ public class UsbService extends Service {
             if (serialPort != null) {
                 serialPort.write(data);
                 Log.e("SEND", "发送成功");
-                Debuger.dialogError("SEND", "发送成功");
-                Log.e("SEND", bytesToHexString(data));
-                Debuger.dialogError("SEND", bytesToHexString(data));
             } else {
                 Log.e("SEND", "连接不存在重新连接");
             }
         } catch (Exception e) {
             Log.e("SEND", "发送失败");
-            Debuger.dialogError("SEND", String.valueOf(e));
             Log.e("SEND", String.valueOf(e));
             e.printStackTrace();
         }

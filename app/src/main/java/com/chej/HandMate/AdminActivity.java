@@ -26,7 +26,6 @@ import com.chej.HandMate.Model.MyCustomDialog;
 import com.chej.HandMate.Model.SysApplication;
 import com.chej.HandMate.Model.users.UserData;
 import com.chej.HandMate.Transmission.USB.UsbService;
-import com.chej.HandMate.Transmission.Wifi.WifiService;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.LineDataSet;

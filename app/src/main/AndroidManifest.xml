@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.chej.HandMate">
 
-    <uses-feature android:name="android.hardware.usb.host"
-        android:required="true"/>
+    <uses-permission android:name="com.android.example.USB_PERMISSION"/>
     <uses-permission android:name="android.hardware.usb.host" />
     <uses-permission android:name="ANDROID.PERMISSION.HARDWARE_TEST" />
     <uses-permission android:name="android.permission.SHUTDOWN" />
@@ -85,12 +84,6 @@
             android:process=":U3D"
             android:screenOrientation="landscape" />
 
-        <service
-            android:name=".Transmission.Wifi.WifiService"
-            android:enabled="true"
-            android:exported="true"
-            android:process=":ComService">
-            </service>
         <service
             android:name=".Transmission.USB.UsbService"
             android:enabled="true"

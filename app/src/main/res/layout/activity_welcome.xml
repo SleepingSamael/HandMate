@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/enter"
-    tools:context="com.chej.HandMate.com.qslll.handmate.Welcome">
+    tools:context="com.chej.HandMate.Welcome">
 
     <Button
         android:id="@+id/enter_game"
@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:text="点击此处获取屏幕数据"
-        android:textSize="30dp" />
+        android:textSize="30dp"
+        android:visibility="invisible"/>
 
 </RelativeLayout>

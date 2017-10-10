@@ -34,7 +34,6 @@ import com.chej.HandMate.Model.SysApplication;
 import com.chej.HandMate.Model.users.UserData;
 import com.chej.HandMate.TTS.SpeechUtil;
 import com.chej.HandMate.Transmission.USB.UsbService;
-import com.chej.HandMate.Transmission.Wifi.WifiService;
 import com.chej.library.ExpandingPagerFactory;
 import com.chej.library.fragments.ExpandingFragment;
 

@@ -30,7 +30,7 @@ import java.util.TimerTask;
 //建立Android服务层，为下位机和UNITY提供通讯服务
 public  class WifiService extends Service {
 
-    private String WifiName ="310R-04";
+    private String WifiName ="310R-01";
     private int updateNUM = 0;
     private int connectionCounter = 0;
     private int heartBeatCounter = 0;
@@ -73,8 +73,8 @@ public  class WifiService extends Service {
             mCallbacks.register(cb);
         }
         @Override
-        public String getMessage(){
-            return connection.strResult;
+        public void sendGetV(){
+
         }
 
         @Override
