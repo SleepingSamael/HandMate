@@ -22,6 +22,7 @@ import android.widget.ToggleButton;
 import com.chej.HandMate.Model.MyCustomDialog;
 import com.chej.HandMate.Model.SysApplication;
 import com.chej.HandMate.Transmission.Wifi.WifiService;
+import com.github.mikephil.charting.charts.LineChart;
 
 public class AdminActivity extends AppCompatActivity {
 
@@ -50,9 +51,15 @@ public class AdminActivity extends AppCompatActivity {
     private EditText littleFingerFist_et;
     private EditText littleFingerStretch_et;
     private EditText littleFingerMove_et;
+    private EditText thumbRatio_et;//增益系数
+    private EditText forefingerRatio_et;
+    private EditText middleFingerRatio_et;
+    private EditText ringFingerRatio_et;
+    private EditText littleFingerRatio_et;
     private Button quit;
     private Button save;
     private ToggleButton glove;
+    private LineChart chart = (LineChart) findViewById(R.id.chart);
 
     private IMyAidlInterface iMyAidlInterface;
     @Override
@@ -104,6 +111,11 @@ public class AdminActivity extends AppCompatActivity {
         littleFingerFist_et=(EditText)findViewById(R.id.littleFingerFist);
         littleFingerStretch_et=(EditText)findViewById(R.id.littleFingerStretch);
         littleFingerMove_et=(EditText)findViewById(R.id.littleFingerMove);
+        thumbRatio_et=(EditText)findViewById(R.id.thumbRatio);
+        forefingerRatio_et=(EditText)findViewById(R.id.forefingerRatio);
+        middleFingerRatio_et=(EditText)findViewById(R.id.middleFingerRatio);
+        ringFingerRatio_et=(EditText)findViewById(R.id.ringFingerRatio);
+        littleFingerRatio_et=(EditText)findViewById(R.id.littleFingerRatio);
 
         //获取Preferences
         final SharedPreferences userSettings = getSharedPreferences("setting", 0);
@@ -132,6 +144,11 @@ public class AdminActivity extends AppCompatActivity {
         middleFingerMove_et.setText(userSettings.getString("middleMove","114"));
         ringFingerMove_et.setText(userSettings.getString("ringMove","114"));
         littleFingerMove_et.setText(userSettings.getString("littleMove","114"));
+        thumbRatio_et.setText(userSettings.getString("thumbRatio","10"));
+        forefingerRatio_et.setText(userSettings.getString("foreRatio","10"));
+        middleFingerRatio_et.setText(userSettings.getString("middleRatio","10"));
+        ringFingerRatio_et.setText(userSettings.getString("ringRatio","10"));
+        littleFingerRatio_et.setText(userSettings.getString("littleRatio","10"));
         if(userSettings.getString("glove","右").equals("右")){
             glove.setChecked(false);
         }else{
@@ -161,7 +178,9 @@ public class AdminActivity extends AppCompatActivity {
                         ringFingerStretch_et.getText().toString().trim().equals("") || ringFingerMove_et.getText().toString().trim().equals("") ||
                         littleFingerFlat_et.getText().toString().trim().equals("") || littleFingerMiddle_et.getText().toString().trim().equals("") ||
                         littleFingerFist_et.getText().toString().trim().equals("") || littleFingerStretch_et.getText().toString().trim().equals("") ||
-                        littleFingerMove_et.getText().toString().trim().equals(""))
+                        littleFingerMove_et.getText().toString().trim().equals("") || thumbRatio_et.getText().toString().trim().equals("")||
+                        forefingerRatio_et.getText().toString().trim().equals("") ||middleFingerRatio_et.getText().toString().trim().equals("")||
+                        ringFingerRatio_et.getText().toString().trim().equals("") ||littleFingerRatio_et.getText().toString().trim().equals(""))
                 {
                     new MyCustomDialog.Builder(AdminActivity.this)
                             .setTitle("警告").setMessage("不能有空项目，请重新输入！")
@@ -229,6 +248,11 @@ public class AdminActivity extends AppCompatActivity {
                     editor.putString("middleMove",middleFingerMove_et.getText().toString());
                     editor.putString("ringMove",ringFingerMove_et.getText().toString());
                     editor.putString("littleMove",littleFingerMove_et.getText().toString());
+                    editor.putString("thumbRatio",thumbRatio_et.getText().toString());
+                    editor.putString("foreRatio",forefingerRatio_et.getText().toString());
+                    editor.putString("middleRatio",middleFingerRatio_et.getText().toString());
+                    editor.putString("ringRatio",ringFingerRatio_et.getText().toString());
+                    editor.putString("littleRatio",littleFingerRatio_et.getText().toString());
                     //d、完成提交
                     editor.commit();
                     Toast.makeText(getApplicationContext(), "信息已保存", Toast.LENGTH_SHORT).show();
@@ -244,9 +268,10 @@ public class AdminActivity extends AppCompatActivity {
                             +" "+userSettings.getString("ringStretch","50")+" "+userSettings.getString("littleStretch","50")
                             +" "+userSettings.getString("thumbMove","114")+" "+userSettings.getString("foreMove","114")
                             +" "+userSettings.getString("middleMove","114")+" "+userSettings.getString("ringMove","114")
-                            +" "+userSettings.getString("littleMove","114");
+                            +" "+userSettings.getString("littleMove","114")+" "+userSettings.getString("thumbRatio","10")
+                            +" "+userSettings.getString("foreRatio","10")+" "+userSettings.getString("middleRatio","10")
+                            +" "+userSettings.getString("ringRatio","10")+" "+userSettings.getString("ringRatio","10");
                     sendConfigData(data);
-                    Log.e("send",userSettings.getString("littleMove","114"));
                 }
             }
         });

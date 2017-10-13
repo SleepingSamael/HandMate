@@ -852,11 +852,11 @@ public class Connection {
     public byte[] dConfigData(String data)
     {
         String[] str = data.split("\\ ");
-        byte[] bytes = new byte[30];
+        byte[] bytes = new byte[35];
         bytes[0] = (byte) 0xff;
         bytes[1] = (byte) 0xff;
         bytes[2] = (byte) 0x26;//ID
-        bytes[3] = (byte) 0x30;//长度
+        bytes[3] = (byte) 0x35;//长度
         bytes[4] = (byte)Integer.parseInt(str[0]);
         bytes[5] = (byte)Integer.parseInt(str[1]);
         bytes[6] = (byte)Integer.parseInt(str[2]);
@@ -882,10 +882,16 @@ public class Connection {
         bytes[26] = (byte)Integer.parseInt(str[22]);
         bytes[27] = (byte)Integer.parseInt(str[23]);
         bytes[28] = (byte)Integer.parseInt(str[24]);
-        bytes[29] = (byte) ~(bytes[2] + bytes[3] + bytes[4] + bytes[5] + bytes[6] + bytes[7]
+        bytes[29] = (byte)Integer.parseInt(str[25]);
+        bytes[30] = (byte)Integer.parseInt(str[26]);
+        bytes[31] = (byte)Integer.parseInt(str[27]);
+        bytes[32] = (byte)Integer.parseInt(str[28]);
+        bytes[33] = (byte)Integer.parseInt(str[29]);
+        bytes[34] = (byte) ~(bytes[2] + bytes[3] + bytes[4] + bytes[5] + bytes[6] + bytes[7]
                 + bytes[8] + bytes[9] + bytes[10] + bytes[11] + bytes[12] + bytes[13] + bytes[14]
                 + bytes[15] + bytes[16] + bytes[17] + bytes[18] + bytes[19] + bytes[20] + bytes[21]
-                + bytes[22] + bytes[23] + bytes[24] + bytes[25] + bytes[26] + bytes[27] + bytes[28]);
+                + bytes[22] + bytes[23] + bytes[24] + bytes[25] + bytes[26] + bytes[27] + bytes[28]
+                + bytes[29] + bytes[30] + bytes[31] + bytes[32] + bytes[33]);
         return bytes;
     }
     /**

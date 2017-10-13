@@ -521,6 +521,100 @@
                                         android:textSize="30dp" />
 
                                 </TableRow>
+                                <TableRow>
+                                    <Space
+                                        android:layout_height="30dp"/>
+                                </TableRow>
+                                <TableRow
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="20dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:text="拇   指增益系数："
+                                        android:textSize="30dp" />
+
+                                    <EditText
+                                        android:id="@+id/thumbRatio"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:ems="2"
+                                        android:inputType="number"
+                                        android:maxLength="3"
+                                        android:textSize="30dp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginLeft="10dp"
+                                        android:text="食   指增益系数："
+                                        android:textSize="30dp" />
+
+                                    <EditText
+                                        android:id="@+id/forefingerRatio"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:ems="2"
+                                        android:inputType="number"
+                                        android:maxLength="3"
+                                        android:textSize="30dp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginLeft="10dp"
+                                        android:text="中   指增益系数："
+                                        android:textSize="30dp" />
+
+                                    <EditText
+                                        android:id="@+id/middleFingerRatio"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:ems="2"
+                                        android:inputType="number"
+                                        android:maxLength="3"
+                                        android:textSize="30dp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginLeft="10dp"
+                                        android:text="无名指增益系数："
+                                        android:textSize="30dp" />
+
+                                    <EditText
+                                        android:id="@+id/ringFingerRatio"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:ems="2"
+                                        android:inputType="number"
+                                        android:maxLength="3"
+                                        android:textSize="30dp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginLeft="10dp"
+                                        android:text="小   指增益系数："
+                                        android:textSize="30dp" />
+
+                                    <EditText
+                                        android:id="@+id/littleFingerRatio"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:ems="2"
+                                        android:inputType="number"
+                                        android:maxLength="3"
+                                        android:textSize="30dp" />
+
+                                </TableRow>
                             </TableLayout>
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -567,11 +661,10 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/textView5"
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/chart"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="TextView" />
+                            android:layout_height="match_parent" />
                     </LinearLayout>
 
                     <LinearLayout
