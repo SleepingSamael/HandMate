@@ -43,592 +43,592 @@
                         android:orientation="vertical">
 
 
-                            <TableLayout
+                        <TableLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginTop="20dp">
+
+                            <TableRow
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="20dp"
-                                android:layout_marginRight="20dp"
-                                android:layout_marginTop="20dp">
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="20dp">
 
-                                <TableRow
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginLeft="20dp">
-
-                                    <TextView
-                                        android:id="@+id/textView17"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginBottom="20dp"
-
-                                        android:text="手套位置配置"
-                                        android:textSize="40dp" />
-                                </TableRow>
-
-                                <TableRow
-                                    android:layout_marginLeft="20dp"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:text="拇   指平展位置(°)："
-                                        android:textSize="30dp" />
-
-                                    <EditText
-                                        android:id="@+id/thumbFlat"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:ems="2"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:textSize="30dp" />
-
-                                    <TextView
-                                        android:id="@+id/textView14"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="10dp"
-                                        android:text="拇   指中间位置(°)："
-                                        android:textSize="30dp" />
-
-                                    <EditText
-                                        android:id="@+id/thumbMiddle"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:ems="2"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:textSize="30dp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="10dp"
-                                        android:text="拇   指握拳位置(°)："
-                                        android:textSize="30dp" />
-
-                                    <EditText
-                                        android:id="@+id/thumbFist"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:ems="2"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:textSize="30dp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="10dp"
-                                        android:text="拇   指自然位置(°)："
-                                        android:textSize="30dp" />
-
-                                    <EditText
-                                        android:id="@+id/thumbStretch"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:ems="2"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:textSize="30dp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="10dp"
-                                        android:text="拇   指运行速度(rmp)："
-                                        android:textSize="30dp" />
-
-                                    <EditText
-                                        android:id="@+id/thumbMove"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:ems="2"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:textSize="30dp" />
-
-                                </TableRow>
-
-                                <TableRow
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginLeft="20dp">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:text="食   指平展位置(°)："
-                                        android:textSize="30dp" />
-
-                                    <EditText
-                                        android:id="@+id/forefingerFlat"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:ems="2"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:textSize="30dp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="10dp"
-                                        android:text="食   指中间位置(°)："
-                                        android:textSize="30dp" />
-
-                                    <EditText
-                                        android:id="@+id/forefingerMiddle"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:ems="2"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:textSize="30dp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="10dp"
-                                        android:text="食   指握拳位置(°)："
-                                        android:textSize="30dp" />
-
-                                    <EditText
-                                        android:id="@+id/forefingerFist"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:ems="2"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:textSize="30dp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="10dp"
-                                        android:text="食   指自然位置(°)："
-                                        android:textSize="30dp" />
-
-                                    <EditText
-                                        android:id="@+id/forefingerStretch"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:ems="2"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:textSize="30dp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="10dp"
-                                        android:text="食   指运行速度(rmp)："
-                                        android:textSize="30dp" />
-
-                                    <EditText
-                                        android:id="@+id/forefingerMove"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:ems="2"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:textSize="30dp" />
-
-                                </TableRow>
-
-                                <TableRow
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginLeft="20dp">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:text="中   指平展位置(°)："
-                                        android:textSize="30dp" />
-
-                                    <EditText
-                                        android:id="@+id/middleFingerFlat"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:ems="2"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:textSize="30dp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="10dp"
-                                        android:text="中    指中间位置(°)："
-                                        android:textSize="30dp" />
-
-                                    <EditText
-                                        android:id="@+id/middleFingerMiddle"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:ems="2"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:textSize="30dp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="10dp"
-                                        android:text="中   指握拳位置(°)："
-                                        android:textSize="30dp" />
-
-                                    <EditText
-                                        android:id="@+id/middleFingerFist"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:ems="2"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:textSize="30dp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="10dp"
-                                        android:text="中   指自然位置(°)："
-                                        android:textSize="30dp" />
-
-                                    <EditText
-                                        android:id="@+id/middleFingerStretch"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:ems="2"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:textSize="30dp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="10dp"
-                                        android:text="中   指运行速度(rmp)："
-                                        android:textSize="30dp" />
-
-                                    <EditText
-                                        android:id="@+id/middleFingerMove"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:ems="2"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:textSize="30dp" />
-
-                                </TableRow>
-
-                                <TableRow
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginLeft="20dp">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:text="无名指平展位置(°)："
-                                        android:textSize="30dp" />
-
-                                    <EditText
-                                        android:id="@+id/ringFingerFlat"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:ems="2"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:textSize="30dp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="10dp"
-                                        android:text="无名指中间位置(°)："
-                                        android:textSize="30dp" />
-
-                                    <EditText
-                                        android:id="@+id/ringFingerMiddle"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:ems="2"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:textSize="30dp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="10dp"
-                                        android:text="无名指握拳位置(°)："
-                                        android:textSize="30dp" />
-
-                                    <EditText
-                                        android:id="@+id/ringFingerFist"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:ems="2"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:textSize="30dp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="10dp"
-                                        android:text="无名指自然位置(°)："
-                                        android:textSize="30dp" />
-
-                                    <EditText
-                                        android:id="@+id/ringFingerStretch"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:ems="2"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:textSize="30dp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="10dp"
-                                        android:text="无名指运行速度(rmp)："
-                                        android:textSize="30dp" />
-
-                                    <EditText
-                                        android:id="@+id/ringFingerMove"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:ems="2"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:textSize="30dp" />
-
-                                </TableRow>
-
-                                <TableRow
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginLeft="20dp">
-
-                                    <TextView
-                                        android:id="@+id/textView15"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:text="小   指平展位置(°)："
-                                        android:textSize="30dp" />
-
-                                    <EditText
-                                        android:id="@+id/littleFingerFlat"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:ems="2"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:textSize="30dp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="10dp"
-                                        android:text="小   指中间位置(°)："
-                                        android:textSize="30dp" />
-
-                                    <EditText
-                                        android:id="@+id/littleFingerMiddle"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:ems="2"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:textSize="30dp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="10dp"
-                                        android:text="小   指握拳位置(°)："
-                                        android:textSize="30dp" />
-
-                                    <EditText
-                                        android:id="@+id/littleFingerFist"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:ems="2"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:textSize="30dp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="10dp"
-                                        android:text="小   指自然位置(°)："
-                                        android:textSize="30dp" />
-
-                                    <EditText
-                                        android:id="@+id/littleFingerStretch"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:ems="2"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:textSize="30dp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="10dp"
-                                        android:text="小   指运行速度(rmp)："
-                                        android:textSize="30dp" />
-
-                                    <EditText
-                                        android:id="@+id/littleFingerMove"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:ems="2"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:textSize="30dp" />
-
-                                </TableRow>
-                                <TableRow>
-                                    <Space
-                                        android:layout_height="30dp"/>
-                                </TableRow>
-                                <TableRow
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginLeft="20dp">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:text="拇   指增益系数："
-                                        android:textSize="30dp" />
-
-                                    <EditText
-                                        android:id="@+id/thumbRatio"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:ems="2"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:textSize="30dp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="10dp"
-                                        android:text="食   指增益系数："
-                                        android:textSize="30dp" />
-
-                                    <EditText
-                                        android:id="@+id/forefingerRatio"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:ems="2"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:textSize="30dp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="10dp"
-                                        android:text="中   指增益系数："
-                                        android:textSize="30dp" />
-
-                                    <EditText
-                                        android:id="@+id/middleFingerRatio"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:ems="2"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:textSize="30dp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="10dp"
-                                        android:text="无名指增益系数："
-                                        android:textSize="30dp" />
-
-                                    <EditText
-                                        android:id="@+id/ringFingerRatio"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:ems="2"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:textSize="30dp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="10dp"
-                                        android:text="小   指增益系数："
-                                        android:textSize="30dp" />
-
-                                    <EditText
-                                        android:id="@+id/littleFingerRatio"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:ems="2"
-                                        android:inputType="number"
-                                        android:maxLength="3"
-                                        android:textSize="30dp" />
-
-                                </TableRow>
-                            </TableLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                >
                                 <TextView
-                                    android:layout_marginLeft="50dp"
-                                    android:layout_marginTop="30dp"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:textSize="25dp"
-                                    android:text="位置单位为°，范围0-180。速度单位为rmp，范围80-114。" />
-                            </LinearLayout>
+                                    android:id="@+id/textView17"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+
+                                    android:text="手套位置配置"
+                                    android:textSize="40dp" />
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_marginLeft="20dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="拇   指平展位置(°)："
+                                    android:textSize="30dp" />
+
+                                <EditText
+                                    android:id="@+id/thumbFlat"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="2"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textSize="30dp" />
+
+                                <TextView
+                                    android:id="@+id/textView14"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="拇   指中间位置(°)："
+                                    android:textSize="30dp" />
+
+                                <EditText
+                                    android:id="@+id/thumbMiddle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="2"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textSize="30dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="拇   指握拳位置(°)："
+                                    android:textSize="30dp" />
+
+                                <EditText
+                                    android:id="@+id/thumbFist"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="2"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textSize="30dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="拇   指自然位置(°)："
+                                    android:textSize="30dp" />
+
+                                <EditText
+                                    android:id="@+id/thumbStretch"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="2"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textSize="30dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="拇   指运行速度(rmp)："
+                                    android:textSize="30dp" />
+
+                                <EditText
+                                    android:id="@+id/thumbMove"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="2"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textSize="30dp" />
+
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="20dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="食   指平展位置(°)："
+                                    android:textSize="30dp" />
+
+                                <EditText
+                                    android:id="@+id/forefingerFlat"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="2"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textSize="30dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="食   指中间位置(°)："
+                                    android:textSize="30dp" />
+
+                                <EditText
+                                    android:id="@+id/forefingerMiddle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="2"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textSize="30dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="食   指握拳位置(°)："
+                                    android:textSize="30dp" />
+
+                                <EditText
+                                    android:id="@+id/forefingerFist"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="2"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textSize="30dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="食   指自然位置(°)："
+                                    android:textSize="30dp" />
+
+                                <EditText
+                                    android:id="@+id/forefingerStretch"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="2"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textSize="30dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="食   指运行速度(rmp)："
+                                    android:textSize="30dp" />
+
+                                <EditText
+                                    android:id="@+id/forefingerMove"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="2"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textSize="30dp" />
+
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="20dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="中   指平展位置(°)："
+                                    android:textSize="30dp" />
+
+                                <EditText
+                                    android:id="@+id/middleFingerFlat"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="2"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textSize="30dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="中    指中间位置(°)："
+                                    android:textSize="30dp" />
+
+                                <EditText
+                                    android:id="@+id/middleFingerMiddle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="2"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textSize="30dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="中   指握拳位置(°)："
+                                    android:textSize="30dp" />
+
+                                <EditText
+                                    android:id="@+id/middleFingerFist"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="2"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textSize="30dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="中   指自然位置(°)："
+                                    android:textSize="30dp" />
+
+                                <EditText
+                                    android:id="@+id/middleFingerStretch"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="2"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textSize="30dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="中   指运行速度(rmp)："
+                                    android:textSize="30dp" />
+
+                                <EditText
+                                    android:id="@+id/middleFingerMove"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="2"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textSize="30dp" />
+
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="20dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="无名指平展位置(°)："
+                                    android:textSize="30dp" />
+
+                                <EditText
+                                    android:id="@+id/ringFingerFlat"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="2"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textSize="30dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="无名指中间位置(°)："
+                                    android:textSize="30dp" />
+
+                                <EditText
+                                    android:id="@+id/ringFingerMiddle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="2"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textSize="30dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="无名指握拳位置(°)："
+                                    android:textSize="30dp" />
+
+                                <EditText
+                                    android:id="@+id/ringFingerFist"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="2"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textSize="30dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="无名指自然位置(°)："
+                                    android:textSize="30dp" />
+
+                                <EditText
+                                    android:id="@+id/ringFingerStretch"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="2"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textSize="30dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="无名指运行速度(rmp)："
+                                    android:textSize="30dp" />
+
+                                <EditText
+                                    android:id="@+id/ringFingerMove"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="2"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textSize="30dp" />
+
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="20dp">
+
+                                <TextView
+                                    android:id="@+id/textView15"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="小   指平展位置(°)："
+                                    android:textSize="30dp" />
+
+                                <EditText
+                                    android:id="@+id/littleFingerFlat"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="2"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textSize="30dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="小   指中间位置(°)："
+                                    android:textSize="30dp" />
+
+                                <EditText
+                                    android:id="@+id/littleFingerMiddle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="2"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textSize="30dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="小   指握拳位置(°)："
+                                    android:textSize="30dp" />
+
+                                <EditText
+                                    android:id="@+id/littleFingerFist"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="2"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textSize="30dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="小   指自然位置(°)："
+                                    android:textSize="30dp" />
+
+                                <EditText
+                                    android:id="@+id/littleFingerStretch"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="2"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textSize="30dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="小   指运行速度(rmp)："
+                                    android:textSize="30dp" />
+
+                                <EditText
+                                    android:id="@+id/littleFingerMove"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="2"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textSize="30dp" />
+
+                            </TableRow>
+                            <TableRow>
+                                <Space
+                                    android:layout_height="30dp"/>
+                            </TableRow>
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="20dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="拇   指增益系数："
+                                    android:textSize="30dp" />
+
+                                <EditText
+                                    android:id="@+id/thumbRatio"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="2"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textSize="30dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="食   指增益系数："
+                                    android:textSize="30dp" />
+
+                                <EditText
+                                    android:id="@+id/forefingerRatio"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="2"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textSize="30dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="中   指增益系数："
+                                    android:textSize="30dp" />
+
+                                <EditText
+                                    android:id="@+id/middleFingerRatio"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="2"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textSize="30dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="无名指增益系数："
+                                    android:textSize="30dp" />
+
+                                <EditText
+                                    android:id="@+id/ringFingerRatio"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="2"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textSize="30dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="小   指增益系数："
+                                    android:textSize="30dp" />
+
+                                <EditText
+                                    android:id="@+id/littleFingerRatio"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="2"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textSize="30dp" />
+
+                            </TableRow>
+                        </TableLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            >
+                            <TextView
+                                android:layout_marginLeft="50dp"
+                                android:layout_marginTop="30dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textSize="25dp"
+                                android:text="位置单位为°，范围0-180。速度单位为rmp，范围80-113。" />
+                        </LinearLayout>
                         <LinearLayout
                             android:layout_marginTop="50dp"
                             android:layout_width="match_parent"
@@ -660,11 +660,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
+                        <Button
+                            android:id="@+id/button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:text="动态添加数据" />
 
                         <com.github.mikephil.charting.charts.LineChart
                             android:id="@+id/chart"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" />
+
                     </LinearLayout>
 
                     <LinearLayout
