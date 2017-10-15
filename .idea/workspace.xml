@@ -5,6 +5,8 @@
       <config>
         <devices>
           <device id="HandMate" />
+          <device id="10.1in WXGA (Tablet)" />
+          <device id="Nexus 10" />
           <device id="tv_1080p" />
         </devices>
         <target>android-24</target>
@@ -19,17 +21,15 @@
     </layouts>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="send" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="800439c1-3e9e-4e17-a0f5-cd09de8e77f6" name="Default" comment="管理员界面,，添加修改左右手">
+    <list default="true" id="800439c1-3e9e-4e17-a0f5-cd09de8e77f6" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/AdminActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/AdminActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/Wifi/Connection.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/Wifi/Connection.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_admin.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_admin.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/library/library.iml" afterPath="$PROJECT_DIR$/library/library.iml" />
     </list>
     <ignored path="expandingpager-master.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -77,35 +77,19 @@
             <state />
           </provider>
           <provider editor-type-id="text-editor">
-            <state relative-caret-position="38304">
-              <caret line="672" column="67" selection-start-line="672" selection-start-column="67" selection-end-line="672" selection-end-column="67" />
+            <state relative-caret-position="362">
+              <caret line="629" column="90" selection-start-line="629" selection-start-column="90" selection-end-line="629" selection-end-column="90" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AdminActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AdminActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/AdminActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1581">
-              <caret line="40" column="20" selection-start-line="40" selection-start-column="20" selection-end-line="40" selection-end-column="20" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#9084#9381#0" expanded="true" />
-                <element signature="e#9380#9381#0" expanded="true" />
-                <element signature="e#9416#20204#0" expanded="true" />
-                <element signature="e#11877#12179#0" expanded="true" />
-                <element signature="e#12178#12179#0" expanded="true" />
-                <element signature="e#14749#15051#0" expanded="true" />
-                <element signature="e#15050#15051#0" expanded="true" />
-                <element signature="e#20203#20204#0" expanded="true" />
-                <element signature="e#20249#20786#0" expanded="true" />
-                <element signature="e#20785#20786#0" expanded="true" />
-                <element signature="e#22706#22851#0" expanded="true" />
-                <element signature="e#22850#22851#0" expanded="true" />
-                <element signature="e#26297#27031#0" expanded="true" />
-                <element signature="e#27030#27031#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="616">
+              <caret line="295" column="17" selection-start-line="295" selection-start-column="17" selection-end-line="295" selection-end-column="17" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -113,7 +97,7 @@
       <file leaf-file-name="Chart.java" pinned="false" current-in-tab="false">
         <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.PhilJay/MPAndroidChart/v3.0.2/a686f57c1f31262aaecf0cdf700d78eaa8f6b6ab/MPAndroidChart-v3.0.2-sources.jar!/com/github/mikephil/charting/charts/Chart.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="455">
+            <state relative-caret-position="1653">
               <caret line="29" column="51" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="58" />
               <folding>
                 <element signature="e#36693#36694#0" expanded="true" />
@@ -123,11 +107,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="u3dPlayer.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="u3dPlayer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/U3D/u3dPlayer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="192" column="34" selection-start-line="192" selection-start-column="34" selection-end-line="192" selection-end-column="34" />
+            <state relative-caret-position="57">
+              <caret line="193" column="20" selection-start-line="193" selection-start-column="20" selection-end-line="193" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -138,13 +122,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="8151">
               <caret line="187" column="32" selection-start-line="187" selection-start-column="32" selection-end-line="187" selection-end-column="32" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#15153#15154#0" expanded="false" />
-                <element signature="e#15201#15202#0" expanded="false" />
-                <element signature="e#16152#16153#0" expanded="false" />
-                <element signature="e#16200#16201#0" expanded="false" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -154,13 +132,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="16017">
               <caret line="326" column="0" selection-start-line="326" selection-start-column="0" selection-end-line="326" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#14688#14689#0" expanded="false" />
-                <element signature="e#14736#14737#0" expanded="false" />
-                <element signature="e#15648#15649#0" expanded="false" />
-                <element signature="e#15696#15697#0" expanded="false" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -168,14 +140,10 @@
       <file leaf-file-name="Connection.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/Wifi/Connection.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="50160">
-              <caret line="914" column="1" selection-start-line="914" selection-start-column="1" selection-end-line="914" selection-end-column="1" />
+            <state relative-caret-position="-3188">
+              <caret line="857" column="41" selection-start-line="857" selection-start-column="41" selection-end-line="857" selection-end-column="41" />
               <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#7229#7230#0" expanded="false" />
-                <element signature="e#7277#7278#0" expanded="false" />
-                <element signature="e#28761#28762#0" expanded="false" />
-                <element signature="e#28809#28810#0" expanded="false" />
+                <marker date="1508062590824" expanded="true" signature="33587:33618" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -186,7 +154,13 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1767">
               <caret line="31" column="49" selection-start-line="31" selection-start-column="49" selection-end-line="31" selection-end-column="49" />
-              <folding />
+              <folding>
+                <marker date="1508058891385" expanded="true" signature="49:459" ph="{...}" />
+                <marker date="1508058891385" expanded="true" signature="126:276" ph="{...}" />
+                <marker date="1508058891385" expanded="true" signature="293:455" ph="{...}" />
+                <marker date="1508058891385" expanded="true" signature="311:449" ph="{...}" />
+                <marker date="1508058891385" expanded="true" signature="474:1232" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -206,10 +180,11 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="layoutResourceFile_vertical" />
         <option value="valueResourceFile" />
+        <option value="layoutResourceFile_vertical" />
         <option value="resourceFile" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -2524,9 +2499,10 @@
     </option>
     <option name="modificationStamps">
       <map>
+        <entry key="C:\Users\Administrator\Desktop\project\HandMate" value="6021026096341" />
         <entry key="C:\Users\samael\Desktop\expandingpager-master" value="6001558907331" />
-        <entry key="C:\Users\samael\Desktop\project\HandMate" value="6024818560103" />
-        <entry key="C:\Users\samael\Desktop\project\Handmate" value="6012706729699" />
+        <entry key="C:\Users\samael\Desktop\project\HandMate" value="6024979896301" />
+        <entry key="C:\Users\samael\Desktop\project\Handmate" value="6020370299671" />
         <entry key="C:\Users\samael\Desktop\project\expandingpager-master" value="6010806295133" />
       </map>
     </option>
@@ -2969,21 +2945,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/anim/ClickImageView.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/anim/view_trans.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/animator/selector_animators_12.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/TTS/SpeechUtil.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/anim/view_anima.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/timeline_item.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_front.xml" />
-        <option value="$PROJECT_DIR$/library/src/main/res/layout/expanding_fragment.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_hardwarectivity.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/btn_home.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/btn_ok_selector.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout-v17/activity_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_system_set.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_report.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_senior_set.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_history.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_u3d_player.xml" />
@@ -2992,12 +2953,10 @@
         <option value="$PROJECT_DIR$/.idea/modules.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Config/ConfigUtil.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_game_item.xml" />
-        <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/UsersActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Model/users/UserData.java" />
         <option value="$PROJECT_DIR$/library/proguard-rules.pro" />
         <option value="$PROJECT_DIR$/app/proguard-rules.pro" />
-        <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/activity_admin.xml" />
         <option value="$PROJECT_DIR$/app/app.iml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_user_edit.xml" />
@@ -3006,27 +2965,44 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Hardwarectivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/UserEditActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/aidl/com/chej/HandMate/IMyAidlInterface.aidl" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/Connection.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/U3D/u3dPlayer.java" />
         <option value="$PROJECT_DIR$/library/src/main/java/com/chej/library/ExpandingPagerFactory.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/GameItemActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/MasterSlaveActivity.java" />
         <option value="$PROJECT_DIR$/library/src/main/java/com/chej/library/ExpandingViewPagerTransformer.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/EvaluateActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_devicelist.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/DeviceListActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_console.xml" />
+        <option value="$PROJECT_DIR$/usbSerialForAndroid/src/main/java/com/hoho/android/usbserial/util/HexDump.java" />
+        <option value="$PROJECT_DIR$/usbSerialForAndroid/src/main/java/com/hoho/android/usbserial/util/SerialInputOutputManager.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/SerialConsoleActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/user_list_item.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/BootBroadcastReceiver.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/ComService.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/Wifi/Connection.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/xml/device_filter.xml" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/WifiService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/Connection.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/UsbService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/Wifi/WifiService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/USB/UsbService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/Messages.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/USB/USBHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_admin.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/Wifi/Connection.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/AdminActivity.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-10" />
-    <option name="width" value="2582" />
-    <option name="height" value="1384" />
+    <option name="width" value="2574" />
+    <option name="height" value="1385" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -3053,171 +3029,16 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="expandingpager-master" />
+              <option name="myItemId" value="HandMate" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="expandingpager-master" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="library" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="expandingpager-master" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="library" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="expandingpager-master" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="values" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="expandingpager-master" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="expandingpager-master" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="menu" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="expandingpager-master" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="expandingpager-master" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drawable" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="expandingpager-master" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="expandingpager-master" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="aidl" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com.qslll.expandingpager" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="expandingpager-master" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
-      </pane>
-      <pane id="Scratches" />
-      <pane id="PackagesPane">
-        <subPane />
       </pane>
       <pane id="ProjectPane">
         <subPane>
@@ -3486,14 +3307,17 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="PackagesPane">
+        <subPane />
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="android.sdk.path" value="D:/Android/sdk" />
     <property name="device.picker.selection" value="HandMate" />
-    <property name="android.project.structure.last.selected" value="app" />
+    <property name="android.project.structure.last.selected" value="Project" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
@@ -4062,7 +3886,35 @@
       <option name="project" value="LOCAL" />
       <updated>1504494163891</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="1.9">
+      <created>1505289280744</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1505289280744</updated>
+    </task>
+    <task id="LOCAL-00030" summary="1.91添加usb">
+      <created>1505789837155</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1505789837155</updated>
+    </task>
+    <task id="LOCAL-00031" summary="920">
+      <created>1505871604101</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1505871604101</updated>
+    </task>
+    <task id="LOCAL-00032" summary="921">
+      <created>1505963523151</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1505963523151</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TodoView">
@@ -4075,7 +3927,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-10" y="0" width="2582" height="1384" extended-state="0" />
+    <frame x="-10" y="0" width="2574" height="1385" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283713" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -4083,16 +3935,17 @@
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7243196" sideWeight="0.5258064" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2837959" sideWeight="0.70668817" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.67710197" sideWeight="0.5275081" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43828264" sideWeight="0.70668817" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12176375" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3765324" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.47179946" sideWeight="0.47419354" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.67710197" sideWeight="0.47249192" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27408057" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2782258" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.58012533" sideWeight="0.57655114" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27912623" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19767442" sideWeight="0.57655114" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24979855" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -4105,7 +3958,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1217742" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -4138,10 +3990,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="实现自启动，实现报文跳转界面" />
-    <MESSAGE value="修改报文" />
-    <MESSAGE value="修改若干传输功能" />
-    <MESSAGE value="关机重启功能修改" />
     <MESSAGE value="加入舵机状态，手套操暂停" />
     <MESSAGE value="修改搜索bug" />
     <MESSAGE value="1.6beta" />
@@ -4163,7 +4011,11 @@
     <MESSAGE value="添加管理员界面（未完成）" />
     <MESSAGE value="添加管理员界面,，修改配置功能" />
     <MESSAGE value="管理员界面,，添加修改左右手" />
-    <option name="LAST_COMMIT_MESSAGE" value="管理员界面,，添加修改左右手" />
+    <MESSAGE value="1.9" />
+    <MESSAGE value="1.91添加usb" />
+    <MESSAGE value="920" />
+    <MESSAGE value="921" />
+    <option name="LAST_COMMIT_MESSAGE" value="921" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -4478,7 +4330,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4498,31 +4349,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/Wifi/Connection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50160">
-          <caret line="914" column="1" selection-start-line="914" selection-start-column="1" selection-end-line="914" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#7229#7230#0" expanded="false" />
-            <element signature="e#7277#7278#0" expanded="false" />
-            <element signature="e#28761#28762#0" expanded="false" />
-            <element signature="e#28809#28810#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/GameItemActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="16017">
           <caret line="326" column="0" selection-start-line="326" selection-start-column="0" selection-end-line="326" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#14688#14689#0" expanded="false" />
-            <element signature="e#14736#14737#0" expanded="false" />
-            <element signature="e#15648#15649#0" expanded="false" />
-            <element signature="e#15696#15697#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -4530,23 +4361,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="8151">
           <caret line="187" column="32" selection-start-line="187" selection-start-column="32" selection-end-line="187" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#15153#15154#0" expanded="false" />
-            <element signature="e#15201#15202#0" expanded="false" />
-            <element signature="e#16152#16153#0" expanded="false" />
-            <element signature="e#16200#16201#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="38304">
-          <caret line="672" column="67" selection-start-line="672" selection-start-column="67" selection-end-line="672" selection-end-column="67" />
           <folding />
         </state>
       </provider>
@@ -4555,13 +4369,19 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1767">
           <caret line="31" column="49" selection-start-line="31" selection-start-column="49" selection-end-line="31" selection-end-column="49" />
-          <folding />
+          <folding>
+            <marker date="1508058891385" expanded="true" signature="49:459" ph="{...}" />
+            <marker date="1508058891385" expanded="true" signature="126:276" ph="{...}" />
+            <marker date="1508058891385" expanded="true" signature="293:455" ph="{...}" />
+            <marker date="1508058891385" expanded="true" signature="311:449" ph="{...}" />
+            <marker date="1508058891385" expanded="true" signature="474:1232" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.PhilJay/MPAndroidChart/v3.0.2/a686f57c1f31262aaecf0cdf700d78eaa8f6b6ab/MPAndroidChart-v3.0.2-sources.jar!/com/github/mikephil/charting/charts/Chart.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="455">
+        <state relative-caret-position="1653">
           <caret line="29" column="51" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="58" />
           <folding>
             <element signature="e#36693#36694#0" expanded="true" />
@@ -4570,34 +4390,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/AdminActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/U3D/u3dPlayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1581">
-          <caret line="40" column="20" selection-start-line="40" selection-start-column="20" selection-end-line="40" selection-end-column="20" />
+        <state relative-caret-position="57">
+          <caret line="193" column="20" selection-start-line="193" selection-start-column="20" selection-end-line="193" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_admin.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="362">
+          <caret line="629" column="90" selection-start-line="629" selection-start-column="90" selection-end-line="629" selection-end-column="90" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/Transmission/Wifi/Connection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3188">
+          <caret line="857" column="41" selection-start-line="857" selection-start-column="41" selection-end-line="857" selection-end-column="41" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#9084#9381#0" expanded="true" />
-            <element signature="e#9380#9381#0" expanded="true" />
-            <element signature="e#9416#20204#0" expanded="true" />
-            <element signature="e#11877#12179#0" expanded="true" />
-            <element signature="e#12178#12179#0" expanded="true" />
-            <element signature="e#14749#15051#0" expanded="true" />
-            <element signature="e#15050#15051#0" expanded="true" />
-            <element signature="e#20203#20204#0" expanded="true" />
-            <element signature="e#20249#20786#0" expanded="true" />
-            <element signature="e#20785#20786#0" expanded="true" />
-            <element signature="e#22706#22851#0" expanded="true" />
-            <element signature="e#22850#22851#0" expanded="true" />
-            <element signature="e#26297#27031#0" expanded="true" />
-            <element signature="e#27030#27031#0" expanded="true" />
+            <marker date="1508062590824" expanded="true" signature="33587:33618" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/U3D/u3dPlayer.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/chej/HandMate/AdminActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="192" column="34" selection-start-line="192" selection-start-column="34" selection-end-line="192" selection-end-column="34" />
+        <state relative-caret-position="616">
+          <caret line="295" column="17" selection-start-line="295" selection-start-column="17" selection-end-line="295" selection-end-column="17" />
           <folding />
         </state>
       </provider>

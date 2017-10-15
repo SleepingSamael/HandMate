@@ -30,6 +30,7 @@ import com.chej.HandMate.Model.users.UserData;
 import com.chej.HandMate.ShutDownActivity;
 
 import static android.content.Context.ACTIVITY_SERVICE;
+import static android.content.Context.LOCATION_SERVICE;
 
 /**
  * 建立上下位机之间的连接
@@ -438,10 +439,13 @@ public class Connection {
                                 +" "+userSettings.getString("littleFist","120")+" "+userSettings.getString("thumbStretch","50")
                                 +" "+userSettings.getString("foreStretch","50")+" "+userSettings.getString("middleStretch","50")
                                 +" "+userSettings.getString("ringStretch","50")+" "+userSettings.getString("littleStretch","50")
-                                +" "+userSettings.getString("thumbMove","114")+" "+userSettings.getString("foreMove","114")
-                                +" "+userSettings.getString("middleMove","114")+" "+userSettings.getString("ringMove","114")
-                                +" "+userSettings.getString("littleMove","114");
+                                +" "+userSettings.getString("thumbMove","113")+" "+userSettings.getString("foreMove","113")
+                                +" "+userSettings.getString("middleMove","113")+" "+userSettings.getString("ringMove","113")
+                                +" "+userSettings.getString("littleMove","113")+" "+userSettings.getString("thumbRatio","15")
+                                +" "+userSettings.getString("foreRatio","15") +" "+userSettings.getString("middleRatio","15")
+                                +" "+userSettings.getString("ringRatio","15") +" "+userSettings.getString("littleRatio","15");
                         sendData(dConfigData(data));
+                        Log.e("AAAAAAA",data);
                     }
                     if (str[0].equals("10"))//下位机向上位机发送角度信息
                     {

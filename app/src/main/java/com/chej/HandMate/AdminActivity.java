@@ -158,11 +158,11 @@ public class AdminActivity extends AppCompatActivity {
         middleFingerMove_et.setText(userSettings.getString("middleMove","113"));
         ringFingerMove_et.setText(userSettings.getString("ringMove","113"));
         littleFingerMove_et.setText(userSettings.getString("littleMove","113"));
-        thumbRatio_et.setText(userSettings.getString("thumbRatio","10"));
-        forefingerRatio_et.setText(userSettings.getString("foreRatio","10"));
-        middleFingerRatio_et.setText(userSettings.getString("middleRatio","10"));
-        ringFingerRatio_et.setText(userSettings.getString("ringRatio","10"));
-        littleFingerRatio_et.setText(userSettings.getString("littleRatio","10"));
+        thumbRatio_et.setText(userSettings.getString("thumbRatio","15"));
+        forefingerRatio_et.setText(userSettings.getString("foreRatio","15"));
+        middleFingerRatio_et.setText(userSettings.getString("middleRatio","15"));
+        ringFingerRatio_et.setText(userSettings.getString("ringRatio","15"));
+        littleFingerRatio_et.setText(userSettings.getString("littleRatio","15"));
         if(userSettings.getString("glove","右").equals("右")){
             glove.setChecked(false);
         }else{
@@ -221,7 +221,12 @@ public class AdminActivity extends AppCompatActivity {
                         Integer.parseInt(forefingerMove_et.getText().toString())>113 || Integer.parseInt(forefingerMove_et.getText().toString())<10 ||
                         Integer.parseInt(middleFingerMove_et.getText().toString())>113 || Integer.parseInt(middleFingerMove_et.getText().toString())<10 ||
                         Integer.parseInt(ringFingerMove_et.getText().toString())>113 || Integer.parseInt(ringFingerMove_et.getText().toString())<10 ||
-                        Integer.parseInt(littleFingerMove_et.getText().toString())>113 || Integer.parseInt(littleFingerMove_et.getText().toString())<10)
+                        Integer.parseInt(littleFingerMove_et.getText().toString())>113 || Integer.parseInt(littleFingerMove_et.getText().toString())<10||
+                        Integer.parseInt(thumbRatio_et.getText().toString())>19 ||Integer.parseInt(thumbRatio_et.getText().toString())<11||
+                        Integer.parseInt(forefingerRatio_et.getText().toString())>19 ||Integer.parseInt(forefingerRatio_et.getText().toString())<11||
+                        Integer.parseInt(middleFingerRatio_et.getText().toString())>19 ||Integer.parseInt(middleFingerRatio_et.getText().toString())<11||
+                        Integer.parseInt(ringFingerRatio_et.getText().toString())>19 ||Integer.parseInt(ringFingerRatio_et.getText().toString())<11||
+                        Integer.parseInt(littleFingerRatio_et.getText().toString())>19 ||Integer.parseInt(littleFingerRatio_et.getText().toString())<11)
                 {
                     new MyCustomDialog.Builder(AdminActivity.this)
                             .setTitle("警告").setMessage("数值超过有效范围，请重新输入！")
@@ -282,9 +287,10 @@ public class AdminActivity extends AppCompatActivity {
                             +" "+userSettings.getString("ringStretch","50")+" "+userSettings.getString("littleStretch","50")
                             +" "+userSettings.getString("thumbMove","113")+" "+userSettings.getString("foreMove","113")
                             +" "+userSettings.getString("middleMove","113")+" "+userSettings.getString("ringMove","113")
-                            +" "+userSettings.getString("littleMove","113")+" "+userSettings.getString("thumbRatio","10")
-                            +" "+userSettings.getString("foreRatio","10")+" "+userSettings.getString("middleRatio","10")
-                            +" "+userSettings.getString("ringRatio","10")+" "+userSettings.getString("littleRatio","10");
+                            +" "+userSettings.getString("littleMove","113")+" "+userSettings.getString("thumbRatio","15")
+                            +" "+userSettings.getString("foreRatio","15")+" "+userSettings.getString("middleRatio","15")
+                            +" "+userSettings.getString("ringRatio","15")+" "+userSettings.getString("littleRatio","15");
+                    Toast.makeText(getApplicationContext(), "信息已保存", Toast.LENGTH_SHORT).show();
                     Toast.makeText(getApplicationContext(), data, Toast.LENGTH_SHORT).show();
                     sendConfigData(data);
                 }

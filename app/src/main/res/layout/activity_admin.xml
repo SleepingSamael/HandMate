@@ -627,7 +627,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:textSize="25dp"
-                                android:text="位置单位为°，范围0-180。速度单位为rmp，范围80-113。" />
+                                android:text="位置单位为°，范围0-180。速度单位为rmp，范围80-113。增益系数范围11-19" />
                         </LinearLayout>
                         <LinearLayout
                             android:layout_marginTop="50dp"
