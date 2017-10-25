@@ -20,6 +20,7 @@ import android.widget.TabHost;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.chej.HandMate.Model.SetConstant;
 import com.chej.HandMate.Model.MyCustomDialog;
 import com.chej.HandMate.Model.SysApplication;
 import com.chej.HandMate.Transmission.Wifi.WifiService;
@@ -65,11 +66,26 @@ public class AdminActivity extends AppCompatActivity {
     private EditText littleFingerFist_et;
     private EditText littleFingerStretch_et;
     private EditText littleFingerMove_et;
-    private EditText thumbRatio_et;//增益系数
-    private EditText forefingerRatio_et;
-    private EditText middleFingerRatio_et;
-    private EditText ringFingerRatio_et;
-    private EditText littleFingerRatio_et;
+    private EditText thumb_0v_et;//0v电压系数（不可修改）
+    private EditText forefinger_0v_et;
+    private EditText middleFinger_0v_et;
+    private EditText ringFinger_0v_et;
+    private EditText littleFinger_0v_et;
+    private EditText thumb_180v_et;//180v电压（不可修改）
+    private EditText forefinger_180v_et;
+    private EditText middleFinger_180v_et;
+    private EditText ringFinger_180v_et;
+    private EditText littleFinger_180v_et;
+    private EditText thumb_adjust_0v_et;//0v校准电压
+    private EditText forefinger_adjust_0v_et;
+    private EditText middleFinger_adjust_0v_et;
+    private EditText ringFinger_adjust_0v_et;
+    private EditText littleFinger_adjust_0v_et;
+    private EditText thumb_adjust_180v_et;//180v校准电压
+    private EditText forefinger_adjust_180v_et;
+    private EditText middleFinger_adjust_180v_et;
+    private EditText ringFinger_adjust_180v_et;
+    private EditText littleFinger_adjust_180v_et;
     private Button quit;
     private Button save;
     private ToggleButton glove;
@@ -93,8 +109,9 @@ public class AdminActivity extends AppCompatActivity {
 
         //在TabHost创建标签，然后设置：标题／图标／标签页布局
         th.addTab(th.newTabSpec("tab1").setIndicator("手套配置",getResources().getDrawable(R.drawable.logo)).setContent(R.id.tab_glove));
-        th.addTab(th.newTabSpec("tab2").setIndicator("标签2",null).setContent(R.id.tab2));
-        th.addTab(th.newTabSpec("tab3").setIndicator("标签3",null).setContent(R.id.tab3));
+        th.addTab(th.newTabSpec("tab2").setIndicator("电压配置",null).setContent(R.id.tab_voltageAdjust));
+        th.addTab(th.newTabSpec("tab3").setIndicator("标签2",null).setContent(R.id.tab2));
+        th.addTab(th.newTabSpec("tab4").setIndicator("标签3",null).setContent(R.id.tab3));
         //上面的null可以为getResources().getDrawable(R.drawable.图片名)设置图标
 
         glove=(ToggleButton)findViewById(R.id.glove_toggleButton) ;
@@ -125,11 +142,28 @@ public class AdminActivity extends AppCompatActivity {
         littleFingerFist_et=(EditText)findViewById(R.id.littleFingerFist);
         littleFingerStretch_et=(EditText)findViewById(R.id.littleFingerStretch);
         littleFingerMove_et=(EditText)findViewById(R.id.littleFingerMove);
-        thumbRatio_et=(EditText)findViewById(R.id.thumbRatio);
-        forefingerRatio_et=(EditText)findViewById(R.id.forefingerRatio);
-        middleFingerRatio_et=(EditText)findViewById(R.id.middleFingerRatio);
-        ringFingerRatio_et=(EditText)findViewById(R.id.ringFingerRatio);
-        littleFingerRatio_et=(EditText)findViewById(R.id.littleFingerRatio);
+        //电压
+        thumb_0v_et=(EditText)findViewById(R.id.thumb_voltage_0);
+        forefinger_0v_et=(EditText)findViewById(R.id.forefinger_voltage_0);
+        middleFinger_0v_et=(EditText)findViewById(R.id.middleFinger_voltage_0);
+        ringFinger_0v_et=(EditText)findViewById(R.id.ringFinger_voltage_0);
+        littleFinger_0v_et=(EditText)findViewById(R.id.littleFinger_voltage_0);
+        thumb_180v_et=(EditText)findViewById(R.id.thumb_voltage_180);
+        forefinger_180v_et=(EditText)findViewById(R.id.forefinger_voltage_180);
+        middleFinger_180v_et=(EditText)findViewById(R.id.middleFinger_voltage_180);
+        ringFinger_180v_et=(EditText)findViewById(R.id.ringFinger_voltage_180);
+        littleFinger_180v_et=(EditText)findViewById(R.id.littleFinger_voltage_180);
+        //校准电压
+        thumb_adjust_0v_et=(EditText)findViewById(R.id.thumb_adjust_0);
+        forefinger_adjust_0v_et=(EditText)findViewById(R.id.forefinger_adjust_0);
+        middleFinger_adjust_0v_et=(EditText)findViewById(R.id.middleFinger_adjust_0);
+        ringFinger_adjust_0v_et=(EditText)findViewById(R.id.ringFinger_adjust_0);
+        littleFinger_adjust_0v_et=(EditText)findViewById(R.id.littleFinger_adjust_0);
+        thumb_adjust_180v_et=(EditText)findViewById(R.id.thumb_adjust_180);
+        forefinger_adjust_180v_et=(EditText)findViewById(R.id.forefinger_adjust_180);
+        middleFinger_adjust_180v_et=(EditText)findViewById(R.id.middleFinger_adjust_180);
+        ringFinger_adjust_180v_et=(EditText)findViewById(R.id.ringFinger_adjust_180);
+        littleFinger_adjust_180v_et=(EditText)findViewById(R.id.littleFinger_adjust_180);
 
         //获取Preferences
         final SharedPreferences userSettings = getSharedPreferences("setting", 0);
@@ -158,11 +192,29 @@ public class AdminActivity extends AppCompatActivity {
         middleFingerMove_et.setText(userSettings.getString("middleMove","113"));
         ringFingerMove_et.setText(userSettings.getString("ringMove","113"));
         littleFingerMove_et.setText(userSettings.getString("littleMove","113"));
-        thumbRatio_et.setText(userSettings.getString("thumbRatio","15"));
-        forefingerRatio_et.setText(userSettings.getString("foreRatio","15"));
-        middleFingerRatio_et.setText(userSettings.getString("middleRatio","15"));
-        ringFingerRatio_et.setText(userSettings.getString("ringRatio","15"));
-        littleFingerRatio_et.setText(userSettings.getString("littleRatio","15"));
+        //电压
+        thumb_0v_et.setText(SetConstant.THUMB_0V);
+        forefinger_0v_et.setText(SetConstant.FORE_0V);
+        middleFinger_0v_et.setText(SetConstant.MIDDLE_0V);
+        ringFinger_0v_et.setText(SetConstant.RING_0V);
+        littleFinger_0v_et.setText(SetConstant.LITTLE_0V);
+        thumb_180v_et.setText(SetConstant.THUMB_180V);
+        forefinger_180v_et.setText(SetConstant.FORE_180V);
+        middleFinger_180v_et.setText(SetConstant.MIDDLE_180V);
+        ringFinger_180v_et.setText(SetConstant.RING_180V);
+        littleFinger_180v_et.setText(SetConstant.LITTLE_180V);
+        //校准电压（默认与电压一致）
+        thumb_adjust_0v_et.setText(userSettings.getString("thumbAdjust0V", SetConstant.THUMB_0V));
+        forefinger_adjust_0v_et.setText(userSettings.getString("foreAdjust0V",SetConstant.FORE_0V));
+        middleFinger_adjust_0v_et.setText(userSettings.getString("middleAdjust0V",SetConstant.MIDDLE_0V));
+        ringFinger_adjust_0v_et.setText(userSettings.getString("ringAdjust0V",SetConstant.RING_0V));
+        littleFinger_adjust_0v_et.setText(userSettings.getString("littleAdjust0V",SetConstant.LITTLE_0V));
+        thumb_adjust_180v_et.setText(userSettings.getString("thumbAdjust180V",SetConstant.THUMB_180V));
+        forefinger_adjust_180v_et.setText(userSettings.getString("foreAdjust180V",SetConstant.FORE_180V));
+        middleFinger_adjust_180v_et.setText(userSettings.getString("middleAdjust180V",SetConstant.MIDDLE_180V));
+        ringFinger_adjust_180v_et.setText(userSettings.getString("ringAdjust180V",SetConstant.RING_180V));
+        littleFinger_adjust_180v_et.setText(userSettings.getString("littleAdjust180V",SetConstant.LITTLE_180V));
+
         if(userSettings.getString("glove","右").equals("右")){
             glove.setChecked(false);
         }else{
@@ -192,9 +244,17 @@ public class AdminActivity extends AppCompatActivity {
                         ringFingerStretch_et.getText().toString().trim().equals("") || ringFingerMove_et.getText().toString().trim().equals("") ||
                         littleFingerFlat_et.getText().toString().trim().equals("") || littleFingerMiddle_et.getText().toString().trim().equals("") ||
                         littleFingerFist_et.getText().toString().trim().equals("") || littleFingerStretch_et.getText().toString().trim().equals("") ||
-                        littleFingerMove_et.getText().toString().trim().equals("") || thumbRatio_et.getText().toString().trim().equals("")||
-                        forefingerRatio_et.getText().toString().trim().equals("") ||middleFingerRatio_et.getText().toString().trim().equals("")||
-                        ringFingerRatio_et.getText().toString().trim().equals("") ||littleFingerRatio_et.getText().toString().trim().equals(""))
+                        littleFingerMove_et.getText().toString().trim().equals("") || thumb_0v_et.getText().toString().trim().equals("")||
+                        thumb_adjust_0v_et.getText().toString().trim().equals("") ||thumb_180v_et.getText().toString().trim().equals("")||
+                        thumb_adjust_180v_et.getText().toString().trim().equals("") ||forefinger_0v_et.getText().toString().trim().equals("")||
+                        forefinger_adjust_0v_et.getText().toString().trim().equals("") ||forefinger_180v_et.getText().toString().trim().equals("")||
+                        forefinger_adjust_180v_et.getText().toString().trim().equals("") ||middleFinger_0v_et.getText().toString().trim().equals("")||
+                        middleFinger_adjust_0v_et.getText().toString().trim().equals("") ||middleFinger_180v_et.getText().toString().trim().equals("")||
+                        middleFinger_adjust_180v_et.getText().toString().trim().equals("") ||ringFinger_0v_et.getText().toString().trim().equals("")||
+                        ringFinger_adjust_0v_et.getText().toString().trim().equals("") ||ringFinger_180v_et.getText().toString().trim().equals("")||
+                        ringFinger_adjust_180v_et.getText().toString().trim().equals("") ||littleFinger_0v_et.getText().toString().trim().equals("")||
+                        littleFinger_adjust_0v_et.getText().toString().trim().equals("") ||littleFinger_180v_et.getText().toString().trim().equals("")||
+                        littleFinger_adjust_180v_et.getText().toString().trim().equals("") )
                 {
                     new MyCustomDialog.Builder(AdminActivity.this)
                             .setTitle("警告").setMessage("不能有空项目，请重新输入！")
@@ -221,15 +281,10 @@ public class AdminActivity extends AppCompatActivity {
                         Integer.parseInt(forefingerMove_et.getText().toString())>113 || Integer.parseInt(forefingerMove_et.getText().toString())<10 ||
                         Integer.parseInt(middleFingerMove_et.getText().toString())>113 || Integer.parseInt(middleFingerMove_et.getText().toString())<10 ||
                         Integer.parseInt(ringFingerMove_et.getText().toString())>113 || Integer.parseInt(ringFingerMove_et.getText().toString())<10 ||
-                        Integer.parseInt(littleFingerMove_et.getText().toString())>113 || Integer.parseInt(littleFingerMove_et.getText().toString())<10||
-                        Integer.parseInt(thumbRatio_et.getText().toString())>19 ||Integer.parseInt(thumbRatio_et.getText().toString())<11||
-                        Integer.parseInt(forefingerRatio_et.getText().toString())>19 ||Integer.parseInt(forefingerRatio_et.getText().toString())<11||
-                        Integer.parseInt(middleFingerRatio_et.getText().toString())>19 ||Integer.parseInt(middleFingerRatio_et.getText().toString())<11||
-                        Integer.parseInt(ringFingerRatio_et.getText().toString())>19 ||Integer.parseInt(ringFingerRatio_et.getText().toString())<11||
-                        Integer.parseInt(littleFingerRatio_et.getText().toString())>19 ||Integer.parseInt(littleFingerRatio_et.getText().toString())<11)
+                        Integer.parseInt(littleFingerMove_et.getText().toString())>113 || Integer.parseInt(littleFingerMove_et.getText().toString())<10)
                 {
                     new MyCustomDialog.Builder(AdminActivity.this)
-                            .setTitle("警告").setMessage("数值超过有效范围，请重新输入！")
+                            .setTitle("警告").setMessage("手套位置配置数值超过有效范围，请重新输入！")
                             .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -267,14 +322,23 @@ public class AdminActivity extends AppCompatActivity {
                     editor.putString("middleMove",middleFingerMove_et.getText().toString());
                     editor.putString("ringMove",ringFingerMove_et.getText().toString());
                     editor.putString("littleMove",littleFingerMove_et.getText().toString());
-                    editor.putString("thumbRatio",thumbRatio_et.getText().toString());
-                    editor.putString("foreRatio",forefingerRatio_et.getText().toString());
-                    editor.putString("middleRatio",middleFingerRatio_et.getText().toString());
-                    editor.putString("ringRatio",ringFingerRatio_et.getText().toString());
-                    editor.putString("littleRatio",littleFingerRatio_et.getText().toString());
+                    //电压
+                    editor.putString("thumbAdjust0V",thumb_adjust_0v_et.getText().toString());
+                    editor.putString("foreAdjust0V",forefinger_adjust_0v_et.getText().toString());
+                    editor.putString("middleAdjust0V",middleFinger_adjust_0v_et.getText().toString());
+                    editor.putString("ringAdjust0V",ringFinger_adjust_0v_et.getText().toString());
+                    editor.putString("littleAdjust0V",littleFinger_adjust_0v_et.getText().toString());
+                    editor.putString("thumbAdjust180V",thumb_adjust_180v_et.getText().toString());
+                    editor.putString("foreAdjust180V",forefinger_adjust_180v_et.getText().toString());
+                    editor.putString("middleAdjust180V",middleFinger_adjust_180v_et.getText().toString());
+                    editor.putString("ringAdjust180V",ringFinger_adjust_180v_et.getText().toString());
+                    editor.putString("littleAdjust180V",littleFinger_adjust_180v_et.getText().toString());
                     //d、完成提交
                     editor.commit();
                     Toast.makeText(getApplicationContext(), "信息已保存", Toast.LENGTH_SHORT).show();
+                    String strh=voltageToMessage(userSettings.getString("thumbAdjust180V","2.69"),DigitPosition.HIGH);
+                    String strl=voltageToMessage(userSettings.getString("thumbAdjust180V","2.69"),DigitPosition.LOW);
+                    //电压值乘1000后拆成两位发送
                     String data = userSettings.getString("thumbFlat","10")+" "+userSettings.getString("foreFlat","10")+" "
                             +userSettings.getString("middleFlat","10")+" "+userSettings.getString("ringFlat","10")+
                             " "+userSettings.getString("littleFlat","10")+" "+userSettings.getString("thumbMiddle","110")
@@ -287,12 +351,29 @@ public class AdminActivity extends AppCompatActivity {
                             +" "+userSettings.getString("ringStretch","50")+" "+userSettings.getString("littleStretch","50")
                             +" "+userSettings.getString("thumbMove","113")+" "+userSettings.getString("foreMove","113")
                             +" "+userSettings.getString("middleMove","113")+" "+userSettings.getString("ringMove","113")
-                            +" "+userSettings.getString("littleMove","113")+" "+userSettings.getString("thumbRatio","15")
-                            +" "+userSettings.getString("foreRatio","15")+" "+userSettings.getString("middleRatio","15")
-                            +" "+userSettings.getString("ringRatio","15")+" "+userSettings.getString("littleRatio","15");
-                    Toast.makeText(getApplicationContext(), "信息已保存", Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getApplicationContext(), data, Toast.LENGTH_SHORT).show();
+                            +" "+userSettings.getString("littleMove","113")
+                            +" "+voltageToMessage(userSettings.getString("thumbAdjust180V",SetConstant.THUMB_180V),DigitPosition.HIGH)
+                            +" "+voltageToMessage(userSettings.getString("foreAdjust180V",SetConstant.FORE_180V),DigitPosition.HIGH)
+                            +" "+voltageToMessage(userSettings.getString("middleAdjust180V",SetConstant.MIDDLE_180V),DigitPosition.HIGH)
+                            +" "+voltageToMessage(userSettings.getString("ringAdjust180V",SetConstant.RING_180V),DigitPosition.HIGH)
+                            +" "+voltageToMessage(userSettings.getString("littleAdjust180V",SetConstant.LITTLE_180V),DigitPosition.HIGH)
+                            +" "+voltageToMessage(userSettings.getString("thumbAdjust180V",SetConstant.THUMB_180V),DigitPosition.LOW)
+                            +" "+voltageToMessage(userSettings.getString("foreAdjust180V",SetConstant.FORE_180V),DigitPosition.LOW)
+                            +" "+voltageToMessage(userSettings.getString("middleAdjust180V",SetConstant.MIDDLE_180V),DigitPosition.LOW)
+                            +" "+voltageToMessage(userSettings.getString("ringAdjust180V",SetConstant.RING_180V),DigitPosition.LOW)
+                            +" "+voltageToMessage(userSettings.getString("littleAdjust180V",SetConstant.LITTLE_180V),DigitPosition.LOW)
+                            +" "+voltageToMessage(userSettings.getString("thumbAdjust0V",SetConstant.THUMB_0V),DigitPosition.HIGH)
+                            +" "+voltageToMessage(userSettings.getString("foreAdjust0V",SetConstant.FORE_0V),DigitPosition.HIGH)
+                            +" "+voltageToMessage(userSettings.getString("middleAdjust0V",SetConstant.MIDDLE_180V),DigitPosition.HIGH)
+                            +" "+voltageToMessage(userSettings.getString("ringAdjust0V",SetConstant.RING_0V),DigitPosition.HIGH)
+                            +" "+voltageToMessage(userSettings.getString("littleAdjust0V",SetConstant.LITTLE_0V),DigitPosition.HIGH)
+                            +" "+voltageToMessage(userSettings.getString("thumbAdjust0V",SetConstant.THUMB_0V),DigitPosition.LOW)
+                            +" "+voltageToMessage(userSettings.getString("foreAdjust0V",SetConstant.FORE_0V),DigitPosition.LOW)
+                            +" "+voltageToMessage(userSettings.getString("middleAdjust0V",SetConstant.MIDDLE_0V),DigitPosition.LOW)
+                            +" "+voltageToMessage(userSettings.getString("ringAdjust0V",SetConstant.RING_0V),DigitPosition.LOW)
+                            +" "+voltageToMessage(userSettings.getString("littleAdjust0V",SetConstant.LITTLE_0V),DigitPosition.LOW);
                     sendConfigData(data);
+                    Log.e("AAAAAAA",data);
                 }
             }
         });
@@ -473,6 +554,20 @@ public class AdminActivity extends AppCompatActivity {
         return set;
     }
 
+    //将界面上显示的电压值乘1000后分割成高低位
+    public enum DigitPosition{
+        HIGH,LOW
+    }
+    public static String voltageToMessage(String v,DigitPosition dp)
+    {
+        String str=(int)(Float.parseFloat(v)*1000)+"";
+        if(dp==dp.HIGH){
+            return str.substring(0,2);
+        }else {
+            return str.substring(2,4);
+        }
+
+    }
     //向下位机发送配置信息
     public void sendConfigData(String Data) {
         if (iMyAidlInterface!=null){

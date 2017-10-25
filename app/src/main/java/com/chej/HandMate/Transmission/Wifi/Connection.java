@@ -23,14 +23,18 @@ import java.net.Socket;
 import java.net.SocketAddress;
 import java.nio.charset.Charset;
 import java.util.Date;
+
+import com.chej.HandMate.AdminActivity;
 import com.chej.HandMate.ExerciseActivity;
 import com.chej.HandMate.MasterSlaveActivity;
 import com.chej.HandMate.Model.MyCustomDialog;
+import com.chej.HandMate.Model.SetConstant;
 import com.chej.HandMate.Model.users.UserData;
 import com.chej.HandMate.ShutDownActivity;
 
 import static android.content.Context.ACTIVITY_SERVICE;
 import static android.content.Context.LOCATION_SERVICE;
+import static com.chej.HandMate.AdminActivity.voltageToMessage;
 
 /**
  * 建立上下位机之间的连接
@@ -403,6 +407,7 @@ public class Connection {
                                 break;
                             case "02":NetType="AX-12Bus";
                                 break;
+                            default:NetType=str[2];
                         }
                         String rightStatus = "未连接";
                         String leftStatus ="未连接";
@@ -441,9 +446,27 @@ public class Connection {
                                 +" "+userSettings.getString("ringStretch","50")+" "+userSettings.getString("littleStretch","50")
                                 +" "+userSettings.getString("thumbMove","113")+" "+userSettings.getString("foreMove","113")
                                 +" "+userSettings.getString("middleMove","113")+" "+userSettings.getString("ringMove","113")
-                                +" "+userSettings.getString("littleMove","113")+" "+userSettings.getString("thumbRatio","15")
-                                +" "+userSettings.getString("foreRatio","15") +" "+userSettings.getString("middleRatio","15")
-                                +" "+userSettings.getString("ringRatio","15") +" "+userSettings.getString("littleRatio","15");
+                                +" "+userSettings.getString("littleMove","113")
+                                +" "+voltageToMessage(userSettings.getString("thumbAdjust180V", SetConstant.THUMB_180V), AdminActivity.DigitPosition.HIGH)
+                                +" "+voltageToMessage(userSettings.getString("foreAdjust180V",SetConstant.FORE_180V), AdminActivity.DigitPosition.HIGH)
+                                +" "+voltageToMessage(userSettings.getString("middleAdjust180V",SetConstant.MIDDLE_180V), AdminActivity.DigitPosition.HIGH)
+                                +" "+voltageToMessage(userSettings.getString("ringAdjust180V",SetConstant.RING_180V), AdminActivity.DigitPosition.HIGH)
+                                +" "+voltageToMessage(userSettings.getString("littleAdjust180V",SetConstant.LITTLE_180V), AdminActivity.DigitPosition.HIGH)
+                                +" "+voltageToMessage(userSettings.getString("thumbAdjust180V",SetConstant.THUMB_180V), AdminActivity.DigitPosition.LOW)
+                                +" "+voltageToMessage(userSettings.getString("foreAdjust180V",SetConstant.FORE_180V), AdminActivity.DigitPosition.LOW)
+                                +" "+voltageToMessage(userSettings.getString("middleAdjust180V",SetConstant.MIDDLE_180V), AdminActivity.DigitPosition.LOW)
+                                +" "+voltageToMessage(userSettings.getString("ringAdjust180V",SetConstant.RING_180V), AdminActivity.DigitPosition.LOW)
+                                +" "+voltageToMessage(userSettings.getString("littleAdjust180V",SetConstant.LITTLE_180V), AdminActivity.DigitPosition.LOW)
+                                +" "+voltageToMessage(userSettings.getString("thumbAdjust0V",SetConstant.THUMB_0V), AdminActivity.DigitPosition.HIGH)
+                                +" "+voltageToMessage(userSettings.getString("foreAdjust0V",SetConstant.FORE_0V), AdminActivity.DigitPosition.HIGH)
+                                +" "+voltageToMessage(userSettings.getString("middleAdjust0V",SetConstant.MIDDLE_180V), AdminActivity.DigitPosition.HIGH)
+                                +" "+voltageToMessage(userSettings.getString("ringAdjust0V",SetConstant.RING_0V), AdminActivity.DigitPosition.HIGH)
+                                +" "+voltageToMessage(userSettings.getString("littleAdjust0V",SetConstant.LITTLE_0V), AdminActivity.DigitPosition.HIGH)
+                                +" "+voltageToMessage(userSettings.getString("thumbAdjust0V",SetConstant.THUMB_0V), AdminActivity.DigitPosition.LOW)
+                                +" "+voltageToMessage(userSettings.getString("foreAdjust0V",SetConstant.FORE_0V), AdminActivity.DigitPosition.LOW)
+                                +" "+voltageToMessage(userSettings.getString("middleAdjust0V",SetConstant.MIDDLE_0V), AdminActivity.DigitPosition.LOW)
+                                +" "+voltageToMessage(userSettings.getString("ringAdjust0V",SetConstant.RING_0V), AdminActivity.DigitPosition.LOW)
+                                +" "+voltageToMessage(userSettings.getString("littleAdjust0V",SetConstant.LITTLE_0V), AdminActivity.DigitPosition.LOW);
                         sendData(dConfigData(data));
                         Log.e("AAAAAAA",data);
                     }
@@ -856,11 +879,11 @@ public class Connection {
     public byte[] dConfigData(String data)
     {
         String[] str = data.split("\\ ");
-        byte[] bytes = new byte[35];
+        byte[] bytes = new byte[50];
         bytes[0] = (byte) 0xff;
         bytes[1] = (byte) 0xff;
         bytes[2] = (byte) 0x26;//ID
-        bytes[3] = (byte) 0x35;//长度
+        bytes[3] = (byte) 0x50;//长度
         bytes[4] = (byte)Integer.parseInt(str[0]);
         bytes[5] = (byte)Integer.parseInt(str[1]);
         bytes[6] = (byte)Integer.parseInt(str[2]);
@@ -891,11 +914,28 @@ public class Connection {
         bytes[31] = (byte)Integer.parseInt(str[27]);
         bytes[32] = (byte)Integer.parseInt(str[28]);
         bytes[33] = (byte)Integer.parseInt(str[29]);
-        bytes[34] = (byte) ~(bytes[2] + bytes[3] + bytes[4] + bytes[5] + bytes[6] + bytes[7]
+        bytes[34] = (byte)Integer.parseInt(str[30]);
+        bytes[35] = (byte)Integer.parseInt(str[31]);
+        bytes[36] = (byte)Integer.parseInt(str[32]);
+        bytes[37] = (byte)Integer.parseInt(str[33]);
+        bytes[38] = (byte)Integer.parseInt(str[34]);
+        bytes[39] = (byte)Integer.parseInt(str[35]);
+        bytes[40] = (byte)Integer.parseInt(str[36]);
+        bytes[41] = (byte)Integer.parseInt(str[37]);
+        bytes[42] = (byte)Integer.parseInt(str[38]);
+        bytes[43] = (byte)Integer.parseInt(str[39]);
+        bytes[44] = (byte)Integer.parseInt(str[40]);
+        bytes[45] = (byte)Integer.parseInt(str[41]);
+        bytes[46] = (byte)Integer.parseInt(str[42]);
+        bytes[47] = (byte)Integer.parseInt(str[43]);
+        bytes[48] = (byte)Integer.parseInt(str[44]);
+        bytes[49] = (byte) ~(bytes[2] + bytes[3] + bytes[4] + bytes[5] + bytes[6] + bytes[7]
                 + bytes[8] + bytes[9] + bytes[10] + bytes[11] + bytes[12] + bytes[13] + bytes[14]
                 + bytes[15] + bytes[16] + bytes[17] + bytes[18] + bytes[19] + bytes[20] + bytes[21]
                 + bytes[22] + bytes[23] + bytes[24] + bytes[25] + bytes[26] + bytes[27] + bytes[28]
-                + bytes[29] + bytes[30] + bytes[31] + bytes[32] + bytes[33]);
+                + bytes[29] + bytes[30] + bytes[31] + bytes[32] + bytes[33] + bytes[34] + bytes[35]
+                + bytes[36] + bytes[37] + bytes[38] + bytes[39] + bytes[40] + bytes[41] + bytes[42]
+                + bytes[43] + bytes[44] + bytes[45] + bytes[46] + bytes[47] + bytes[48]);
         return bytes;
     }
     /**
