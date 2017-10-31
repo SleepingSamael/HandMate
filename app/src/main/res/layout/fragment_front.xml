@@ -33,7 +33,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="60dp"
         tools:text="Seychelles"
-        android:textSize="55px"
+        android:textSize="70px"
         
         app:typeface="roboto_slab_light"
         android:textAllCaps="true"

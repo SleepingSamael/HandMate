@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Environment;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TabHost;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -38,6 +40,13 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
+
+import org.w3c.dom.Text;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
 
 public class AdminActivity extends AppCompatActivity {
 
@@ -88,8 +97,11 @@ public class AdminActivity extends AppCompatActivity {
     private EditText littleFinger_adjust_180v_et;
     private Button quit;
     private Button save;
+    private Button log;
     private ToggleButton glove;
     private LineChart mChart;
+    private Button getError;
+    private TextView showError;
 
     private IMyAidlInterface iMyAidlInterface;
     @Override
@@ -110,10 +122,14 @@ public class AdminActivity extends AppCompatActivity {
         //在TabHost创建标签，然后设置：标题／图标／标签页布局
         th.addTab(th.newTabSpec("tab1").setIndicator("手套配置",getResources().getDrawable(R.drawable.logo)).setContent(R.id.tab_glove));
         th.addTab(th.newTabSpec("tab2").setIndicator("电压配置",null).setContent(R.id.tab_voltageAdjust));
-        th.addTab(th.newTabSpec("tab3").setIndicator("标签2",null).setContent(R.id.tab2));
-        th.addTab(th.newTabSpec("tab4").setIndicator("标签3",null).setContent(R.id.tab3));
+        th.addTab(th.newTabSpec("tab3").setIndicator("错误信息",null).setContent(R.id.tab_error));
+        th.addTab(th.newTabSpec("tab4").setIndicator("标签2",null).setContent(R.id.tab2));
+        th.addTab(th.newTabSpec("tab5").setIndicator("标签3",null).setContent(R.id.tab3));
         //上面的null可以为getResources().getDrawable(R.drawable.图片名)设置图标
 
+        getError=(Button)findViewById(R.id.btn_errorreport);
+        showError=(TextView)findViewById(R.id.tv_errorreport);
+        log=(Button)findViewById(R.id.btn_log) ;
         glove=(ToggleButton)findViewById(R.id.glove_toggleButton) ;
         quit=(Button)findViewById(R.id.btn_quit) ;
         save=(Button)findViewById(R.id.btn_save) ;
@@ -220,6 +236,69 @@ public class AdminActivity extends AppCompatActivity {
         }else{
             glove.setChecked(true);
         }
+
+        //存储log到本地
+        log.setOnClickListener(new Button.OnClickListener(){//创建监听
+            public void onClick(View v) {
+                try {
+                    //获取系统时间
+                    SimpleDateFormat sDateFormat = new    SimpleDateFormat("yyyy-MM-dd  HH:mm:ss");
+                    String  sysDate = sDateFormat.format(new java.util.Date());
+                    String [] arr = sysDate.split("\\s+");
+                    final String sdate=arr[0];
+                    final String stime=arr[1];
+                    String [] arr2 = stime.split(":");
+                    String hour=arr2[0];
+                    String min=arr2[1];
+                    String sec=arr2[2];
+                    String filePath= Environment.getExternalStorageDirectory()+"/LOG_"+sdate+"_"+hour+"h"+min+"m"+sec+"s"+".txt";
+
+                    Runtime  r = Runtime.getRuntime();
+                    r.exec("logcat -f "+ filePath);
+                    r.exec("logcat -c");
+                    r.freeMemory();
+                    //   Process proc =Runtime.getRuntime().exec(new String[]{"logcat *:E ","logcat -f "+ filePath,"logcat -c"});
+                    //    Thread.sleep(200);
+                    //   proc.destroy();
+                    // Runtime.getRuntime().exec("logcat -f "+ filePath);
+                    //Runtime.getRuntime().exec("logcat -c");
+                    Toast.makeText(getApplicationContext(), "LOG已保存"+filePath, Toast.LENGTH_SHORT).show();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    Log.e("LOG", String.valueOf(ex));
+                }
+            }
+        });
+
+        //获取错误信息
+        getError.setOnClickListener(new Button.OnClickListener(){//创建监听
+            public void onClick(View v) {
+                try {
+                    sendrComponentStatus();
+                    //获取系统时间
+                    SimpleDateFormat sDateFormat = new    SimpleDateFormat("yyyy-MM-dd  HH:mm:ss");
+                    String  sysDate = sDateFormat.format(new java.util.Date());
+                    String [] arr = sysDate.split("\\s+");
+                    final String sdate=arr[0];
+                    final String stime=arr[1];
+                    showError.append(sdate+"   "+stime+":   ");
+                    showError.append("舵机1温度："+getComponentTemperature()[0]+"  "+
+                            "舵机2温度："+getComponentTemperature()[1]+"  "+
+                            "舵机3温度："+getComponentTemperature()[2]+"  "+
+                            "舵机4温度："+getComponentTemperature()[3]+"  "+
+                            "舵机5温度："+getComponentTemperature()[4]+"  "+"\n");
+                    showError.append(getComponentError()[0]+"\n"+
+                            getComponentError()[1]+"\n"+
+                            getComponentError()[2]+"\n"+
+                            getComponentError()[3]+"\n"+
+                            getComponentError()[4]+"\n");
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    Log.e("getError", String.valueOf(ex));
+                }
+            }
+        });
 
         quit.setOnClickListener(new Button.OnClickListener(){//创建监听
             public void onClick(View v) {
@@ -336,8 +415,6 @@ public class AdminActivity extends AppCompatActivity {
                     //d、完成提交
                     editor.commit();
                     Toast.makeText(getApplicationContext(), "信息已保存", Toast.LENGTH_SHORT).show();
-                    String strh=voltageToMessage(userSettings.getString("thumbAdjust180V","2.69"),DigitPosition.HIGH);
-                    String strl=voltageToMessage(userSettings.getString("thumbAdjust180V","2.69"),DigitPosition.LOW);
                     //电压值乘1000后拆成两位发送
                     String data = userSettings.getString("thumbFlat","10")+" "+userSettings.getString("foreFlat","10")+" "
                             +userSettings.getString("middleFlat","10")+" "+userSettings.getString("ringFlat","10")+
@@ -594,6 +671,42 @@ public class AdminActivity extends AppCompatActivity {
             }
         }
     }
+    //向下位机请求舵机信息
+    public void sendrComponentStatus() {
+        if (iMyAidlInterface!=null){
+            try {
+                iMyAidlInterface.sendrComponentStatus();
+            } catch (RemoteException e) {
+                Log.e("sendrComponentStatus",e.toString());
+            }
+        }
+    }
+
+    //获取舵机温度
+    public String[]  getComponentTemperature(){
+
+        if (iMyAidlInterface!=null){
+            try {
+                return iMyAidlInterface.getComponentTemperature();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    //获取舵机错误
+    public String[]  getComponentError(){
+        if (iMyAidlInterface!=null){
+            try {
+                return iMyAidlInterface.getComponentError();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
     //绑定ComService
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override

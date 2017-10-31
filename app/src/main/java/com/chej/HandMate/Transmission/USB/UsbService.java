@@ -265,7 +265,11 @@ public class UsbService extends Service {
                     //
                     // Some Arduinos would need some sleep because firmware wait some time to know whether a new sketch is going
                     // to be uploaded or not
-                    //Thread.sleep(2000); // sleep some. YMMV with different chips.
+                    try {
+                        Thread.sleep(2000); // sleep some. YMMV with different chips.
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
 
                     // Everything went as expected. Send an intent to MainActivity
                     Intent intent = new Intent(ACTION_USB_READY);

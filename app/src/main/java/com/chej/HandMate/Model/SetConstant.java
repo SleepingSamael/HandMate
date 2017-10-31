@@ -7,7 +7,7 @@ package com.chej.HandMate.Model;
 
 public class SetConstant {
     public final static String THUMB_180V="1.978";
-    public final static String FORE_180V=" 2.189";
+    public final static String FORE_180V="2.189";
     public final static String MIDDLE_180V="2.269";
     public final static String RING_180V="2.105";
     public final static String LITTLE_180V="2.216";

@@ -30,7 +30,7 @@ import java.util.TimerTask;
 //建立Android服务层，为下位机和UNITY提供通讯服务
 public  class WifiService extends Service {
 
-    private String WifiName ="chej_glove";
+    private String WifiName ="310R-04";
     private int updateNUM = 0;
     private int connectionCounter = 0;
     private int heartBeatCounter = 0;
@@ -109,6 +109,16 @@ public  class WifiService extends Service {
         @Override
         public String[] getComponentStatus() {
             return connection.componentArray;
+        }
+        //获取舵机温度
+        @Override
+        public String[] getComponentTemperature() {
+            return connection.componentTemperature;
+        }
+        //获取舵机错误
+        @Override
+        public String[] getComponentError() {
+            return connection.componentError;
         }
 
         //向u3d发送配置数据
@@ -209,6 +219,11 @@ public  class WifiService extends Service {
             // ModeStatus 0：退出 1：进入
             connection.sendData(connection.cSVCMode(SVCMode,ModeStatus));
             Log.e("sendcSVCMode", "send");
+        }
+        @Override
+        public void sendrComponentStatus()//请求舵机状态
+        {
+            connection.sendData(connection.rComponentStatus());
         }
 
     };

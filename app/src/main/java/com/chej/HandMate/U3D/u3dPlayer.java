@@ -2,6 +2,7 @@
  * U3D界面
  */
 package com.chej.HandMate.U3D;
+import com.chej.HandMate.TTS.SpeechUtil;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
@@ -86,10 +87,14 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
      */
     private GoogleApiClient client;
 
+    private SpeechUtil speechUtil;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_u3d_player);
+
+        speechUtil = new SpeechUtil(this);
 
         final SharedPreferences userSettings = getSharedPreferences("setting", 0);
         if(userSettings.getString("glove","右").equals("右")){
@@ -161,7 +166,6 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
 
     //u3d调取舵机状态
     public String[] getComponentStatus(){
-        Log.e("U3d","getComponentStatus");
         if (iMyAidlInterface!=null){
             try {
                 return iMyAidlInterface.getComponentStatus();
@@ -210,6 +214,12 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
            }
        }
    }
+
+   //语音（U3D调用）
+    public void u3dTTS(String str)
+    {
+        speechUtil.speak(str);
+    }
 
    //触觉反馈（U3D调用）
    public void ToLowerTouchFeedBack(float[] touchFeedBack){

@@ -70,7 +70,9 @@ public class Connection {
     private int powerInfo=0;//下位机电量
     public byte[] messageToDevice;//向下位机发送的角度报文
     public String[] fingerArray = {"0","0","0","0","0"};
-    public String[] componentArray = {"0","0","0","0","0"};
+    public String[] componentArray = {"0","0","0","0","0"};//舵机位置
+    public String[] componentTemperature = {"0","0","0","0","0"};//舵机温度
+    public String[] componentError = {null,null,null,null,null};//舵机错误信息
     String strResult=null;//接收报文十进制
     String hexResult=null;//接收报文十六进制
 
@@ -527,13 +529,28 @@ public class Connection {
                                     case "02"://当前负载
                                         break;
                                     case "03"://舵机错误状态
-                                        motorErrorHandler("1", Integer.parseInt(str[5], 16));
-                                        motorErrorHandler("2", Integer.parseInt(str[7], 16));
-                                        motorErrorHandler("3", Integer.parseInt(str[9], 16));
-                                        motorErrorHandler("4", Integer.parseInt(str[11], 16));
-                                        motorErrorHandler("5", Integer.parseInt(str[13], 16));
+                                        componentError[0]=motorErrorHandler("1", Integer.parseInt(str[5], 16));
+                                        componentError[1]=motorErrorHandler("2", Integer.parseInt(str[7], 16));
+                                        componentError[2]=motorErrorHandler("3", Integer.parseInt(str[9], 16));
+                                        componentError[3]=motorErrorHandler("4", Integer.parseInt(str[11], 16));
+                                        componentError[4]=motorErrorHandler("5", Integer.parseInt(str[13], 16));
                                         break;
                                     case "04"://当前温度
+                                        try {
+                                            //对舵机位置信息进行整理
+                                            componentTemperature[0] = Integer.parseInt(str[5], 16) + "";
+                                            componentTemperature[1] = Integer.parseInt(str[7], 16) + "";
+                                            componentTemperature[2] = Integer.parseInt(str[9], 16) + "";
+                                            componentTemperature[3] = Integer.parseInt(str[11], 16) + "";
+                                            componentTemperature[4] = Integer.parseInt(str[13], 16) + "";
+                                            Log.e("componentTemperature", "-----------------------------------");
+                                            for (int i = 0; i < 5; i++) {
+                                                Log.e("componentTemperature", "The Array Contains " + componentArray[i]);
+                                            }
+                                            Log.e("componentTemperature", "-----------------------------------");
+                                        } catch (Exception e) {
+                                            Log.e("componentTemperature", String.valueOf(e));
+                                        }
                                         break;
                                     case "05"://当前电压
                                         break;
@@ -549,40 +566,42 @@ public class Connection {
     }
 
     //舵机错误处理
-    private void motorErrorHandler(String motorNum,int code)
+    private String motorErrorHandler(String motorNum,int code)
     {
+        StringBuilder errorMsg=new StringBuilder();
         if((code&1)==1)
         {
-            dialogError("舵机错误","舵机"+motorNum+"号发生错误\n"+"错误原因："+"输入电压错误");
+            errorMsg.append("舵机"+motorNum+"号发生错误  "+"错误原因："+"输入电压错误\n");
         }
         else if((code&2)==2)
         {
-            dialogError("舵机错误","舵机"+motorNum+"号发生错误\n"+"错误原因："+"目标角度超出范围");
+            errorMsg.append("舵机"+motorNum+"号发生错误  "+"错误原因："+"目标角度超出范围\n");
         }
         else if((code&4)==4)
         {
-            dialogError("舵机错误","舵机"+motorNum+"号发生错误\n"+"错误原因："+"舵机温度过高");
+            errorMsg.append("舵机"+motorNum+"号发生错误  "+"错误原因："+"舵机温度过高\n");
         }
         else if((code&8)==8)
         {
-            dialogError("舵机错误","舵机"+motorNum+"号发生错误\n"+"错误原因："+"角度范围设置错误");
+            errorMsg.append("舵机"+motorNum+"号发生错误 "+"错误原因："+"角度范围设置错误\n");
         }
         else if((code&16)==16)
         {
-            dialogError("舵机错误","舵机"+motorNum+"号发生错误\n"+"错误原因："+"校验和错误");
+            errorMsg.append("舵机"+motorNum+"号发生错误 "+"错误原因："+"校验和错误\n");
         }
         else if((code&32)==32)
         {
-            dialogError("舵机错误","舵机"+motorNum+"号发生错误\n"+"错误原因："+"舵机超负荷");
+            errorMsg.append("舵机"+motorNum+"号发生错误 "+"错误原因："+"舵机超负荷\n");
         }
         else if((code&64)==64)
         {
-            dialogError("舵机错误","舵机"+motorNum+"号发生错误\n"+"错误原因："+"舵机超负荷");
+            errorMsg.append("舵机"+motorNum+"号发生错误 "+"错误原因："+"舵机超负荷\n");
         }
         else if((code&128)==128)
         {
-            dialogError("舵机错误","舵机"+motorNum+"号发生错误\n"+"错误原因："+"发生指令错误");
+            errorMsg.append("舵机"+motorNum+"号发生错误 "+"错误原因："+"发生指令错误\n");
         }
+        return errorMsg.toString();
     }
     //反向处理 U3D→下位机
     private class BackHandler extends Handler {
@@ -954,6 +973,16 @@ public class Connection {
         b[4]=(byte)SVCMode;
         b[5]=(byte)ModeStatus;
         b[6]=(byte) ~(b[2]+b[3]+b[4]+b[5]);
+        return b;
+    }
+     //向GCU请求舵机状态
+    public byte[] rComponentStatus() {
+        byte[]b=new byte[5];
+        b[0]=(byte)0xff;
+        b[1]=(byte)0xff;
+        b[2]=(byte)0x28;//ID
+        b[3]=(byte)0x05;//长度
+        b[4]=(byte) ~(b[2]+b[3]);
         return b;
     }
 }

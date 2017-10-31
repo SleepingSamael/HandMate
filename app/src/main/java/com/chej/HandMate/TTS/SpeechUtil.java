@@ -127,7 +127,7 @@ public class SpeechUtil implements SpeechSynthesizerListener {
     /**
      * 开始文本合成并朗读
      */
-    public void speak(String content) {
+    public int speak(String content) {
         if (!content.isEmpty()) {
             mSpeechSynthesizer.speak(content.toString());
             Log.e(tag,"开始合成器："+content);
@@ -145,6 +145,7 @@ public class SpeechUtil implements SpeechSynthesizerListener {
                 }
             }
         }).start();*/
+        return 0;
     }
 
     /**

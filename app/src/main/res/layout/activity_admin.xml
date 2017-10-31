@@ -210,7 +210,9 @@
                                     android:inputType="number"
                                     android:maxLength="3"
                                     android:textSize="30dp"
-                                    android:gravity="center"/>
+                                    android:gravity="center"
+                                    android:focusable="false"
+                                    android:textColor="@color/gray"/>
 
                             </TableRow>
 
@@ -293,7 +295,9 @@
                                     android:gravity="center"
                                     android:inputType="number"
                                     android:maxLength="3"
-                                    android:textSize="30dp" />
+                                    android:textSize="30dp"
+                                    android:focusable="false"
+                                    android:textColor="@color/gray"/>
 
                             </TableRow>
 
@@ -368,16 +372,18 @@
 
 
                                 <EditText
-                                    android:layout_width="0dp"
                                     android:id="@+id/middleFingerMove"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:background="@null"
                                     android:ems="2"
+                                    android:gravity="center"
                                     android:inputType="number"
                                     android:maxLength="3"
-                                    android:textSize="30dp"
-                                    android:gravity="center"/>
+                                    android:textSize="30dp" android:focusable="false"
+                                    android:textColor="@color/gray"
+                                    />
 
                             </TableRow>
 
@@ -461,7 +467,9 @@
                                     android:inputType="number"
                                     android:maxLength="3"
                                     android:textSize="30dp"
-                                    android:gravity="center"/>
+                                    android:gravity="center"
+                                    android:focusable="false"
+                                    android:textColor="@color/gray"/>
 
                             </TableRow>
 
@@ -542,7 +550,9 @@
                                     android:inputType="number"
                                     android:maxLength="3"
                                     android:textSize="30dp"
-                                    android:gravity="center"/>
+                                    android:gravity="center"
+                                    android:focusable="false"
+                                    android:textColor="@color/gray"/>
 
                             </TableRow>
 
@@ -558,7 +568,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:textSize="25dp"
-                                android:text="位置单位为°，范围0-180。速度单位为rmp，范围80-113。增益系数范围11-19" />
+                                android:text="位置单位为°，范围0-180。" />
                         </LinearLayout>
                         <LinearLayout
                             android:layout_marginTop="50dp"
@@ -699,9 +709,9 @@
                                     android:layout_weight="1"
                                     android:background="@null"
                                     android:ems="2"
-                                    android:focusable="false"
                                     android:gravity="center"
                                     android:inputType="numberDecimal"
+                                    android:focusable="false"
                                     android:textColor="@color/gray"
                                     android:textSize="30dp" />
 
@@ -1045,6 +1055,26 @@
                         </TableLayout>
                     </LinearLayout>
                     <LinearLayout
+                        android:id="@+id/tab_error"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:id="@+id/btn_errorreport"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="查看错误报告" />
+
+                        <TextView
+                            android:id="@+id/tv_errorreport"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="26dp"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
                         android:id="@+id/tab2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -1118,11 +1148,22 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="600dp"
             android:background="@drawable/quit"
-            android:text="放弃修改"
+            android:stateListAnimator="@animator/selector_animators_102"
+            android:text="返回"
             android:textAlignment="center"
             android:textColor="@color/gray"
-            android:textSize="42px"
-            android:stateListAnimator="@animator/selector_animators_102"/>
+            android:textSize="42px" />
+
+        <Button
+            android:id="@+id/btn_log"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="94dp"
+            android:layout_marginStart="94dp"
+            android:layout_toEndOf="@+id/home"
+            android:layout_toRightOf="@+id/home"
+            android:text="生成log文件" />
 
 
     </RelativeLayout>
