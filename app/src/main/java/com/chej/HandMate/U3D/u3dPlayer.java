@@ -3,6 +3,7 @@
  */
 package com.chej.HandMate.U3D;
 import com.chej.HandMate.TTS.SpeechUtil;
+import com.chej.HandMate.Transmission.USB.UsbService;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
@@ -96,6 +97,12 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
 
         speechUtil = new SpeechUtil(this);
 
+        try {
+            Intent bindIntent = new Intent(u3dPlayer.this, UsbService.class);
+            bindService(bindIntent, serviceConnection, BIND_AUTO_CREATE);
+        }catch(Exception e){
+
+        }
         final SharedPreferences userSettings = getSharedPreferences("setting", 0);
         if(userSettings.getString("glove","右").equals("右")){
             handID="1";
@@ -114,13 +121,6 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
         scenenum = bundle.getInt("Mode") ;
         gloveID = bundle.getString("Glove");
 
-
-        try {
-            Intent bindIntent = new Intent(u3dPlayer.this, WifiService.class);
-            bindService(bindIntent, serviceConnection, BIND_AUTO_CREATE);
-        }catch(Exception e){
-
-        }
 
         u3DBroadCastReceiver=new U3DBroadCastReceiver();
         IntentFilter filter = new IntentFilter("com.example.U3D_BROADCAST");

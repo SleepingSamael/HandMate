@@ -72,6 +72,10 @@ public  class WifiService extends Service {
         public void registerCallback(ICallBack cb) throws RemoteException {
             mCallbacks.register(cb);
         }
+        @Override
+        public String getMessage(){
+            return connection.strResult;
+        }
 
         @Override
         public void unregisterCallback(ICallBack cb) throws RemoteException {

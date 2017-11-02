@@ -25,7 +25,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:text="点击此处获取屏幕数据"
-        android:textSize="30dp"
-        android:visibility="invisible"/>
+        android:textSize="30dp" />
 
 </RelativeLayout>

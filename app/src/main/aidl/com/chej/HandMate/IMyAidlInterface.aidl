@@ -14,6 +14,7 @@ interface IMyAidlInterface {
     void runServiceState();
     boolean getConnectionStatus();
 
+     String getMessage();
     String [] getFingerArray();
     String[] getComponentStatus();
     String[] getConfigArray();

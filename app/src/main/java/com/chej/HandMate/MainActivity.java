@@ -33,6 +33,7 @@ import com.chej.HandMate.Model.MyCustomDialog;
 import com.chej.HandMate.Model.SysApplication;
 import com.chej.HandMate.Model.users.UserData;
 import com.chej.HandMate.TTS.SpeechUtil;
+import com.chej.HandMate.Transmission.USB.UsbService;
 import com.chej.HandMate.Transmission.Wifi.WifiService;
 import com.chej.library.ExpandingPagerFactory;
 import com.chej.library.fragments.ExpandingFragment;
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
         clock.setText(sdate+"   "+stime);
 
 
-        Intent myServiceIntent = new Intent(MainActivity.this, WifiService.class);
+        Intent myServiceIntent = new Intent(MainActivity.this, UsbService.class);
         bindService(myServiceIntent, serviceConnection,
                 Context.BIND_AUTO_CREATE);
 

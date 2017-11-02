@@ -14,9 +14,24 @@ import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbManager;
 import android.os.Binder;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
+import android.os.RemoteCallbackList;
+import android.os.RemoteException;
+import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 
+import com.chej.HandMate.AdminActivity;
+import com.chej.HandMate.Entity;
+import com.chej.HandMate.ExerciseActivity;
+import com.chej.HandMate.ICallBack;
+import com.chej.HandMate.IMyAidlInterface;
+import com.chej.HandMate.MasterSlaveActivity;
+import com.chej.HandMate.Model.SetConstant;
+import com.chej.HandMate.Model.users.UserData;
+import com.chej.HandMate.U3D.u3dPlayer;
 import com.felhr.usbserial.CDCSerialDevice;
 import com.felhr.usbserial.UsbSerialDevice;
 import com.felhr.usbserial.UsbSerialInterface;
@@ -24,8 +39,208 @@ import com.felhr.usbserial.UsbSerialInterface;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import static com.chej.HandMate.AdminActivity.voltageToMessage;
+import static com.chej.HandMate.Transmission.USB.USBHelper.bytesToHexString;
+import static com.chej.HandMate.Transmission.USB.USBHelper.bytesToString;
 
 public class UsbService extends Service {
+    private int updateNUM = 0;
+    private int connectionCounter = 0;
+    private int heartBeatCounter = 0;
+    private Context mContext;
+    public u3dPlayer u3d;
+    public USBHelper usbHelper;
+    private IntentFilter intentFilter;
+
+    private LocalBroadcastManager localBroadcastManager;
+
+    Timer heartBeatTimer;
+    TimerTask heartBeatTimerTask;
+    Timer timer2;
+    TimerTask timer2task;
+
+    private ReceiveHandler receiveHandler = new ReceiveHandler();
+    Thread receiverThread;
+    Thread sendThread;
+    Thread ExerciseThread;
+
+    //初始化connection对象，连接状态
+    public UsbService() {
+        usbHelper = new USBHelper();
+        heartBeatTimer = new Timer();
+        timer2 = new Timer();
+    }
+
+
+    //实例化回调函数列表
+    private RemoteCallbackList<ICallBack> mCallbacks = new RemoteCallbackList<>();
+
+
+    //注册服务程序，注册回调函数列表
+    private IMyAidlInterface.Stub binder = new IMyAidlInterface.Stub() {
+        @Override
+        public void registerCallback(ICallBack cb) throws RemoteException {
+            mCallbacks.register(cb);
+        }
+
+        @Override
+        public void unregisterCallback(ICallBack cb) throws RemoteException {
+            mCallbacks.unregister(cb);
+        }
+
+        @Override
+        public void send2Service(Entity entity) throws RemoteException {
+            String msg = "收到来自客户端是消息：" + entity.getName();
+            //sendMsgToMain(msg);
+        }
+        @Override
+        public String getMessage(){
+            return usbHelper.strResult;
+        }
+
+
+        @Override
+        public void runServiceState() {
+
+        }
+
+        @Override
+        public boolean getConnectionStatus() {
+                return false;
+        }
+
+        //向u3d发送手指角度
+        @Override
+        public String[] getFingerArray() {
+            return usbHelper.fingerArray;
+        }
+
+        //向u3d发送舵机状态
+        @Override
+        public String[] getComponentStatus() {
+            return usbHelper.componentArray;
+        }
+        //获取舵机温度
+        @Override
+        public String[] getComponentTemperature() {
+            return usbHelper.componentTemperature;
+        }
+        //获取舵机错误
+        @Override
+        public String[] getComponentError() {
+            return usbHelper.componentError;
+        }
+
+        //向u3d发送配置数据
+        @Override
+        public String[] getConfigArray(){
+            return usbHelper.configArray;
+        }
+        //向下位机发送角度数据报文
+        @Override
+        public void setCurrentAngle(String strAngles) {
+            String[] str = strAngles.split("\\ ");
+            int[] angles = {Integer.parseInt(str[0]), Integer.parseInt(str[1]), Integer.parseInt(str[2])
+                    , Integer.parseInt(str[3]), Integer.parseInt(str[4])};
+            byte[] bAngles = {(byte) 0xff, (byte) 0xff, (byte) 0x24, (byte) 0x10,
+                    (byte) 0xb4, (byte) 0xb4, (byte) 0xb4, (byte) 0xb4, (byte) 0xb4,
+                    (byte) ~(0x10 + 0x10 + 0xb4 + 0xb4 + 0xb4 + 0xb4 + 0xb4)};
+            bAngles[0] = (byte) 0xff;
+            bAngles[1] = (byte) 0xff;
+            bAngles[2] = (byte) 0x24;
+            bAngles[3] = (byte) 0x10;
+            bAngles[4] = (byte) angles[0];
+            bAngles[5] = (byte) angles[1];
+            bAngles[6] = (byte) angles[2];
+            bAngles[7] = (byte) angles[3];
+            bAngles[8] = (byte) angles[4];
+            bAngles[9] = (byte) ~(bAngles[2] + bAngles[3] + bAngles[4] + bAngles[5] +
+                    bAngles[6] + bAngles[7] + bAngles[8]);
+            sendExercise(bAngles);
+            Log.e("手套操", bytesToString(bAngles));
+        }
+        @Override
+        public void sendrNetStatus()//请求网络状态
+        {
+            sendData(usbHelper.rNetStatus());
+        }
+        @Override
+        public void senddGloveSelect(int gloveNum)//通知下位机开始发手套数据  0无手套数据 1 左手套数据 2 右手套数据
+        {
+            sendData((usbHelper.dGloveSelect(gloveNum)));
+        }
+        @Override
+        public void sendTrainMode(int mode) {//向下位机发送训练模式
+            //TrainMode报文
+            byte[] bytes = new byte[6];
+            bytes[0] = (byte) 0xff;
+            bytes[1] = (byte) 0xff;
+            bytes[2] = (byte) 0x07;//ID
+            bytes[3] = (byte) 0x06;//长度
+            bytes[4] = (byte) mode;//模式
+            /*
+            0：游戏模式1：主动模式2：被动模式3：评估模式
+             */
+            bytes[5] = (byte) ~(bytes[2] + bytes[3] + bytes[4]);
+            sendData(bytes);
+            Log.e("切换模式", mode + "");
+        }
+
+        //游戏正式界面后，用户点击确实开始后，AWS发送此报文通知GCU运动
+        @Override
+        public void sendTrainAck(int mode,int status){
+            //TrainAck报文
+            byte[] bytes = new byte[7];
+            bytes[0] = (byte) 0xff;
+            bytes[1] = (byte) 0xff;
+            bytes[2] = (byte) 0x23;//ID
+            bytes[3] = (byte) 0x07;//长度
+            bytes[4] = (byte) mode;//模式
+            bytes[5] = (byte) status;//状态，1：开始 0：停止
+            /*
+            0：游戏模式1：主动模式2：被动模式3：评估模式
+             */
+            bytes[6] = (byte) ~(bytes[2] + bytes[3] + bytes[4] + bytes[5]);
+            sendData(bytes);
+            Log.e("sendTrainAck", "start");
+        }
+        @Override
+        public void sendShutdown(){
+            //dAWSEndStatus报文
+            byte[] bytes = new byte[6];
+            bytes[0] = (byte) 0xff;
+            bytes[1] = (byte) 0xff;
+            bytes[2] = (byte) 0x06;//ID
+            bytes[3] = (byte) 0x06;//长度
+            bytes[4] = (byte) 0x00;//0：关机１：开机
+            bytes[5] = (byte) ~(bytes[2] + bytes[3] + bytes[4] );
+            sendData(bytes);
+            Log.e("sendShutdown", "send");
+        }
+        @Override
+        public void sendConfigData(String Data){
+            //收到GCU发送的rConfigData报文时，需要把配置数据发送给GCU。
+            sendData(usbHelper.dConfigData(Data));
+            Log.e("sendConfigData", "send");
+        }
+        @Override
+        public void sendcSVCMode(int SVCMode,int ModeStatus){
+            //SVCMode 0：NULL1：版本升级2：网络状态3：部件状态4：运动配置
+            // ModeStatus 0：退出 1：进入
+            sendData(usbHelper.cSVCMode(SVCMode,ModeStatus));
+            Log.e("sendcSVCMode", "send");
+        }
+        @Override
+        public void sendrComponentStatus()//请求舵机状态
+        {
+            sendData(usbHelper.rComponentStatus());
+        }
+
+    };
+
     public static final String ACTION_USB_READY = "com.felhr.connectivityservices.USB_READY";
     public static final String ACTION_USB_ATTACHED = "android.hardware.usb.action.USB_DEVICE_ATTACHED";
     public static final String ACTION_USB_DETACHED = "android.hardware.usb.action.USB_DEVICE_DETACHED";
@@ -39,12 +254,9 @@ public class UsbService extends Service {
     public static final int MESSAGE_FROM_SERIAL_PORT = 0;
     public static final int CTS_CHANGE = 1;
     public static final int DSR_CHANGE = 2;
-    public static final int SYNC_READ = 3;
     private static final String ACTION_USB_PERMISSION = "com.android.example.USB_PERMISSION";
     private static final int BAUD_RATE = 115200; // 波特率
     public static boolean SERVICE_CONNECTED = false;
-
-    private IBinder binder = new UsbBinder();
 
     private Context context;
     private Handler mHandler;
@@ -59,14 +271,30 @@ public class UsbService extends Service {
      *  In this particular example. byte stream is converted to String and send to UI thread to
      *  be treated there.
      */
-    private UsbSerialInterface.UsbReadCallback mCallback = new UsbSerialInterface.UsbReadCallback() {
+    private UsbSerialInterface.UsbReadCallback uCallback = new UsbSerialInterface.UsbReadCallback() {
         @Override
         public void onReceivedData(byte[] arg0) {
+            //读取数据流中的数据
+            byte[] result = arg0;
+            usbHelper.strResult = bytesToString(result);
+            Log.e("USB",usbHelper.strResult);
+            usbHelper.hexResult = bytesToHexString(result);
             try {
-                String data = new String(arg0, "UTF-8");
-                if (mHandler != null)
-                    mHandler.obtainMessage(MESSAGE_FROM_SERIAL_PORT, data).sendToTarget();
-            } catch (UnsupportedEncodingException e) {
+                if (!result.equals("")) {
+                    Message msg = new Message();
+                    msg.what = 1;
+                    Bundle data = new Bundle();
+                    data.putString("msg", usbHelper.strResult);//十进制结果
+                    data.putString("hex", usbHelper.hexResult);//十六进制结果
+                    msg.setData(data);
+                    receiveHandler.sendMessage(msg);
+                }
+            } catch (Exception e) {
+                Log.e("ReadThread", "--->>read failure!" + e.toString());
+            }
+            try {
+                Thread.sleep(50L);
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
@@ -154,15 +382,8 @@ public class UsbService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        mCallbacks.kill();
         UsbService.SERVICE_CONNECTED = false;
-    }
-
-    /*
-     * This function will be called from MainActivity to write data through Serial Port
-     */
-    public void write(byte[] data) {
-        if (serialPort != null)
-            serialPort.syncWrite(data, 0);
     }
 
     /*
@@ -256,11 +477,12 @@ public class UsbService extends Service {
                      * UsbSerialInterface.FLOW_CONTROL_DSR_DTR only for CP2102 and FT232
                      */
                     serialPort.setFlowControl(UsbSerialInterface.FLOW_CONTROL_OFF);
-                    serialPort.read(mCallback);
+                    serialPort.read(uCallback);
                     serialPort.getCTS(ctsCallback);
                     serialPort.getDSR(dsrCallback);
+                    sendData(usbHelper.rConnectGCU());
 
-                    new ReadThread().start();
+         //           new ReadThread().start();
 
                     //
                     // Some Arduinos would need some sleep because firmware wait some time to know whether a new sketch is going
@@ -293,20 +515,371 @@ public class UsbService extends Service {
         }
     }
 
-    private class ReadThread extends Thread {
-        @Override
+
+    /*
+     * 发送byte数据
+     */
+    public void SendByte(byte[] data) {
+        try {
+            if (serialPort != null) {
+                serialPort.write(data);
+                Log.e("SEND", "发送成功");
+                Log.e("SEND", bytesToHexString(data));
+            } else {
+                Log.e("SEND", "连接不存在重新连接");
+            }
+        } catch (Exception e) {
+            Log.e("SEND", "发送失败");
+            Log.e("SEND", String.valueOf(e));
+            e.printStackTrace();
+        }
+    }
+    //向下位机发送数据进程,手套操调用
+    private class MySendRunnable implements Runnable{
+        private byte[] sendData;
+        public MySendRunnable(byte[] sendData)
+        {
+            this.sendData = sendData;
+        }
         public void run() {
-            while(true){
-                byte[] buffer = new byte[100];
-                int n = serialPort.syncRead(buffer, 0);
-                if(n > 0) {
-                    byte[] received = new byte[n];
-                    System.arraycopy(buffer, 0, received, 0, n);
-                    String receivedStr = new String(received);
-                    mHandler.obtainMessage(SYNC_READ, receivedStr).sendToTarget();
+
+            try {
+                // if (!sendData.equals("")) {
+                SendByte(sendData);
+
+                Log.e("SendRunnable", "---->>已发送至下位机....");
+                //  }
+            } catch (Exception e) {
+                Log.e("SendRunnable", "--->>read failure!" + e.toString());
+            }
+
+        }
+    }
+    //开启新线程发送数据
+    public void sendData(byte[] data) {
+        MySendRunnable mySendRunnable1 = new MySendRunnable(data);
+        sendThread = new Thread(mySendRunnable1);
+        //sendThread = new Thread(new MySendRunnable(data));
+        sendThread.start();
+    }
+    //开启新线程发送手套操（上→下）
+    public void sendExercise(byte[] data) {
+        MySendRunnable mySendRunnable = new MySendRunnable(data);
+        ExerciseThread = new Thread(mySendRunnable);
+        //ExerciseThread = new Thread(new MySendRunnable(data));
+        ExerciseThread.start();
+    }
+
+    //消息处理器，对接收到的消息进行处理（上位机接收下位机数据）
+    private class ReceiveHandler extends Handler {
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+            //对启动后的消息进行处理
+            if (msg.what == 1) {
+                String result = msg.getData().get("hex").toString();
+
+                Log.e("Receiver", "result= " + result);
+                //连包处理
+                String[] strFF = result.split("ff ff ");
+                for (int ff = 0; ff < strFF.length; ff++) {
+                    strFF[ff].trim();
+                    Log.e("Receiver", "I am receiving " + strFF[ff]);
+                    String[] str = strFF[ff].split("\\ ");
+                    /**
+                     * 判断收到报文类型
+                     */
+                    if (str[0].equals("03"))//心跳检测
+                    {
+                        usbHelper.beatTime = usbHelper.refFormatNowDate();
+                        usbHelper.heartBeat = true;
+                        sendData(usbHelper.rHeartBeat());
+                    }
+                    if (str[0].equals("05"))//关机
+                    {
+                        if (usbHelper.getRunningActivityName().equals(".U3D.u3dPlayer")) {
+                            try {
+                                //暂停广播
+                                Intent i = new Intent("com.example.U3D_BROADCAST");
+                                i.putExtra("U3D", "pauseU3D");
+                                UserData.getContext().sendBroadcast(i);
+                            } catch (Exception e) {
+                                Log.e("u3d", e.toString());
+                            }
+                        }
+                        Log.e("Receiver", "ID=    " + str[0]);
+                        usbHelper.dialogShutDown();
+                    }
+                    if (str[0].equals("09"))//dButtonInfo改变模式
+                    {
+                        Log.e("Receiver", "ID=    " + str[0]);
+                        try {
+                            ButtonMode(Integer.valueOf(str[2]).intValue());
+                        } catch (Exception e) {
+                            Log.e("Connection", String.valueOf(e));
+                        }
+                    }
+                    if (str[0].equals("19"))//dNetStatus网络状态
+                    {
+                        String NetType = null;//网络类型
+                        switch (str[2]) {
+                            case "00":
+                                NetType = "WIFI";
+                                break;
+                            case "01":
+                                NetType = "Zigbee";
+                                break;
+                            case "02":
+                                NetType = "AX-12Bus";
+                                break;
+                            default:
+                                NetType = str[2];
+                        }
+                        String rightStatus = "未连接";
+                        String leftStatus = "未连接";
+                        if (str[3].equals("01")) {
+                            rightStatus = "连接正常";
+                        }
+                        if (str[4].equals("00")) {
+                            leftStatus = "连接正常";
+                        }
+                        usbHelper.dialogError("手套" + NetType + "连接状态", "右手：" + rightStatus + "\n" + "左手：" + leftStatus);
+                    }
+                    if (str[0].equals("20"))//dPowerinfo下位机电量
+                    {
+                        Log.e("Receiver", "ID=    " + str[0]);
+                        try {
+                            int a = Integer.parseInt(str[2], 16);
+                            usbHelper.powerInfo = Integer.valueOf(a).intValue();
+                            Log.e("PowerInfo", "下位机电量为   " + usbHelper.powerInfo);
+                        } catch (Exception e) {
+                            Log.e("PowerInfo", String.valueOf(e));
+                        }
+                    }
+                    if (str[0].equals("25"))//GCU向AWS发送配置报文请求。
+                    {
+                        String data = usbHelper.userSettings.getString("thumbFlat", "10") + " " + usbHelper.userSettings.getString("foreFlat", "10") + " "
+                                + usbHelper.userSettings.getString("middleFlat", "10") + " " + usbHelper.userSettings.getString("ringFlat", "10") +
+                                " " + usbHelper.userSettings.getString("littleFlat", "10") + " " + usbHelper.userSettings.getString("thumbMiddle", "110")
+                                + " " + usbHelper.userSettings.getString("foreMiddle", "110") + " " + usbHelper.userSettings.getString("middleMiddle", "110")
+                                + " " + usbHelper.userSettings.getString("ringMiddle", "110") + " " + usbHelper.userSettings.getString("littleMiddle", "110")
+                                + " " + usbHelper.userSettings.getString("thumbFist", "120") + " " + usbHelper.userSettings.getString("foreFist", "140")
+                                + " " + usbHelper.userSettings.getString("middleFist", "140") + " " + usbHelper.userSettings.getString("ringFist", "140")
+                                + " " + usbHelper.userSettings.getString("littleFist", "120") + " " + usbHelper.userSettings.getString("thumbStretch", "50")
+                                + " " +usbHelper.userSettings.getString("foreStretch", "50") + " " + usbHelper.userSettings.getString("middleStretch", "50")
+                                + " " + usbHelper.userSettings.getString("ringStretch", "50") + " " + usbHelper.userSettings.getString("littleStretch", "50")
+                                + " " + usbHelper.userSettings.getString("thumbMove", "113") + " " + usbHelper.userSettings.getString("foreMove", "113")
+                                + " " + usbHelper.userSettings.getString("middleMove", "113") + " " + usbHelper.userSettings.getString("ringMove", "113")
+                                + " " + usbHelper.userSettings.getString("littleMove", "113")
+                                + " " + voltageToMessage(usbHelper.userSettings.getString("thumbAdjust180V", SetConstant.THUMB_180V), AdminActivity.DigitPosition.HIGH)
+                                + " " + voltageToMessage(usbHelper.userSettings.getString("foreAdjust180V", SetConstant.FORE_180V), AdminActivity.DigitPosition.HIGH)
+                                + " " + voltageToMessage(usbHelper.userSettings.getString("middleAdjust180V", SetConstant.MIDDLE_180V), AdminActivity.DigitPosition.HIGH)
+                                + " " + voltageToMessage(usbHelper.userSettings.getString("ringAdjust180V", SetConstant.RING_180V), AdminActivity.DigitPosition.HIGH)
+                                + " " + voltageToMessage(usbHelper.userSettings.getString("littleAdjust180V", SetConstant.LITTLE_180V), AdminActivity.DigitPosition.HIGH)
+                                + " " + voltageToMessage(usbHelper.userSettings.getString("thumbAdjust180V", SetConstant.THUMB_180V), AdminActivity.DigitPosition.LOW)
+                                + " " + voltageToMessage(usbHelper.userSettings.getString("foreAdjust180V", SetConstant.FORE_180V), AdminActivity.DigitPosition.LOW)
+                                + " " + voltageToMessage(usbHelper.userSettings.getString("middleAdjust180V", SetConstant.MIDDLE_180V), AdminActivity.DigitPosition.LOW)
+                                + " " + voltageToMessage(usbHelper.userSettings.getString("ringAdjust180V", SetConstant.RING_180V), AdminActivity.DigitPosition.LOW)
+                                + " " + voltageToMessage(usbHelper.userSettings.getString("littleAdjust180V", SetConstant.LITTLE_180V), AdminActivity.DigitPosition.LOW)
+                                + " " + voltageToMessage(usbHelper.userSettings.getString("thumbAdjust0V", SetConstant.THUMB_0V), AdminActivity.DigitPosition.HIGH)
+                                + " " + voltageToMessage(usbHelper.userSettings.getString("foreAdjust0V", SetConstant.FORE_0V), AdminActivity.DigitPosition.HIGH)
+                                + " " + voltageToMessage(usbHelper.userSettings.getString("middleAdjust0V", SetConstant.MIDDLE_180V), AdminActivity.DigitPosition.HIGH)
+                                + " " + voltageToMessage(usbHelper.userSettings.getString("ringAdjust0V", SetConstant.RING_0V), AdminActivity.DigitPosition.HIGH)
+                                + " " + voltageToMessage(usbHelper.userSettings.getString("littleAdjust0V", SetConstant.LITTLE_0V), AdminActivity.DigitPosition.HIGH)
+                                + " " + voltageToMessage(usbHelper.userSettings.getString("thumbAdjust0V", SetConstant.THUMB_0V), AdminActivity.DigitPosition.LOW)
+                                + " " + voltageToMessage(usbHelper.userSettings.getString("foreAdjust0V", SetConstant.FORE_0V), AdminActivity.DigitPosition.LOW)
+                                + " " + voltageToMessage(usbHelper.userSettings.getString("middleAdjust0V", SetConstant.MIDDLE_0V), AdminActivity.DigitPosition.LOW)
+                                + " " + voltageToMessage(usbHelper.userSettings.getString("ringAdjust0V", SetConstant.RING_0V), AdminActivity.DigitPosition.LOW)
+                                + " " + voltageToMessage(usbHelper.userSettings.getString("littleAdjust0V", SetConstant.LITTLE_0V), AdminActivity.DigitPosition.LOW);
+                        sendData(usbHelper.dConfigData(data));
+                        Log.e("AAAAAAA", data);
+                    }
+                    if (str[0].equals("10"))//下位机向上位机发送角度信息
+                    {
+                        if (str.length == 8) {
+                            try {
+                                Log.e("Receiver", "ID=    " + str[0]);
+                                String[] str2 = msg.getData().get("msg").toString().split("\\ ");
+                                //手指序号
+                                usbHelper.fingerNumber = Integer.parseInt(str2[2]);
+                                //手指运动角度
+                                usbHelper.angleFromDownStream = Float.parseFloat(str2[5]);
+                                //对手指信息进行整理
+                                usbHelper.fingerArray[0] = Integer.parseInt(str[2], 16) + "";
+                                usbHelper.fingerArray[1] = Integer.parseInt(str[3], 16) + "";
+                                usbHelper.fingerArray[2] = Integer.parseInt(str[4], 16) + "";
+                                usbHelper.fingerArray[3] = Integer.parseInt(str[5], 16) + "";
+                                usbHelper.fingerArray[4] = Integer.parseInt(str[6], 16) + "";
+                                Log.e("fingerArray", "-----------------------------------");
+                                for (int i = 0; i < 5; i++) {
+                                    Log.e("fingerArray", "The Array Contains " + usbHelper.fingerArray[i]);
+                                }
+                                Log.e("fingerArray", "-----------------------------------");
+
+                            } catch (Exception e) {
+                                Log.e("Connection", String.valueOf(e));
+                            }
+                        }
+                    }
+                    if (str[0].equals("21"))//部件信息
+                    {
+                        if (str.length == 15) {
+                            if (str[2].equals("00"))//舵机
+                            {
+
+                                switch (str[3]) {
+                                    case "00"://当前位置
+                                        try {
+                                            //对舵机位置信息进行整理
+                                            usbHelper.componentArray[0] = Integer.parseInt(str[5], 16) + "";
+                                            usbHelper.componentArray[1] = Integer.parseInt(str[7], 16) + "";
+                                            usbHelper.componentArray[2] = Integer.parseInt(str[9], 16) + "";
+                                            usbHelper.componentArray[3] = Integer.parseInt(str[11], 16) + "";
+                                            usbHelper.componentArray[4] = Integer.parseInt(str[13], 16) + "";
+                                            Log.e("componentArray", "-----------------------------------");
+                                            for (int i = 0; i < 5; i++) {
+                                                Log.e("componentArray", "The Array Contains " + usbHelper.componentArray[i]);
+                                            }
+                                            Log.e("componentArray", "-----------------------------------");
+                                        } catch (Exception e) {
+                                            Log.e("componentArray", String.valueOf(e));
+                                        }
+                                        break;
+                                    case "01"://当前速度
+                                        break;
+                                    case "02"://当前负载
+                                        break;
+                                    case "03"://舵机错误状态
+                                        usbHelper.componentError[0] = usbHelper.motorErrorHandler("1", Integer.parseInt(str[5], 16));
+                                        usbHelper.componentError[1] = usbHelper.motorErrorHandler("2", Integer.parseInt(str[7], 16));
+                                        usbHelper.componentError[2] = usbHelper.motorErrorHandler("3", Integer.parseInt(str[9], 16));
+                                        usbHelper.componentError[3] = usbHelper.motorErrorHandler("4", Integer.parseInt(str[11], 16));
+                                        usbHelper.componentError[4] = usbHelper.motorErrorHandler("5", Integer.parseInt(str[13], 16));
+                                        break;
+                                    case "04"://当前温度
+                                        try {
+                                            //对舵机位置信息进行整理
+                                            usbHelper.componentTemperature[0] = Integer.parseInt(str[5], 16) + "";
+                                            usbHelper.componentTemperature[1] = Integer.parseInt(str[7], 16) + "";
+                                            usbHelper.componentTemperature[2] = Integer.parseInt(str[9], 16) + "";
+                                            usbHelper.componentTemperature[3] = Integer.parseInt(str[11], 16) + "";
+                                            usbHelper.componentTemperature[4] = Integer.parseInt(str[13], 16) + "";
+                                            Log.e("componentTemperature", "-----------------------------------");
+                                            for (int i = 0; i < 5; i++) {
+                                                Log.e("componentTemperature", "The Array Contains " + usbHelper.componentArray[i]);
+                                            }
+                                            Log.e("componentTemperature", "-----------------------------------");
+                                        } catch (Exception e) {
+                                            Log.e("componentTemperature", String.valueOf(e));
+                                        }
+                                        break;
+                                    case "05"://当前电压
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
     }
+
+
+
+    /**
+     * 根据下位机按键报文操作
+     * mode=1：主动模式
+     * mode=2：被动模式
+     * mode=3：开始
+     * mode=4：停止
+     *
+     * @param buttonType
+     */
+    public void ButtonMode(int buttonType) {
+        if (buttonType == 1) //主从模式
+        {
+            if (usbHelper.getRunningActivityName().equals(".U3D.u3dPlayer")) {
+                try {
+                    //发送退出u3d广播
+                    Intent i = new Intent("com.example.U3D_BROADCAST");
+                    i.putExtra("U3D", "stopU3D");
+                    i.putExtra("buttonType", "1");
+                    UserData.getContext().sendBroadcast(i);
+                } catch (Exception e) {
+                    Log.e("u3d", e.toString());
+                }
+            } else {
+                MasterSlaveActivity.MSActionStart(UserData.getContext());
+                byte[] bytes = new byte[6];
+                bytes[0] = (byte) 0xff;
+                bytes[1] = (byte) 0xff;
+                bytes[2] = (byte) 0x07;//ID
+                bytes[3] = (byte) 0x06;//长度
+                bytes[4] = (byte) 0x01;//模式
+                sendData(bytes);
+                Log.e("ChangeMode", "主从模式");
+            }
+        } else if (buttonType == 2) //手套操
+        {
+            if (usbHelper.getRunningActivityName().equals(".U3D.u3dPlayer")) {
+                try {
+                    //发送退出u3d广播
+                    Intent i = new Intent("com.example.U3D_BROADCAST");
+                    i.putExtra("U3D", "stopU3D");
+                    i.putExtra("buttonType", "2");
+                    UserData.getContext().sendBroadcast(i);
+                } catch (Exception e) {
+                    Log.e("u3d", e.toString());
+                }
+            } else {
+                ExerciseActivity.ExerciseActionStart(UserData.getContext());//切换手套操主从模式
+                byte[] bytes = new byte[6];
+                bytes[0] = (byte) 0xff;
+                bytes[1] = (byte) 0xff;
+                bytes[2] = (byte) 0x07;//ID
+                bytes[3] = (byte) 0x06;//长度
+                bytes[4] = (byte) 0x02;//模式
+                sendData(bytes);
+                Log.e("ChangeMode", "手套操");
+            }
+        } else if (buttonType == 3) //开始
+        {
+            if (usbHelper.getRunningActivityName().equals(".U3D.u3dPlayer")) {
+                try {
+                    //暂停广播
+                    Intent i = new Intent("com.example.U3D_BROADCAST");
+                    i.putExtra("U3D", "pauseU3D");
+                    UserData.getContext().sendBroadcast(i);
+                } catch (Exception e) {
+                    Log.e("u3d", e.toString());
+                }
+            }
+            Log.e("u3d", "开始");
+
+        } else if (buttonType == 4) //停止
+        {
+            if (usbHelper.getRunningActivityName().equals(".U3D.u3dPlayer")) {
+                try {
+                    //暂停广播
+                    Intent i = new Intent("com.example.U3D_BROADCAST");
+                    i.putExtra("U3D", "pauseU3D");
+                    UserData.getContext().sendBroadcast(i);
+                } catch (Exception e) {
+                    Log.e("u3d", e.toString());
+                }
+            }
+            Log.e("u3d", "暂停");
+        }
+
+    }
+
+
+
+
+
 }
 
