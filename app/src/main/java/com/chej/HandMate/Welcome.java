@@ -26,6 +26,7 @@ import com.chej.HandMate.Model.SysApplication;
 import com.chej.HandMate.Transmission.USB.USBHelper;
 import com.chej.HandMate.Transmission.USB.UsbService;
 import com.chej.HandMate.Transmission.Wifi.WifiService;
+import com.chej.HandMate.utils.Debuger;
 
 import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
@@ -68,7 +69,7 @@ public class Welcome extends Activity {
     private TextView size;
     private UsbService usbService;
     private MyHandler mHandler;
-
+    public  static Welcome activity;
     private String tag = "Welcome";
 
     private IMyAidlInterface iMyAidlInterface;
@@ -93,6 +94,7 @@ public class Welcome extends Activity {
                 startActivityForResult(intent, 1);
             }
         }
+        activity = this;
        /* try {
             Intent startIntent = new Intent(Welcome.this, UsbService.class);
             startService(startIntent); // 启动服务
@@ -200,10 +202,10 @@ public class Welcome extends Activity {
             try {
                 iMyAidlInterface.registerCallback(iCallBack);
             } catch (RemoteException e) {
-               Log.e(tag,e.toString());
+                Log.e(tag,e.toString());
             }
-            //Intent mintent = new Intent(Welcome.this, UsersActivity.class);
-            //startActivity(mintent);
+            Intent mintent = new Intent(Welcome.this, UsersActivity.class);
+            startActivity(mintent);
             //finish();
         }
 
@@ -236,7 +238,10 @@ public class Welcome extends Activity {
     public void onResume() {
         super.onResume();
         setFilters();  // Start listening notifications from UsbService
+
         startService(UsbService.class, serviceConnection, null);
+
+        /*
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             public void run() {
@@ -252,7 +257,7 @@ public class Welcome extends Activity {
                 }
             }
         }, 200 , 100);
-
+*/
     }
     @Override
     public void onPause() {
@@ -286,8 +291,11 @@ public class Welcome extends Activity {
 
         @Override
         public void handleMessage(Message msg) {
+            Debuger.dialogError("MyHandler.handleMessage","handleMessage");
+            Debuger.dialogError("MyHandler.handleMessage",msg.toString());
             switch (msg.what) {
                 case UsbService.MESSAGE_FROM_SERIAL_PORT:
+
                     String data = (String) msg.obj;
                     mActivity.get().size.append(data);
                     break;

@@ -201,6 +201,12 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
 
         return null;
     }
+    //语音（U3D调用）
+    public void u3dTTS(String str,String speed)
+    {
+        speechUtil.speed(speed);
+        speechUtil.speak(str);
+    }
 
     //向下位机传递(U3D调用)
    public void sendToLowerComputer(String angles)//U3d传来角度数据,转换成报文传给下位机
@@ -215,11 +221,6 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
        }
    }
 
-   //语音（U3D调用）
-    public void u3dTTS(String str)
-    {
-        speechUtil.speak(str);
-    }
 
    //触觉反馈（U3D调用）
    public void ToLowerTouchFeedBack(float[] touchFeedBack){
@@ -344,6 +345,7 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
         }
         senddGloveSelect(0);
         unbindService(serviceConnection);
+        speechUtil.release();
         finish();
        /* runOnUiThread(new Runnable() {
             @Override
@@ -383,6 +385,7 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
     protected void onDestroy() {
         super.onDestroy();
         mUnityPlayer.quit();
+        speechUtil.release();
         finish();
     }
 

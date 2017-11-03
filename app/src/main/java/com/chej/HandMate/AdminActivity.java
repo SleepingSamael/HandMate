@@ -22,9 +22,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.chej.HandMate.Model.SetConstant;
 import com.chej.HandMate.Model.MyCustomDialog;
 import com.chej.HandMate.Model.SysApplication;
+import com.chej.HandMate.Model.users.UserData;
+import com.chej.HandMate.Transmission.USB.UsbService;
 import com.chej.HandMate.Transmission.Wifi.WifiService;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
@@ -102,6 +103,7 @@ public class AdminActivity extends AppCompatActivity {
     private LineChart mChart;
     private Button getError;
     private TextView showError;
+    private Button getV;
 
     private IMyAidlInterface iMyAidlInterface;
     @Override
@@ -109,9 +111,10 @@ public class AdminActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
+
         SysApplication.getInstance().addActivity(this);
 
-        Intent myServiceIntent = new Intent(AdminActivity.this, WifiService.class);
+        Intent myServiceIntent = new Intent(AdminActivity.this, UsbService.class);
         bindService(myServiceIntent, serviceConnection,
                 Context.BIND_AUTO_CREATE);
 
@@ -127,6 +130,7 @@ public class AdminActivity extends AppCompatActivity {
         th.addTab(th.newTabSpec("tab5").setIndicator("标签3",null).setContent(R.id.tab3));
         //上面的null可以为getResources().getDrawable(R.drawable.图片名)设置图标
 
+        getV=(Button)findViewById(R.id.btn_getV);
         getError=(Button)findViewById(R.id.btn_errorreport);
         showError=(TextView)findViewById(R.id.tv_errorreport);
         log=(Button)findViewById(R.id.btn_log) ;
@@ -182,7 +186,7 @@ public class AdminActivity extends AppCompatActivity {
         littleFinger_adjust_180v_et=(EditText)findViewById(R.id.littleFinger_adjust_180);
 
         //获取Preferences
-        final SharedPreferences userSettings = getSharedPreferences("setting", 0);
+        final SharedPreferences userSettings = UserData.getContext().getSharedPreferences("setting", Context.MODE_APPEND);
         thumbFlat_et.setText(userSettings.getString("thumbFlat","10"));
         forefingerFlat_et.setText(userSettings.getString("foreFlat","10"));
         middleFingerFlat_et.setText(userSettings.getString("middleFlat","10"));
@@ -209,27 +213,27 @@ public class AdminActivity extends AppCompatActivity {
         ringFingerMove_et.setText(userSettings.getString("ringMove","113"));
         littleFingerMove_et.setText(userSettings.getString("littleMove","113"));
         //电压
-        thumb_0v_et.setText(SetConstant.THUMB_0V);
-        forefinger_0v_et.setText(SetConstant.FORE_0V);
-        middleFinger_0v_et.setText(SetConstant.MIDDLE_0V);
-        ringFinger_0v_et.setText(SetConstant.RING_0V);
-        littleFinger_0v_et.setText(SetConstant.LITTLE_0V);
-        thumb_180v_et.setText(SetConstant.THUMB_180V);
-        forefinger_180v_et.setText(SetConstant.FORE_180V);
-        middleFinger_180v_et.setText(SetConstant.MIDDLE_180V);
-        ringFinger_180v_et.setText(SetConstant.RING_180V);
-        littleFinger_180v_et.setText(SetConstant.LITTLE_180V);
+        thumb_0v_et.setText(userSettings.getString("thumb0V","0"));
+        forefinger_0v_et.setText(userSettings.getString("fore0V","0"));
+        middleFinger_0v_et.setText(userSettings.getString("middle0V","0"));
+        ringFinger_0v_et.setText(userSettings.getString("ring0V","0"));
+        littleFinger_0v_et.setText(userSettings.getString("little0V","0"));
+        thumb_180v_et.setText(userSettings.getString("thumb180V","0"));
+        forefinger_180v_et.setText(userSettings.getString("fore180V","0"));
+        middleFinger_180v_et.setText(userSettings.getString("middle180V","0"));
+        ringFinger_180v_et.setText(userSettings.getString("ring180V","0"));
+        littleFinger_180v_et.setText(userSettings.getString("little180V","0"));
         //校准电压（默认与电压一致）
-        thumb_adjust_0v_et.setText(userSettings.getString("thumbAdjust0V", SetConstant.THUMB_0V));
-        forefinger_adjust_0v_et.setText(userSettings.getString("foreAdjust0V",SetConstant.FORE_0V));
-        middleFinger_adjust_0v_et.setText(userSettings.getString("middleAdjust0V",SetConstant.MIDDLE_0V));
-        ringFinger_adjust_0v_et.setText(userSettings.getString("ringAdjust0V",SetConstant.RING_0V));
-        littleFinger_adjust_0v_et.setText(userSettings.getString("littleAdjust0V",SetConstant.LITTLE_0V));
-        thumb_adjust_180v_et.setText(userSettings.getString("thumbAdjust180V",SetConstant.THUMB_180V));
-        forefinger_adjust_180v_et.setText(userSettings.getString("foreAdjust180V",SetConstant.FORE_180V));
-        middleFinger_adjust_180v_et.setText(userSettings.getString("middleAdjust180V",SetConstant.MIDDLE_180V));
-        ringFinger_adjust_180v_et.setText(userSettings.getString("ringAdjust180V",SetConstant.RING_180V));
-        littleFinger_adjust_180v_et.setText(userSettings.getString("littleAdjust180V",SetConstant.LITTLE_180V));
+        thumb_adjust_0v_et.setText(userSettings.getString("thumbAdjust0V","1"));
+        forefinger_adjust_0v_et.setText(userSettings.getString("foreAdjust0V","1"));
+        middleFinger_adjust_0v_et.setText(userSettings.getString("middleAdjust0V","1"));
+        ringFinger_adjust_0v_et.setText(userSettings.getString("ringAdjust0V","1"));
+        littleFinger_adjust_0v_et.setText(userSettings.getString("littleAdjust0V","1"));
+        thumb_adjust_180v_et.setText(userSettings.getString("thumbAdjust180V","1"));
+        forefinger_adjust_180v_et.setText(userSettings.getString("foreAdjust180V","1"));
+        middleFinger_adjust_180v_et.setText(userSettings.getString("middleAdjust180V","1"));
+        ringFinger_adjust_180v_et.setText(userSettings.getString("ringAdjust180V","1"));
+        littleFinger_adjust_180v_et.setText(userSettings.getString("littleAdjust180V","1"));
 
         if(userSettings.getString("glove","右").equals("右")){
             glove.setChecked(false);
@@ -254,6 +258,7 @@ public class AdminActivity extends AppCompatActivity {
                     String filePath= Environment.getExternalStorageDirectory()+"/LOG_"+sdate+"_"+hour+"h"+min+"m"+sec+"s"+".txt";
 
                     Runtime  r = Runtime.getRuntime();
+                    r.exec("logcat -v time");
                     r.exec("logcat -f "+ filePath);
                     r.exec("logcat -c");
                     r.freeMemory();
@@ -297,6 +302,22 @@ public class AdminActivity extends AppCompatActivity {
                     ex.printStackTrace();
                     Log.e("getError", String.valueOf(ex));
                 }
+            }
+        });
+        getV.setOnClickListener(new Button.OnClickListener(){//创建监听
+            public void onClick(View v) {
+                sendGetV();
+                SharedPreferences userSettings = UserData.getContext().getSharedPreferences("setting",Context.MODE_APPEND);
+                thumb_0v_et.setText(userSettings.getString("thumb0V","0"));
+                forefinger_0v_et.setText(userSettings.getString("fore0V","0"));
+                middleFinger_0v_et.setText(userSettings.getString("middle0V","0"));
+                ringFinger_0v_et.setText(userSettings.getString("ring0V","0"));
+                littleFinger_0v_et.setText(userSettings.getString("little0V","0"));
+                thumb_180v_et.setText(userSettings.getString("thumb180V","0"));
+                forefinger_180v_et.setText(userSettings.getString("fore180V","0"));
+                middleFinger_180v_et.setText(userSettings.getString("middle180V","0"));
+                ringFinger_180v_et.setText(userSettings.getString("ring180V","0"));
+                littleFinger_180v_et.setText(userSettings.getString("little180V","0"));
             }
         });
 
@@ -429,26 +450,26 @@ public class AdminActivity extends AppCompatActivity {
                             +" "+userSettings.getString("thumbMove","113")+" "+userSettings.getString("foreMove","113")
                             +" "+userSettings.getString("middleMove","113")+" "+userSettings.getString("ringMove","113")
                             +" "+userSettings.getString("littleMove","113")
-                            +" "+voltageToMessage(userSettings.getString("thumbAdjust180V",SetConstant.THUMB_180V),DigitPosition.HIGH)
-                            +" "+voltageToMessage(userSettings.getString("foreAdjust180V",SetConstant.FORE_180V),DigitPosition.HIGH)
-                            +" "+voltageToMessage(userSettings.getString("middleAdjust180V",SetConstant.MIDDLE_180V),DigitPosition.HIGH)
-                            +" "+voltageToMessage(userSettings.getString("ringAdjust180V",SetConstant.RING_180V),DigitPosition.HIGH)
-                            +" "+voltageToMessage(userSettings.getString("littleAdjust180V",SetConstant.LITTLE_180V),DigitPosition.HIGH)
-                            +" "+voltageToMessage(userSettings.getString("thumbAdjust180V",SetConstant.THUMB_180V),DigitPosition.LOW)
-                            +" "+voltageToMessage(userSettings.getString("foreAdjust180V",SetConstant.FORE_180V),DigitPosition.LOW)
-                            +" "+voltageToMessage(userSettings.getString("middleAdjust180V",SetConstant.MIDDLE_180V),DigitPosition.LOW)
-                            +" "+voltageToMessage(userSettings.getString("ringAdjust180V",SetConstant.RING_180V),DigitPosition.LOW)
-                            +" "+voltageToMessage(userSettings.getString("littleAdjust180V",SetConstant.LITTLE_180V),DigitPosition.LOW)
-                            +" "+voltageToMessage(userSettings.getString("thumbAdjust0V",SetConstant.THUMB_0V),DigitPosition.HIGH)
-                            +" "+voltageToMessage(userSettings.getString("foreAdjust0V",SetConstant.FORE_0V),DigitPosition.HIGH)
-                            +" "+voltageToMessage(userSettings.getString("middleAdjust0V",SetConstant.MIDDLE_180V),DigitPosition.HIGH)
-                            +" "+voltageToMessage(userSettings.getString("ringAdjust0V",SetConstant.RING_0V),DigitPosition.HIGH)
-                            +" "+voltageToMessage(userSettings.getString("littleAdjust0V",SetConstant.LITTLE_0V),DigitPosition.HIGH)
-                            +" "+voltageToMessage(userSettings.getString("thumbAdjust0V",SetConstant.THUMB_0V),DigitPosition.LOW)
-                            +" "+voltageToMessage(userSettings.getString("foreAdjust0V",SetConstant.FORE_0V),DigitPosition.LOW)
-                            +" "+voltageToMessage(userSettings.getString("middleAdjust0V",SetConstant.MIDDLE_0V),DigitPosition.LOW)
-                            +" "+voltageToMessage(userSettings.getString("ringAdjust0V",SetConstant.RING_0V),DigitPosition.LOW)
-                            +" "+voltageToMessage(userSettings.getString("littleAdjust0V",SetConstant.LITTLE_0V),DigitPosition.LOW);
+                            +" "+voltageToMessage(userSettings.getString("thumbAdjust180V","1"),DigitPosition.HIGH)
+                            +" "+voltageToMessage(userSettings.getString("foreAdjust180V","1"),DigitPosition.HIGH)
+                            +" "+voltageToMessage(userSettings.getString("middleAdjust180V","1"),DigitPosition.HIGH)
+                            +" "+voltageToMessage(userSettings.getString("ringAdjust180V","1"),DigitPosition.HIGH)
+                            +" "+voltageToMessage(userSettings.getString("littleAdjust180V","1"),DigitPosition.HIGH)
+                            +" "+voltageToMessage(userSettings.getString("thumbAdjust180V","1"),DigitPosition.LOW)
+                            +" "+voltageToMessage(userSettings.getString("foreAdjust180V","1"),DigitPosition.LOW)
+                            +" "+voltageToMessage(userSettings.getString("middleAdjust180V","1"),DigitPosition.LOW)
+                            +" "+voltageToMessage(userSettings.getString("ringAdjust180V","1"),DigitPosition.LOW)
+                            +" "+voltageToMessage(userSettings.getString("littleAdjust180V","1"),DigitPosition.LOW)
+                            +" "+voltageToMessage(userSettings.getString("thumbAdjust0V","1"),DigitPosition.HIGH)
+                            +" "+voltageToMessage(userSettings.getString("foreAdjust0V","1"),DigitPosition.HIGH)
+                            +" "+voltageToMessage(userSettings.getString("middleAdjust0V","1"),DigitPosition.HIGH)
+                            +" "+voltageToMessage(userSettings.getString("ringAdjust0V","1"),DigitPosition.HIGH)
+                            +" "+voltageToMessage(userSettings.getString("littleAdjust0V","1"),DigitPosition.HIGH)
+                            +" "+voltageToMessage(userSettings.getString("thumbAdjust0V","1"),DigitPosition.LOW)
+                            +" "+voltageToMessage(userSettings.getString("foreAdjust0V","1"),DigitPosition.LOW)
+                            +" "+voltageToMessage(userSettings.getString("middleAdjust0V","1"),DigitPosition.LOW)
+                            +" "+voltageToMessage(userSettings.getString("ringAdjust0V","1"),DigitPosition.LOW)
+                            +" "+voltageToMessage(userSettings.getString("littleAdjust0V","1"),DigitPosition.LOW);
                     sendConfigData(data);
                     Log.e("AAAAAAA",data);
                 }
@@ -522,7 +543,7 @@ public class AdminActivity extends AppCompatActivity {
         xl.setAvoidFirstLastClipping(true);
 
         // 几个x坐标轴之间才绘制？
-    //    xl.setSpaceBetweenLabels(5);
+        //    xl.setSpaceBetweenLabels(5);
 
         // 如果false，那么x坐标轴将不可见
         xl.setEnabled(true);
@@ -579,7 +600,7 @@ public class AdminActivity extends AppCompatActivity {
         }
         // 先添加一个x坐标轴的值
         // 因为是从0开始，data.getXValCount()每次返回的总是全部x坐标轴上总数量，所以不必多此一举的加1
-    //    data.addXValue((data.getXValCount()) + "");
+        //    data.addXValue((data.getXValCount()) + "");
 
         // 生成随机测试数
         float f = (float) ((Math.random()) * 20 + 50);
@@ -604,7 +625,7 @@ public class AdminActivity extends AppCompatActivity {
 
         // 将坐标移动到最新
         // 此代码将刷新图表的绘图
-     //   mChart.moveViewToX(data.getXValCount() - 5);
+        //   mChart.moveViewToX(data.getXValCount() - 5);
 
         // mChart.moveViewTo(data.getXValCount()-7, 55f,
         // AxisDependency.LEFT);
@@ -652,6 +673,16 @@ public class AdminActivity extends AppCompatActivity {
                 iMyAidlInterface.sendConfigData(Data);
             } catch (RemoteException e) {
                 Log.e("sendConfigData",e.toString());
+            }
+        }
+    }
+    //获取电压
+    public void sendGetV() {
+        if (iMyAidlInterface!=null){
+            try {
+                iMyAidlInterface.sendGetV();
+            } catch (RemoteException e) {
+                Log.e("sendGetV",e.toString());
             }
         }
     }

@@ -146,15 +146,15 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
             @Override
             public void onPageSelected(int position) {
                 switch (position){
-                    case 0: speechUtil.speak("主从模式");
+                    case 0: //speechUtil.speak("主从模式");
                         break;
-                    case 1:speechUtil.speak("游戏模式");
+                    case 1://speechUtil.speak("游戏模式");
                         break;
-                    case 2: speechUtil.speak("手套操");
+                    case 2: //speechUtil.speak("手套操");
                         break;
-                    case 3: speechUtil.speak("评估");
+                    case 3: ///speechUtil.speak("评估");
                         break;
-                    case 4: speechUtil.speak("历史记录");
+                    case 4: //speechUtil.speak("历史记录");
                         break;
                 }
             }

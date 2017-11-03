@@ -14,7 +14,6 @@ interface IMyAidlInterface {
     void runServiceState();
     boolean getConnectionStatus();
 
-     String getMessage();
     String [] getFingerArray();
     String[] getComponentStatus();
     String[] getConfigArray();
@@ -34,4 +33,5 @@ interface IMyAidlInterface {
    void senddGloveSelect(int gloveNum);//通知下位机开始发手套数据
    void sendConfigData(String ata);//给下位机发送配置数据
    void sendcSVCMode(int SVCMode,int ModeStatus);//当进入服务模式时，通知选择的服务模式和状态，此时下位机进入服务模式后停止运动。当退出服务模式后恢复运动，并使能最后发送的配置项。
+   void sendGetV();
 }

@@ -396,4 +396,14 @@ public class USBHelper {
         b[4] = (byte) ~(b[2] + b[3]);
         return b;
     }
+    //获取电压值
+    public byte[] getV(){
+        byte[]b=new byte[5];
+        b[0]=(byte)0xff;
+        b[1]=(byte)0xff;
+        b[2]=(byte)0x0A;//ID
+        b[3]=(byte)0x05;//长度
+        b[4]=(byte) ~(b[2]+b[3]);
+        return b;
+    }
 }

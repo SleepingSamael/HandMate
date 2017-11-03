@@ -10,6 +10,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbManager;
@@ -32,6 +33,7 @@ import com.chej.HandMate.MasterSlaveActivity;
 import com.chej.HandMate.Model.SetConstant;
 import com.chej.HandMate.Model.users.UserData;
 import com.chej.HandMate.U3D.u3dPlayer;
+import com.chej.HandMate.utils.Debuger;
 import com.felhr.usbserial.CDCSerialDevice;
 import com.felhr.usbserial.UsbSerialDevice;
 import com.felhr.usbserial.UsbSerialInterface;
@@ -96,10 +98,6 @@ public class UsbService extends Service {
             String msg = "收到来自客户端是消息：" + entity.getName();
             //sendMsgToMain(msg);
         }
-        @Override
-        public String getMessage(){
-            return usbHelper.strResult;
-        }
 
 
         @Override
@@ -109,7 +107,7 @@ public class UsbService extends Service {
 
         @Override
         public boolean getConnectionStatus() {
-                return false;
+            return false;
         }
 
         //向u3d发送手指角度
@@ -122,6 +120,10 @@ public class UsbService extends Service {
         @Override
         public String[] getComponentStatus() {
             return usbHelper.componentArray;
+        }
+        @Override
+        public void sendGetV(){
+            sendData(usbHelper.getV());
         }
         //获取舵机温度
         @Override
@@ -274,12 +276,14 @@ public class UsbService extends Service {
     private UsbSerialInterface.UsbReadCallback uCallback = new UsbSerialInterface.UsbReadCallback() {
         @Override
         public void onReceivedData(byte[] arg0) {
+
             //读取数据流中的数据
             byte[] result = arg0;
-            usbHelper.strResult = bytesToString(result);
-            Log.e("USB",usbHelper.strResult);
-            usbHelper.hexResult = bytesToHexString(result);
+
             try {
+                usbHelper.strResult = bytesToString(result);
+                Log.e("USB",usbHelper.strResult);
+                usbHelper.hexResult = bytesToHexString(result);
                 if (!result.equals("")) {
                     Message msg = new Message();
                     msg.what = 1;
@@ -306,6 +310,7 @@ public class UsbService extends Service {
     private UsbSerialInterface.UsbCTSCallback ctsCallback = new UsbSerialInterface.UsbCTSCallback() {
         @Override
         public void onCTSChanged(boolean state) {
+
             if(mHandler != null)
                 mHandler.obtainMessage(CTS_CHANGE).sendToTarget();
         }
@@ -317,6 +322,7 @@ public class UsbService extends Service {
     private UsbSerialInterface.UsbDSRCallback dsrCallback = new UsbSerialInterface.UsbDSRCallback() {
         @Override
         public void onDSRChanged(boolean state) {
+
             if(mHandler != null)
                 mHandler.obtainMessage(DSR_CHANGE).sendToTarget();
         }
@@ -327,6 +333,7 @@ public class UsbService extends Service {
     private final BroadcastReceiver usbReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context arg0, Intent arg1) {
+
             if (arg1.getAction().equals(ACTION_USB_PERMISSION)) {
                 boolean granted = arg1.getExtras().getBoolean(UsbManager.EXTRA_PERMISSION_GRANTED);
                 if (granted) // User accepted our USB connection. Try to open the device as a serial port
@@ -339,16 +346,19 @@ public class UsbService extends Service {
                 {
                     Intent intent = new Intent(ACTION_USB_PERMISSION_NOT_GRANTED);
                     arg0.sendBroadcast(intent);
+                    Debuger.dialogError("UsbService.usbReceiver","ACTION_USB_PERMISSION_NOT_GRANTED");
                 }
             } else if (arg1.getAction().equals(ACTION_USB_ATTACHED)) {
+                Debuger.dialogError("UsbService.usbReceiver","ACTION_USB_ATTACHED");
                 if (!serialPortConnected)
                     findSerialPortDevice(); // A USB device has been attached. Try to open it as a Serial port
             } else if (arg1.getAction().equals(ACTION_USB_DETACHED)) {
                 // Usb device was disconnected. send an intent to the Main Activity
+                Debuger.dialogError("UsbService.usbReceiver","ACTION_USB_DISCONNECTED");
                 Intent intent = new Intent(ACTION_USB_DISCONNECTED);
                 arg0.sendBroadcast(intent);
                 if (serialPortConnected) {
-                    serialPort.syncClose();
+                    serialPort.close();
                 }
                 serialPortConnected = false;
             }
@@ -361,12 +371,20 @@ public class UsbService extends Service {
      */
     @Override
     public void onCreate() {
-        this.context = this;
-        serialPortConnected = false;
-        UsbService.SERVICE_CONNECTED = true;
-        setFilter();
-        usbManager = (UsbManager) getSystemService(Context.USB_SERVICE);
-        findSerialPortDevice();
+        try{
+            Debuger.dialogError("UsbService","onCreate");
+            this.context = this;
+            serialPortConnected = false;
+            UsbService.SERVICE_CONNECTED = true;
+
+            setFilter();
+
+            usbManager = (UsbManager) getSystemService(Context.USB_SERVICE);
+            findSerialPortDevice();
+        }catch (Exception ex){
+            Debuger.dialogError("UsbService.onCreate","UsbService.onCreat.err"+ex.getMessage());
+        }
+
     }
 
     @Override
@@ -400,37 +418,44 @@ public class UsbService extends Service {
     }
 
     private void findSerialPortDevice() {
-        // This snippet will try to open the first encountered usb device connected, excluding usb root hubs
-        HashMap<String, UsbDevice> usbDevices = usbManager.getDeviceList();
-        if (!usbDevices.isEmpty()) {
-            boolean keep = true;
-            for (Map.Entry<String, UsbDevice> entry : usbDevices.entrySet()) {
-                device = entry.getValue();
-                int deviceVID = device.getVendorId();
-                int devicePID = device.getProductId();
+        try{
+            // This snippet will try to open the first encountered usb device connected, excluding usb root hubs
+            HashMap<String, UsbDevice> usbDevices = usbManager.getDeviceList();
+            Debuger.dialogError("UsbService",":findSerialPortDevice");
+            if (!usbDevices.isEmpty()) {
+                boolean keep = true;
+                for (Map.Entry<String, UsbDevice> entry : usbDevices.entrySet()) {
+                    device = entry.getValue();
+                    int deviceVID = device.getVendorId();
+                    int devicePID = device.getProductId();
 
-                if (deviceVID != 0x1d6b && (devicePID != 0x0001 && devicePID != 0x0002 && devicePID != 0x0003)) {
-                    // There is a device connected to our Android device. Try to open it as a Serial Port.
-                    requestUserPermission();
-                    keep = false;
-                } else {
-                    connection = null;
-                    device = null;
+                    if (deviceVID != 0x1d6b && (devicePID != 0x0001 && devicePID != 0x0002 && devicePID != 0x0003)) {
+                        // There is a device connected to our Android device. Try to open it as a Serial Port.
+                        requestUserPermission();
+                        keep = false;
+                    } else {
+                        connection = null;
+                        device = null;
+                    }
+
+                    if (!keep)
+                        break;
                 }
-
-                if (!keep)
-                    break;
-            }
-            if (!keep) {
-                // There is no USB devices connected (but usb host were listed). Send an intent to MainActivity.
+                if (!keep) {
+                    // There is no USB devices connected (but usb host were listed). Send an intent to MainActivity.
+                    Intent intent = new Intent(ACTION_NO_USB);
+                    sendBroadcast(intent);
+                }
+            } else {
+                // There is no USB devices connected. Send an intent to MainActivity
                 Intent intent = new Intent(ACTION_NO_USB);
                 sendBroadcast(intent);
             }
-        } else {
-            // There is no USB devices connected. Send an intent to MainActivity
-            Intent intent = new Intent(ACTION_NO_USB);
-            sendBroadcast(intent);
+        }catch (Exception ex){
+            Debuger.dialogError("UsbService.findSerialPortDevice","findSerialPortDevice.err"+ex.getMessage());
         }
+
+
     }
 
     private void setFilter() {
@@ -445,8 +470,10 @@ public class UsbService extends Service {
      * Request user permission. The response will be received in the BroadcastReceiver
      */
     private void requestUserPermission() {
+        Debuger.dialogError("UsbService.requestUserPermission",":requestUserPermission1");
         PendingIntent mPendingIntent = PendingIntent.getBroadcast(this, 0, new Intent(ACTION_USB_PERMISSION), 0);
         usbManager.requestPermission(device, mPendingIntent);
+        Debuger.dialogError("UsbService.requestUserPermission","requestUserPermission:2");
     }
 
     public class UsbBinder extends Binder {
@@ -462,57 +489,66 @@ public class UsbService extends Service {
     private class ConnectionThread extends Thread {
         @Override
         public void run() {
-            serialPort = UsbSerialDevice.createUsbSerialDevice(device, connection);
-            if (serialPort != null) {
-                if (serialPort.syncOpen()) {
-                    serialPortConnected = true;
-                    serialPort.setBaudRate(BAUD_RATE);
-                    serialPort.setDataBits(UsbSerialInterface.DATA_BITS_8);
-                    serialPort.setStopBits(UsbSerialInterface.STOP_BITS_1);
-                    serialPort.setParity(UsbSerialInterface.PARITY_NONE);
-                    /**
-                     * Current flow control Options:
-                     * UsbSerialInterface.FLOW_CONTROL_OFF
-                     * UsbSerialInterface.FLOW_CONTROL_RTS_CTS only for CP2102 and FT232
-                     * UsbSerialInterface.FLOW_CONTROL_DSR_DTR only for CP2102 and FT232
-                     */
-                    serialPort.setFlowControl(UsbSerialInterface.FLOW_CONTROL_OFF);
-                    serialPort.read(uCallback);
-                    serialPort.getCTS(ctsCallback);
-                    serialPort.getDSR(dsrCallback);
-                    sendData(usbHelper.rConnectGCU());
+            try{
+                serialPort = UsbSerialDevice.createUsbSerialDevice(device, connection);
+                Debuger.dialogError("ConnectionThread.run","ConnectionThread.run");
+                if (serialPort != null) {
+                    if (serialPort.open()) {
+                        serialPortConnected = true;
+                        serialPort.setBaudRate(BAUD_RATE);
+                        serialPort.setDataBits(UsbSerialInterface.DATA_BITS_8);
+                        serialPort.setStopBits(UsbSerialInterface.STOP_BITS_1);
+                        serialPort.setParity(UsbSerialInterface.PARITY_NONE);
+                        /**
+                         * Current flow control Options:
+                         * UsbSerialInterface.FLOW_CONTROL_OFF
+                         * UsbSerialInterface.FLOW_CONTROL_RTS_CTS only for CP2102 and FT232
+                         * UsbSerialInterface.FLOW_CONTROL_DSR_DTR only for CP2102 and FT232
+                         */
+                        serialPort.setFlowControl(UsbSerialInterface.FLOW_CONTROL_OFF);
+                        serialPort.read(uCallback);
+                        serialPort.getCTS(ctsCallback);
+                        serialPort.getDSR(dsrCallback);
+                        //sendData(usbHelper.rConnectGCU());
 
-         //           new ReadThread().start();
+                        //           new ReadThread().start();
 
-                    //
-                    // Some Arduinos would need some sleep because firmware wait some time to know whether a new sketch is going
-                    // to be uploaded or not
-                    try {
+                        //
+                        // Some Arduinos would need some sleep because firmware wait some time to know whether a new sketch is going
+                        // to be uploaded or not
+                    /*try {
                         Thread.sleep(2000); // sleep some. YMMV with different chips.
                     } catch (InterruptedException e) {
                         e.printStackTrace();
-                    }
+                    }*/
 
-                    // Everything went as expected. Send an intent to MainActivity
-                    Intent intent = new Intent(ACTION_USB_READY);
-                    context.sendBroadcast(intent);
-                } else {
-                    // Serial port could not be opened, maybe an I/O error or if CDC driver was chosen, it does not really fit
-                    // Send an Intent to Main Activity
-                    if (serialPort instanceof CDCSerialDevice) {
-                        Intent intent = new Intent(ACTION_CDC_DRIVER_NOT_WORKING);
+                        // Everything went as expected. Send an intent to MainActivity
+                        Intent intent = new Intent(ACTION_USB_READY);
                         context.sendBroadcast(intent);
+                        Debuger.dialogError("UsbService.ConnectionThread.Run","ACTION_USB_READY");
                     } else {
-                        Intent intent = new Intent(ACTION_USB_DEVICE_NOT_WORKING);
-                        context.sendBroadcast(intent);
+                        // Serial port could not be opened, maybe an I/O error or if CDC driver was chosen, it does not really fit
+                        // Send an Intent to Main Activity
+                        if (serialPort instanceof CDCSerialDevice) {
+                            Intent intent = new Intent(ACTION_CDC_DRIVER_NOT_WORKING);
+                            context.sendBroadcast(intent);
+                            Debuger.dialogError("UsbService.ConnectionThread.Run","ACTION_CDC_DRIVER_NOT_WORKING");
+                        } else {
+                            Intent intent = new Intent(ACTION_USB_DEVICE_NOT_WORKING);
+                            context.sendBroadcast(intent);
+                            Debuger.dialogError("UsbService.ConnectionThread.Run","ACTION_USB_DEVICE_NOT_WORKING");
+                        }
                     }
+                } else {
+                    // No driver for given device, even generic CDC driver could not be loaded
+                    Intent intent = new Intent(ACTION_USB_NOT_SUPPORTED);
+                    context.sendBroadcast(intent);
                 }
-            } else {
-                // No driver for given device, even generic CDC driver could not be loaded
-                Intent intent = new Intent(ACTION_USB_NOT_SUPPORTED);
-                context.sendBroadcast(intent);
+            }catch (Exception ex){
+                Debuger.dialogError("UsbService.ConnectionThread","ConnectionThread.err"+ex.getMessage());
             }
-        }
+
+        }//~ run
     }
 
 
@@ -524,12 +560,15 @@ public class UsbService extends Service {
             if (serialPort != null) {
                 serialPort.write(data);
                 Log.e("SEND", "发送成功");
+                Debuger.dialogError("SEND", "发送成功");
                 Log.e("SEND", bytesToHexString(data));
+                Debuger.dialogError("SEND", bytesToHexString(data));
             } else {
                 Log.e("SEND", "连接不存在重新连接");
             }
         } catch (Exception e) {
             Log.e("SEND", "发送失败");
+            Debuger.dialogError("SEND", String.valueOf(e));
             Log.e("SEND", String.valueOf(e));
             e.printStackTrace();
         }
@@ -551,6 +590,7 @@ public class UsbService extends Service {
                 //  }
             } catch (Exception e) {
                 Log.e("SendRunnable", "--->>read failure!" + e.toString());
+                Debuger.dialogError("UsbService","MySendRunnable.run.err"+e.getMessage());
             }
 
         }
@@ -575,217 +615,249 @@ public class UsbService extends Service {
 
         @Override
         public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-
-            //对启动后的消息进行处理
-            if (msg.what == 1) {
-                String result = msg.getData().get("hex").toString();
-
-                Log.e("Receiver", "result= " + result);
-                //连包处理
-                String[] strFF = result.split("ff ff ");
-                for (int ff = 0; ff < strFF.length; ff++) {
-                    strFF[ff].trim();
-                    Log.e("Receiver", "I am receiving " + strFF[ff]);
-                    String[] str = strFF[ff].split("\\ ");
-                    /**
-                     * 判断收到报文类型
-                     */
-                    if (str[0].equals("03"))//心跳检测
-                    {
-                        usbHelper.beatTime = usbHelper.refFormatNowDate();
-                        usbHelper.heartBeat = true;
-                        sendData(usbHelper.rHeartBeat());
-                    }
-                    if (str[0].equals("05"))//关机
-                    {
-                        if (usbHelper.getRunningActivityName().equals(".U3D.u3dPlayer")) {
-                            try {
-                                //暂停广播
-                                Intent i = new Intent("com.example.U3D_BROADCAST");
-                                i.putExtra("U3D", "pauseU3D");
-                                UserData.getContext().sendBroadcast(i);
-                            } catch (Exception e) {
-                                Log.e("u3d", e.toString());
-                            }
+            try {
+                super.handleMessage(msg);
+                //对启动后的消息进行处理
+                if (msg.what == 1) {
+                    String result = msg.getData().get("hex").toString();
+                    Log.e("Receiver", "result= " + result);
+                    //连包处理
+                    String[] strFF = result.split("ff ff ");
+                    for (int ff = 0; ff < strFF.length; ff++) {
+                        strFF[ff].trim();
+                        Log.e("Receiver", "I am receiving " + strFF[ff]);
+                        String[] str = strFF[ff].split("\\ ");
+                        /**
+                         * 判断收到报文类型
+                         */
+                        if (str[0].equals("03"))//心跳检测
+                        {
+                            usbHelper.beatTime = usbHelper.refFormatNowDate();
+                            usbHelper.heartBeat = true;
+                            sendData(usbHelper.rHeartBeat());
                         }
-                        Log.e("Receiver", "ID=    " + str[0]);
-                        usbHelper.dialogShutDown();
-                    }
-                    if (str[0].equals("09"))//dButtonInfo改变模式
-                    {
-                        Log.e("Receiver", "ID=    " + str[0]);
-                        try {
-                            ButtonMode(Integer.valueOf(str[2]).intValue());
-                        } catch (Exception e) {
-                            Log.e("Connection", String.valueOf(e));
-                        }
-                    }
-                    if (str[0].equals("19"))//dNetStatus网络状态
-                    {
-                        String NetType = null;//网络类型
-                        switch (str[2]) {
-                            case "00":
-                                NetType = "WIFI";
-                                break;
-                            case "01":
-                                NetType = "Zigbee";
-                                break;
-                            case "02":
-                                NetType = "AX-12Bus";
-                                break;
-                            default:
-                                NetType = str[2];
-                        }
-                        String rightStatus = "未连接";
-                        String leftStatus = "未连接";
-                        if (str[3].equals("01")) {
-                            rightStatus = "连接正常";
-                        }
-                        if (str[4].equals("00")) {
-                            leftStatus = "连接正常";
-                        }
-                        usbHelper.dialogError("手套" + NetType + "连接状态", "右手：" + rightStatus + "\n" + "左手：" + leftStatus);
-                    }
-                    if (str[0].equals("20"))//dPowerinfo下位机电量
-                    {
-                        Log.e("Receiver", "ID=    " + str[0]);
-                        try {
-                            int a = Integer.parseInt(str[2], 16);
-                            usbHelper.powerInfo = Integer.valueOf(a).intValue();
-                            Log.e("PowerInfo", "下位机电量为   " + usbHelper.powerInfo);
-                        } catch (Exception e) {
-                            Log.e("PowerInfo", String.valueOf(e));
-                        }
-                    }
-                    if (str[0].equals("25"))//GCU向AWS发送配置报文请求。
-                    {
-                        String data = usbHelper.userSettings.getString("thumbFlat", "10") + " " + usbHelper.userSettings.getString("foreFlat", "10") + " "
-                                + usbHelper.userSettings.getString("middleFlat", "10") + " " + usbHelper.userSettings.getString("ringFlat", "10") +
-                                " " + usbHelper.userSettings.getString("littleFlat", "10") + " " + usbHelper.userSettings.getString("thumbMiddle", "110")
-                                + " " + usbHelper.userSettings.getString("foreMiddle", "110") + " " + usbHelper.userSettings.getString("middleMiddle", "110")
-                                + " " + usbHelper.userSettings.getString("ringMiddle", "110") + " " + usbHelper.userSettings.getString("littleMiddle", "110")
-                                + " " + usbHelper.userSettings.getString("thumbFist", "120") + " " + usbHelper.userSettings.getString("foreFist", "140")
-                                + " " + usbHelper.userSettings.getString("middleFist", "140") + " " + usbHelper.userSettings.getString("ringFist", "140")
-                                + " " + usbHelper.userSettings.getString("littleFist", "120") + " " + usbHelper.userSettings.getString("thumbStretch", "50")
-                                + " " +usbHelper.userSettings.getString("foreStretch", "50") + " " + usbHelper.userSettings.getString("middleStretch", "50")
-                                + " " + usbHelper.userSettings.getString("ringStretch", "50") + " " + usbHelper.userSettings.getString("littleStretch", "50")
-                                + " " + usbHelper.userSettings.getString("thumbMove", "113") + " " + usbHelper.userSettings.getString("foreMove", "113")
-                                + " " + usbHelper.userSettings.getString("middleMove", "113") + " " + usbHelper.userSettings.getString("ringMove", "113")
-                                + " " + usbHelper.userSettings.getString("littleMove", "113")
-                                + " " + voltageToMessage(usbHelper.userSettings.getString("thumbAdjust180V", SetConstant.THUMB_180V), AdminActivity.DigitPosition.HIGH)
-                                + " " + voltageToMessage(usbHelper.userSettings.getString("foreAdjust180V", SetConstant.FORE_180V), AdminActivity.DigitPosition.HIGH)
-                                + " " + voltageToMessage(usbHelper.userSettings.getString("middleAdjust180V", SetConstant.MIDDLE_180V), AdminActivity.DigitPosition.HIGH)
-                                + " " + voltageToMessage(usbHelper.userSettings.getString("ringAdjust180V", SetConstant.RING_180V), AdminActivity.DigitPosition.HIGH)
-                                + " " + voltageToMessage(usbHelper.userSettings.getString("littleAdjust180V", SetConstant.LITTLE_180V), AdminActivity.DigitPosition.HIGH)
-                                + " " + voltageToMessage(usbHelper.userSettings.getString("thumbAdjust180V", SetConstant.THUMB_180V), AdminActivity.DigitPosition.LOW)
-                                + " " + voltageToMessage(usbHelper.userSettings.getString("foreAdjust180V", SetConstant.FORE_180V), AdminActivity.DigitPosition.LOW)
-                                + " " + voltageToMessage(usbHelper.userSettings.getString("middleAdjust180V", SetConstant.MIDDLE_180V), AdminActivity.DigitPosition.LOW)
-                                + " " + voltageToMessage(usbHelper.userSettings.getString("ringAdjust180V", SetConstant.RING_180V), AdminActivity.DigitPosition.LOW)
-                                + " " + voltageToMessage(usbHelper.userSettings.getString("littleAdjust180V", SetConstant.LITTLE_180V), AdminActivity.DigitPosition.LOW)
-                                + " " + voltageToMessage(usbHelper.userSettings.getString("thumbAdjust0V", SetConstant.THUMB_0V), AdminActivity.DigitPosition.HIGH)
-                                + " " + voltageToMessage(usbHelper.userSettings.getString("foreAdjust0V", SetConstant.FORE_0V), AdminActivity.DigitPosition.HIGH)
-                                + " " + voltageToMessage(usbHelper.userSettings.getString("middleAdjust0V", SetConstant.MIDDLE_180V), AdminActivity.DigitPosition.HIGH)
-                                + " " + voltageToMessage(usbHelper.userSettings.getString("ringAdjust0V", SetConstant.RING_0V), AdminActivity.DigitPosition.HIGH)
-                                + " " + voltageToMessage(usbHelper.userSettings.getString("littleAdjust0V", SetConstant.LITTLE_0V), AdminActivity.DigitPosition.HIGH)
-                                + " " + voltageToMessage(usbHelper.userSettings.getString("thumbAdjust0V", SetConstant.THUMB_0V), AdminActivity.DigitPosition.LOW)
-                                + " " + voltageToMessage(usbHelper.userSettings.getString("foreAdjust0V", SetConstant.FORE_0V), AdminActivity.DigitPosition.LOW)
-                                + " " + voltageToMessage(usbHelper.userSettings.getString("middleAdjust0V", SetConstant.MIDDLE_0V), AdminActivity.DigitPosition.LOW)
-                                + " " + voltageToMessage(usbHelper.userSettings.getString("ringAdjust0V", SetConstant.RING_0V), AdminActivity.DigitPosition.LOW)
-                                + " " + voltageToMessage(usbHelper.userSettings.getString("littleAdjust0V", SetConstant.LITTLE_0V), AdminActivity.DigitPosition.LOW);
-                        sendData(usbHelper.dConfigData(data));
-                        Log.e("AAAAAAA", data);
-                    }
-                    if (str[0].equals("10"))//下位机向上位机发送角度信息
-                    {
-                        if (str.length == 8) {
-                            try {
-                                Log.e("Receiver", "ID=    " + str[0]);
-                                String[] str2 = msg.getData().get("msg").toString().split("\\ ");
-                                //手指序号
-                                usbHelper.fingerNumber = Integer.parseInt(str2[2]);
-                                //手指运动角度
-                                usbHelper.angleFromDownStream = Float.parseFloat(str2[5]);
-                                //对手指信息进行整理
-                                usbHelper.fingerArray[0] = Integer.parseInt(str[2], 16) + "";
-                                usbHelper.fingerArray[1] = Integer.parseInt(str[3], 16) + "";
-                                usbHelper.fingerArray[2] = Integer.parseInt(str[4], 16) + "";
-                                usbHelper.fingerArray[3] = Integer.parseInt(str[5], 16) + "";
-                                usbHelper.fingerArray[4] = Integer.parseInt(str[6], 16) + "";
-                                Log.e("fingerArray", "-----------------------------------");
-                                for (int i = 0; i < 5; i++) {
-                                    Log.e("fingerArray", "The Array Contains " + usbHelper.fingerArray[i]);
+                        if (str[0].equals("05"))//关机
+                        {
+                            if (usbHelper.getRunningActivityName().equals(".U3D.u3dPlayer")) {
+                                try {
+                                    //暂停广播
+                                    Intent i = new Intent("com.example.U3D_BROADCAST");
+                                    i.putExtra("U3D", "pauseU3D");
+                                    UserData.getContext().sendBroadcast(i);
+                                } catch (Exception e) {
+                                    Log.e("u3d", e.toString());
                                 }
-                                Log.e("fingerArray", "-----------------------------------");
-
+                            }
+                            Log.e("Receiver", "ID=    " + str[0]);
+                            usbHelper.dialogShutDown();
+                        }
+                        if (str[0].equals("09"))//dButtonInfo改变模式
+                        {
+                            Log.e("Receiver", "ID=    " + str[0]);
+                            try {
+                                ButtonMode(Integer.valueOf(str[2]).intValue());
                             } catch (Exception e) {
                                 Log.e("Connection", String.valueOf(e));
                             }
                         }
-                    }
-                    if (str[0].equals("21"))//部件信息
-                    {
-                        if (str.length == 15) {
-                            if (str[2].equals("00"))//舵机
-                            {
+                        if (str[0].equals("19"))//dNetStatus网络状态
+                        {
+                            String NetType = null;//网络类型
+                            switch (str[2]) {
+                                case "00":
+                                    NetType = "WIFI";
+                                    break;
+                                case "01":
+                                    NetType = "Zigbee";
+                                    break;
+                                case "02":
+                                    NetType = "AX-12Bus";
+                                    break;
+                                default:
+                                    NetType = str[2];
+                            }
+                            String rightStatus = "未连接";
+                            String leftStatus = "未连接";
+                            if (str[3].equals("01")) {
+                                rightStatus = "连接正常";
+                            }
+                            if (str[4].equals("00")) {
+                                leftStatus = "连接正常";
+                            }
+                            usbHelper.dialogError("手套" + NetType + "连接状态", "右手：" + rightStatus + "\n" + "左手：" + leftStatus);
+                        }
+                        if (str[0].equals("20"))//dPowerinfo下位机电量
+                        {
+                            Log.e("Receiver", "ID=    " + str[0]);
+                            try {
+                                int a = Integer.parseInt(str[2], 16);
+                                usbHelper.powerInfo = Integer.valueOf(a).intValue();
+                                Log.e("PowerInfo", "下位机电量为   " + usbHelper.powerInfo);
+                            } catch (Exception e) {
+                                Log.e("PowerInfo", String.valueOf(e));
+                            }
+                        }
+                        if (str[0].equals("29"))//dFingerVInit电压初始值
+                        {
+                            try {
+                                //让setting处于编辑状态
+                                SharedPreferences.Editor editor = usbHelper.userSettings.edit();
+                                //存放数据
+                                editor.putString("thumb180V",(float)Integer.parseInt(str[2]+str[3],16)/1000+"");
+                                editor.putString("fore180V",(float)Integer.parseInt(str[4]+str[5],16)/1000+"");
+                                editor.putString("middle180V",(float)Integer.parseInt(str[6]+str[7],16)/1000+"");
+                                editor.putString("ring180V",(float)Integer.parseInt(str[8]+str[9],16)/1000+"");
+                                editor.putString("little180V",(float)Integer.parseInt(str[10]+str[11],16)/1000+"");
+                                editor.putString("thumb0V",(float)Integer.parseInt(str[12]+str[13],16)/1000+"");
+                                editor.putString("fore0V",(float)Integer.parseInt(str[14]+str[15],16)/1000+"");
+                                editor.putString("middle0V",(float)Integer.parseInt(str[16]+str[17],16)/1000+"");
+                                editor.putString("ring0V",(float)Integer.parseInt(str[18]+str[19],16)/1000+"");
+                                editor.putString("little0V",(float)Integer.parseInt(str[20]+str[21],16)/1000+"");
+                                //d、完成提交
+                                editor.commit();
+                                Log.e("dFingerVInit", usbHelper.userSettings.getString("thumb180V","0"));
+                                Log.e("dFingerVInit", usbHelper.userSettings.getString("fore180V","0"));
+                                Log.e("dFingerVInit", usbHelper.userSettings.getString("middle180V","0"));
+                                Log.e("dFingerVInit", usbHelper.userSettings.getString("ring180V","0"));
+                                Log.e("dFingerVInit", usbHelper.userSettings.getString("little180V","0"));
+                            }catch (Exception e){
+                                Log.e("dFingerVInit", String.valueOf(e));
+                            }
+                        }
+                        if(str[0].equals("25"))//GCU向AWS发送配置报文请求。
+                        {
+                            String data = usbHelper.userSettings.getString("thumbFlat","10")+" "+usbHelper.userSettings.getString("foreFlat","10")+" "
+                                    +usbHelper.userSettings.getString("middleFlat","10")+" "+usbHelper.userSettings.getString("ringFlat","10")+
+                                    " "+usbHelper.userSettings.getString("littleFlat","10")+" "+usbHelper.userSettings.getString("thumbMiddle","110")
+                                    +" "+usbHelper.userSettings.getString("foreMiddle","110")+" "+usbHelper.userSettings.getString("middleMiddle","110")
+                                    +" "+usbHelper.userSettings.getString("ringMiddle","110")+" "+usbHelper.userSettings.getString("littleMiddle","110")
+                                    +" "+usbHelper.userSettings.getString("thumbFist","120")+" "+usbHelper.userSettings.getString("foreFist","140")
+                                    +" "+usbHelper.userSettings.getString("middleFist","140")+" "+usbHelper.userSettings.getString("ringFist","140")
+                                    +" "+usbHelper.userSettings.getString("littleFist","120")+" "+usbHelper.userSettings.getString("thumbStretch","50")
+                                    +" "+usbHelper.userSettings.getString("foreStretch","50")+" "+usbHelper.userSettings.getString("middleStretch","50")
+                                    +" "+usbHelper.userSettings.getString("ringStretch","50")+" "+usbHelper.userSettings.getString("littleStretch","50")
+                                    +" "+usbHelper.userSettings.getString("thumbMove","113")+" "+usbHelper.userSettings.getString("foreMove","113")
+                                    +" "+usbHelper.userSettings.getString("middleMove","113")+" "+usbHelper.userSettings.getString("ringMove","113")
+                                    +" "+usbHelper.userSettings.getString("littleMove","113")
+                                    +" "+voltageToMessage(usbHelper.userSettings.getString("thumbAdjust180V", "1"), AdminActivity.DigitPosition.HIGH)
+                                    +" "+voltageToMessage(usbHelper.userSettings.getString("foreAdjust180V","1"), AdminActivity.DigitPosition.HIGH)
+                                    +" "+voltageToMessage(usbHelper.userSettings.getString("middleAdjust180V","1"), AdminActivity.DigitPosition.HIGH)
+                                    +" "+voltageToMessage(usbHelper.userSettings.getString("ringAdjust180V","1"), AdminActivity.DigitPosition.HIGH)
+                                    +" "+voltageToMessage(usbHelper.userSettings.getString("littleAdjust180V","1"), AdminActivity.DigitPosition.HIGH)
+                                    +" "+voltageToMessage(usbHelper.userSettings.getString("thumbAdjust180V","1"), AdminActivity.DigitPosition.LOW)
+                                    +" "+voltageToMessage(usbHelper.userSettings.getString("foreAdjust180V","1"), AdminActivity.DigitPosition.LOW)
+                                    +" "+voltageToMessage(usbHelper.userSettings.getString("middleAdjust180V","1"), AdminActivity.DigitPosition.LOW)
+                                    +" "+voltageToMessage(usbHelper.userSettings.getString("ringAdjust180V","1"), AdminActivity.DigitPosition.LOW)
+                                    +" "+voltageToMessage(usbHelper.userSettings.getString("littleAdjust180V","1"), AdminActivity.DigitPosition.LOW)
+                                    +" "+voltageToMessage(usbHelper.userSettings.getString("thumbAdjust0V","1"), AdminActivity.DigitPosition.HIGH)
+                                    +" "+voltageToMessage(usbHelper.userSettings.getString("foreAdjust0V","1"), AdminActivity.DigitPosition.HIGH)
+                                    +" "+voltageToMessage(usbHelper.userSettings.getString("middleAdjust0V","1"), AdminActivity.DigitPosition.HIGH)
+                                    +" "+voltageToMessage(usbHelper.userSettings.getString("ringAdjust0V","1"), AdminActivity.DigitPosition.HIGH)
+                                    +" "+voltageToMessage(usbHelper.userSettings.getString("littleAdjust0V","1"), AdminActivity.DigitPosition.HIGH)
+                                    +" "+voltageToMessage(usbHelper.userSettings.getString("thumbAdjust0V","1"), AdminActivity.DigitPosition.LOW)
+                                    +" "+voltageToMessage(usbHelper.userSettings.getString("foreAdjust0V","1"), AdminActivity.DigitPosition.LOW)
+                                    +" "+voltageToMessage(usbHelper.userSettings.getString("middleAdjust0V","1"), AdminActivity.DigitPosition.LOW)
+                                    +" "+voltageToMessage(usbHelper.userSettings.getString("ringAdjust0V","1"), AdminActivity.DigitPosition.LOW)
+                                    +" "+voltageToMessage(usbHelper.userSettings.getString("littleAdjust0V","1"), AdminActivity.DigitPosition.LOW);
+                            sendData(usbHelper.dConfigData(data));
+                            Log.e("AAAAAAA",data);
+                        }
+                        if (str[0].equals("10"))//下位机向上位机发送角度信息
+                        {
+                            if (str.length == 8) {
+                                try {
+                                    Log.e("Receiver", "ID=    " + str[0]);
+                                    String[] str2 = msg.getData().get("msg").toString().split("\\ ");
+                                    //手指序号
+                                    usbHelper.fingerNumber = Integer.parseInt(str2[2]);
+                                    //手指运动角度
+                                    usbHelper.angleFromDownStream = Float.parseFloat(str2[5]);
+                                    //对手指信息进行整理
+                                    usbHelper.fingerArray[0] = Integer.parseInt(str[2], 16) + "";
+                                    usbHelper.fingerArray[1] = Integer.parseInt(str[3], 16) + "";
+                                    usbHelper.fingerArray[2] = Integer.parseInt(str[4], 16) + "";
+                                    usbHelper.fingerArray[3] = Integer.parseInt(str[5], 16) + "";
+                                    usbHelper.fingerArray[4] = Integer.parseInt(str[6], 16) + "";
+                                    Log.e("fingerArray", "-----------------------------------");
+                                    for (int i = 0; i < 5; i++) {
+                                        Log.e("fingerArray", "The Array Contains " + usbHelper.fingerArray[i]);
+                                    }
+                                    Log.e("fingerArray", "-----------------------------------");
 
-                                switch (str[3]) {
-                                    case "00"://当前位置
-                                        try {
-                                            //对舵机位置信息进行整理
-                                            usbHelper.componentArray[0] = Integer.parseInt(str[5], 16) + "";
-                                            usbHelper.componentArray[1] = Integer.parseInt(str[7], 16) + "";
-                                            usbHelper.componentArray[2] = Integer.parseInt(str[9], 16) + "";
-                                            usbHelper.componentArray[3] = Integer.parseInt(str[11], 16) + "";
-                                            usbHelper.componentArray[4] = Integer.parseInt(str[13], 16) + "";
-                                            Log.e("componentArray", "-----------------------------------");
-                                            for (int i = 0; i < 5; i++) {
-                                                Log.e("componentArray", "The Array Contains " + usbHelper.componentArray[i]);
+                                } catch (Exception e) {
+                                    Log.e("Connection", String.valueOf(e));
+                                }
+                            }
+                        }
+                        if (str[0].equals("21"))//部件信息
+                        {
+                            if (str.length == 15) {
+                                if (str[2].equals("00"))//舵机
+                                {
+
+                                    switch (str[3]) {
+                                        case "00"://当前位置
+                                            try {
+                                                //对舵机位置信息进行整理
+                                                usbHelper.componentArray[0] = Integer.parseInt(str[5], 16) + "";
+                                                usbHelper.componentArray[1] = Integer.parseInt(str[7], 16) + "";
+                                                usbHelper.componentArray[2] = Integer.parseInt(str[9], 16) + "";
+                                                usbHelper.componentArray[3] = Integer.parseInt(str[11], 16) + "";
+                                                usbHelper.componentArray[4] = Integer.parseInt(str[13], 16) + "";
+                                                Log.e("componentArray", "-----------------------------------");
+                                                for (int i = 0; i < 5; i++) {
+                                                    Log.e("componentArray", "The Array Contains " + usbHelper.componentArray[i]);
+                                                }
+                                                Log.e("componentArray", "-----------------------------------");
+                                            } catch (Exception e) {
+                                                Log.e("componentArray", String.valueOf(e));
                                             }
-                                            Log.e("componentArray", "-----------------------------------");
-                                        } catch (Exception e) {
-                                            Log.e("componentArray", String.valueOf(e));
-                                        }
-                                        break;
-                                    case "01"://当前速度
-                                        break;
-                                    case "02"://当前负载
-                                        break;
-                                    case "03"://舵机错误状态
-                                        usbHelper.componentError[0] = usbHelper.motorErrorHandler("1", Integer.parseInt(str[5], 16));
-                                        usbHelper.componentError[1] = usbHelper.motorErrorHandler("2", Integer.parseInt(str[7], 16));
-                                        usbHelper.componentError[2] = usbHelper.motorErrorHandler("3", Integer.parseInt(str[9], 16));
-                                        usbHelper.componentError[3] = usbHelper.motorErrorHandler("4", Integer.parseInt(str[11], 16));
-                                        usbHelper.componentError[4] = usbHelper.motorErrorHandler("5", Integer.parseInt(str[13], 16));
-                                        break;
-                                    case "04"://当前温度
-                                        try {
-                                            //对舵机位置信息进行整理
-                                            usbHelper.componentTemperature[0] = Integer.parseInt(str[5], 16) + "";
-                                            usbHelper.componentTemperature[1] = Integer.parseInt(str[7], 16) + "";
-                                            usbHelper.componentTemperature[2] = Integer.parseInt(str[9], 16) + "";
-                                            usbHelper.componentTemperature[3] = Integer.parseInt(str[11], 16) + "";
-                                            usbHelper.componentTemperature[4] = Integer.parseInt(str[13], 16) + "";
-                                            Log.e("componentTemperature", "-----------------------------------");
-                                            for (int i = 0; i < 5; i++) {
-                                                Log.e("componentTemperature", "The Array Contains " + usbHelper.componentArray[i]);
+                                            break;
+                                        case "01"://当前速度
+                                            break;
+                                        case "02"://当前负载
+                                            break;
+                                        case "03"://舵机错误状态
+                                            usbHelper.componentError[0] = usbHelper.motorErrorHandler("1", Integer.parseInt(str[5], 16));
+                                            usbHelper.componentError[1] = usbHelper.motorErrorHandler("2", Integer.parseInt(str[7], 16));
+                                            usbHelper.componentError[2] = usbHelper.motorErrorHandler("3", Integer.parseInt(str[9], 16));
+                                            usbHelper.componentError[3] = usbHelper.motorErrorHandler("4", Integer.parseInt(str[11], 16));
+                                            usbHelper.componentError[4] = usbHelper.motorErrorHandler("5", Integer.parseInt(str[13], 16));
+                                            break;
+                                        case "04"://当前温度
+                                            try {
+                                                //对舵机位置信息进行整理
+                                                usbHelper.componentTemperature[0] = Integer.parseInt(str[5], 16) + "";
+                                                usbHelper.componentTemperature[1] = Integer.parseInt(str[7], 16) + "";
+                                                usbHelper.componentTemperature[2] = Integer.parseInt(str[9], 16) + "";
+                                                usbHelper.componentTemperature[3] = Integer.parseInt(str[11], 16) + "";
+                                                usbHelper.componentTemperature[4] = Integer.parseInt(str[13], 16) + "";
+                                                Log.e("componentTemperature", "-----------------------------------");
+                                                for (int i = 0; i < 5; i++) {
+                                                    Log.e("componentTemperature", "The Array Contains " + usbHelper.componentArray[i]);
+                                                }
+                                                Log.e("componentTemperature", "-----------------------------------");
+                                            } catch (Exception e) {
+                                                Log.e("componentTemperature", String.valueOf(e));
                                             }
-                                            Log.e("componentTemperature", "-----------------------------------");
-                                        } catch (Exception e) {
-                                            Log.e("componentTemperature", String.valueOf(e));
-                                        }
-                                        break;
-                                    case "05"://当前电压
-                                        break;
-                                    default:
-                                        break;
+                                            break;
+                                        case "05"://当前电压
+                                            break;
+                                        default:
+                                            break;
+                                    }
                                 }
                             }
                         }
                     }
                 }
+
+
+            }catch(Exception ex)
+            {
+                Debuger.dialogError("UsbService","ReceiveHandler.handlermessage.err"+ex.getMessage());
             }
-        }
+        }// ~
     }
 
 

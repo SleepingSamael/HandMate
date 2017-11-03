@@ -1,6 +1,7 @@
 package com.chej.HandMate.TTS;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.os.Environment;
 import android.util.Log;
@@ -11,6 +12,7 @@ import com.baidu.tts.client.SpeechSynthesizeBag;
 import com.baidu.tts.client.SpeechSynthesizer;
 import com.baidu.tts.client.SpeechSynthesizerListener;
 import com.baidu.tts.client.TtsMode;
+import com.chej.HandMate.Model.users.UserData;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,7 +28,11 @@ import java.util.List;
  */
 
 public class SpeechUtil implements SpeechSynthesizerListener {
-
+    /**
+     * 获取配置信息
+     */
+    SharedPreferences userSettings = UserData.getContext().getSharedPreferences("setting",Context.MODE_APPEND);
+    String voiceSwitch = userSettings.getString("voiceSwitch","on");
     protected static final String tag = "SpeechUtil";
     private SpeechSynthesizer mSpeechSynthesizer;
     private Context context;
@@ -128,11 +134,14 @@ public class SpeechUtil implements SpeechSynthesizerListener {
      * 开始文本合成并朗读
      */
     public int speak(String content) {
-        if (!content.isEmpty()) {
-            mSpeechSynthesizer.speak(content.toString());
-            Log.e(tag,"开始合成器："+content);
-        }else{
-            Log.e(tag,"开始合成器失败："+content);
+        Log.e(tag, voiceSwitch);
+        if(voiceSwitch.equals("on")) {
+            if (!content.isEmpty()) {
+                mSpeechSynthesizer.speak(content.toString());
+                Log.e(tag, "开始合成器：" + content);
+            } else {
+                Log.e(tag, "开始合成器失败：" + content);
+            }
         }
 
       /*  new Thread(new Runnable() {
@@ -155,14 +164,30 @@ public class SpeechUtil implements SpeechSynthesizerListener {
         // 发音人（在线引擎），可用参数为0,1,2,3。。。（服务器端会动态增加，各值含义参考文档，以文档说明为准。0--普通女声，1--普通男声，2--特别男声，3--情感男声。。。）
         mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_SPEAKER, "0");
         // 设置Mix模式的合成策略
-        this.mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_MIX_MODE, SpeechSynthesizer.MIX_MODE_DEFAULT);
+        this.mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_MIX_MODE, SpeechSynthesizer.MIX_MODE_HIGH_SPEED_SYNTHESIZE);
         mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_VOLUME, "9");//音量，取值范围[0, 9]，数值越大，音量越大
-        mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_SPEED, "5");//朗读语速，取值范围[0, 9]，数值越大，语速越快
+        mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_SPEED, "6");//朗读语速，取值范围[0, 9]，数值越大，语速越快
         mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_PITCH, "5");//音调，取值范围[0, 9]，数值越大，音量越高
         mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_AUDIO_ENCODE,
                 SpeechSynthesizer.AUDIO_ENCODE_AMR);//音频格式，支持bv/amr/opus/mp3，取值详见随后常量声明
         mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_AUDIO_RATE,
                 SpeechSynthesizer.AUDIO_BITRATE_AMR_15K85);//音频比特率，各音频格式支持的比特率详见随后常量声明
+    }
+    public void speed(String speed) {
+        if(voiceSwitch.equals("on")) {
+            this.mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_SPEED, speed);//朗读语速，取值范围[0, 9]，数值越大，语速越快
+        }
+    }
+    public void  release(){
+        if(voiceSwitch.equals("on")) {
+            this.mSpeechSynthesizer.release();
+        }
+
+    }
+    public void getInstance(){
+        if(voiceSwitch.equals("on")) {
+            this.mSpeechSynthesizer.getInstance();
+        }
     }
     private void pause() {
         this.mSpeechSynthesizer.pause();

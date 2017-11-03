@@ -1,8 +1,10 @@
 package com.chej.HandMate;
 
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Build;
@@ -20,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.SeekBar;
 import android.widget.Switch;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,9 +41,10 @@ public class SystemSetActivity extends AppCompatActivity implements View.OnClick
     private SeekBar light;
     private SeekBar volum;
     private Switch voice;
-    private ImageView senior;
+    private TableRow senior;
     private TextView clock;
     private AudioManager mAudioManager;
+    private Context mcontext;
     // 最大音量
     private int maxVolume;
     // 当前音量
@@ -54,12 +58,22 @@ public class SystemSetActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_system_set);
         SysApplication.getInstance().addActivity(this);
+        mcontext=this;
+        //获取Preferences
+        final SharedPreferences userSettings = UserData.getContext().getSharedPreferences("setting", Context.MODE_APPEND);
         tv_user=(TextView)findViewById(R.id.tv_user);
         user=(Button)findViewById(R.id.user);
         light = (SeekBar) findViewById(R.id.light_seekBar);
         volum = (SeekBar) findViewById(R.id.volum_seekBar);
         voice = (Switch) findViewById(R.id.voice_switch);
-        senior = (ImageView)findViewById(R.id.senior_set);
+        if(userSettings.getString("voiceSwitch","on").equals("on"))
+        {
+            voice.setChecked(true);
+        }
+        else {
+            voice.setChecked(false);
+        }
+        senior = (TableRow) findViewById(R.id.senior_set);
         set = (Button)findViewById(R.id.set);
 
         speechUtil = new SpeechUtil(this);
@@ -90,11 +104,26 @@ public class SystemSetActivity extends AppCompatActivity implements View.OnClick
                                          boolean isChecked) {
                 // TODO Auto-generated method stub
                 if (isChecked) {
+                    //让setting处于编辑状态
+                    SharedPreferences.Editor editor = userSettings.edit();
+                    //存放数据
+                    editor.putString("voiceSwitch","on");
+                    //d、完成提交
+                    editor.commit();
+                    speechUtil.release();
+                    speechUtil = new SpeechUtil(mcontext);
                     speechUtil.speak("语音功能已开启");
 
                 } else {
-                    speechUtil.speak("语音功能已关闭");
-
+                    //让setting处于编辑状态
+                    SharedPreferences.Editor editor = userSettings.edit();
+                    //存放数据
+                    editor.putString("voiceSwitch","off");
+                    //d、完成提交
+                    editor.commit();
+                    Toast.makeText(getApplicationContext(), "语音功能已关闭", Toast.LENGTH_SHORT).show();
+                    speechUtil.release();
+                    speechUtil = new SpeechUtil(mcontext);
                 }
             }
         });
@@ -264,7 +293,7 @@ public class SystemSetActivity extends AppCompatActivity implements View.OnClick
                         // 设置音量
                         mAudioManager.setStreamVolume(
                                 AudioManager.STREAM_MUSIC, progress, 0);
-                       // voice_tv.setText("当前音量百分比：" + progress * 100
+                        // voice_tv.setText("当前音量百分比：" + progress * 100
                         //        / maxVolume + " %");
                     }
                 });
@@ -306,7 +335,7 @@ public class SystemSetActivity extends AppCompatActivity implements View.OnClick
                                 * (1f / 100f);
                         // 调节亮度
                         getWindow().setAttributes(lp);
-                       // light_tv.setText("当前亮度：" + progress + "%");
+                        // light_tv.setText("当前亮度：" + progress + "%");
                     }
                 });
     }
@@ -328,7 +357,7 @@ public class SystemSetActivity extends AppCompatActivity implements View.OnClick
                 .getStreamVolume(AudioManager.STREAM_MUSIC);
         Log.e("currentVolume", String.valueOf(currentVolume));
         // 显示音量
-      // Log.e("当前音量百分比：" , currentVolume * 100 / maxVolume + " %");
+        // Log.e("当前音量百分比：" , currentVolume * 100 / maxVolume + " %");
         volum.setProgress(maxVolume);
     }
 

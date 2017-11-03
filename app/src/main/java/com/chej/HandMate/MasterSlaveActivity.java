@@ -34,6 +34,7 @@ import com.chej.HandMate.Model.SysApplication;
 import com.chej.HandMate.Model.history.HistoryData;
 import com.chej.HandMate.Model.users.UserData;
 import com.chej.HandMate.TTS.SpeechUtil;
+import com.chej.HandMate.Transmission.USB.UsbService;
 import com.chej.HandMate.Transmission.Wifi.WifiService;
 import com.chej.HandMate.U3D.u3dPlayer;
 import com.chej.library.ExpandingPagerFactory;
@@ -141,7 +142,7 @@ public class MasterSlaveActivity extends AppCompatActivity implements ExpandingF
         final String stime=arr[1];
         clock.setText(sdate+"   "+stime);
 
-        Intent myServiceIntent = new Intent(MasterSlaveActivity.this, WifiService.class);
+        Intent myServiceIntent = new Intent(MasterSlaveActivity.this, UsbService.class);
         bindService(myServiceIntent, serviceConnection,
                 Context.BIND_AUTO_CREATE);
 
