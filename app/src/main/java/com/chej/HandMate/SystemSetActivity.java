@@ -1,6 +1,7 @@
 package com.chej.HandMate;
 
 import android.annotation.TargetApi;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -94,9 +95,9 @@ public class SystemSetActivity extends AppCompatActivity implements View.OnClick
         tv_user.setOnClickListener(this);
 
         mAudioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
-        initViews();
         initVolume();
         initLight();
+        initViews();
         //语音开关switch
         voice.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -293,8 +294,6 @@ public class SystemSetActivity extends AppCompatActivity implements View.OnClick
                         // 设置音量
                         mAudioManager.setStreamVolume(
                                 AudioManager.STREAM_MUSIC, progress, 0);
-                        // voice_tv.setText("当前音量百分比：" + progress * 100
-                        //        / maxVolume + " %");
                     }
                 });
         // 调节亮度
@@ -322,29 +321,26 @@ public class SystemSetActivity extends AppCompatActivity implements View.OnClick
                          * 并且还需要提示用户跳转到修改系统的设置界面去授予此权限
                          * 也就是说，要想申请该权限，apk必须要打包，签名打包。要签名打包，debug模式是不能申请该权限
                          */
-                        /*
+
                         // 设置系统亮度模式
                         Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE, Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
                         // 设置系统亮度
                         Settings.System.putInt(getContentResolver(),
-                                Settings.System.SCREEN_BRIGHTNESS, progress);*/
+                                Settings.System.SCREEN_BRIGHTNESS, progress);
                         //设置当前窗口亮度
-                        WindowManager.LayoutParams lp = getWindow()
-                                .getAttributes();
-                        lp.screenBrightness = Float.valueOf(progress)
-                                * (1f / 100f);
+                     //   WindowManager.LayoutParams lp = getWindow()
+                     //           .getAttributes();
+                     //   lp.screenBrightness = Float.valueOf(progress)
+                     //           * (1f / 100f);
                         // 调节亮度
-                        getWindow().setAttributes(lp);
+                    //    getWindow().setAttributes(lp);
                         // light_tv.setText("当前亮度：" + progress + "%");
                     }
                 });
     }
 
     /**
-     * 初始化音量数据
-     *
-     * @description：
-     * @author ldm
+     * @description：初始化音量数据
      * @date 2016-12-2 下午3:20:05
      */
     private void initVolume() {
@@ -353,12 +349,10 @@ public class SystemSetActivity extends AppCompatActivity implements View.OnClick
         // 设置voice_seekbar的最大值
         volum.setMax(maxVolume);
         // 获取到当前 设备的音量
-        currentVolume = mAudioManager
-                .getStreamVolume(AudioManager.STREAM_MUSIC);
-        Log.e("currentVolume", String.valueOf(currentVolume));
+        currentVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
         // 显示音量
-        // Log.e("当前音量百分比：" , currentVolume * 100 / maxVolume + " %");
-        volum.setProgress(maxVolume);
+       Log.e("当前音量百分比：" , currentVolume * 100 / maxVolume + " %");
+        volum.setProgress(currentVolume);
     }
 
     //申请权限

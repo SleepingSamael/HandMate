@@ -85,7 +85,7 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
-    private GoogleApiClient client;
+ //   private GoogleApiClient client;
 
     private SpeechUtil speechUtil;
 
@@ -120,7 +120,6 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
         scenenum = bundle.getInt("Mode") ;
         gloveID = bundle.getString("Glove");
 
-
         u3DBroadCastReceiver=new U3DBroadCastReceiver();
         IntentFilter filter = new IntentFilter("com.example.U3D_BROADCAST");
         this.registerReceiver(new u3dPlayer.U3DBroadCastReceiver(), filter);// 注册本地广播监听器
@@ -129,8 +128,7 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
         u3dLayout.addView(mUnityPlayer);
         mUnityPlayer.requestFocus();
 
-
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+  //      client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     //U3D广播接收器
@@ -434,8 +432,8 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        AppIndex.AppIndexApi.start(client, getIndexApiAction());
+     //   client.connect();
+    //    AppIndex.AppIndexApi.start(client, getIndexApiAction());
     }
 
     @Override
@@ -444,8 +442,8 @@ public class u3dPlayer extends UnityPlayerNativeActivity {
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-        AppIndex.AppIndexApi.end(client, getIndexApiAction());
-        client.disconnect();
+   //     AppIndex.AppIndexApi.end(client, getIndexApiAction());
+   //     client.disconnect();
     }
 
 

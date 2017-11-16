@@ -19,9 +19,6 @@ public class Debuger {
     static String _errorTitle;
     static String _errorMessage;
     public static void dialogError(String errorTitle,String errorMessage) {
-        /*
-
-*/
 
         try{
             MyCustomDialog.Builder builder = new MyCustomDialog.Builder(UserData.getContext());

@@ -420,17 +420,31 @@ public class UsbService extends Service {
         try{
             // This snippet will try to open the first encountered usb device connected, excluding usb root hubs
             HashMap<String, UsbDevice> usbDevices = usbManager.getDeviceList();
+           /*for (Map.Entry<String, UsbDevice> entry : usbDevices.entrySet()) {
+                UsbDevice device0= entry.getValue();
+                int deviceVID = device0.getVendorId();
+                int devicePID = device0.getProductId();
+                Debuger.dialogError("devicePID", "" + devicePID + " " + deviceVID + " "
+                        + device0.getDeviceName() + " " +
+                        device0.getProductName() + " " +
+                        device0.getDeviceId() + " " +
+                        device0.getSerialNumber() + " " +
+                        device0.getManufacturerName() + " ");
+            }*/
             if (!usbDevices.isEmpty()) {
                 boolean keep = true;
                 for (Map.Entry<String, UsbDevice> entry : usbDevices.entrySet()) {
-                    device = entry.getValue();
-                    int deviceVID = device.getVendorId();
-                    int devicePID = device.getProductId();
+                     UsbDevice tmp_device = entry.getValue();
+                    int deviceVID = tmp_device.getVendorId();
+                    int devicePID = tmp_device.getProductId();
 
                     if (deviceVID != 0x1d6b && (devicePID != 0x0001 && devicePID != 0x0002 && devicePID != 0x0003)) {
                         // There is a device connected to our Android device. Try to open it as a Serial Port.
-                        requestUserPermission();
-                        keep = false;
+                        if(devicePID==29987) {
+                            device = tmp_device;
+                            requestUserPermission();
+                            keep = false;
+                        }
                     } else {
                         connection = null;
                         device = null;

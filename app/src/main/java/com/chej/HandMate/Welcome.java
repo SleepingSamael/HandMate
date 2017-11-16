@@ -43,6 +43,8 @@ public class Welcome extends Activity {
         @Override
         public void onReceive(Context context, Intent intent) {
             switch (intent.getAction()) {
+                case UsbService.ACTION_USB_READY:
+
                 case UsbService.ACTION_USB_PERMISSION_GRANTED: // USB PERMISSION GRANTED
                     Toast.makeText(context, "USB Ready", Toast.LENGTH_SHORT).show();
                     Intent mintent = new Intent(Welcome.this, UsersActivity.class);
