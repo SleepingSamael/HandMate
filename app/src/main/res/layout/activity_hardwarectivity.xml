@@ -29,14 +29,15 @@
             >
 
             <TableRow android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="130dp"
                 android:gravity="center">
 
                 <ImageView
                     android:id="@+id/logo_to_admin"
                     android:layout_width="0.0dp"
                     android:layout_height="85dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/hardwarelogo" />
 
@@ -52,23 +53,36 @@
             </TableRow>
 
             <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="6"
-                android:gravity="center">
+                android:layout_width="wrap_content"
+                android:layout_height="650dp"
+                >
 
-                <TextView
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:text="版本: 10 或更高版本\n系统结构: Intel CPU 系列: 6，型号: 12，分级: 3 具有 MMX 扩展指令集，SSE 整数，SSE 浮点，SSE2, SSE3
-                    \n物理处理器数: 4
-                    \n处理器速度: 3292 MHz
-                    \n内建内存: 8129 MB
-                    \n空闲内存:2 MB
-                    \n可用的内存: 6947 MB
-                    \n占用的内存: 70 %"
-                    android:textSize="32dp" />
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginBottom="30dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/tv_hardinfo"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="版本: 10 或更高版本\n系统结构: Intel CPU 系列: 6，型号: 12，分级: 3 具有 MMX 扩展指令集，SSE 整数，SSE 浮点，SSE2, SSE3
+                            \n物理处理器数: 4
+                            \n\n处理器速度: 3292 MHz
+                            \n\n内建内存: 8129 MB
+                            \n\n空闲内存:2 MB
+                            \n\n可用的内存: 6947 MB
+                            \n占用的内存: 70 %"
+                            android:textSize="32dp" />
+                    </LinearLayout>
+                </ScrollView>
 
             </TableRow>
 

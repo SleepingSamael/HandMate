@@ -2,6 +2,7 @@ package com.chej.HandMate;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuInflater;
@@ -22,6 +23,7 @@ import java.text.SimpleDateFormat;
 
 public class Hardwarectivity extends AppCompatActivity implements View.OnClickListener,PopupMenu.OnMenuItemClickListener{
     private TextView tv_user;
+    private TextView tv_hardInfo;
     private Button user;
     private TextView clock;
     private Button set;
@@ -52,6 +54,7 @@ public class Hardwarectivity extends AppCompatActivity implements View.OnClickLi
         clock.setText(sdate+"   "+stime);
 
         tv_user=(TextView)findViewById(R.id.tv_user);
+        tv_hardInfo=(TextView)findViewById(R.id.tv_hardinfo);
         user=(Button)findViewById(R.id.user);
         set=(Button)findViewById(R.id.set);
         volume=(ImageView)findViewById(R.id.volume);
@@ -65,6 +68,8 @@ public class Hardwarectivity extends AppCompatActivity implements View.OnClickLi
         tv_user.setText(userData.getUserName());
         user.setOnClickListener(this);
         tv_user.setOnClickListener(this);
+        SharedPreferences userSettings = UserData.getContext().getSharedPreferences("setting", 0);
+        tv_hardInfo.setText(userSettings.getString("deviceInfo", ""));
 
 
         //home键

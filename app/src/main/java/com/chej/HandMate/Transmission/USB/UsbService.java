@@ -420,17 +420,27 @@ public class UsbService extends Service {
         try{
             // This snippet will try to open the first encountered usb device connected, excluding usb root hubs
             HashMap<String, UsbDevice> usbDevices = usbManager.getDeviceList();
-           /*for (Map.Entry<String, UsbDevice> entry : usbDevices.entrySet()) {
+            StringBuilder stringBuilder=new StringBuilder();
+           for (Map.Entry<String, UsbDevice> entry : usbDevices.entrySet()) {
                 UsbDevice device0= entry.getValue();
-                int deviceVID = device0.getVendorId();
-                int devicePID = device0.getProductId();
-                Debuger.dialogError("devicePID", "" + devicePID + " " + deviceVID + " "
-                        + device0.getDeviceName() + " " +
-                        device0.getProductName() + " " +
-                        device0.getDeviceId() + " " +
-                        device0.getSerialNumber() + " " +
-                        device0.getManufacturerName() + " ");
-            }*/
+               stringBuilder.append("PID:"+device0.getProductId()+"  "
+                       +"VID:"+device0.getVendorId()+"\n"
+                       +"DeviceName:"+device0.getDeviceName() + "\n"
+                       +"ProductName:"+device0.getProductName()+ "\n"
+                       +"DeviceId:"+device0.getDeviceId()+ "\n"
+                       +"SerialNumber:"+device0.getSerialNumber()+ "\n"
+                       +"ManufacturerName"+device0.getManufacturerName()+ "\n\n");
+            }
+            /**
+             * 存储USB连接设备信息
+             */
+            SharedPreferences userSettings = UserData.getContext().getSharedPreferences("setting", 0);
+            //让setting处于编辑状态
+            SharedPreferences.Editor editor = userSettings.edit();
+            //存放数据
+            editor.putString("deviceInfo",stringBuilder.toString());
+            //d、完成提交
+            editor.commit();
             if (!usbDevices.isEmpty()) {
                 boolean keep = true;
                 for (Map.Entry<String, UsbDevice> entry : usbDevices.entrySet()) {
