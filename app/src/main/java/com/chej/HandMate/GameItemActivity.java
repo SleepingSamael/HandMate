@@ -240,6 +240,17 @@ public class GameItemActivity extends AppCompatActivity implements ExpandingFrag
                         mbundle.putInt("Mode", 4004);
                         mbundle.putString("Glove","0");
                         break;
+                    case "愤怒的小鸟":
+                        historyData.setPid(userData.getUserId());
+                        historyData.setHid(mhistoryDataManager.countData()+1);
+                        historyData.setItem("游戏模式 愤怒的小鸟");
+                        historyData.setDate(sdate);
+                        historyData.setTime(stime);
+                        mhistoryDataManager.inserHistorytData(historyData);
+                        mbundle.putInt("ID",historyData.getHid());
+                        mbundle.putInt("Mode", 4005);
+                        mbundle.putString("Glove","0");
+                        break;
                 }
                 i.putExtras(mbundle);
                 senddGloveSelect(gloveFlag);
@@ -343,6 +354,7 @@ public class GameItemActivity extends AppCompatActivity implements ExpandingFrag
             galleryItemses.add(new GalleryItems("欢乐大熊猫", R.drawable.pandagame,"身为一只在树林里快乐生活的大熊猫，今天又到了进食的时间了。饥肠辘辘的你无意之间进入了树林中的一片竹林，看见天上掉的满满的竹子，高兴坏了，口水直流，到底能吃到多少的竹子就看你的表现了。（使用主动手套）"));
            // galleryItemses.add(new GalleryItems("钢琴大师", R.drawable.pianogame,"你是百年一遇的钢琴天才，应广大媒体的要求，在上海进行了一场巡回演出。接下里，就开始你的表演吧！（使用主动手套）"));
             galleryItemses.add(new GalleryItems("打地鼠", R.drawable.whackamole,"可恶的地鼠又来捣乱啦。身为农场主的你亲自要解决这些地鼠！挥起你的锤子，通过握拳，打掉他们吧！"));
+            galleryItemses.add(new GalleryItems("愤怒的小鸟", R.drawable.angrybird,"为了报复偷走鸟蛋的肥猪们，鸟儿以自己的身体为武器，仿佛炮弹一样去攻击肥猪们的堡垒。"));
         }
         return galleryItemses;
     }

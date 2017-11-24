@@ -273,7 +273,7 @@ public class USBHelper {
         byte[] b = new byte[6];
         b[0] = (byte) 0xff;
         b[1] = (byte) 0xff;
-        b[2] = (byte) 0x18;//ID
+        b[2] = (byte) 0x19;//ID
         b[3] = (byte) 0x06;//长度
         b[4] = (byte) 0x01;//网络类型:  0：WIFI 1：Zigbee 2：AX-12Bus
         b[5] = (byte) ~(b[2] + b[3] + b[4]);
@@ -290,7 +290,7 @@ public class USBHelper {
         byte[] b = new byte[6];
         b[0] = (byte) 0xff;
         b[1] = (byte) 0xff;
-        b[2] = (byte) 0x27;//ID
+        b[2] = (byte) 0x13;//ID
         b[3] = (byte) 0x06;//长度
         b[4] = (byte) gloveNum;//当前手套选择: 0x00 无手套选择 0x01 左手套选择 0x02 右手套选择
         b[5] = (byte) ~(b[2] + b[3] + b[4]);
@@ -307,7 +307,7 @@ public class USBHelper {
         byte[] bytes = new byte[50];
         bytes[0] = (byte) 0xff;
         bytes[1] = (byte) 0xff;
-        bytes[2] = (byte) 0x26;//ID
+        bytes[2] = (byte) 0x06;//ID
         bytes[3] = (byte) 0x50;//长度
         bytes[4] = (byte) Integer.parseInt(str[0]);
         bytes[5] = (byte) Integer.parseInt(str[1]);
@@ -376,7 +376,7 @@ public class USBHelper {
         byte[] b = new byte[7];
         b[0] = (byte) 0xff;
         b[1] = (byte) 0xff;
-        b[2] = (byte) 0x14;//ID
+        b[2] = (byte) 0x15;//ID
         b[3] = (byte) 0x07;//长度
         b[4] = (byte) SVCMode;
         b[5] = (byte) ModeStatus;
@@ -389,17 +389,17 @@ public class USBHelper {
         byte[] b = new byte[5];
         b[0] = (byte) 0xff;
         b[1] = (byte) 0xff;
-        b[2] = (byte) 0x28;//ID
+        b[2] = (byte) 0x22;//ID
         b[3] = (byte) 0x05;//长度
         b[4] = (byte) ~(b[2] + b[3]);
         return b;
     }
-    //获取电压值
+    //获取电压值 rGloveInitV
     public byte[] getV(){
         byte[]b=new byte[5];
         b[0]=(byte)0xff;
         b[1]=(byte)0xff;
-        b[2]=(byte)0x0A;//ID
+        b[2]=(byte)0x24;//ID
         b[3]=(byte)0x05;//长度
         b[4]=(byte) ~(b[2]+b[3]);
         return b;

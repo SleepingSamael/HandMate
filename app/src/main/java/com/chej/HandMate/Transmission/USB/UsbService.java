@@ -141,18 +141,18 @@ public class UsbService extends Service {
         public String[] getConfigArray(){
             return usbHelper.configArray;
         }
-        //向下位机发送角度数据报文
+        //向下位机发送角度数据报文 dAWSAngle
         @Override
         public void setCurrentAngle(String strAngles) {
             String[] str = strAngles.split("\\ ");
             int[] angles = {Integer.parseInt(str[0]), Integer.parseInt(str[1]), Integer.parseInt(str[2])
                     , Integer.parseInt(str[3]), Integer.parseInt(str[4])};
-            byte[] bAngles = {(byte) 0xff, (byte) 0xff, (byte) 0x24, (byte) 0x10,
+            byte[] bAngles = {(byte) 0xff, (byte) 0xff, (byte) 0x12, (byte) 0x10,
                     (byte) 0xb4, (byte) 0xb4, (byte) 0xb4, (byte) 0xb4, (byte) 0xb4,
                     (byte) ~(0x10 + 0x10 + 0xb4 + 0xb4 + 0xb4 + 0xb4 + 0xb4)};
             bAngles[0] = (byte) 0xff;
             bAngles[1] = (byte) 0xff;
-            bAngles[2] = (byte) 0x24;
+            bAngles[2] = (byte) 0x12;
             bAngles[3] = (byte) 0x10;
             bAngles[4] = (byte) angles[0];
             bAngles[5] = (byte) angles[1];
@@ -180,7 +180,7 @@ public class UsbService extends Service {
             byte[] bytes = new byte[6];
             bytes[0] = (byte) 0xff;
             bytes[1] = (byte) 0xff;
-            bytes[2] = (byte) 0x07;//ID
+            bytes[2] = (byte) 0x0A;//ID
             bytes[3] = (byte) 0x06;//长度
             bytes[4] = (byte) mode;//模式
             /*
@@ -198,7 +198,7 @@ public class UsbService extends Service {
             byte[] bytes = new byte[7];
             bytes[0] = (byte) 0xff;
             bytes[1] = (byte) 0xff;
-            bytes[2] = (byte) 0x23;//ID
+            bytes[2] = (byte) 0x11;//ID
             bytes[3] = (byte) 0x07;//长度
             bytes[4] = (byte) mode;//模式
             bytes[5] = (byte) status;//状态，1：开始 0：停止
@@ -215,7 +215,7 @@ public class UsbService extends Service {
             byte[] bytes = new byte[6];
             bytes[0] = (byte) 0xff;
             bytes[1] = (byte) 0xff;
-            bytes[2] = (byte) 0x06;//ID
+            bytes[2] = (byte) 0x09;//ID
             bytes[3] = (byte) 0x06;//长度
             bytes[4] = (byte) 0x00;//0：关机１：开机
             bytes[5] = (byte) ~(bytes[2] + bytes[3] + bytes[4] );
@@ -342,6 +342,8 @@ public class UsbService extends Service {
                     arg0.sendBroadcast(intent);
                     connection = usbManager.openDevice(device);
                     new ConnectionThread().start();
+                    sendData(usbHelper.rConnectGCU());
+                    //进入连接成功状态
                 } else // User not accepted our USB connection. Send an Intent to the Main Activity
                 {
                     Intent intent = new Intent(ACTION_USB_PERMISSION_NOT_GRANTED);
@@ -651,7 +653,7 @@ public class UsbService extends Service {
                             usbHelper.heartBeat = true;
                             sendData(usbHelper.rHeartBeat());
                         }
-                        if (str[0].equals("05"))//关机
+                        if (str[0].equals("08"))//关机
                         {
                             if (usbHelper.getRunningActivityName().equals(".U3D.u3dPlayer")) {
                                 try {
@@ -666,7 +668,7 @@ public class UsbService extends Service {
                             Log.e("Receiver", "ID=    " + str[0]);
                             usbHelper.dialogShutDown();
                         }
-                        if (str[0].equals("09"))//dButtonInfo改变模式
+                        if (str[0].equals("0C"))//dButtonInfo改变模式
                         {
                             Log.e("Receiver", "ID=    " + str[0]);
                             try {
@@ -675,7 +677,7 @@ public class UsbService extends Service {
                                 Log.e("Connection", String.valueOf(e));
                             }
                         }
-                        if (str[0].equals("19"))//dNetStatus网络状态
+                        if (str[0].equals("20"))//dNetStatus网络状态
                         {
                             String NetType = null;//网络类型
                             switch (str[2]) {
@@ -701,7 +703,7 @@ public class UsbService extends Service {
                             }
                             usbHelper.dialogError("手套" + NetType + "连接状态", "右手：" + rightStatus + "\n" + "左手：" + leftStatus);
                         }
-                        if (str[0].equals("20"))//dPowerinfo下位机电量
+                        if (str[0].equals("10"))//dPowerinfo下位机电量
                         {
                             Log.e("Receiver", "ID=    " + str[0]);
                             try {
@@ -712,7 +714,7 @@ public class UsbService extends Service {
                                 Log.e("PowerInfo", String.valueOf(e));
                             }
                         }
-                        if (str[0].equals("29"))//dFingerVInit电压初始值
+                        if (str[0].equals("07"))//dFingerVInit电压初始值
                         {
                             try {
                                 //让setting处于编辑状态
@@ -739,7 +741,7 @@ public class UsbService extends Service {
                                 Log.e("dFingerVInit", String.valueOf(e));
                             }
                         }
-                        if(str[0].equals("25"))//GCU向AWS发送配置报文请求。
+                        if(str[0].equals("05"))//GCU向AWS发送配置报文请求。
                         {
                             String data = usbHelper.userSettings.getString("thumbFlat","10")+" "+usbHelper.userSettings.getString("foreFlat","10")+" "
                                     +usbHelper.userSettings.getString("middleFlat","10")+" "+usbHelper.userSettings.getString("ringFlat","10")+
@@ -777,7 +779,7 @@ public class UsbService extends Service {
                             sendData(usbHelper.dConfigData(data));
                             Log.e("AAAAAAA",data);
                         }
-                        if (str[0].equals("10"))//下位机向上位机发送角度信息
+                        if (str[0].equals("0D"))//下位机向上位机发送角度信息
                         {
                             if (str.length == 8) {
                                 try {
@@ -904,10 +906,10 @@ public class UsbService extends Service {
                 byte[] bytes = new byte[6];
                 bytes[0] = (byte) 0xff;
                 bytes[1] = (byte) 0xff;
-                bytes[2] = (byte) 0x07;//ID
+                bytes[2] = (byte) 0x0B;//ID
                 bytes[3] = (byte) 0x06;//长度
                 bytes[4] = (byte) 0x01;//模式
-                sendData(bytes);
+                sendData(bytes);//aChangeMode
                 Log.e("ChangeMode", "主从模式");
             }
         } else if (buttonType == 2) //手套操
@@ -927,10 +929,10 @@ public class UsbService extends Service {
                 byte[] bytes = new byte[6];
                 bytes[0] = (byte) 0xff;
                 bytes[1] = (byte) 0xff;
-                bytes[2] = (byte) 0x07;//ID
+                bytes[2] = (byte) 0x0B;//ID
                 bytes[3] = (byte) 0x06;//长度
                 bytes[4] = (byte) 0x02;//模式
-                sendData(bytes);
+                sendData(bytes);//aChangeMode
                 Log.e("ChangeMode", "手套操");
             }
         } else if (buttonType == 3) //开始
