@@ -178,7 +178,7 @@ public class UsbService extends Service {
             byte[] bytes = new byte[6];
             bytes[0] = (byte) 0xff;
             bytes[1] = (byte) 0xff;
-            bytes[2] = (byte) 0x0A;//ID
+            bytes[2] = (byte) 0x0a;//ID
             bytes[3] = (byte) 0x06;//长度
             bytes[4] = (byte) mode;//模式
             /*
@@ -659,10 +659,6 @@ public class UsbService extends Service {
                         /**
                          * 判断收到报文类型
                          */
-                        if (!(str[0].equals("21")||str[0].equals("03")||str[0].equals("04"))&&str[0]!="")
-                        {
-
-                        }
                         if (str[0].equals("03"))//心跳检测
                         {
                             usbHelper.beatTime = usbHelper.refFormatNowDate();
@@ -684,7 +680,7 @@ public class UsbService extends Service {
                             Log.e("Receiver", "ID=    " + str[0]);
                             usbHelper.dialogShutDown();
                         }
-                        if (str[0].equals("0C"))//dButtonInfo改变模式
+                        if (str[0].equals("0c"))//dButtonInfo改变模式
                         {
                             Log.e("Receiver", "ID=    " + str[0]);
                             try {
@@ -798,9 +794,8 @@ public class UsbService extends Service {
                             sendData(usbHelper.dConfigData(data));
                             Log.e("AAAAAAA",data);
                         }
-                        if (str[0].equals("0D"))//下位机向上位机发送角度信息 dAngleInfo
+                        if (str[0].equals("0d"))//下位机向上位机发送角度信息 dAngleInfo
                         {
-                            Log.e("Receiver", "ID=    " + str[0]);
                             if (str.length == 8) {
                                 try {
                                     Log.e("Receiver", "ID=    " + str[0]);
@@ -957,7 +952,7 @@ public class UsbService extends Service {
                 byte[] bytes = new byte[6];
                 bytes[0] = (byte) 0xff;
                 bytes[1] = (byte) 0xff;
-                bytes[2] = (byte) 0x0B;//ID
+                bytes[2] = (byte) 0x0b;//ID
                 bytes[3] = (byte) 0x06;//长度
                 bytes[4] = (byte) 0x01;//模式
                 sendData(bytes);//aChangeMode
@@ -980,7 +975,7 @@ public class UsbService extends Service {
                 byte[] bytes = new byte[6];
                 bytes[0] = (byte) 0xff;
                 bytes[1] = (byte) 0xff;
-                bytes[2] = (byte) 0x0B;//ID
+                bytes[2] = (byte) 0x0b;//ID
                 bytes[3] = (byte) 0x06;//长度
                 bytes[4] = (byte) 0x02;//模式
                 sendData(bytes);//aChangeMode
