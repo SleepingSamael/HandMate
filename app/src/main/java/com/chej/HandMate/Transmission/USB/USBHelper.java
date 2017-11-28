@@ -44,6 +44,11 @@ public class USBHelper {
     public String message=null;
     public boolean heartBeat = false;
     public long beatTime = 0;//心跳间隔
+    public long tmp_exciseTime =0;//排除错误数据
+    public long exciseTime = 0;//排除错误数据
+    public boolean exciseFlag = false;//第一次获取用
+    public int angleLimit = 50;//错误数据界限，可更改
+    public int timelimit = 100;//错误时间界限，可更改
 
     public static float angleFromDownStream = 0;
     public int fingerNumber = 0;

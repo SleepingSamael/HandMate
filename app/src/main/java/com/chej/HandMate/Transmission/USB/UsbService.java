@@ -60,9 +60,7 @@ public class UsbService extends Service {
     private LocalBroadcastManager localBroadcastManager;
 
     Timer heartBeatTimer;
-    TimerTask heartBeatTimerTask;
     Timer timer2;
-    TimerTask timer2task;
 
     private ReceiveHandler receiveHandler = new ReceiveHandler();
     Thread receiverThread;
@@ -282,7 +280,7 @@ public class UsbService extends Service {
 
             try {
                 usbHelper.strResult = bytesToString(result);
-                Log.e("USB",usbHelper.strResult);
+            //    Log.e("USB",usbHelper.strResult);
                 usbHelper.hexResult = bytesToHexString(result);
                 if (!result.equals("")) {
                     Message msg = new Message();
@@ -356,6 +354,7 @@ public class UsbService extends Service {
                     findSerialPortDevice(); // A USB device has been attached. Try to open it as a Serial port
             } else if (arg1.getAction().equals(ACTION_USB_DETACHED)) {
                 // Usb device was disconnected. send an intent to the Main Activity
+                //限定pid编号
                 boolean flag = false;
                 HashMap<String, UsbDevice> usbDevices = usbManager.getDeviceList();
                 for (Map.Entry<String, UsbDevice> entry : usbDevices.entrySet()) {
@@ -650,16 +649,20 @@ public class UsbService extends Service {
                 //对启动后的消息进行处理
                 if (msg.what == 1) {
                     String result = msg.getData().get("hex").toString();
-                    Log.e("Receiver", "result= " + result);
+              //      Log.e("Receiver", "result= " + result);
                     //连包处理
                     String[] strFF = result.split("ff ff ");
                     for (int ff = 0; ff < strFF.length; ff++) {
                         strFF[ff].trim();
-                        Log.e("Receiver", "I am receiving " + strFF[ff]);
+               //         Log.e("Receiver", "I am receiving " + strFF[ff]);
                         String[] str = strFF[ff].split("\\ ");
                         /**
                          * 判断收到报文类型
                          */
+                        if (!(str[0].equals("21")||str[0].equals("03")||str[0].equals("04"))&&str[0]!="")
+                        {
+
+                        }
                         if (str[0].equals("03"))//心跳检测
                         {
                             usbHelper.beatTime = usbHelper.refFormatNowDate();
@@ -692,6 +695,7 @@ public class UsbService extends Service {
                         }
                         if (str[0].equals("20"))//dNetStatus网络状态
                         {
+                            Log.e("Receiver", "ID=    " + str[0]);
                             String NetType = null;//网络类型
                             switch (str[2]) {
                                 case "00":
@@ -727,8 +731,9 @@ public class UsbService extends Service {
                                 Log.e("PowerInfo", String.valueOf(e));
                             }
                         }
-                        if (str[0].equals("07"))//dFingerVInit电压初始值
+                        if (str[0].equals("07"))//dFignerVInit电压初始值
                         {
+                            Log.e("Receiver", "ID=    " + str[0]);
                             try {
                                 //让setting处于编辑状态
                                 SharedPreferences.Editor editor = usbHelper.userSettings.edit();
@@ -756,6 +761,7 @@ public class UsbService extends Service {
                         }
                         if(str[0].equals("05"))//GCU向AWS发送配置报文请求。
                         {
+                            Log.e("Receiver", "ID=    " + str[0]);
                             String data = usbHelper.userSettings.getString("thumbFlat","10")+" "+usbHelper.userSettings.getString("foreFlat","10")+" "
                                     +usbHelper.userSettings.getString("middleFlat","10")+" "+usbHelper.userSettings.getString("ringFlat","10")+
                                     " "+usbHelper.userSettings.getString("littleFlat","10")+" "+usbHelper.userSettings.getString("thumbMiddle","110")
@@ -792,8 +798,9 @@ public class UsbService extends Service {
                             sendData(usbHelper.dConfigData(data));
                             Log.e("AAAAAAA",data);
                         }
-                        if (str[0].equals("0D"))//下位机向上位机发送角度信息
+                        if (str[0].equals("0D"))//下位机向上位机发送角度信息 dAngleInfo
                         {
+                            Log.e("Receiver", "ID=    " + str[0]);
                             if (str.length == 8) {
                                 try {
                                     Log.e("Receiver", "ID=    " + str[0]);
@@ -819,8 +826,9 @@ public class UsbService extends Service {
                                 }
                             }
                         }
-                        if (str[0].equals("21"))//部件信息
+                        if (str[0].equals("21"))//部件信息 dComponentStatus
                         {
+                            Log.e("Receiver", "ID=    " + str[0]);
                             if (str.length == 15) {
                                 if (str[2].equals("00"))//舵机
                                 {
@@ -828,17 +836,47 @@ public class UsbService extends Service {
                                     switch (str[3]) {
                                         case "00"://当前位置
                                             try {
-                                                //对舵机位置信息进行整理
-                                                usbHelper.componentArray[0] = Integer.parseInt(str[5], 16) + "";
-                                                usbHelper.componentArray[1] = Integer.parseInt(str[7], 16) + "";
-                                                usbHelper.componentArray[2] = Integer.parseInt(str[9], 16) + "";
-                                                usbHelper.componentArray[3] = Integer.parseInt(str[11], 16) + "";
-                                                usbHelper.componentArray[4] = Integer.parseInt(str[13], 16) + "";
-                                                Log.e("componentArray", "-----------------------------------");
-                                                for (int i = 0; i < 5; i++) {
-                                                    Log.e("componentArray", "The Array Contains " + usbHelper.componentArray[i]);
+                                                if(!usbHelper.exciseFlag) {//初次获取数据
+                                                    usbHelper.exciseTime = usbHelper.refFormatNowDate();
+                                                    usbHelper.tmp_exciseTime = usbHelper.refFormatNowDate();
+                                                    //对舵机位置信息进行整理
+                                                    usbHelper.componentArray[0] = Integer.parseInt(str[5], 16) + "";
+                                                    usbHelper.componentArray[1] = Integer.parseInt(str[7], 16) + "";
+                                                    usbHelper.componentArray[2] = Integer.parseInt(str[9], 16) + "";
+                                                    usbHelper.componentArray[3] = Integer.parseInt(str[11], 16) + "";
+                                                    usbHelper.componentArray[4] = Integer.parseInt(str[13], 16) + "";
+                                                    /*
+                                                    Log.e("componentArray", "-----------------------------------");
+                                                    for (int i = 0; i < 5; i++) {
+                                                        Log.e("componentArray", "The Array Contains " + usbHelper.componentArray[i]);
+                                                    }
+                                                    Log.e("componentArray", "-----------------------------------");
+                                                    */
+                                                    usbHelper.exciseFlag=true;
                                                 }
-                                                Log.e("componentArray", "-----------------------------------");
+                                                else {
+                                                    usbHelper.exciseTime=usbHelper.refFormatNowDate();
+                                                    if (!(usbHelper.exciseTime-usbHelper.tmp_exciseTime<usbHelper.timelimit &&
+                                                            ((Math.abs(Integer.parseInt(usbHelper.componentArray[0])-Integer.parseInt(str[5], 16))>usbHelper.angleLimit)||
+                                                                    (Math.abs(Integer.parseInt(usbHelper.componentArray[1])-Integer.parseInt(str[7], 16))>usbHelper.angleLimit)||
+                                                                    (Math.abs(Integer.parseInt(usbHelper.componentArray[2])-Integer.parseInt(str[9], 16))>usbHelper.angleLimit)||
+                                                                    (Math.abs(Integer.parseInt(usbHelper.componentArray[3])-Integer.parseInt(str[11], 16))>usbHelper.angleLimit)||
+                                                                    (Math.abs(Integer.parseInt(usbHelper.componentArray[4])-Integer.parseInt(str[13], 16))>usbHelper.angleLimit))))
+                                                    {
+                                                        //对舵机位置信息进行整理
+                                                        usbHelper.componentArray[0] = Integer.parseInt(str[5], 16) + "";
+                                                        usbHelper.componentArray[1] = Integer.parseInt(str[7], 16) + "";
+                                                        usbHelper.componentArray[2] = Integer.parseInt(str[9], 16) + "";
+                                                        usbHelper.componentArray[3] = Integer.parseInt(str[11], 16) + "";
+                                                        usbHelper.componentArray[4] = Integer.parseInt(str[13], 16) + "";
+                                                        Log.e("componentArray", "-----------------------------------");
+                                                        for (int i = 0; i < 5; i++) {
+                                                            Log.e("componentArray", "The Array Contains " + usbHelper.componentArray[i]);
+                                                        }
+                                                        Log.e("componentArray", "-----------------------------------");
+                                                        usbHelper.tmp_exciseTime=usbHelper.exciseTime;
+                                                    }
+                                                }
                                             } catch (Exception e) {
                                                 Log.e("componentArray", String.valueOf(e));
                                             }
@@ -885,7 +923,7 @@ public class UsbService extends Service {
 
             }catch(Exception ex)
             {
-                Debuger.dialogError("UsbService","ReceiveHandler.handlermessage.err"+ex.getMessage());
+                Debuger.dialogError("UsbService","ReceiveHandler.handlermessage.err  "+ex.getMessage());
             }
         }// ~
     }
