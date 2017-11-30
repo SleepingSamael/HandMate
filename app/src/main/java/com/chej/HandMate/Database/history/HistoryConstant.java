@@ -1,4 +1,4 @@
-package com.chej.HandMate.Model.history;
+package com.chej.HandMate.Database.history;
 
 /**
  * Created by samael on 2017/2/28.

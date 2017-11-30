@@ -20,7 +20,6 @@ import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
-import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
@@ -33,11 +32,11 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.chej.HandMate.Database.UserDataManager;
+import com.chej.HandMate.Database.users.UserDataManager;
 import com.chej.HandMate.Model.MyCustomDialog;
 import com.chej.HandMate.Model.SysApplication;
-import com.chej.HandMate.Model.users.UserData;
-import com.chej.HandMate.Model.users.UsersConstant;
+import com.chej.HandMate.Database.users.UserData;
+import com.chej.HandMate.Database.users.UsersConstant;
 import com.chej.HandMate.Search.CharacterParser;
 import com.chej.HandMate.Search.PinyinComparator;
 import com.chej.HandMate.Search.SortAdapter;
@@ -46,7 +45,6 @@ import com.chej.HandMate.TTS.SpeechUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 

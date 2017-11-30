@@ -3,7 +3,6 @@ package com.chej.HandMate;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,10 +13,10 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.chej.HandMate.Database.UserDataManager;
+import com.chej.HandMate.Database.users.UserDataManager;
 import com.chej.HandMate.Model.MyCustomDialog;
 import com.chej.HandMate.Model.SysApplication;
-import com.chej.HandMate.Model.users.UserData;
+import com.chej.HandMate.Database.users.UserData;
 import com.chej.HandMate.TTS.SpeechUtil;
 
 import java.text.SimpleDateFormat;

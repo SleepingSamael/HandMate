@@ -1,4 +1,4 @@
-package com.chej.HandMate.Model.history;
+package com.chej.HandMate.Database.history;
 
 /**
  * 历史记录类

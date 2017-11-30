@@ -2,17 +2,15 @@ package com.chej.HandMate.TTS;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.media.AudioManager;
 import android.os.Environment;
 import android.util.Log;
 
-import com.baidu.tts.auth.AuthInfo;
 import com.baidu.tts.client.SpeechError;
 import com.baidu.tts.client.SpeechSynthesizeBag;
 import com.baidu.tts.client.SpeechSynthesizer;
 import com.baidu.tts.client.SpeechSynthesizerListener;
 import com.baidu.tts.client.TtsMode;
-import com.chej.HandMate.Model.users.UserData;
+import com.chej.HandMate.Database.users.UserData;
 
 import java.io.File;
 import java.io.FileNotFoundException;

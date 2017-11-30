@@ -9,9 +9,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.chej.HandMate.Database.HistoryDataManager;
+import com.chej.HandMate.Database.history.HistoryDataManager;
 import com.chej.HandMate.Model.SysApplication;
-import com.chej.HandMate.Model.users.UserData;
+import com.chej.HandMate.Database.users.UserData;
 
 import java.io.File;
 import java.io.FileNotFoundException;

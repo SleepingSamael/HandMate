@@ -1,4 +1,4 @@
-package com.chej.HandMate.Model.users;
+package com.chej.HandMate.Database.users;
 
 /**
  * Created by samael on 2017/1/12.

@@ -29,11 +29,10 @@ import com.chej.HandMate.ExerciseActivity;
 import com.chej.HandMate.MasterSlaveActivity;
 import com.chej.HandMate.Model.MyCustomDialog;
 import com.chej.HandMate.Model.SetConstant;
-import com.chej.HandMate.Model.users.UserData;
+import com.chej.HandMate.Database.users.UserData;
 import com.chej.HandMate.ShutDownActivity;
 
 import static android.content.Context.ACTIVITY_SERVICE;
-import static android.content.Context.LOCATION_SERVICE;
 import static com.chej.HandMate.AdminActivity.voltageToMessage;
 
 /**

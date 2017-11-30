@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.chej.HandMate.Model.MyCustomDialog;
 import com.chej.HandMate.Model.SysApplication;
-import com.chej.HandMate.Model.users.UserData;
+import com.chej.HandMate.Database.users.UserData;
 import com.chej.HandMate.TTS.SpeechUtil;
 
 import java.text.SimpleDateFormat;

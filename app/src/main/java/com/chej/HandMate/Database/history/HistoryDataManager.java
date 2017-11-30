@@ -1,4 +1,4 @@
-package com.chej.HandMate.Database;
+package com.chej.HandMate.Database.history;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,8 +8,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.chej.HandMate.Model.history.HistoryData;
-import com.chej.HandMate.Model.history.HistoryConstant;
+import com.chej.HandMate.Database.SQLdm;
+import com.chej.HandMate.Database.history.HistoryData;
+import com.chej.HandMate.Database.history.HistoryConstant;
 
 import static android.content.ContentValues.TAG;
 

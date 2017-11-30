@@ -30,19 +30,16 @@ import com.chej.HandMate.ExerciseActivity;
 import com.chej.HandMate.ICallBack;
 import com.chej.HandMate.IMyAidlInterface;
 import com.chej.HandMate.MasterSlaveActivity;
-import com.chej.HandMate.Model.SetConstant;
-import com.chej.HandMate.Model.users.UserData;
+import com.chej.HandMate.Database.users.UserData;
 import com.chej.HandMate.U3D.u3dPlayer;
 import com.chej.HandMate.utils.Debuger;
 import com.felhr.usbserial.CDCSerialDevice;
 import com.felhr.usbserial.UsbSerialDevice;
 import com.felhr.usbserial.UsbSerialInterface;
 
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
-import java.util.TimerTask;
 
 import static com.chej.HandMate.AdminActivity.voltageToMessage;
 import static com.chej.HandMate.Transmission.USB.USBHelper.bytesToHexString;

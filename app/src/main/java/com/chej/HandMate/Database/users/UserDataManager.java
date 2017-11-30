@@ -1,4 +1,4 @@
-package com.chej.HandMate.Database;
+package com.chej.HandMate.Database.users;
 
 
 import android.content.ContentValues;
@@ -9,8 +9,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.chej.HandMate.Model.users.UserData;
-import com.chej.HandMate.Model.users.UsersConstant;
+import com.chej.HandMate.Database.SQLdm;
+import com.chej.HandMate.Database.users.UserData;
+import com.chej.HandMate.Database.users.UsersConstant;
 
 import static android.content.ContentValues.TAG;
 

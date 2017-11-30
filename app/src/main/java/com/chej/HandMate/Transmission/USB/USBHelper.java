@@ -5,35 +5,17 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.util.Log;
 import android.view.WindowManager;
 
-import com.chej.HandMate.AdminActivity;
-import com.chej.HandMate.ExerciseActivity;
-import com.chej.HandMate.MasterSlaveActivity;
 import com.chej.HandMate.Model.MyCustomDialog;
-import com.chej.HandMate.Model.SetConstant;
-import com.chej.HandMate.Model.users.UserData;
+import com.chej.HandMate.Database.users.UserData;
 import com.chej.HandMate.ShutDownActivity;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.net.InetSocketAddress;
-import java.net.Socket;
-import java.net.SocketAddress;
-import java.nio.charset.Charset;
 import java.util.Date;
 
 import static android.content.Context.ACTIVITY_SERVICE;
-import static com.chej.HandMate.AdminActivity.voltageToMessage;
 
 /**
  * Created by samael on 2017/9/21.

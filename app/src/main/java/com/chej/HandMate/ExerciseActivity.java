@@ -25,13 +25,13 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.chej.HandMate.Database.HistoryDataManager;
+import com.chej.HandMate.Database.history.HistoryDataManager;
 import com.chej.HandMate.Adapter.GalleryViewPagerAdapter;
 import com.chej.HandMate.Model.GalleryItems;
 import com.chej.HandMate.Model.MyCustomDialog;
 import com.chej.HandMate.Model.SysApplication;
-import com.chej.HandMate.Model.history.HistoryData;
-import com.chej.HandMate.Model.users.UserData;
+import com.chej.HandMate.Database.history.HistoryData;
+import com.chej.HandMate.Database.users.UserData;
 import com.chej.HandMate.TTS.SpeechUtil;
 import com.chej.HandMate.Transmission.USB.UsbService;
 import com.chej.HandMate.U3D.u3dPlayer;

@@ -1,4 +1,4 @@
-package com.chej.HandMate.Model.users;
+package com.chej.HandMate.Database.users;
 
 import android.app.Application;
 import android.content.Context;
