@@ -113,13 +113,13 @@ public class USBHelper {
         if ((code & 1) == 1) {
             errorMsg.append("舵机" + motorNum + "号发生错误  " + "错误原因：" + "输入电压错误\n");
         } else if ((code & 2) == 2) {
-            errorMsg.append("舵机" + motorNum + "号发生错误  " + "错误原因：" + "目标角度超出范围\n");
+            errorMsg.append("舵机" + motorNum + "号发生错误  " + "错误原因：" + "霍尔传感器错误\n");
         } else if ((code & 4) == 4) {
             errorMsg.append("舵机" + motorNum + "号发生错误  " + "错误原因：" + "舵机温度过高\n");
         } else if ((code & 8) == 8) {
-            errorMsg.append("舵机" + motorNum + "号发生错误 " + "错误原因：" + "角度范围设置错误\n");
+            errorMsg.append("舵机" + motorNum + "号发生错误 " + "错误原因：" + "编码错误\n");
         } else if ((code & 16) == 16) {
-            errorMsg.append("舵机" + motorNum + "号发生错误 " + "错误原因：" + "校验和错误\n");
+            errorMsg.append("舵机" + motorNum + "号发生错误 " + "错误原因：" + "electrical shock error \n");
         } else if ((code & 32) == 32) {
             errorMsg.append("舵机" + motorNum + "号发生错误 " + "错误原因：" + "舵机超负荷\n");
         } else if ((code & 64) == 64) {

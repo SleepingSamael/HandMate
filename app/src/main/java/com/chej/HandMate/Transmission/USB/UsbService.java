@@ -357,6 +357,7 @@ public class UsbService extends Service {
                 for (Map.Entry<String, UsbDevice> entry : usbDevices.entrySet()) {
                     UsbDevice device0= entry.getValue();
                     int devicePID = device0.getProductId();
+                    //29987
                     if(devicePID==29987) {
                         flag=true;
                         break;
@@ -461,6 +462,7 @@ public class UsbService extends Service {
 
                     if (deviceVID != 0x1d6b && (devicePID != 0x0001 && devicePID != 0x0002 && devicePID != 0x0003)) {
                         // There is a device connected to our Android device. Try to open it as a Serial Port.
+                        //29987
                         if(devicePID==29987) {
                             device = tmp_device;
                             requestUserPermission();
