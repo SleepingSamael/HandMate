@@ -2,6 +2,7 @@ package com.chej.HandMate.utils;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.os.Environment;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -9,6 +10,11 @@ import android.widget.Toast;
 import com.chej.HandMate.Model.MyCustomDialog;
 import com.chej.HandMate.Database.users.UserData;
 import com.chej.HandMate.Welcome;
+
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by chenx on 2017/11/2.
@@ -57,5 +63,12 @@ public class Debuger {
 
         }
 
+    }
+    public static void fileLog(String filename,String data) {
+        try {
+            FileUtils.writeStringToFile(new File(Environment.getExternalStorageDirectory() +"/"+filename+".txt"), data, true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

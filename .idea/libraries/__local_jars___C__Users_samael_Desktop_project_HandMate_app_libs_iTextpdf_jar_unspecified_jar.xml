@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="iTextpdf">
+  <library name="__local_jars__:C.\Users\samael\Desktop\project\HandMate\app\libs\iTextpdf.jar:unspecified@jar">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/app/libs/iTextpdf.jar!/" />
     </CLASSES>

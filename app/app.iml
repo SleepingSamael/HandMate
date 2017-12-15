@@ -22,7 +22,7 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7">
     <output url="file://$MODULE_DIR$/build/intermediates/classes/debug" />
     <output-test url="file://$MODULE_DIR$/build/intermediates/classes/test/debug" />
     <exclude-output />
@@ -103,31 +103,33 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 25 Platform (5)" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="butterknife-7.0.1" level="project" />
-    <orderEntry type="library" exported="" name="play-services-appindexing-8.4.0" level="project" />
-    <orderEntry type="library" exported="" name="play-services-base-8.4.0" level="project" />
-    <orderEntry type="library" exported="" name="UsbSerial-4.5" level="project" />
-    <orderEntry type="library" exported="" name="support-fragment-25.0.0" level="project" />
-    <orderEntry type="library" exported="" name="iTextAsian-1.0" level="project" />
-    <orderEntry type="library" exported="" name="joda-time-2.9.6" level="project" />
-    <orderEntry type="library" exported="" name="unity-classes" level="project" />
-    <orderEntry type="library" exported="" name="support-core-ui-25.0.0" level="project" />
-    <orderEntry type="library" exported="" name="cardview-v7-25.0.0" level="project" />
-    <orderEntry type="library" exported="" name="com.baidu.tts_2.3.0" level="project" />
-    <orderEntry type="library" exported="" name="support-core-utils-25.0.0" level="project" />
-    <orderEntry type="library" exported="" name="support-annotations-25.0.0" level="project" />
-    <orderEntry type="library" exported="" name="robototextview-2.5.0" level="project" />
-    <orderEntry type="library" exported="" name="MPAndroidChart-v3.0.2" level="project" />
-    <orderEntry type="library" exported="" name="iTextpdf" level="project" />
-    <orderEntry type="library" exported="" name="support-v4-25.0.0" level="project" />
-    <orderEntry type="library" exported="" name="support-media-compat-25.0.0" level="project" />
-    <orderEntry type="library" exported="" name="support-compat-25.0.0" level="project" />
-    <orderEntry type="library" exported="" name="animated-vector-drawable-25.0.0" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="hamcrest-core-1.3" level="project" />
-    <orderEntry type="library" exported="" name="appcompat-v7-25.0.0" level="project" />
-    <orderEntry type="library" exported="" name="support-vector-drawable-25.0.0" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="junit-4.12" level="project" />
-    <orderEntry type="library" exported="" name="play-services-basement-8.4.0" level="project" />
+    <orderEntry type="library" exported="" name="com.github.felHR85:UsbSerial-4.5" level="project" />
+    <orderEntry type="library" exported="" name="com.android.support:support-fragment-25.0.0" level="project" />
+    <orderEntry type="library" exported="" name="com.android.support:support-core-ui-25.0.0" level="project" />
+    <orderEntry type="library" exported="" name="__local_jars__:C.\Users\samael\Desktop\project\HandMate\app\libs\commons-io-2.4.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="junit:junit:4.12@jar" level="project" />
+    <orderEntry type="library" exported="" name="__local_jars__:C.\Users\samael\Desktop\project\HandMate\app\libs\iTextpdf.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" exported="" name="com.android.support:cardview-v7-25.0.0" level="project" />
+    <orderEntry type="library" exported="" name="com.google.android.gms:play-services-base-8.4.0" level="project" />
+    <orderEntry type="library" exported="" name="com.android.support:support-media-compat-25.0.0" level="project" />
+    <orderEntry type="library" exported="" name="com.android.support:animated-vector-drawable-25.0.0" level="project" />
+    <orderEntry type="library" exported="" name="com.jakewharton:butterknife:7.0.1@jar" level="project" />
+    <orderEntry type="library" exported="" name="com.android.support:support-v4-25.0.0" level="project" />
+    <orderEntry type="library" exported="" name="com.google.android.gms:play-services-appindexing-8.4.0" level="project" />
+    <orderEntry type="library" exported="" name="com.android.support:support-annotations:25.0.0@jar" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="org.hamcrest:hamcrest-core:1.3@jar" level="project" />
+    <orderEntry type="library" exported="" name="__local_jars__:C.\Users\samael\Desktop\project\HandMate\app\libs\commons-lang3-3.3.2.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" exported="" name="__local_jars__:C.\Users\samael\Desktop\project\HandMate\app\libs\iTextAsian-1.0.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" exported="" name="com.android.support:support-core-utils-25.0.0" level="project" />
+    <orderEntry type="library" exported="" name="__local_jars__:C.\Users\samael\Desktop\project\HandMate\app\libs\unity-classes.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" exported="" name="com.android.support:appcompat-v7-25.0.0" level="project" />
+    <orderEntry type="library" exported="" name="com.github.johnkil.android-robototextview:robototextview-2.5.0" level="project" />
+    <orderEntry type="library" exported="" name="__local_jars__:C.\Users\samael\Desktop\project\HandMate\app\libs\com.baidu.tts_2.3.0.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" exported="" name="com.android.support:support-compat-25.0.0" level="project" />
+    <orderEntry type="library" exported="" name="com.github.PhilJay:MPAndroidChart:v3.0.2@jar" level="project" />
+    <orderEntry type="library" exported="" name="joda-time:joda-time:2.9.6@jar" level="project" />
+    <orderEntry type="library" exported="" name="com.google.android.gms:play-services-basement-8.4.0" level="project" />
+    <orderEntry type="library" exported="" name="com.android.support:support-vector-drawable-25.0.0" level="project" />
     <orderEntry type="module" module-name="library" exported="" />
     <orderEntry type="library" exported="" name="android-android-25" level="project" />
     <orderEntry type="library" exported="" name="org.apache.http.legacy-android-25" level="project" />

@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import com.chej.HandMate.Model.MyCustomDialog;
 import com.chej.HandMate.Database.users.UserData;
 import com.chej.HandMate.ShutDownActivity;
+import com.chej.HandMate.utils.Debuger;
 
 import java.io.InputStream;
 import java.util.Date;
@@ -23,18 +24,17 @@ import static android.content.Context.ACTIVITY_SERVICE;
 
 public class USBHelper {
 
-    public String message=null;
     public boolean heartBeat = false;
     public long beatTime = 0;//心跳间隔
     public long tmp_exciseTime =0;//排除错误数据
     public long exciseTime = 0;//排除错误数据
+    public long tmp_exciseTimeG =0;//排除错误数据（Glove）
+    public long exciseTimeG = 0;//排除错误数据Glove
     public boolean exciseFlag = false;//第一次获取用
+    public boolean gloveFlag = false;
     public int angleLimit = 50;//错误数据界限，可更改
-    public int timelimit = 100;//错误时间界限，可更改
+    public int timeLimit = 100;//错误时间界限，可更改
 
-    public static float angleFromDownStream = 0;
-    public int fingerNumber = 0;
-    private int score = 0;
     public int powerInfo = 0;//下位机电量
     public String[] fingerArray = {"0", "0", "0", "0", "0"};
     public String[] componentArray = {"0", "0", "0", "0", "0"};//舵机位置

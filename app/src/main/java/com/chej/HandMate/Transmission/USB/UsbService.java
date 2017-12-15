@@ -16,6 +16,7 @@ import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbManager;
 import android.os.Binder;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -32,11 +33,15 @@ import com.chej.HandMate.IMyAidlInterface;
 import com.chej.HandMate.MasterSlaveActivity;
 import com.chej.HandMate.Database.users.UserData;
 import com.chej.HandMate.U3D.u3dPlayer;
+import com.chej.HandMate.utils.Converter;
 import com.chej.HandMate.utils.Debuger;
 import com.felhr.usbserial.CDCSerialDevice;
 import com.felhr.usbserial.UsbSerialDevice;
 import com.felhr.usbserial.UsbSerialInterface;
 
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
@@ -292,7 +297,7 @@ public class UsbService extends Service {
                 Log.e("ReadThread", "--->>read failure!" + e.toString());
             }
             try {
-                Thread.sleep(50L);
+                Thread.sleep(10L);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -676,7 +681,7 @@ public class UsbService extends Service {
                                     Log.e("u3d", e.toString());
                                 }
                             }
-                            Log.e("Receiver", "ID=    " + str[0]);
+                            Debuger.fileLog("LogShutDown",result);
                             usbHelper.dialogShutDown();
                         }
                         if (str[0].equals("0c"))//dButtonInfo改变模式
@@ -726,7 +731,7 @@ public class UsbService extends Service {
                                 Log.e("PowerInfo", String.valueOf(e));
                             }
                         }
-                        if (str[0].equals("07"))//dFignerVInit电压初始值
+                        if (str[0].equals("07"))//dFingerVInit电压初始值
                         {
                             Log.e("Receiver", "ID=    " + str[0]);
                             try {
@@ -797,6 +802,54 @@ public class UsbService extends Service {
                         {
                             if (str.length == 8) {
                                 try {
+                                    if (!usbHelper.gloveFlag) {//初次获取数据
+                                        usbHelper.exciseTimeG = usbHelper.refFormatNowDate();
+                                        usbHelper.tmp_exciseTimeG = usbHelper.refFormatNowDate();
+                                        Log.e("Receiver", "ID=    " + str[0]);
+                                        String[] str2 = msg.getData().get("msg").toString().split("\\ ");
+                                        //对手指信息进行整理
+                                        Converter.i64_2finger(str2,usbHelper.fingerArray,new int[]{2,3,4,5,6});
+                                        /*usbHelper.fingerArray[0] = Integer.parseInt(str2[2], 16) + "";
+                                        usbHelper.fingerArray[1] = Integer.parseInt(str2[3], 16) + "";
+                                        usbHelper.fingerArray[2] = Integer.parseInt(str2[4], 16) + "";
+                                        usbHelper.fingerArray[3] = Integer.parseInt(str2[5], 16) + "";
+                                        usbHelper.fingerArray[4] = Integer.parseInt(str2[6], 16) + "";*/
+                                        Log.e("fingerArray", "-----------------------------------");
+                                        for (int i = 0; i < 5; i++) {
+                                            Log.e("fingerArray", "The Array Contains " + usbHelper.fingerArray[i]);
+                                        }
+                                        Log.e("fingerArray", "-----------------------------------");
+
+                                        usbHelper.gloveFlag = true;
+                                    } else {
+                                        usbHelper.exciseTimeG = usbHelper.refFormatNowDate();
+                                        String[] str2 = msg.getData().get("msg").toString().split("\\ ");
+                                        if (!(usbHelper.exciseTimeG - usbHelper.tmp_exciseTimeG < usbHelper.timeLimit &&
+                                                ((Math.abs(Integer.parseInt(usbHelper.fingerArray[0]) - Integer.parseInt(str[5], 16)) > usbHelper.angleLimit) ||
+                                                        (Math.abs(Integer.parseInt(usbHelper.fingerArray[1]) - Integer.parseInt(str[7], 16)) > usbHelper.angleLimit) ||
+                                                        (Math.abs(Integer.parseInt(usbHelper.fingerArray[2]) - Integer.parseInt(str[9], 16)) > usbHelper.angleLimit) ||
+                                                        (Math.abs(Integer.parseInt(usbHelper.fingerArray[3]) - Integer.parseInt(str[11], 16)) > usbHelper.angleLimit) ||
+                                                        (Math.abs(Integer.parseInt(usbHelper.fingerArray[4]) - Integer.parseInt(str[13], 16)) > usbHelper.angleLimit)))) {
+                                            //对手指信息进行整理
+                                            Converter.i64_2finger(str2,usbHelper.fingerArray,new int[]{2,3,4,5,6});
+                                            /*usbHelper.fingerArray[0] = Integer.parseInt(str2[2], 16) + "";
+                                            usbHelper.fingerArray[1] = Integer.parseInt(str2[3], 16) + "";
+                                            usbHelper.fingerArray[2] = Integer.parseInt(str2[4], 16) + "";
+                                            usbHelper.fingerArray[3] = Integer.parseInt(str2[5], 16) + "";
+                                            usbHelper.fingerArray[4] = Integer.parseInt(str2[6], 16) + "";*/
+                                            Log.e("fingerArray", "-----------------------------------");
+                                            for (int i = 0; i < 5; i++) {
+                                                Log.e("fingerArray", "The Array Contains " + usbHelper.fingerArray[i]);
+                                            }
+                                            Log.e("fingerArray", "-----------------------------------");
+                                            usbHelper.tmp_exciseTimeG = usbHelper.exciseTimeG;
+                                        }
+                                    }
+                                } catch (Exception e) {
+                                        Log.e("Connection", String.valueOf(e));
+                                }
+
+                              /*  try {
                                     Log.e("Receiver", "ID=    " + str[0]);
                                     String[] str2 = msg.getData().get("msg").toString().split("\\ ");
                                     //手指序号
@@ -817,7 +870,7 @@ public class UsbService extends Service {
 
                                 } catch (Exception e) {
                                     Log.e("Connection", String.valueOf(e));
-                                }
+                                }*/
                             }
                         }
                         if (str[0].equals("21"))//部件信息 dComponentStatus
@@ -834,35 +887,40 @@ public class UsbService extends Service {
                                                     usbHelper.exciseTime = usbHelper.refFormatNowDate();
                                                     usbHelper.tmp_exciseTime = usbHelper.refFormatNowDate();
                                                     //对舵机位置信息进行整理
-                                                    usbHelper.componentArray[0] = Integer.parseInt(str[5], 16) + "";
+                                                    Converter.i64_2finger(str,usbHelper.componentArray,new int[]{5,7,9,11,13});
+                                                   /* usbHelper.componentArray[0] = Integer.parseInt(str[5], 16) + "";
                                                     usbHelper.componentArray[1] = Integer.parseInt(str[7], 16) + "";
                                                     usbHelper.componentArray[2] = Integer.parseInt(str[9], 16) + "";
                                                     usbHelper.componentArray[3] = Integer.parseInt(str[11], 16) + "";
-                                                    usbHelper.componentArray[4] = Integer.parseInt(str[13], 16) + "";
-                                                    /*
-                                                    Log.e("componentArray", "-----------------------------------");
-                                                    for (int i = 0; i < 5; i++) {
-                                                        Log.e("componentArray", "The Array Contains " + usbHelper.componentArray[i]);
-                                                    }
-                                                    Log.e("componentArray", "-----------------------------------");
-                                                    */
+                                                    usbHelper.componentArray[4] = Integer.parseInt(str[13], 16) + "";*/
+
                                                     usbHelper.exciseFlag=true;
                                                 }
                                                 else {
                                                     usbHelper.exciseTime=usbHelper.refFormatNowDate();
-                                                    if (!(usbHelper.exciseTime-usbHelper.tmp_exciseTime<usbHelper.timelimit &&
+                                                    if((Integer.parseInt(usbHelper.componentArray[0]) - Integer.parseInt(str[5], 16)!=0) || Integer.parseInt(str[5], 16)==0) {
+                                                        FileUtils.writeStringToFile(new File(Environment.getExternalStorageDirectory() +"/log2.txt"), "time:"+String.valueOf(usbHelper.exciseTime-usbHelper.tmp_exciseTime)+"angle:" + String.valueOf(Integer.parseInt(usbHelper.componentArray[0]) - Integer.parseInt(str[5], 16)) +" Last:"+Integer.parseInt(usbHelper.componentArray[0])+" Current:"+Integer.parseInt(str[5], 16)+ "\n", true);
+                                                    }
+                                                    if (usbHelper.exciseTime-usbHelper.tmp_exciseTime<usbHelper.timeLimit &&
                                                             ((Math.abs(Integer.parseInt(usbHelper.componentArray[0])-Integer.parseInt(str[5], 16))>usbHelper.angleLimit)||
                                                                     (Math.abs(Integer.parseInt(usbHelper.componentArray[1])-Integer.parseInt(str[7], 16))>usbHelper.angleLimit)||
                                                                     (Math.abs(Integer.parseInt(usbHelper.componentArray[2])-Integer.parseInt(str[9], 16))>usbHelper.angleLimit)||
                                                                     (Math.abs(Integer.parseInt(usbHelper.componentArray[3])-Integer.parseInt(str[11], 16))>usbHelper.angleLimit)||
-                                                                    (Math.abs(Integer.parseInt(usbHelper.componentArray[4])-Integer.parseInt(str[13], 16))>usbHelper.angleLimit))))
+                                                                    (Math.abs(Integer.parseInt(usbHelper.componentArray[4])-Integer.parseInt(str[13], 16))>usbHelper.angleLimit)))
                                                     {
+                                                        if(Integer.parseInt(usbHelper.componentArray[0]) - Integer.parseInt(str[5], 16)!=0) {
+                                                            FileUtils.writeStringToFile(new File(Environment.getExternalStorageDirectory() +"/log1.txt"), ">:" + String.valueOf(Integer.parseInt(usbHelper.componentArray[0]) - Integer.parseInt(str[5], 16)) + "\n", true);
+                                                        }
+                                                        usbHelper.tmp_exciseTime=usbHelper.exciseTime;
+                                                    }
+                                                    else {
+                                                        Converter.i64_2finger(str,usbHelper.componentArray,new int[]{5,7,9,11,13});
                                                         //对舵机位置信息进行整理
-                                                        usbHelper.componentArray[0] = Integer.parseInt(str[5], 16) + "";
+                                                       /* usbHelper.componentArray[0] = Integer.parseInt(str[5], 16) + "";
                                                         usbHelper.componentArray[1] = Integer.parseInt(str[7], 16) + "";
                                                         usbHelper.componentArray[2] = Integer.parseInt(str[9], 16) + "";
                                                         usbHelper.componentArray[3] = Integer.parseInt(str[11], 16) + "";
-                                                        usbHelper.componentArray[4] = Integer.parseInt(str[13], 16) + "";
+                                                        usbHelper.componentArray[4] = Integer.parseInt(str[13], 16) + "";*/
                                                         Log.e("componentArray", "-----------------------------------");
                                                         for (int i = 0; i < 5; i++) {
                                                             Log.e("componentArray", "The Array Contains " + usbHelper.componentArray[i]);

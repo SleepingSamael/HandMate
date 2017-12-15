@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="robototextview-2.5.0">
+  <library name="com.github.johnkil.android-robototextview:robototextview-2.5.0">
     <CLASSES>
       <root url="jar://$USER_HOME$/.android/build-cache/d6f63214da302a89e5538a7b8694b3a0cbedbd4e/output/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.android/build-cache/d6f63214da302a89e5538a7b8694b3a0cbedbd4e/output/res" />
