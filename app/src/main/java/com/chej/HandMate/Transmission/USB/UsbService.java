@@ -23,6 +23,7 @@ import android.os.Message;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.support.v4.content.LocalBroadcastManager;
+import android.text.method.DateTimeKeyListener;
 import android.util.Log;
 
 import com.chej.HandMate.AdminActivity;
@@ -40,9 +41,13 @@ import com.felhr.usbserial.UsbSerialDevice;
 import com.felhr.usbserial.UsbSerialInterface;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.joda.time.DateTime;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 
@@ -642,7 +647,20 @@ public class UsbService extends Service {
         //ExerciseThread = new Thread(new MySendRunnable(data));
         ExerciseThread.start();
     }
+    public static String[] convert(String[] content) {
+        List<String> list =new ArrayList<>();
+        for(String item:content) {
+            if(StringUtils.isNotBlank(item)) {
+                list.add(item);
+            }
 
+        }
+        return list.toArray(new String[list.size()]);
+    }
+
+    private static void LogS(String msg){
+        Debuger.fileLog("LogStep_"+ DateTime.now().getHourOfDay(),DateTime.now().toString("mm:ss")+" "+msg+"\r\n");
+    }
     //消息处理器，对接收到的消息进行处理（上位机接收下位机数据）
     private class ReceiveHandler extends Handler {
 
@@ -653,13 +671,19 @@ public class UsbService extends Service {
                 //对启动后的消息进行处理
                 if (msg.what == 1) {
                     String result = msg.getData().get("hex").toString();
-              //      Log.e("Receiver", "result= " + result);
+                    String[] tempResult = StringUtils.splitByWholeSeparator(StringUtils.substringAfter(result, "ff ff"), "ff ff");
+                    if(tempResult ==null)
+                    {
+                        Debuger.dialogError("Result:",result);
+                    }
+                    //StringUtils.substringBetween(result,"ff ff",);
                     //连包处理
-                    String[] strFF = result.split("ff ff ");
+                    String[] strFF = convert(tempResult);// result.split("ff ff");
+
                     for (int ff = 0; ff < strFF.length; ff++) {
-                        strFF[ff].trim();
-               //         Log.e("Receiver", "I am receiving " + strFF[ff]);
-                        String[] str = strFF[ff].split("\\ ");
+                        strFF[ff]=strFF[ff].trim();
+                        String[] str = StringUtils.split(strFF[ff]," ");
+                        LogS(str[0]+" 0_Length:"+str[0]+" Length:"+str.length+" "+strFF[ff]);
                         /**
                          * 判断收到报文类型
                          */
@@ -681,7 +705,8 @@ public class UsbService extends Service {
                                     Log.e("u3d", e.toString());
                                 }
                             }
-                            Debuger.fileLog("LogShutDown",result);
+                            Debuger.fileLog("LogShutDown", "result:" + result + "\n"
+                                    +"strff:"+strFF[ff]);
                             usbHelper.dialogShutDown();
                         }
                         if (str[0].equals("0c"))//dButtonInfo改变模式
@@ -738,199 +763,135 @@ public class UsbService extends Service {
                                 //让setting处于编辑状态
                                 SharedPreferences.Editor editor = usbHelper.userSettings.edit();
                                 //存放数据
-                                editor.putString("thumb180V",(float)Integer.parseInt(str[2]+str[3],16)/1000+"");
-                                editor.putString("fore180V",(float)Integer.parseInt(str[4]+str[5],16)/1000+"");
-                                editor.putString("middle180V",(float)Integer.parseInt(str[6]+str[7],16)/1000+"");
-                                editor.putString("ring180V",(float)Integer.parseInt(str[8]+str[9],16)/1000+"");
-                                editor.putString("little180V",(float)Integer.parseInt(str[10]+str[11],16)/1000+"");
-                                editor.putString("thumb0V",(float)Integer.parseInt(str[12]+str[13],16)/1000+"");
-                                editor.putString("fore0V",(float)Integer.parseInt(str[14]+str[15],16)/1000+"");
-                                editor.putString("middle0V",(float)Integer.parseInt(str[16]+str[17],16)/1000+"");
-                                editor.putString("ring0V",(float)Integer.parseInt(str[18]+str[19],16)/1000+"");
-                                editor.putString("little0V",(float)Integer.parseInt(str[20]+str[21],16)/1000+"");
+                                editor.putString("thumb180V", (float) Integer.parseInt(str[2] + str[3], 16) / 1000 + "");
+                                editor.putString("fore180V", (float) Integer.parseInt(str[4] + str[5], 16) / 1000 + "");
+                                editor.putString("middle180V", (float) Integer.parseInt(str[6] + str[7], 16) / 1000 + "");
+                                editor.putString("ring180V", (float) Integer.parseInt(str[8] + str[9], 16) / 1000 + "");
+                                editor.putString("little180V", (float) Integer.parseInt(str[10] + str[11], 16) / 1000 + "");
+                                editor.putString("thumb0V", (float) Integer.parseInt(str[12] + str[13], 16) / 1000 + "");
+                                editor.putString("fore0V", (float) Integer.parseInt(str[14] + str[15], 16) / 1000 + "");
+                                editor.putString("middle0V", (float) Integer.parseInt(str[16] + str[17], 16) / 1000 + "");
+                                editor.putString("ring0V", (float) Integer.parseInt(str[18] + str[19], 16) / 1000 + "");
+                                editor.putString("little0V", (float) Integer.parseInt(str[20] + str[21], 16) / 1000 + "");
                                 //d、完成提交
                                 editor.commit();
-                                Log.e("dFingerVInit", usbHelper.userSettings.getString("thumb180V","0"));
-                                Log.e("dFingerVInit", usbHelper.userSettings.getString("fore180V","0"));
-                                Log.e("dFingerVInit", usbHelper.userSettings.getString("middle180V","0"));
-                                Log.e("dFingerVInit", usbHelper.userSettings.getString("ring180V","0"));
-                                Log.e("dFingerVInit", usbHelper.userSettings.getString("little180V","0"));
-                            }catch (Exception e){
+                                Log.e("dFingerVInit", usbHelper.userSettings.getString("thumb180V", "0"));
+                                Log.e("dFingerVInit", usbHelper.userSettings.getString("fore180V", "0"));
+                                Log.e("dFingerVInit", usbHelper.userSettings.getString("middle180V", "0"));
+                                Log.e("dFingerVInit", usbHelper.userSettings.getString("ring180V", "0"));
+                                Log.e("dFingerVInit", usbHelper.userSettings.getString("little180V", "0"));
+                            } catch (Exception e) {
                                 Log.e("dFingerVInit", String.valueOf(e));
                             }
                         }
-                        if(str[0].equals("05"))//GCU向AWS发送配置报文请求。
+                        if (str[0].equals("05"))//GCU向AWS发送配置报文请求。
                         {
                             Log.e("Receiver", "ID=    " + str[0]);
-                            String data = usbHelper.userSettings.getString("thumbFlat","10")+" "+usbHelper.userSettings.getString("foreFlat","10")+" "
-                                    +usbHelper.userSettings.getString("middleFlat","10")+" "+usbHelper.userSettings.getString("ringFlat","10")+
-                                    " "+usbHelper.userSettings.getString("littleFlat","10")+" "+usbHelper.userSettings.getString("thumbMiddle","110")
-                                    +" "+usbHelper.userSettings.getString("foreMiddle","110")+" "+usbHelper.userSettings.getString("middleMiddle","110")
-                                    +" "+usbHelper.userSettings.getString("ringMiddle","110")+" "+usbHelper.userSettings.getString("littleMiddle","110")
-                                    +" "+usbHelper.userSettings.getString("thumbFist","120")+" "+usbHelper.userSettings.getString("foreFist","140")
-                                    +" "+usbHelper.userSettings.getString("middleFist","140")+" "+usbHelper.userSettings.getString("ringFist","140")
-                                    +" "+usbHelper.userSettings.getString("littleFist","120")+" "+usbHelper.userSettings.getString("thumbStretch","50")
-                                    +" "+usbHelper.userSettings.getString("foreStretch","50")+" "+usbHelper.userSettings.getString("middleStretch","50")
-                                    +" "+usbHelper.userSettings.getString("ringStretch","50")+" "+usbHelper.userSettings.getString("littleStretch","50")
-                                    +" "+usbHelper.userSettings.getString("thumbMove","113")+" "+usbHelper.userSettings.getString("foreMove","113")
-                                    +" "+usbHelper.userSettings.getString("middleMove","113")+" "+usbHelper.userSettings.getString("ringMove","113")
-                                    +" "+usbHelper.userSettings.getString("littleMove","113")
-                                    +" "+voltageToMessage(usbHelper.userSettings.getString("thumbAdjust180V", "1"), AdminActivity.DigitPosition.HIGH)
-                                    +" "+voltageToMessage(usbHelper.userSettings.getString("foreAdjust180V","1"), AdminActivity.DigitPosition.HIGH)
-                                    +" "+voltageToMessage(usbHelper.userSettings.getString("middleAdjust180V","1"), AdminActivity.DigitPosition.HIGH)
-                                    +" "+voltageToMessage(usbHelper.userSettings.getString("ringAdjust180V","1"), AdminActivity.DigitPosition.HIGH)
-                                    +" "+voltageToMessage(usbHelper.userSettings.getString("littleAdjust180V","1"), AdminActivity.DigitPosition.HIGH)
-                                    +" "+voltageToMessage(usbHelper.userSettings.getString("thumbAdjust180V","1"), AdminActivity.DigitPosition.LOW)
-                                    +" "+voltageToMessage(usbHelper.userSettings.getString("foreAdjust180V","1"), AdminActivity.DigitPosition.LOW)
-                                    +" "+voltageToMessage(usbHelper.userSettings.getString("middleAdjust180V","1"), AdminActivity.DigitPosition.LOW)
-                                    +" "+voltageToMessage(usbHelper.userSettings.getString("ringAdjust180V","1"), AdminActivity.DigitPosition.LOW)
-                                    +" "+voltageToMessage(usbHelper.userSettings.getString("littleAdjust180V","1"), AdminActivity.DigitPosition.LOW)
-                                    +" "+voltageToMessage(usbHelper.userSettings.getString("thumbAdjust0V","1"), AdminActivity.DigitPosition.HIGH)
-                                    +" "+voltageToMessage(usbHelper.userSettings.getString("foreAdjust0V","1"), AdminActivity.DigitPosition.HIGH)
-                                    +" "+voltageToMessage(usbHelper.userSettings.getString("middleAdjust0V","1"), AdminActivity.DigitPosition.HIGH)
-                                    +" "+voltageToMessage(usbHelper.userSettings.getString("ringAdjust0V","1"), AdminActivity.DigitPosition.HIGH)
-                                    +" "+voltageToMessage(usbHelper.userSettings.getString("littleAdjust0V","1"), AdminActivity.DigitPosition.HIGH)
-                                    +" "+voltageToMessage(usbHelper.userSettings.getString("thumbAdjust0V","1"), AdminActivity.DigitPosition.LOW)
-                                    +" "+voltageToMessage(usbHelper.userSettings.getString("foreAdjust0V","1"), AdminActivity.DigitPosition.LOW)
-                                    +" "+voltageToMessage(usbHelper.userSettings.getString("middleAdjust0V","1"), AdminActivity.DigitPosition.LOW)
-                                    +" "+voltageToMessage(usbHelper.userSettings.getString("ringAdjust0V","1"), AdminActivity.DigitPosition.LOW)
-                                    +" "+voltageToMessage(usbHelper.userSettings.getString("littleAdjust0V","1"), AdminActivity.DigitPosition.LOW);
+                            String data = usbHelper.userSettings.getString("thumbFlat", "10") + " " + usbHelper.userSettings.getString("foreFlat", "10") + " "
+                                    + usbHelper.userSettings.getString("middleFlat", "10") + " " + usbHelper.userSettings.getString("ringFlat", "10") +
+                                    " " + usbHelper.userSettings.getString("littleFlat", "10") + " " + usbHelper.userSettings.getString("thumbMiddle", "110")
+                                    + " " + usbHelper.userSettings.getString("foreMiddle", "110") + " " + usbHelper.userSettings.getString("middleMiddle", "110")
+                                    + " " + usbHelper.userSettings.getString("ringMiddle", "110") + " " + usbHelper.userSettings.getString("littleMiddle", "110")
+                                    + " " + usbHelper.userSettings.getString("thumbFist", "120") + " " + usbHelper.userSettings.getString("foreFist", "140")
+                                    + " " + usbHelper.userSettings.getString("middleFist", "140") + " " + usbHelper.userSettings.getString("ringFist", "140")
+                                    + " " + usbHelper.userSettings.getString("littleFist", "120") + " " + usbHelper.userSettings.getString("thumbStretch", "50")
+                                    + " " + usbHelper.userSettings.getString("foreStretch", "50") + " " + usbHelper.userSettings.getString("middleStretch", "50")
+                                    + " " + usbHelper.userSettings.getString("ringStretch", "50") + " " + usbHelper.userSettings.getString("littleStretch", "50")
+                                    + " " + usbHelper.userSettings.getString("thumbMove", "113") + " " + usbHelper.userSettings.getString("foreMove", "113")
+                                    + " " + usbHelper.userSettings.getString("middleMove", "113") + " " + usbHelper.userSettings.getString("ringMove", "113")
+                                    + " " + usbHelper.userSettings.getString("littleMove", "113")
+                                    + " " + voltageToMessage(usbHelper.userSettings.getString("thumbAdjust180V", "1"), AdminActivity.DigitPosition.HIGH)
+                                    + " " + voltageToMessage(usbHelper.userSettings.getString("foreAdjust180V", "1"), AdminActivity.DigitPosition.HIGH)
+                                    + " " + voltageToMessage(usbHelper.userSettings.getString("middleAdjust180V", "1"), AdminActivity.DigitPosition.HIGH)
+                                    + " " + voltageToMessage(usbHelper.userSettings.getString("ringAdjust180V", "1"), AdminActivity.DigitPosition.HIGH)
+                                    + " " + voltageToMessage(usbHelper.userSettings.getString("littleAdjust180V", "1"), AdminActivity.DigitPosition.HIGH)
+                                    + " " + voltageToMessage(usbHelper.userSettings.getString("thumbAdjust180V", "1"), AdminActivity.DigitPosition.LOW)
+                                    + " " + voltageToMessage(usbHelper.userSettings.getString("foreAdjust180V", "1"), AdminActivity.DigitPosition.LOW)
+                                    + " " + voltageToMessage(usbHelper.userSettings.getString("middleAdjust180V", "1"), AdminActivity.DigitPosition.LOW)
+                                    + " " + voltageToMessage(usbHelper.userSettings.getString("ringAdjust180V", "1"), AdminActivity.DigitPosition.LOW)
+                                    + " " + voltageToMessage(usbHelper.userSettings.getString("littleAdjust180V", "1"), AdminActivity.DigitPosition.LOW)
+                                    + " " + voltageToMessage(usbHelper.userSettings.getString("thumbAdjust0V", "1"), AdminActivity.DigitPosition.HIGH)
+                                    + " " + voltageToMessage(usbHelper.userSettings.getString("foreAdjust0V", "1"), AdminActivity.DigitPosition.HIGH)
+                                    + " " + voltageToMessage(usbHelper.userSettings.getString("middleAdjust0V", "1"), AdminActivity.DigitPosition.HIGH)
+                                    + " " + voltageToMessage(usbHelper.userSettings.getString("ringAdjust0V", "1"), AdminActivity.DigitPosition.HIGH)
+                                    + " " + voltageToMessage(usbHelper.userSettings.getString("littleAdjust0V", "1"), AdminActivity.DigitPosition.HIGH)
+                                    + " " + voltageToMessage(usbHelper.userSettings.getString("thumbAdjust0V", "1"), AdminActivity.DigitPosition.LOW)
+                                    + " " + voltageToMessage(usbHelper.userSettings.getString("foreAdjust0V", "1"), AdminActivity.DigitPosition.LOW)
+                                    + " " + voltageToMessage(usbHelper.userSettings.getString("middleAdjust0V", "1"), AdminActivity.DigitPosition.LOW)
+                                    + " " + voltageToMessage(usbHelper.userSettings.getString("ringAdjust0V", "1"), AdminActivity.DigitPosition.LOW)
+                                    + " " + voltageToMessage(usbHelper.userSettings.getString("littleAdjust0V", "1"), AdminActivity.DigitPosition.LOW);
                             sendData(usbHelper.dConfigData(data));
-                            Log.e("AAAAAAA",data);
+                            Log.e("AAAAAAA", data);
                         }
                         if (str[0].equals("0d"))//下位机向上位机发送角度信息 dAngleInfo
                         {
                             if (str.length == 8) {
                                 try {
-                                    if (!usbHelper.gloveFlag) {//初次获取数据
-                                        usbHelper.exciseTimeG = usbHelper.refFormatNowDate();
-                                        usbHelper.tmp_exciseTimeG = usbHelper.refFormatNowDate();
-                                        Log.e("Receiver", "ID=    " + str[0]);
-                                        String[] str2 = msg.getData().get("msg").toString().split("\\ ");
-                                        //对手指信息进行整理
-                                        Converter.i64_2finger(str2,usbHelper.fingerArray,new int[]{2,3,4,5,6});
-                                        /*usbHelper.fingerArray[0] = Integer.parseInt(str2[2], 16) + "";
-                                        usbHelper.fingerArray[1] = Integer.parseInt(str2[3], 16) + "";
-                                        usbHelper.fingerArray[2] = Integer.parseInt(str2[4], 16) + "";
-                                        usbHelper.fingerArray[3] = Integer.parseInt(str2[5], 16) + "";
-                                        usbHelper.fingerArray[4] = Integer.parseInt(str2[6], 16) + "";*/
-                                        Log.e("fingerArray", "-----------------------------------");
-                                        for (int i = 0; i < 5; i++) {
-                                            Log.e("fingerArray", "The Array Contains " + usbHelper.fingerArray[i]);
-                                        }
-                                        Log.e("fingerArray", "-----------------------------------");
-
-                                        usbHelper.gloveFlag = true;
-                                    } else {
-                                        usbHelper.exciseTimeG = usbHelper.refFormatNowDate();
-                                        String[] str2 = msg.getData().get("msg").toString().split("\\ ");
-                                        if (!(usbHelper.exciseTimeG - usbHelper.tmp_exciseTimeG < usbHelper.timeLimit &&
-                                                ((Math.abs(Integer.parseInt(usbHelper.fingerArray[0]) - Integer.parseInt(str[5], 16)) > usbHelper.angleLimit) ||
-                                                        (Math.abs(Integer.parseInt(usbHelper.fingerArray[1]) - Integer.parseInt(str[7], 16)) > usbHelper.angleLimit) ||
-                                                        (Math.abs(Integer.parseInt(usbHelper.fingerArray[2]) - Integer.parseInt(str[9], 16)) > usbHelper.angleLimit) ||
-                                                        (Math.abs(Integer.parseInt(usbHelper.fingerArray[3]) - Integer.parseInt(str[11], 16)) > usbHelper.angleLimit) ||
-                                                        (Math.abs(Integer.parseInt(usbHelper.fingerArray[4]) - Integer.parseInt(str[13], 16)) > usbHelper.angleLimit)))) {
-                                            //对手指信息进行整理
-                                            Converter.i64_2finger(str2,usbHelper.fingerArray,new int[]{2,3,4,5,6});
-                                            /*usbHelper.fingerArray[0] = Integer.parseInt(str2[2], 16) + "";
-                                            usbHelper.fingerArray[1] = Integer.parseInt(str2[3], 16) + "";
-                                            usbHelper.fingerArray[2] = Integer.parseInt(str2[4], 16) + "";
-                                            usbHelper.fingerArray[3] = Integer.parseInt(str2[5], 16) + "";
-                                            usbHelper.fingerArray[4] = Integer.parseInt(str2[6], 16) + "";*/
-                                            Log.e("fingerArray", "-----------------------------------");
-                                            for (int i = 0; i < 5; i++) {
-                                                Log.e("fingerArray", "The Array Contains " + usbHelper.fingerArray[i]);
-                                            }
-                                            Log.e("fingerArray", "-----------------------------------");
-                                            usbHelper.tmp_exciseTimeG = usbHelper.exciseTimeG;
-                                        }
-                                    }
-                                } catch (Exception e) {
-                                        Log.e("Connection", String.valueOf(e));
-                                }
-
-                              /*  try {
-                                    Log.e("Receiver", "ID=    " + str[0]);
                                     String[] str2 = msg.getData().get("msg").toString().split("\\ ");
-                                    //手指序号
-                                    usbHelper.fingerNumber = Integer.parseInt(str2[2]);
-                                    //手指运动角度
-                                    usbHelper.angleFromDownStream = Float.parseFloat(str2[5]);
                                     //对手指信息进行整理
-                                    usbHelper.fingerArray[0] = Integer.parseInt(str[2], 16) + "";
-                                    usbHelper.fingerArray[1] = Integer.parseInt(str[3], 16) + "";
-                                    usbHelper.fingerArray[2] = Integer.parseInt(str[4], 16) + "";
-                                    usbHelper.fingerArray[3] = Integer.parseInt(str[5], 16) + "";
-                                    usbHelper.fingerArray[4] = Integer.parseInt(str[6], 16) + "";
-                                    Log.e("fingerArray", "-----------------------------------");
+                                    usbHelper.fingerArray[0] = Integer.parseInt(str2[2], 16) + "";
+                                    usbHelper.fingerArray[1] = Integer.parseInt(str2[3], 16) + "";
+                                    usbHelper.fingerArray[2] = Integer.parseInt(str2[4], 16) + "";
+                                    usbHelper.fingerArray[3] = Integer.parseInt(str2[5], 16) + "";
+                                    usbHelper.fingerArray[4] = Integer.parseInt(str2[6], 16) + "";
+                                    Debuger.fileLog("LogFingerArray", "componentArray" + "-----------------------------------");
                                     for (int i = 0; i < 5; i++) {
-                                        Log.e("fingerArray", "The Array Contains " + usbHelper.fingerArray[i]);
+                                        Debuger.fileLog("LogFingerArray", "The Array Contains " + usbHelper.fingerArray[i]);
                                     }
-                                    Log.e("fingerArray", "-----------------------------------");
-
+                                    Debuger.fileLog("LogFingerArray", "componentArray" + "-----------------------------------");
                                 } catch (Exception e) {
                                     Log.e("Connection", String.valueOf(e));
-                                }*/
+                                }
                             }
                         }
                         if (str[0].equals("21"))//部件信息 dComponentStatus
                         {
-                            Log.e("Receiver", "ID=    " + str[0]);
+                            LogS("Receiver:ID=    " + str[0]);
                             if (str.length == 15) {
                                 if (str[2].equals("00"))//舵机
                                 {
-
                                     switch (str[3]) {
                                         case "00"://当前位置
-                                            try {
-                                                if(!usbHelper.exciseFlag) {//初次获取数据
-                                                    usbHelper.exciseTime = usbHelper.refFormatNowDate();
-                                                    usbHelper.tmp_exciseTime = usbHelper.refFormatNowDate();
-                                                    //对舵机位置信息进行整理
-                                                    Converter.i64_2finger(str,usbHelper.componentArray,new int[]{5,7,9,11,13});
-                                                   /* usbHelper.componentArray[0] = Integer.parseInt(str[5], 16) + "";
-                                                    usbHelper.componentArray[1] = Integer.parseInt(str[7], 16) + "";
-                                                    usbHelper.componentArray[2] = Integer.parseInt(str[9], 16) + "";
-                                                    usbHelper.componentArray[3] = Integer.parseInt(str[11], 16) + "";
-                                                    usbHelper.componentArray[4] = Integer.parseInt(str[13], 16) + "";*/
-
-                                                    usbHelper.exciseFlag=true;
-                                                }
-                                                else {
-                                                    usbHelper.exciseTime=usbHelper.refFormatNowDate();
-                                                    if((Integer.parseInt(usbHelper.componentArray[0]) - Integer.parseInt(str[5], 16)!=0) || Integer.parseInt(str[5], 16)==0) {
-                                                        FileUtils.writeStringToFile(new File(Environment.getExternalStorageDirectory() +"/log2.txt"), "time:"+String.valueOf(usbHelper.exciseTime-usbHelper.tmp_exciseTime)+"angle:" + String.valueOf(Integer.parseInt(usbHelper.componentArray[0]) - Integer.parseInt(str[5], 16)) +" Last:"+Integer.parseInt(usbHelper.componentArray[0])+" Current:"+Integer.parseInt(str[5], 16)+ "\n", true);
-                                                    }
-                                                    if (usbHelper.exciseTime-usbHelper.tmp_exciseTime<usbHelper.timeLimit &&
-                                                            ((Math.abs(Integer.parseInt(usbHelper.componentArray[0])-Integer.parseInt(str[5], 16))>usbHelper.angleLimit)||
-                                                                    (Math.abs(Integer.parseInt(usbHelper.componentArray[1])-Integer.parseInt(str[7], 16))>usbHelper.angleLimit)||
-                                                                    (Math.abs(Integer.parseInt(usbHelper.componentArray[2])-Integer.parseInt(str[9], 16))>usbHelper.angleLimit)||
-                                                                    (Math.abs(Integer.parseInt(usbHelper.componentArray[3])-Integer.parseInt(str[11], 16))>usbHelper.angleLimit)||
-                                                                    (Math.abs(Integer.parseInt(usbHelper.componentArray[4])-Integer.parseInt(str[13], 16))>usbHelper.angleLimit)))
+                                            if(!usbHelper.component_flag)
+                                            {
+                                                Converter.i64_2finger(str, usbHelper.componentArray, new int[]{5, 7, 9, 11, 13});
+                                                usbHelper.component_flag=true;
+                                            }
+                                            else {
+                                                try {
+                                                    if ((str[5] != "0" && str[7] != "0" && str[9] != "0" && str[11] != "0" && str[13] != "0") &&
+                                                            ((Math.abs(Integer.parseInt(usbHelper.componentArray[0]) - Integer.parseInt(str[5], 16)) < usbHelper.angleLimit)
+                                                                    && (Math.abs(Integer.parseInt(usbHelper.componentArray[1]) - Integer.parseInt(str[7], 16)) < usbHelper.angleLimit)
+                                                                    && (Math.abs(Integer.parseInt(usbHelper.componentArray[2]) - Integer.parseInt(str[9], 16)) < usbHelper.angleLimit)
+                                                                    && (Math.abs(Integer.parseInt(usbHelper.componentArray[3]) - Integer.parseInt(str[11], 16)) < usbHelper.angleLimit)
+                                                                    && (Math.abs(Integer.parseInt(usbHelper.componentArray[4]) - Integer.parseInt(str[13], 16)) < usbHelper.angleLimit)))
                                                     {
-                                                        if(Integer.parseInt(usbHelper.componentArray[0]) - Integer.parseInt(str[5], 16)!=0) {
-                                                            FileUtils.writeStringToFile(new File(Environment.getExternalStorageDirectory() +"/log1.txt"), ">:" + String.valueOf(Integer.parseInt(usbHelper.componentArray[0]) - Integer.parseInt(str[5], 16)) + "\n", true);
+                                                        if(Integer.parseInt(usbHelper.componentArray[0]) - Integer.parseInt(str[5], 16)!=0)
+                                                        {
+                                                            Debuger.fileLog("LogComponentArray", "componentArray" + "-----------------------------------\r\n");
+                                                            for (int i = 0; i < 5; i++) {
+                                                                Debuger.fileLog("LogComponentArray", DateTime.now().toString("mm:ss") + "The Array Contains " + usbHelper.componentArray[i] + "\r\n");
+                                                            }
+                                                            Debuger.fileLog("LogComponentArray", "componentArray" + "-----------------------------------\r\n");
                                                         }
-                                                        usbHelper.tmp_exciseTime=usbHelper.exciseTime;
-                                                    }
-                                                    else {
-                                                        Converter.i64_2finger(str,usbHelper.componentArray,new int[]{5,7,9,11,13});
+                                                        Converter.i64_2finger(str, usbHelper.componentArray, new int[]{5, 7, 9, 11, 13});
                                                         //对舵机位置信息进行整理
-                                                       /* usbHelper.componentArray[0] = Integer.parseInt(str[5], 16) + "";
-                                                        usbHelper.componentArray[1] = Integer.parseInt(str[7], 16) + "";
-                                                        usbHelper.componentArray[2] = Integer.parseInt(str[9], 16) + "";
-                                                        usbHelper.componentArray[3] = Integer.parseInt(str[11], 16) + "";
-                                                        usbHelper.componentArray[4] = Integer.parseInt(str[13], 16) + "";*/
-                                                        Log.e("componentArray", "-----------------------------------");
+
+                                                    } else {
+                                                        Debuger.fileLog("LogComponentArray_ERR", "componentArray" + "-----------------------------------\r\n");
                                                         for (int i = 0; i < 5; i++) {
-                                                            Log.e("componentArray", "The Array Contains " + usbHelper.componentArray[i]);
+                                                            Debuger.fileLog("LogComponentArray_ERR", DateTime.now().toString("mm:ss") + "The Array Contains " + usbHelper.componentArray[i] + "\r\n");
                                                         }
-                                                        Log.e("componentArray", "-----------------------------------");
-                                                        usbHelper.tmp_exciseTime=usbHelper.exciseTime;
+                                                        Debuger.fileLog("LogComponentArray_ERR", "componentArray" + "-----------------------------------\r\n");
+                                                        Debuger.fileLog("LogComponentArray_ERR", (Integer.parseInt(usbHelper.componentArray[0]) - Integer.parseInt(str[5], 16)) + "\r\n");
+                                                        Debuger.fileLog("LogComponentArray_ERR", (Integer.parseInt(usbHelper.componentArray[1]) - Integer.parseInt(str[7], 16)) + "\r\n");
+                                                        Debuger.fileLog("LogComponentArray_ERR", (Integer.parseInt(usbHelper.componentArray[2]) - Integer.parseInt(str[9], 16)) + "\r\n");
+                                                        Debuger.fileLog("LogComponentArray_ERR", (Integer.parseInt(usbHelper.componentArray[3]) - Integer.parseInt(str[11], 16)) + "\r\n");
+                                                        Debuger.fileLog("LogComponentArray_ERR", (Integer.parseInt(usbHelper.componentArray[4]) - Integer.parseInt(str[13], 16)) + "\r\n");
                                                     }
+                                                } catch (Exception e) {
+                                                    Log.e("componentArray", String.valueOf(e));
                                                 }
-                                            } catch (Exception e) {
-                                                Log.e("componentArray", String.valueOf(e));
                                             }
                                             break;
                                         case "01"://当前速度
