@@ -353,10 +353,10 @@ public class UsbService extends Service {
                 {
                     Intent intent = new Intent(ACTION_USB_PERMISSION_NOT_GRANTED);
                     arg0.sendBroadcast(intent);
-                    Debuger.dialogError("UsbService.usbReceiver","ACTION_USB_PERMISSION_NOT_GRANTED");
+            //        Debuger.dialogError("UsbService.usbReceiver","ACTION_USB_PERMISSION_NOT_GRANTED");
                 }
             } else if (arg1.getAction().equals(ACTION_USB_ATTACHED)) {
-                Debuger.dialogError("UsbService.usbReceiver","ACTION_USB_ATTACHED");
+            //    Debuger.dialogError("UsbService.usbReceiver","ACTION_USB_ATTACHED");
                 if (!serialPortConnected)
                     findSerialPortDevice(); // A USB device has been attached. Try to open it as a Serial port
             } else if (arg1.getAction().equals(ACTION_USB_DETACHED)) {
@@ -374,7 +374,7 @@ public class UsbService extends Service {
                     }
                 }
                 if(!flag) {
-                    Debuger.dialogError("UsbService.usbReceiver", "ACTION_USB_DISCONNECTED");
+            //        Debuger.dialogError("UsbService.usbReceiver", "ACTION_USB_DISCONNECTED");
                     Intent intent = new Intent(ACTION_USB_DISCONNECTED);
                     arg0.sendBroadcast(intent);
                     if (serialPortConnected) {
@@ -567,18 +567,18 @@ public class UsbService extends Service {
                         // Everything went as expected. Send an intent to MainActivity
                         Intent intent = new Intent(ACTION_USB_READY);
                         context.sendBroadcast(intent);
-                        Debuger.dialogError("UsbService.ConnectionThread.Run","ACTION_USB_READY");
+            //            Debuger.dialogError("UsbService.ConnectionThread.Run","ACTION_USB_READY");
                     } else {
                         // Serial port could not be opened, maybe an I/O error or if CDC driver was chosen, it does not really fit
                         // Send an Intent to Main Activity
                         if (serialPort instanceof CDCSerialDevice) {
                             Intent intent = new Intent(ACTION_CDC_DRIVER_NOT_WORKING);
                             context.sendBroadcast(intent);
-                            Debuger.dialogError("UsbService.ConnectionThread.Run","ACTION_CDC_DRIVER_NOT_WORKING");
+            //                Debuger.dialogError("UsbService.ConnectionThread.Run","ACTION_CDC_DRIVER_NOT_WORKING");
                         } else {
                             Intent intent = new Intent(ACTION_USB_DEVICE_NOT_WORKING);
                             context.sendBroadcast(intent);
-                            Debuger.dialogError("UsbService.ConnectionThread.Run","ACTION_USB_DEVICE_NOT_WORKING");
+            //                Debuger.dialogError("UsbService.ConnectionThread.Run","ACTION_USB_DEVICE_NOT_WORKING");
                         }
                     }
                 } else {
@@ -627,7 +627,6 @@ public class UsbService extends Service {
                 Log.e("SendRunnable", "---->>已发送至下位机....");
                 //  }
             } catch (Exception e) {
-                Log.e("SendRunnable", "--->>read failure!" + e.toString());
                 Debuger.dialogError("UsbService","MySendRunnable.run.err"+e.getMessage());
             }
 
@@ -674,12 +673,10 @@ public class UsbService extends Service {
                     String[] tempResult = StringUtils.splitByWholeSeparator(StringUtils.substringAfter(result, "ff ff"), "ff ff");
                     if(tempResult ==null)
                     {
-                        Debuger.dialogError("Result:",result);
+        //                Debuger.dialogError("Result:",result);
                     }
-                    //StringUtils.substringBetween(result,"ff ff",);
                     //连包处理
-                    String[] strFF = convert(tempResult);// result.split("ff ff");
-
+                    String[] strFF = convert(tempResult);
                     for (int ff = 0; ff < strFF.length; ff++) {
                         strFF[ff]=strFF[ff].trim();
                         String[] str = StringUtils.split(strFF[ff]," ");
@@ -689,8 +686,12 @@ public class UsbService extends Service {
                          */
                         if (str[0].equals("03"))//心跳检测
                         {
-                            usbHelper.beatTime = usbHelper.refFormatNowDate();
-                            usbHelper.heartBeat = true;
+                            if(!usbHelper.heartBeat)
+                            {
+                                usbHelper.beatTime = usbHelper.refFormatNowDate();
+                                usbHelper.heartBeat = true;
+                                sendData(usbHelper.rConnectGCU());
+                            }
                             sendData(usbHelper.rHeartBeat());
                         }
                         if (str[0].equals("08"))//关机
@@ -827,18 +828,18 @@ public class UsbService extends Service {
                         {
                             if (str.length == 8) {
                                 try {
-                                    String[] str2 = msg.getData().get("msg").toString().split("\\ ");
                                     //对手指信息进行整理
-                                    usbHelper.fingerArray[0] = Integer.parseInt(str2[2], 16) + "";
-                                    usbHelper.fingerArray[1] = Integer.parseInt(str2[3], 16) + "";
-                                    usbHelper.fingerArray[2] = Integer.parseInt(str2[4], 16) + "";
-                                    usbHelper.fingerArray[3] = Integer.parseInt(str2[5], 16) + "";
-                                    usbHelper.fingerArray[4] = Integer.parseInt(str2[6], 16) + "";
-                                    Debuger.fileLog("LogFingerArray", "componentArray" + "-----------------------------------");
+                                    usbHelper.fingerArray[0] = Integer.parseInt(str[2], 16) + "";
+                                    usbHelper.fingerArray[1] = Integer.parseInt(str[3], 16) + "";
+                                    usbHelper.fingerArray[2] = Integer.parseInt(str[4], 16) + "";
+                                    usbHelper.fingerArray[3] = Integer.parseInt(str[5], 16) + "";
+                                    usbHelper.fingerArray[4] = Integer.parseInt(str[6], 16) + "";
+                                    Debuger.fileLog("LogFingerArray", "componentArray" + "-----------------------------------\r\n");
                                     for (int i = 0; i < 5; i++) {
-                                        Debuger.fileLog("LogFingerArray", "The Array Contains " + usbHelper.fingerArray[i]);
+                                        Debuger.fileLog("LogFingerArray", "The Array Contains " + usbHelper.fingerArray[i]+"\r\n");
                                     }
-                                    Debuger.fileLog("LogFingerArray", "componentArray" + "-----------------------------------");
+                                    Debuger.fileLog("LogFingerArray", "componentArray" + "-----------------------------------\r\n");
+                                    Debuger.fileLog("LogFingerArray", strFF[ff]+"\r\n");
                                 } catch (Exception e) {
                                     Log.e("Connection", String.valueOf(e));
                                 }
@@ -876,6 +877,10 @@ public class UsbService extends Service {
                                                         }
                                                         Converter.i64_2finger(str, usbHelper.componentArray, new int[]{5, 7, 9, 11, 13});
                                                         //对舵机位置信息进行整理
+                                                        if(usbHelper.componentArray[0].equals("46"))
+                                                        {
+                                                            Debuger.fileLog("LogComponentArray46", DateTime.now().toString("mm:ss  ") + strFF[ff]+ "\r\n"+result+"\r\n");
+                                                        }
 
                                                     } else {
                                                         Debuger.fileLog("LogComponentArray_ERR", "componentArray" + "-----------------------------------\r\n");

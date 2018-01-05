@@ -220,8 +220,6 @@ public class Welcome extends Activity {
 
         @Override
         public void handleMessage(Message msg) {
-            Debuger.dialogError("MyHandler.handleMessage","handleMessage");
-            Debuger.dialogError("MyHandler.handleMessage",msg.toString());
             switch (msg.what) {
                 case UsbService.MESSAGE_FROM_SERIAL_PORT:
 

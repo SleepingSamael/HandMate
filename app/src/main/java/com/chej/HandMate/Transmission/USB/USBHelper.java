@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.WindowManager;
 
@@ -14,7 +15,11 @@ import com.chej.HandMate.ShutDownActivity;
 import com.chej.HandMate.utils.Debuger;
 
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import static android.content.Context.ACTIVITY_SERVICE;
 
@@ -23,11 +28,11 @@ import static android.content.Context.ACTIVITY_SERVICE;
  */
 
 public class USBHelper {
-
-    public boolean heartBeat = false;
+    public boolean heartBeat = false;//心跳flag
     public long beatTime = 0;//心跳间隔
+    public Queue<Integer> component_queue = new LinkedList<Integer>();
     public boolean component_flag = false;
-    public int angleLimit = 20;//
+    public int angleLimit = 100;//
     public int powerInfo = 0;//下位机电量
     public String[] fingerArray = {"0", "0", "0", "0", "0"};
     public String[] componentArray = {"0", "0", "0", "0", "0"};//舵机位置

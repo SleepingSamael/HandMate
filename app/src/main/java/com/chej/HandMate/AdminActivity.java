@@ -255,11 +255,6 @@ public class AdminActivity extends AppCompatActivity {
                     r.exec("logcat -f "+ filePath);
                     r.exec("logcat -c");
                     r.freeMemory();
-                    //   Process proc =Runtime.getRuntime().exec(new String[]{"logcat *:E ","logcat -f "+ filePath,"logcat -c"});
-                    //    Thread.sleep(200);
-                    //   proc.destroy();
-                    // Runtime.getRuntime().exec("logcat -f "+ filePath);
-                    //Runtime.getRuntime().exec("logcat -c");
                     Toast.makeText(getApplicationContext(), "LOG已保存"+filePath, Toast.LENGTH_SHORT).show();
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -370,11 +365,11 @@ public class AdminActivity extends AppCompatActivity {
                         Integer.parseInt(ringFingerFist_et.getText().toString())>180 || Integer.parseInt(ringFingerStretch_et.getText().toString())>180 ||
                         Integer.parseInt(littleFingerFlat_et.getText().toString())>180 || Integer.parseInt(littleFingerMiddle_et.getText().toString())>180 ||
                         Integer.parseInt(littleFingerFist_et.getText().toString())>180 || Integer.parseInt(littleFingerStretch_et.getText().toString())>180 ||
-                        Integer.parseInt(thumbMove_et.getText().toString())>113 || Integer.parseInt(thumbMove_et.getText().toString())<10 ||
-                        Integer.parseInt(forefingerMove_et.getText().toString())>113 || Integer.parseInt(forefingerMove_et.getText().toString())<10 ||
-                        Integer.parseInt(middleFingerMove_et.getText().toString())>113 || Integer.parseInt(middleFingerMove_et.getText().toString())<10 ||
-                        Integer.parseInt(ringFingerMove_et.getText().toString())>113 || Integer.parseInt(ringFingerMove_et.getText().toString())<10 ||
-                        Integer.parseInt(littleFingerMove_et.getText().toString())>113 || Integer.parseInt(littleFingerMove_et.getText().toString())<10)
+                        Integer.parseInt(thumbMove_et.getText().toString())>360 || Integer.parseInt(thumbMove_et.getText().toString())<1 ||
+                        Integer.parseInt(forefingerMove_et.getText().toString())>360 || Integer.parseInt(forefingerMove_et.getText().toString())<1 ||
+                        Integer.parseInt(middleFingerMove_et.getText().toString())>360 || Integer.parseInt(middleFingerMove_et.getText().toString())<1 ||
+                        Integer.parseInt(ringFingerMove_et.getText().toString())>360 || Integer.parseInt(ringFingerMove_et.getText().toString())<1 ||
+                        Integer.parseInt(littleFingerMove_et.getText().toString())>360 || Integer.parseInt(littleFingerMove_et.getText().toString())<1)
                 {
                     new MyCustomDialog.Builder(AdminActivity.this)
                             .setTitle("警告").setMessage("手套位置配置数值超过有效范围，请重新输入！")

@@ -210,9 +210,7 @@
                                     android:inputType="number"
                                     android:maxLength="3"
                                     android:textSize="30dp"
-                                    android:gravity="center"
-                                    android:focusable="false"
-                                    android:textColor="@color/gray"/>
+                                    android:gravity="center" />
 
                             </TableRow>
 
@@ -296,8 +294,7 @@
                                     android:inputType="number"
                                     android:maxLength="3"
                                     android:textSize="30dp"
-                                    android:focusable="false"
-                                    android:textColor="@color/gray"/>
+                                    />
 
                             </TableRow>
 
@@ -381,8 +378,7 @@
                                     android:gravity="center"
                                     android:inputType="number"
                                     android:maxLength="3"
-                                    android:textSize="30dp" android:focusable="false"
-                                    android:textColor="@color/gray"
+                                    android:textSize="30dp"
                                     />
 
                             </TableRow>
@@ -467,9 +463,7 @@
                                     android:inputType="number"
                                     android:maxLength="3"
                                     android:textSize="30dp"
-                                    android:gravity="center"
-                                    android:focusable="false"
-                                    android:textColor="@color/gray"/>
+                                    android:gravity="center" />
 
                             </TableRow>
 
@@ -550,9 +544,7 @@
                                     android:inputType="number"
                                     android:maxLength="3"
                                     android:textSize="30dp"
-                                    android:gravity="center"
-                                    android:focusable="false"
-                                    android:textColor="@color/gray"/>
+                                    android:gravity="center" />
 
                             </TableRow>
 
@@ -732,8 +724,6 @@
                                     android:ems="2"
                                     android:gravity="center"
                                     android:inputType="numberDecimal"
-                                    android:focusable="false"
-                                    android:textColor="@color/gray"
                                     android:textSize="30dp" />
 
                                 <EditText
@@ -755,11 +745,9 @@
                                     android:layout_weight="1"
                                     android:background="@null"
                                     android:ems="2"
-                                    android:focusable="false"
                                     android:gravity="center"
                                     android:inputType="numberDecimal"
                                     android:maxLength="5"
-                                    android:textColor="@color/gray"
                                     android:textSize="30dp" />
 
                                 <EditText
@@ -801,11 +789,9 @@
                                     android:layout_weight="1"
                                     android:background="@null"
                                     android:ems="2"
-                                    android:focusable="false"
                                     android:gravity="center"
                                     android:inputType="numberDecimal"
                                     android:maxLength="5"
-                                    android:textColor="@color/gray"
                                     android:textSize="30dp" />
 
 
@@ -828,11 +814,9 @@
                                     android:layout_weight="1"
                                     android:background="@null"
                                     android:ems="2"
-                                    android:focusable="false"
                                     android:gravity="center"
                                     android:inputType="numberDecimal"
                                     android:maxLength="5"
-                                    android:textColor="@color/gray"
                                     android:textSize="30dp" />
 
 
@@ -876,11 +860,9 @@
                                     android:layout_weight="1"
                                     android:background="@null"
                                     android:ems="2"
-                                    android:focusable="false"
                                     android:gravity="center"
                                     android:inputType="numberDecimal"
                                     android:maxLength="5"
-                                    android:textColor="@color/gray"
                                     android:textSize="30dp" />
 
 
@@ -904,11 +886,9 @@
                                     android:layout_weight="1"
                                     android:background="@null"
                                     android:ems="2"
-                                    android:focusable="false"
                                     android:gravity="center"
                                     android:inputType="numberDecimal"
                                     android:maxLength="5"
-                                    android:textColor="@color/gray"
                                     android:textSize="30dp" />
 
 
@@ -952,11 +932,9 @@
                                     android:layout_weight="1"
                                     android:background="@null"
                                     android:ems="2"
-                                    android:focusable="false"
                                     android:gravity="center"
                                     android:inputType="numberDecimal"
                                     android:maxLength="5"
-                                    android:textColor="@color/gray"
                                     android:textSize="30dp" />
 
 
@@ -980,11 +958,9 @@
                                     android:layout_weight="1"
                                     android:background="@null"
                                     android:ems="2"
-                                    android:focusable="false"
                                     android:gravity="center"
                                     android:inputType="numberDecimal"
                                     android:maxLength="5"
-                                    android:textColor="@color/gray"
                                     android:textSize="30dp" />
 
                                 <EditText
@@ -1027,11 +1003,9 @@
                                     android:layout_weight="1"
                                     android:background="@null"
                                     android:ems="2"
-                                    android:focusable="false"
                                     android:gravity="center"
                                     android:inputType="numberDecimal"
                                     android:maxLength="5"
-                                    android:textColor="@color/gray"
                                     android:textSize="30dp" />
 
                                 <EditText
@@ -1053,11 +1027,9 @@
                                     android:layout_weight="1"
                                     android:background="@null"
                                     android:ems="2"
-                                    android:focusable="false"
                                     android:gravity="center"
                                     android:inputType="numberDecimal"
                                     android:maxLength="5"
-                                    android:textColor="@color/gray"
                                     android:textSize="30dp" />
 
                                 <EditText
