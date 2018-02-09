@@ -126,7 +126,9 @@
     <orderEntry type="library" name="com.google.android.gms:play-services-base-8.4.0" level="project" />
     <orderEntry type="library" name="com.android.support:support-media-compat-25.0.0" level="project" />
     <orderEntry type="library" name="__local_aars__:C.\Users\samael\Desktop\project\HandMate\app\libs\unity-classes.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="com.android.support.constraint:constraint-layout-solver:1.0.2@jar" level="project" />
     <orderEntry type="library" name="com.android.support:animated-vector-drawable-25.0.0" level="project" />
+    <orderEntry type="library" name="com.android.support.constraint:constraint-layout-1.0.2" level="project" />
     <orderEntry type="library" name="__local_aars__:C.\Users\samael\Desktop\project\HandMate\app\libs\iTextAsian-1.0.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="com.jakewharton:butterknife:7.0.1@jar" level="project" />
     <orderEntry type="library" name="com.android.support:support-v4-25.0.0" level="project" />

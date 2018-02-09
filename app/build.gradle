@@ -9,7 +9,7 @@ android {
         minSdkVersion 23
         targetSdkVersion 25
         versionCode 1
-        versionName "1.0"
+        versionName "1.5.0.180209_beta"
         javaCompileOptions {
             annotationProcessorOptions {
                 includeCompileClasspath = true
@@ -27,6 +27,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':library')
     compile files('libs/iTextAsian-1.0.jar')
@@ -46,6 +47,7 @@ dependencies {
     compile files('libs/commons-io-2.4.jar')
     compile files('libs/commons-lang3-3.3.2.jar')
 }
+
 
 
 

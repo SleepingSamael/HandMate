@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.chej.HandMate">
+    package="com.chej.HandMate"
+    >
 
-    <uses-permission android:name="com.android.example.USB_PERMISSION"/>
+    <uses-permission android:name="com.android.example.USB_PERMISSION" />
     <uses-permission android:name="android.hardware.usb.host" />
     <uses-permission android:name="ANDROID.PERMISSION.HARDWARE_TEST" />
     <uses-permission android:name="android.permission.SHUTDOWN" />
@@ -88,8 +89,7 @@
             android:name=".Transmission.USB.UsbService"
             android:enabled="true"
             android:exported="true"
-            android:process=":USBService">
-            </service>
+            android:process=":USBService"></service>
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -99,7 +99,7 @@
             android:name=".ExerciseActivity"
             android:launchMode="singleTop"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".UsersActivity"
             android:launchMode="singleTask"
@@ -130,8 +130,7 @@
             android:name=".AdminActivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
-        </activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"></activity>
         <activity
             android:name=".SeniorSetActivity"
             android:launchMode="singleTask"
@@ -142,6 +141,13 @@
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+        <activity android:name=".TestActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
+
+        </activity>
+
 
     </application>
 

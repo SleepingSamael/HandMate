@@ -11,6 +11,7 @@
     <!--2. 底部的三个图标按钮-->
 
     <android.support.v7.widget.CardView
+        android:visibility="invisible"
         android:id="@+id/print_set"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -54,6 +55,53 @@
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="135dp"
+        android:layout_marginTop="325dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginLeft="70dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="1dp">
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="108dp"
+            app:srcCompat="@drawable/setdot"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="智能软体机器人手功能康复训练系统"
+            android:layout_marginLeft="130dp"
+            android:layout_marginTop="40dp"
+            android:textSize="48px"/>
+      </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="135dp"
+        android:layout_marginTop="500dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginLeft="70dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="1dp">
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="108dp"
+            app:srcCompat="@drawable/setdot"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="软件版本号：1.5.0.180209_beta"
+            android:layout_marginLeft="130dp"
+            android:layout_marginTop="40dp"
+            android:textSize="48px"/>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:visibility="invisible"
         android:id="@+id/bluetooth_set"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -98,7 +146,8 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="135dp"
-        android:layout_marginTop="500dp"
+        android:layout_marginTop="150dp"
+
         android:layout_marginRight="70dp"
         android:layout_marginLeft="70dp"
         app:cardCornerRadius="10dp"
@@ -206,17 +255,17 @@
             android:layout_height="90dp"
             android:orientation="horizontal">
 
+
             <TextView
+                android:id="@+id/clock"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="700dp"
-                android:textColor="@color/sysblue"
                 android:gravity="center"
-                android:textSize="48px"
                 android:text="2017-02-03   12:40"
-                android:id="@+id/clock" />
-
+                android:textColor="@color/sysblue"
+                android:textSize="48px" />
 
             <ImageView
                 android:id="@+id/power"

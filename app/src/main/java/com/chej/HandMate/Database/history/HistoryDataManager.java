@@ -21,7 +21,6 @@ import static android.content.ContentValues.TAG;
 public class HistoryDataManager {
     private Context mContext = null;
 
-
     private SQLiteDatabase mSQLiteDatabase = null;
     private DataBaseManagementHelper mDatabaseHelper = null;
 

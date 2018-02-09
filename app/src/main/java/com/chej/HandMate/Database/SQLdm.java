@@ -32,7 +32,7 @@ public class SQLdm {
         File jhPath=new File(filePath);
         //查看数据库文件是否存在
         if(jhPath.exists()){
-            Log.i("info", "存在数据库");
+            Log.e("info", jhPath.toString());
             //存在则直接返回打开的数据库
             return SQLiteDatabase.openOrCreateDatabase(jhPath, null);
         }else{
