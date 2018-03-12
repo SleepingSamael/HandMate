@@ -110,6 +110,7 @@
 
     <!--2. 底部的三个图标按钮-->
 
+    <!--3. 顶部的titleBar-->
     <RelativeLayout
         android:id="@+id/bottom_layout"
         android:layout_width="match_parent"
@@ -120,23 +121,23 @@
 
 
         <Button
+            android:id="@+id/user"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
-            android:id="@+id/user"
             android:background="@drawable/user"
-            android:stateListAnimator="@animator/selector_animators_12"
-            />
+            android:stateListAnimator="@animator/selector_animators_12" />
 
         <ImageView
             android:layout_width="208dp"
             android:layout_height="85dp"
-            android:background="@drawable/logo"
-            android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:layout_centerInParent="true"/>
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/logo" />
+
         <Button
             android:id="@+id/add"
             android:layout_width="70dp"
@@ -146,11 +147,10 @@
             android:layout_marginRight="30dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/add"
-            android:stateListAnimator="@animator/selector_animators_12"/>
+            android:stateListAnimator="@animator/selector_animators_12" />
 
     </RelativeLayout>
 
-    <!--3. 顶部的titleBar-->
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -183,39 +183,37 @@
 
             <ImageView
                 android:id="@+id/power"
-                android:layout_width="30dp"
-                android:layout_height="49dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="25dp"
-                android:background="@drawable/power"
+                android:background="@drawable/powerf"
                 />
 
             <ImageView
                 android:id="@+id/volume"
-                android:layout_width="46dp"
-                android:layout_height="46dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="95dp"
-                android:background="@drawable/volume"
-                />
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_alignTop="@+id/wifi"
+                android:layout_toStartOf="@+id/power"
+                android:background="@drawable/volume" />
             <ImageView
                 android:id="@+id/wifi"
-                android:layout_width="62dp"
-                android:layout_height="45dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="162dp"
+                android:layout_marginRight="165dp"
                 android:background="@drawable/wifi"
                 />
             <ImageView
                 android:id="@+id/bluetooth"
-                android:layout_width="36dp"
-                android:layout_height="53dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="255dp"
+                android:layout_marginRight="230dp"
                 android:background="@drawable/bluetooth"
                 />
 

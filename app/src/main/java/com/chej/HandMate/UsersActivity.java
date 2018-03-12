@@ -4,6 +4,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
@@ -46,13 +48,14 @@ import com.chej.HandMate.TTS.SpeechUtil;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 public class UsersActivity extends AppCompatActivity implements View.OnClickListener,PopupMenu.OnMenuItemClickListener {
     private GridView users_gv;
-    private  Button user;
+    private Button user;
     private UserDataManager mUserDataManager;
-    private SearchView  searchView;
+    private SearchView searchView;
     private SortAdapter adapter;
     private Button sortByID;
     private Button sortBySex;
@@ -60,6 +63,7 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
     private Button sortByName;
     private Button add;
     private TextView clock;
+    private static final int msgKey1 = 1;
     Bundle userbundle = new Bundle();//区分修改信息和新增用户界面
 
     private SpeechUtil speechUtil;
@@ -78,15 +82,15 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users);
-        users_gv=(GridView) findViewById(R.id.users_lv);
-        user=(Button)findViewById(R.id.user);
-        searchView=(SearchView) findViewById(R.id.userSearchview);
-        sortBySex=(Button) findViewById(R.id.sortBySex);
-        sortByID=(Button) findViewById(R.id.sortByID);
-        sortByDate=(Button) findViewById(R.id.sortByTime);
-        sortByName=(Button) findViewById(R.id.sortByName);
-        add =(Button)findViewById(R.id.add);
-        final UserData userData=(UserData) getApplication();
+        users_gv = (GridView) findViewById(R.id.users_lv);
+        user = (Button) findViewById(R.id.user);
+        searchView = (SearchView) findViewById(R.id.userSearchview);
+        sortBySex = (Button) findViewById(R.id.sortBySex);
+        sortByID = (Button) findViewById(R.id.sortByID);
+        sortByDate = (Button) findViewById(R.id.sortByTime);
+        sortByName = (Button) findViewById(R.id.sortByName);
+        add = (Button) findViewById(R.id.add);
+        final UserData userData = (UserData) getApplication();
 
         SysApplication.getInstance().addActivity(this);
 
@@ -94,13 +98,15 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
         speechUtil.speak("请选择用户");
 
         //获取系统时间
-        SimpleDateFormat sDateFormat = new    SimpleDateFormat("yyyy-MM-dd  HH:mm");
-        String  sysDate = sDateFormat.format(new java.util.Date());
-        String [] arr = sysDate.split("\\s+");
-        final String sdate=arr[0];
-        final String stime=arr[1];
-        clock=(TextView)findViewById(R.id.clock);
-        clock.setText(sdate+"   "+stime);
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd   HH:mm:ss");
+        String sysDate = sDateFormat.format(new java.util.Date());
+        String[] arr = sysDate.split("\\s+");
+        final String sdate = arr[0];
+        final String stime = arr[1];
+        clock = (TextView) findViewById(R.id.clock);
+        clock.setText(sdate + "   " + stime);
+
+        new TimeThread().start();
 
         //移除焦点
         searchView.setFocusable(false);
@@ -123,7 +129,7 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
             mUserDataManager.openDataBase();            //建立本地数据库
         }
         //1打开数据库输出流
-        final Cursor cursor=mUserDataManager.fetchAllUserDatas();
+        final Cursor cursor = mUserDataManager.fetchAllUserDatas();
         //2.将数据源中数据加载到适配器中
         /*
         SimpleCursorAdapter(Context context,int layout, Cursor c,String[] from,
@@ -135,9 +141,9 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
               int[] to 表示展示字段对应值的控件资源id
               int flags 设置适配器的标记
          */
-        SimpleCursorAdapter adapter=new SimpleCursorAdapter(this,R.layout.user_list_item,cursor,
-                new String[]{UsersConstant._ID, UsersConstant.NAME,UsersConstant.SEX,UsersConstant.DATE,UsersConstant.AGE},
-                new int[]{R.id.tv_id,R.id.tv_name,R.id.tv_sex,R.id.tv_indata,R.id.tv_age},
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.user_list_item, cursor,
+                new String[]{UsersConstant._ID, UsersConstant.NAME, UsersConstant.SEX, UsersConstant.DATE, UsersConstant.AGE},
+                new int[]{R.id.tv_id, R.id.tv_name, R.id.tv_sex, R.id.tv_indata, R.id.tv_age},
                 SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
 
         //3.将适配器的数据加载到控件
@@ -152,7 +158,7 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
                 TextView c = (TextView) view.findViewById(R.id.tv_id);
                 String CID = c.getText().toString();
 
-                Cursor cursor=mUserDataManager.fetchUserData(CID);
+                Cursor cursor = mUserDataManager.fetchUserData(CID);
 
                 userData.setUserName(cursor.getString(cursor.getColumnIndex("name")));
                 userData.setUserId(cursor.getString(cursor.getColumnIndex("_id")));
@@ -184,130 +190,120 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
         });
 
 
-
         //按姓名排序，奇数次单击升序排列，偶数次降序
-        sortByName.setOnClickListener(new Button.OnClickListener(){
+        sortByName.setOnClickListener(new Button.OnClickListener() {
             boolean flag = false;
 
             public void onClick(View v) {
-                Drawable upDrawable= getResources().getDrawable(R.drawable.up);
-                Drawable downDrawable= getResources().getDrawable(R.drawable.down);//升降序图标
+                Drawable upDrawable = getResources().getDrawable(R.drawable.up);
+                Drawable downDrawable = getResources().getDrawable(R.drawable.down);//升降序图标
                 upDrawable.setBounds(0, 0, upDrawable.getMinimumWidth(), upDrawable.getMinimumHeight());
                 downDrawable.setBounds(0, 0, downDrawable.getMinimumWidth(), downDrawable.getMinimumHeight());//升降序图标大小
-                if(!flag)
-                {
+                if (!flag) {
                     //升序
                     PinYinViews(true);
-                    sortByName.setCompoundDrawables(null,null,upDrawable,null);
+                    sortByName.setCompoundDrawables(null, null, upDrawable, null);
 
-                }
-                else
-                {
+                } else {
                     //降序
                     PinYinViews(false);
                     //showlist(mUserDataManager.orderByName());
-                    sortByName.setCompoundDrawables(null,null,downDrawable,null);
+                    sortByName.setCompoundDrawables(null, null, downDrawable, null);
                 }
-                flag=!flag;
+                flag = !flag;
                 sortByName.setBackgroundResource(R.drawable.panon_clicked);
                 sortByID.setBackgroundResource(R.drawable.panon);
-                sortByID.setCompoundDrawables(null,null,null,null);
+                sortByID.setCompoundDrawables(null, null, null, null);
                 sortBySex.setBackgroundResource(R.drawable.panon);
-                sortBySex.setCompoundDrawables(null,null,null,null);
+                sortBySex.setCompoundDrawables(null, null, null, null);
                 sortByDate.setBackgroundResource(R.drawable.panon);
-                sortByDate.setCompoundDrawables(null,null,null,null);
+                sortByDate.setCompoundDrawables(null, null, null, null);
             }
 
         });
         //按ID排序，奇数次单击升序排列，偶数次降序
-        sortByID.setOnClickListener(new Button.OnClickListener(){
+        sortByID.setOnClickListener(new Button.OnClickListener() {
             boolean flag = false;
+
             public void onClick(View v) {
-                Drawable upDrawable= getResources().getDrawable(R.drawable.up);
-                Drawable downDrawable= getResources().getDrawable(R.drawable.down);//升降序图标
+                Drawable upDrawable = getResources().getDrawable(R.drawable.up);
+                Drawable downDrawable = getResources().getDrawable(R.drawable.down);//升降序图标
                 upDrawable.setBounds(0, 0, upDrawable.getMinimumWidth(), upDrawable.getMinimumHeight());
                 downDrawable.setBounds(0, 0, downDrawable.getMinimumWidth(), downDrawable.getMinimumHeight());//升降序图标大小
-                if(!flag)
-                {
+                if (!flag) {
                     //升序
                     showlist(mUserDataManager.orderByID("asc"));
-                    sortByID.setCompoundDrawables(null,null,upDrawable,null);
-                }
-                else
-                {
+                    sortByID.setCompoundDrawables(null, null, upDrawable, null);
+                } else {
                     //降序
                     showlist(mUserDataManager.orderByID("desc"));
-                    sortByID.setCompoundDrawables(null,null,downDrawable,null);
+                    sortByID.setCompoundDrawables(null, null, downDrawable, null);
                 }
-                flag=!flag;
+                flag = !flag;
                 sortByName.setBackgroundResource(R.drawable.panon);
-                sortByName.setCompoundDrawables(null,null,null,null);
+                sortByName.setCompoundDrawables(null, null, null, null);
                 sortByID.setBackgroundResource(R.drawable.panon_clicked);
                 sortBySex.setBackgroundResource(R.drawable.panon);
-                sortBySex.setCompoundDrawables(null,null,null,null);
+                sortBySex.setCompoundDrawables(null, null, null, null);
                 sortByDate.setBackgroundResource(R.drawable.panon);
-                sortByDate.setCompoundDrawables(null,null,null,null);
+                sortByDate.setCompoundDrawables(null, null, null, null);
             }
 
         });
         //按性别排序，奇数次单击升序排列，偶数次降序
-        sortBySex.setOnClickListener(new Button.OnClickListener(){
+        sortBySex.setOnClickListener(new Button.OnClickListener() {
             boolean flag = false;
+
             public void onClick(View v) {
-                Drawable upDrawable= getResources().getDrawable(R.drawable.up);
-                Drawable downDrawable= getResources().getDrawable(R.drawable.down);//升降序图标
+                Drawable upDrawable = getResources().getDrawable(R.drawable.up);
+                Drawable downDrawable = getResources().getDrawable(R.drawable.down);//升降序图标
                 upDrawable.setBounds(0, 0, upDrawable.getMinimumWidth(), upDrawable.getMinimumHeight());
                 downDrawable.setBounds(0, 0, downDrawable.getMinimumWidth(), downDrawable.getMinimumHeight());//升降序图标大小
-                if(!flag)
-                {
+                if (!flag) {
                     //升序
                     showlist(mUserDataManager.orderBySex("asc"));
-                    sortBySex.setCompoundDrawables(null,null,upDrawable,null);
-                }
-                else
-                {
+                    sortBySex.setCompoundDrawables(null, null, upDrawable, null);
+                } else {
                     //降序
                     showlist(mUserDataManager.orderBySex("desc"));
-                    sortBySex.setCompoundDrawables(null,null,downDrawable,null);
+                    sortBySex.setCompoundDrawables(null, null, downDrawable, null);
                 }
-                flag=!flag;
+                flag = !flag;
                 sortByName.setBackgroundResource(R.drawable.panon);
-                sortByName.setCompoundDrawables(null,null,null,null);
+                sortByName.setCompoundDrawables(null, null, null, null);
                 sortByID.setBackgroundResource(R.drawable.panon);
-                sortByID.setCompoundDrawables(null,null,null,null);
+                sortByID.setCompoundDrawables(null, null, null, null);
                 sortBySex.setBackgroundResource(R.drawable.panon_clicked);
                 sortByDate.setBackgroundResource(R.drawable.panon);
-                sortByDate.setCompoundDrawables(null,null,null,null);
+                sortByDate.setCompoundDrawables(null, null, null, null);
             }
 
         });
         //按日期排序，奇数次单击升序排列，偶数次降序
-        sortByDate.setOnClickListener(new Button.OnClickListener(){
+        sortByDate.setOnClickListener(new Button.OnClickListener() {
             boolean flag = false;
+
             public void onClick(View v) {
-                Drawable upDrawable= getResources().getDrawable(R.drawable.up);
-                Drawable downDrawable= getResources().getDrawable(R.drawable.down);//升降序图标
+                Drawable upDrawable = getResources().getDrawable(R.drawable.up);
+                Drawable downDrawable = getResources().getDrawable(R.drawable.down);//升降序图标
                 upDrawable.setBounds(0, 0, upDrawable.getMinimumWidth(), upDrawable.getMinimumHeight());
                 downDrawable.setBounds(0, 0, downDrawable.getMinimumWidth(), downDrawable.getMinimumHeight());//升降序图标大小
-                if(!flag)
-                {
+                if (!flag) {
                     //升序
                     showlist(mUserDataManager.orderByDate("asc"));
-                    sortByDate.setCompoundDrawables(null,null,upDrawable,null);
-                }
-                else
-                {
+                    sortByDate.setCompoundDrawables(null, null, upDrawable, null);
+                } else {
                     //降序
                     showlist(mUserDataManager.orderByDate("desc"));
-                    sortByDate.setCompoundDrawables(null,null,downDrawable,null);
+                    sortByDate.setCompoundDrawables(null, null, downDrawable, null);
                 }
-                flag=!flag;
+                flag = !flag;
                 sortByName.setBackgroundResource(R.drawable.panon);
-                sortByName.setCompoundDrawables(null,null,null,null);
+                sortByName.setCompoundDrawables(null, null, null, null);
                 sortByID.setBackgroundResource(R.drawable.panon);
-                sortByID.setCompoundDrawables(null,null,null,null);
+                sortByID.setCompoundDrawables(null, null, null, null);
                 sortBySex.setBackgroundResource(R.drawable.panon);
-                sortBySex.setCompoundDrawables(null,null,null,null);
+                sortBySex.setCompoundDrawables(null, null, null, null);
                 sortByDate.setBackgroundResource(R.drawable.panon_clicked);
             }
 
@@ -334,9 +330,9 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
         // 根据id-search_mag_icon获取ImageView
         ImageView searchButton = (ImageView) searchView.findViewById(R.id.search_mag_icon);
         //重新设置ImageView的宽高
-        LinearLayout.LayoutParams lpimg = new LinearLayout.LayoutParams(45,45);
+        LinearLayout.LayoutParams lpimg = new LinearLayout.LayoutParams(45, 45);
         lpimg.gravity = Gravity.CENTER;
-        lpimg.leftMargin=10;
+        lpimg.leftMargin = 10;
         searchButton.setLayoutParams(lpimg);
         searchButton.setBackgroundResource(R.drawable.search);
         searchButton.setImageResource(R.drawable.searchblank);
@@ -350,14 +346,15 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
             public boolean onQueryTextSubmit(String query) {
                 return false;
             }
+
             // 当搜索内容改变时触发该方法
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (!TextUtils.isEmpty(newText)){
+                if (!TextUtils.isEmpty(newText)) {
                     users_gv.setFilterText(newText);
                     //当输入框里面的值为空，更新为原来的列表，否则为过滤数据列表
                     filterData(newText);
-                }else{
+                } else {
                     // users_gv.clearTextFilter();
                     showlist(mUserDataManager.fetchAllUserDatas());//刷新列表
                 }
@@ -367,7 +364,7 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
 
 
         //添加用户
-        add.setOnClickListener(new Button.OnClickListener(){
+        add.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 speechUtil.speak("添加新用户");
                 Intent i;
@@ -391,9 +388,9 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
         TextView c = (TextView) info.targetView.findViewById(R.id.tv_id);
         String UID = c.getText().toString();
 
-        final  UserData userData=(UserData) getApplication();
+        final UserData userData = (UserData) getApplication();
 
-        Cursor cursor=mUserDataManager.fetchUserData(UID);
+        Cursor cursor = mUserDataManager.fetchUserData(UID);
 
         userData.setUserName(cursor.getString(cursor.getColumnIndex("name")));
         userData.setUserId(cursor.getString(cursor.getColumnIndex("_id")));
@@ -411,7 +408,7 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
                 return true;
             case 1:
                 Intent i;
-                i = new Intent(UsersActivity.this,UserEditActivity.class);
+                i = new Intent(UsersActivity.this, UserEditActivity.class);
                 userbundle.putInt("Mode", 1);
                 i.putExtras(userbundle);
                 startActivity(i);
@@ -419,7 +416,7 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
                 return true;
             case 2:
                 Intent j;
-                j = new Intent(UsersActivity.this,UserEditActivity.class);
+                j = new Intent(UsersActivity.this, UserEditActivity.class);
                 userbundle.putInt("Mode", 1);
                 j.putExtras(userbundle);
                 startActivity(j);
@@ -429,22 +426,24 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
                 return super.onContextItemSelected(item);
         }
     }
+
     //刷新显示列表项
-    private void showlist(Cursor cursor){
+    private void showlist(Cursor cursor) {
         users_gv.setLayoutAnimation(getAnimationController());
-        SimpleCursorAdapter adapter=new SimpleCursorAdapter(this,R.layout.user_list_item,cursor,
-                new String[]{UsersConstant._ID, UsersConstant.NAME,UsersConstant.SEX,UsersConstant.DATE,UsersConstant.AGE},
-                new int[]{R.id.tv_id,R.id.tv_name,R.id.tv_sex,R.id.tv_indata,R.id.tv_age},
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.user_list_item, cursor,
+                new String[]{UsersConstant._ID, UsersConstant.NAME, UsersConstant.SEX, UsersConstant.DATE, UsersConstant.AGE},
+                new int[]{R.id.tv_id, R.id.tv_name, R.id.tv_sex, R.id.tv_indata, R.id.tv_age},
                 SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
         users_gv.setAdapter(adapter);
     }
+
     /**
      * Layout动画
      *
      * @return
      */
     protected LayoutAnimationController getAnimationController() {
-        int duration=300;
+        int duration = 300;
         AnimationSet set = new AnimationSet(true);
 
         Animation animation = new AlphaAnimation(0.0f, 1.0f);
@@ -464,13 +463,13 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
 
     protected void deleteDialog() {
         speechUtil.speak("确认要删除吗");
-        MyCustomDialog.Builder builder=new MyCustomDialog.Builder(this);
+        MyCustomDialog.Builder builder = new MyCustomDialog.Builder(this);
         builder.setMessage("确认删除吗？");
         builder.setTitle("提示");
         builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                final  UserData userData=(UserData) getApplication();
+                final UserData userData = (UserData) getApplication();
                 mUserDataManager.deleteUserData(userData.getUserId());//根据id删除数据
                 showlist(mUserDataManager.fetchAllUserDatas());//刷新列表
                 dialog.dismiss();
@@ -487,7 +486,7 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
 
     private void shutDownDialog() {
         speechUtil.speak("确定要关机吗");
-        MyCustomDialog.Builder builder=new MyCustomDialog.Builder(this);
+        MyCustomDialog.Builder builder = new MyCustomDialog.Builder(this);
         builder.setMessage("确定要关机吗？");
         builder.setTitle("提示");
         builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
@@ -511,9 +510,9 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
         builder.create().show();
     }
 
-    public void restartDialog(){//弹出第一个对话框
+    public void restartDialog() {//弹出第一个对话框
         speechUtil.speak("确定要重启吗");
-        MyCustomDialog.Builder dialog=new MyCustomDialog.Builder(this);
+        MyCustomDialog.Builder dialog = new MyCustomDialog.Builder(this);
         dialog.setTitle("提示")
                 .setMessage("确定要重启吗？")
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -580,7 +579,7 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
         pinyinComparator = new PinyinComparator();
 
         //数据库内容存入数组
-        Cursor cursor=mUserDataManager.fetchAllUserDatas();
+        Cursor cursor = mUserDataManager.fetchAllUserDatas();
         String[] allName = new String[cursor.getCount()];
         String[] allID = new String[cursor.getCount()];
         String[] allDate = new String[cursor.getCount()];
@@ -621,24 +620,26 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
         SourceDateList = filledData(allName, allID, allDate, allSex, allAge);
 
         // 根据a-z进行排序源数据
-        if(mode) {
+        if (mode) {
             Collections.sort(SourceDateList, pinyinComparator);
-        }else {
-            Collections.sort(SourceDateList,Collections.reverseOrder(pinyinComparator));//逆序排列
+        } else {
+            Collections.sort(SourceDateList, Collections.reverseOrder(pinyinComparator));//逆序排列
         }
         adapter = new SortAdapter(this, SourceDateList);
         users_gv.setAdapter(adapter);
         users_gv.setLayoutAnimation(getAnimationController());
     }
+
     /**
      * 为ListView填充数据
+     *
      * @param name
      * @return
      */
-    private List<SortModel> filledData(String [] name,String [] id,String [] date,String [] sex,String[] age){
+    private List<SortModel> filledData(String[] name, String[] id, String[] date, String[] sex, String[] age) {
         List<SortModel> mSortList = new ArrayList<SortModel>();
 
-        for(int i=0; i<name.length; i++){
+        for (int i = 0; i < name.length; i++) {
             SortModel sortModel = new SortModel();
             sortModel.setName(name[i]);
             sortModel.setId(id[i]);
@@ -650,9 +651,9 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
             String sortString = pinyin.substring(0, 1).toUpperCase();
 
             // 正则表达式，判断首字母是否是英文字母
-            if(sortString.matches("[A-Z]")){
+            if (sortString.matches("[A-Z]")) {
                 sortModel.setSortLetters(sortString.toUpperCase());
-            }else{
+            } else {
                 sortModel.setSortLetters("#");
             }
 
@@ -664,9 +665,10 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
 
     /**
      * 根据输入框中的值来过滤数据并更新ListView
+     *
      * @param filterStr
      */
-    private void filterData(String filterStr){
+    private void filterData(String filterStr) {
         List<SortModel> filterDateList = new ArrayList<SortModel>();
 
         //实例化汉字转拼音类
@@ -674,7 +676,7 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
 
         pinyinComparator = new PinyinComparator();
         //数据库内容存入数组
-        Cursor cursor=mUserDataManager.fetchAllUserDatas();
+        Cursor cursor = mUserDataManager.fetchAllUserDatas();
         String[] allName = new String[cursor.getCount()];
         String[] allID = new String[cursor.getCount()];
         String[] allDate = new String[cursor.getCount()];
@@ -712,15 +714,15 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
             allAge[position] = str5;
         }
 
-        SourceDateList = filledData(allName,allID,allDate,allSex,allAge);
+        SourceDateList = filledData(allName, allID, allDate, allSex, allAge);
 
-        if(TextUtils.isEmpty(filterStr)){
+        if (TextUtils.isEmpty(filterStr)) {
             filterDateList = SourceDateList;
-        }else{
+        } else {
             filterDateList.clear();
-            for(SortModel sortModel : SourceDateList){
+            for (SortModel sortModel : SourceDateList) {
                 String name = sortModel.getName();
-                if(name.indexOf(filterStr.toString()) != -1 || characterParser.getSelling(name).startsWith(filterStr.toString())){
+                if (name.indexOf(filterStr.toString()) != -1 || characterParser.getSelling(name).startsWith(filterStr.toString())) {
                     filterDateList.add(sortModel);
                 }
             }
@@ -733,4 +735,39 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
+    //动态更新时间的线程
+    public class TimeThread extends Thread {
+        @Override
+        public void run() {
+            super.run();
+            do {
+                try {
+                    Thread.sleep(1000);
+                    Message msg = new Message();
+                    msg.what = msgKey1;
+                    mHandler.sendMessage(msg);
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } while (true);
+        }
+    }
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case msgKey1:
+                    long time = System.currentTimeMillis();
+                    Date date = new Date(time);
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd   HH:mm:ss");
+                    clock.setText(format.format(date));
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 }

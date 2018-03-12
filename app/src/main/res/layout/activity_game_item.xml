@@ -161,74 +161,72 @@
 
     <!--3. 顶部的titleBar-->
     <LinearLayout
-        android:id="@+id/linearLayout"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!--沉浸式activity，这个view是用来占位的-->
+
+    <View
+        android:id="@+id/position_view"
+        android:layout_width="1px"
+        android:layout_height="1px" />
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="90dp"
+        android:orientation="horizontal">
 
-        <!--沉浸式activity，这个view是用来占位的-->
-
-        <View
-            android:id="@+id/position_view"
-            android:layout_width="1px"
-            android:layout_height="1px" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="700dp"
-                android:textColor="@color/sysblue"
-                android:gravity="center"
-                android:textSize="48px"
-                android:text="2017-02-03   12:40"
-                android:id="@+id/clock" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="700dp"
+            android:textColor="@color/sysblue"
+            android:gravity="center"
+            android:textSize="48px"
+            android:text="2017-02-03   12:40"
+            android:id="@+id/clock" />
 
 
-            <ImageView
-                android:id="@+id/power"
-                android:layout_width="30dp"
-                android:layout_height="49dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="25dp"
-                android:background="@drawable/power"
-                />
+        <ImageView
+            android:id="@+id/power"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="25dp"
+            android:background="@drawable/powerf"
+            />
 
-            <ImageView
-                android:id="@+id/volume"
-                android:layout_width="46dp"
-                android:layout_height="46dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="95dp"
-                android:background="@drawable/volume"
-                />
-            <ImageView
-                android:id="@+id/wifi"
-                android:layout_width="62dp"
-                android:layout_height="45dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="162dp"
-                android:background="@drawable/wifi"
-                />
-            <ImageView
-                android:id="@+id/bluetooth"
-                android:layout_width="36dp"
-                android:layout_height="53dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="255dp"
-                android:background="@drawable/bluetooth"
-                />
+        <ImageView
+            android:id="@+id/volume"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_alignTop="@+id/wifi"
+            android:layout_toStartOf="@+id/power"
+            android:background="@drawable/volume" />
+        <ImageView
+            android:id="@+id/wifi"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="165dp"
+            android:background="@drawable/wifi"
+            />
+        <ImageView
+            android:id="@+id/bluetooth"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="230dp"
+            android:background="@drawable/bluetooth"
+            />
 
-        </RelativeLayout>
+    </RelativeLayout>
 
-    </LinearLayout>
+</LinearLayout>
 </RelativeLayout>

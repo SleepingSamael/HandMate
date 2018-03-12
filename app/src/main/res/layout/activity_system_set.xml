@@ -325,43 +325,39 @@
 
             <ImageView
                 android:id="@+id/power"
-                android:layout_width="30dp"
-                android:layout_height="49dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="25dp"
-                android:background="@drawable/power"
+                android:background="@drawable/powerf"
                 />
 
             <ImageView
                 android:id="@+id/volume"
-                android:layout_width="46dp"
-                android:layout_height="46dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="95dp"
-                android:background="@drawable/volume"
-                />
-
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_alignTop="@+id/wifi"
+                android:layout_toStartOf="@+id/power"
+                android:background="@drawable/volume" />
             <ImageView
                 android:id="@+id/wifi"
-                android:layout_width="62dp"
-                android:layout_height="45dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="162dp"
-                android:background="@drawable/wifi" />
-
+                android:layout_marginRight="165dp"
+                android:background="@drawable/wifi"
+                />
             <ImageView
                 android:id="@+id/bluetooth"
-                android:layout_width="36dp"
-                android:layout_height="53dp"
-                android:layout_marginRight="29dp"
-                android:background="@drawable/bluetooth"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/wifi"
-                android:layout_toStartOf="@+id/wifi"
-                android:layout_marginEnd="29dp" />
+                android:layout_marginRight="230dp"
+                android:background="@drawable/bluetooth"
+                />
 
         </RelativeLayout>
 

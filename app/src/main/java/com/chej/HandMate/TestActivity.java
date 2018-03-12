@@ -53,7 +53,7 @@ public class TestActivity extends AppCompatActivity
     private TextView mResult = null;
 
     // 基本地址：服务器ip地址：端口号/Web项目逻辑地址+目标页面（Servlet）的url-pattern
-    private String baseURL = "http://www.blackiron.club/chejcenter/AppVersion2?m=getItemByUID&appType=Android";
+    private String baseURL = "https://www.pgyer.com/apiv2/app/install?appKey=263f2786f0a43f79698dce115062d02e&_api_key=70ec4c4428f1415bc4b4890a32a36835";//"http://www.blackiron.club/chejcenter/AppVersion2?m=getItemByUID&appType=Android";
     private String downURL ="";
     private ProgressDialog pd;
 
@@ -93,7 +93,7 @@ public class TestActivity extends AppCompatActivity
             String age = mAgeText.getText().toString();
 
             // 使用GET方法发送请求,需要把参数加在URL后面，用？连接，参数之间用&分隔
-            String url = baseURL ;//+ "?username=" + name + "&age=" + age;
+            String url = baseURL ;
             Log.e(TAG, url);
 
             // 生成请求对象
@@ -107,7 +107,7 @@ public class TestActivity extends AppCompatActivity
                 HttpResponse response = httpClient.execute(httpGet);
 
                 // 显示响应
-                showResponseResult(response);// 一个私有方法，将响应结果显示出来
+               // showResponseResult(response);// 一个私有方法，将响应结果显示出来
 
             }
             catch (Exception e)
@@ -241,7 +241,7 @@ public class TestActivity extends AppCompatActivity
             @Override
             public void run() {
                 HttpClient httpClient = new DefaultHttpClient();
-                HttpGet httpGet = new HttpGet(downURL);
+                HttpGet httpGet = new HttpGet(baseURL);
                 try {
                     HttpResponse response = httpClient.execute(httpGet);
                     if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
@@ -276,7 +276,7 @@ public class TestActivity extends AppCompatActivity
                     }
 
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Log.e("httpdown",e.toString());
                 }
             }
         }).start();

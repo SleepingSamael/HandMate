@@ -41,343 +41,350 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
 
-    <LinearLayout
-        android:layout_width="210mm"
-        android:layout_height="297mm"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal"
-        >
-
-        <TableLayout
+        <LinearLayout
             android:layout_width="210mm"
             android:layout_height="297mm"
-            android:background="#ffffff">
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
 
-            <TableRow android:layout_height="wrap_content">
+            <TableLayout
+                android:layout_width="210mm"
+                android:layout_height="297mm"
+                android:background="#ffffff">
 
-                <TextView
-                    android:layout_width="210mm"
+                <TableRow android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="210mm"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="35dp"
+                        android:gravity="center"
+                        android:text="训练报告"
+                        android:textSize="48px" />
+
+                </TableRow>
+
+                <TableRow
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginTop="35dp"
-                    android:gravity="center"
-                    android:text="训练报告"
-                    android:textSize="48px" />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/darkgray">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:text="个人信息"
-                    android:textSize="40px" />
-            </TableRow>
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/darkgray">
 
-            <TableRow android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:text="个人信息"
+                        android:textSize="40px" />
+                </TableRow>
 
-                <TextView
-                    android:layout_width="0.0dip"
+                <TableRow
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:text="病历号："
-                    android:textSize="35px" />
+                    android:layout_marginTop="20dp">
 
-                <TextView
-                    android:id="@+id/userID"
-                    android:layout_width="0.0dip"
+                    <TextView
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:text="病历号："
+                        android:textSize="35px" />
+
+                    <TextView
+                        android:id="@+id/userID"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:text="XXXXXXX"
+                        android:textSize="35px" />
+
+                    <TextView
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:text="姓名："
+                        android:textSize="35px" />
+
+                    <TextView
+                        android:id="@+id/userName"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:text="Name"
+                        android:textSize="35px" />
+
+                    <TextView
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:text="性别："
+                        android:textSize="35px" />
+
+                    <TextView
+                        android:id="@+id/userSex"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:text="Sex"
+                        android:textSize="35px" />
+
+
+                </TableRow>
+
+                <TableRow
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="20dp">
+
+                    <TextView
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:text="年龄："
+                        android:textSize="35px" />
+
+                    <TextView
+                        android:id="@+id/userAge"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:text="Age"
+                        android:textSize="35px" />
+
+                    <TextView
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="2"
+                        android:text="入院日期："
+                        android:textSize="35px" />
+
+                    <TextView
+                        android:id="@+id/userDate"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="2"
+                        android:text="XXXX-XX-XX"
+                        android:textSize="35px" />
+
+                    <TextView
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:text="诊断："
+                        android:textSize="35px" />
+
+                    <TextView
+                        android:id="@+id/userDiag"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="diagnosis"
+                        android:textSize="35px" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:text="XXXXXXX"
-                    android:textSize="35px" />
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/darkgrey">
 
-                <TextView
-                    android:layout_width="0.0dip"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:text="训练情况"
+                        android:textSize="40px" />
+                </TableRow>
+
+                <TableRow
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:text="训练时间："
+                        android:textSize="35px" />
+
+                    <TextView
+                        android:id="@+id/historyTime"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="2"
+                        android:text="XXXX-XX-XX  XX:XX"
+                        android:textSize="35px" />
+
+                    <TextView
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:text="训练项目："
+                        android:textSize="35px" />
+
+                    <TextView
+                        android:id="@+id/historyItem"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="2"
+                        android:text="游戏模式  空岛保卫战"
+                        android:textSize="35px" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp">
+
+                    <TextView
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:text="得分："
+                        android:textSize="35px" />
+
+                    <TextView
+                        android:id="@+id/historyScore"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:text="100"
+                        android:textSize="35px" />
+
+                    <TextView
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:text="成绩等级："
+                        android:textSize="35px" />
+
+                    <TextView
+                        android:id="@+id/historyLevel"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:text="Level"
+                        android:textSize="35px" />
+
+                    <TextView
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:text="用时："
+                        android:textSize="35px" />
+
+                    <TextView
+                        android:id="@+id/historyDuration"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Duration"
+                        android:textSize="35px" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:text="姓名："
-                    android:textSize="35px" />
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/darkgrey">
 
-                <TextView
-                    android:id="@+id/userName"
-                    android:layout_width="0.0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:text="Name"
-                    android:textSize="35px" />
-
-                <TextView
-                    android:layout_width="0.0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:text="性别："
-                    android:textSize="35px" />
-
-                <TextView
-                    android:id="@+id/userSex"
-                    android:layout_width="0.0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:text="Sex"
-                    android:textSize="35px" />
-
-
-            </TableRow>
-
-            <TableRow android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp">
-
-                <TextView
-                    android:layout_width="0.0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:text="年龄："
-                    android:textSize="35px" />
-
-                <TextView
-                    android:id="@+id/userAge"
-                    android:layout_width="0.0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:text="Age"
-                    android:textSize="35px" />
-                <TextView
-                    android:layout_width="0.0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="2"
-                    android:text="入院日期："
-                    android:textSize="35px" />
-
-                <TextView
-                    android:id="@+id/userDate"
-                    android:layout_width="0.0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="2"
-                    android:text="XXXX-XX-XX"
-                    android:textSize="35px" />
-
-                <TextView
-                    android:layout_width="0.0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:text="诊断："
-                    android:textSize="35px" />
-
-                <TextView
-                    android:id="@+id/userDiag"
-                    android:layout_width="0.0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="2"
-                    android:gravity="center"
-                    android:text="diagnosis"
-                    android:textSize="35px" />
-            </TableRow>
-
-            <TableRow
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/darkgrey">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:text="训练情况"
-                    android:textSize="40px" />
-            </TableRow>
-
-            <TableRow android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
-
-                <TextView
-                    android:layout_width="0.0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:text="训练时间："
-                    android:textSize="35px" />
-
-                <TextView
-                    android:id="@+id/historyTime"
-                    android:layout_width="0.0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="2"
-                    android:text="XXXX-XX-XX  XX:XX"
-                    android:textSize="35px" />
-
-                <TextView
-                    android:layout_width="0.0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:text="训练项目："
-                    android:textSize="35px" />
-
-                <TextView
-                    android:id="@+id/historyItem"
-                    android:layout_width="0.0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="2"
-                    android:text="游戏模式  空岛保卫战"
-                    android:textSize="35px" />
-
-            </TableRow>
-
-            <TableRow android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp">
-
-                <TextView
-                    android:layout_width="0.0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:text="得分："
-                    android:textSize="35px" />
-
-                <TextView
-                    android:id="@+id/historyScore"
-                    android:layout_width="0.0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:text="100"
-                    android:textSize="35px" />
-                <TextView
-                    android:layout_width="0.0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:text="成绩等级："
-                    android:textSize="35px" />
-
-                <TextView
-                    android:id="@+id/historyLevel"
-                    android:layout_width="0.0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:text="Level"
-                    android:textSize="35px" />
-
-                <TextView
-                    android:layout_width="0.0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:text="用时："
-                    android:textSize="35px" />
-
-                <TextView
-                    android:id="@+id/historyDuration"
-                    android:layout_width="0.0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Duration"
-                    android:textSize="35px" />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/darkgrey">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:text="图表分析"
-                    android:textSize="40px" />
-            </TableRow>
-        </TableLayout>
-    </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:text="图表分析"
+                        android:textSize="40px" />
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
     </ScrollView>
 
 

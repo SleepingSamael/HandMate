@@ -26,6 +26,7 @@ import com.chej.HandMate.Model.SysApplication;
 import com.chej.HandMate.Transmission.USB.USBHelper;
 import com.chej.HandMate.Transmission.USB.UsbService;
 import com.chej.HandMate.utils.Debuger;
+import com.chej.HandMate.utils.DeviceID;
 
 import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
@@ -89,6 +90,8 @@ public class Welcome extends Activity {
         mHandler = new MyHandler(this);
         SysApplication.getInstance().addActivity(this);//统一关闭用
 
+        String CPU = DeviceID.getCPUSerial();
+        Debuger.dialogError("CPUSerial",CPU);
 
         //权限申请
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

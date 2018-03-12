@@ -96,7 +96,6 @@ public class ReportActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                speechUtil.speak("返回");
                 finish();
             }
         });
