@@ -29,10 +29,11 @@ import com.chej.HandMate.Model.MyCustomDialog;
 import com.chej.HandMate.Model.SysApplication;
 import com.chej.HandMate.Database.users.UserData;
 import com.chej.HandMate.TTS.SpeechUtil;
+import com.chej.HandMate.fragments.CommonTop;
 
 import java.text.SimpleDateFormat;
 
-public class SystemSetActivity extends AppCompatActivity implements View.OnClickListener,PopupMenu.OnMenuItemClickListener{
+public class SystemSetActivity extends AppCompatActivity implements View.OnClickListener,PopupMenu.OnMenuItemClickListener, CommonTop.OnCommonBottomClick {
     private TextView tv_user;
     private Button user;
     private Button set;
@@ -41,9 +42,9 @@ public class SystemSetActivity extends AppCompatActivity implements View.OnClick
     private SeekBar volum;
     private Switch voice;
     private TableRow senior;
-    private TextView clock;
     private AudioManager mAudioManager;
     private Context mcontext;
+    CommonTop commonTop;
     // 最大音量
     private int maxVolume;
     // 当前音量
@@ -56,6 +57,11 @@ public class SystemSetActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_system_set);
+
+        //复用代码块的实例化
+        commonTop=new CommonTop(this);
+        commonTop.init().setListener(this);
+
         SysApplication.getInstance().addActivity(this);
         mcontext=this;
         //获取Preferences
@@ -77,14 +83,6 @@ public class SystemSetActivity extends AppCompatActivity implements View.OnClick
 
         speechUtil = new SpeechUtil(this);
         speechUtil.speak("系统设置");
-        //获取系统时间
-        SimpleDateFormat sDateFormat = new    SimpleDateFormat("yyyy-MM-dd  HH:mm");
-        String  sysDate = sDateFormat.format(new java.util.Date());
-        String [] arr = sysDate.split("\\s+");
-        final String sdate=arr[0];
-        final String stime=arr[1];
-        clock=(TextView)findViewById(R.id.clock);
-        clock.setText(sdate+"   "+stime);
 
         //全局变量UserData中调取名字
         final UserData userData=(UserData)getApplication();
@@ -292,6 +290,8 @@ public class SystemSetActivity extends AppCompatActivity implements View.OnClick
                         // 设置音量
                         mAudioManager.setStreamVolume(
                                 AudioManager.STREAM_MUSIC, progress, 0);
+                        commonTop=new CommonTop(mcontext);
+                        commonTop.init().setListener((CommonTop.OnCommonBottomClick) mcontext);
                     }
                 });
         // 调节亮度
@@ -370,4 +370,5 @@ public class SystemSetActivity extends AppCompatActivity implements View.OnClick
             }
         }
     }
+
 }

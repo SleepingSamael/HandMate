@@ -18,27 +18,26 @@ import com.chej.HandMate.Model.MyCustomDialog;
 import com.chej.HandMate.Model.SysApplication;
 import com.chej.HandMate.Database.users.UserData;
 import com.chej.HandMate.TTS.SpeechUtil;
+import com.chej.HandMate.fragments.CommonTop;
 
 import java.text.SimpleDateFormat;
 
-public class Hardwarectivity extends AppCompatActivity implements View.OnClickListener,PopupMenu.OnMenuItemClickListener{
+public class Hardwarectivity extends AppCompatActivity implements View.OnClickListener,PopupMenu.OnMenuItemClickListener, CommonTop.OnCommonBottomClick {
     private TextView tv_user;
     private TextView tv_hardInfo;
     private Button user;
-    private TextView clock;
     private Button set;
     private ImageView logo_to_admin;
     private ImageView home;
-    private ImageView power;
-    private ImageView volume;
-    private ImageView wifi;
-    private ImageView bluetooth;
 
     private SpeechUtil speechUtil;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hardwarectivity);
+
+        //复用代码块的实例化
+        new CommonTop(this).init().setListener(this);
 
         SysApplication.getInstance().addActivity(this);
         speechUtil = new SpeechUtil(this);
@@ -50,17 +49,11 @@ public class Hardwarectivity extends AppCompatActivity implements View.OnClickLi
         String [] arr = sysDate.split("\\s+");
         final String sdate=arr[0];
         final String stime=arr[1];
-        clock=(TextView)findViewById(R.id.clock);
-        clock.setText(sdate+"   "+stime);
 
         tv_user=(TextView)findViewById(R.id.tv_user);
         tv_hardInfo=(TextView)findViewById(R.id.tv_hardinfo);
         user=(Button)findViewById(R.id.user);
         set=(Button)findViewById(R.id.set);
-        volume=(ImageView)findViewById(R.id.volume);
-        power=(ImageView)findViewById(R.id.power);
-        wifi=(ImageView)findViewById(R.id.wifi);
-        bluetooth=(ImageView)findViewById(R.id.bluetooth);
         logo_to_admin = (ImageView)findViewById(R.id.logo_to_admin);
 
         //全局变量UserData中调取名字
@@ -102,38 +95,6 @@ public class Hardwarectivity extends AppCompatActivity implements View.OnClickLi
             public void onClick(View v) {
                 Intent i;
                 i = new Intent(Hardwarectivity.this, SystemSetActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        power.setOnClickListener(new Button.OnClickListener(){//创建监听
-            public void onClick(View v) {
-                Intent i;
-                i = new Intent(Hardwarectivity.this,SystemSetActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        volume.setOnClickListener(new Button.OnClickListener(){//创建监听
-            public void onClick(View v) {
-                Intent i;
-                i = new Intent(Hardwarectivity.this,SystemSetActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        wifi.setOnClickListener(new Button.OnClickListener(){//创建监听
-            public void onClick(View v) {
-                Intent i;
-                i = new Intent(Hardwarectivity.this,SystemSetActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        bluetooth.setOnClickListener(new Button.OnClickListener(){//创建监听
-            public void onClick(View v) {
-                Intent i;
-                i = new Intent(Hardwarectivity.this,SystemSetActivity.class);
                 startActivity(i);
                 finish();
             }
@@ -228,4 +189,5 @@ public class Hardwarectivity extends AppCompatActivity implements View.OnClickLi
         });
         builder.create().show();
     }
+
 }

@@ -24,6 +24,7 @@ import com.chej.HandMate.Database.users.UserData;
 import com.chej.HandMate.Timeline.HorizontalListView;
 import com.chej.HandMate.Timeline.ItemBean;
 import com.chej.HandMate.Timeline.TimeLineAdapter;
+import com.chej.HandMate.fragments.CommonTop;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ import java.util.List;
 /**
  * 演示查询sdcard中数据库表中的数据适配到listview中
  */
-public class HistoryActivity extends AppCompatActivity implements View.OnClickListener,PopupMenu.OnMenuItemClickListener {
+public class HistoryActivity extends AppCompatActivity implements View.OnClickListener,PopupMenu.OnMenuItemClickListener, CommonTop.OnCommonBottomClick {
     private TextView tv_user;
     private Button user;
     private Button set;
@@ -45,12 +46,8 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
     private TextView tv_age;
     private TextView tv_date;
     private TextView info;
-    private TextView clock;
     private ImageView home;
-    private ImageView power;
-    private ImageView volume;
-    private ImageView wifi;
-    private ImageView bluetooth;
+
     //一个横向的ListView
     private HorizontalListView lv_timeline;
     private TimeLineAdapter adapter;
@@ -69,6 +66,9 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
         mContext = this;
         setContentView(R.layout.activity_history);
 
+        //复用代码块的实例化
+        new CommonTop(this).init().setListener(this);
+
         SysApplication.getInstance().addActivity(this);
 
         //获取系统时间
@@ -77,16 +77,10 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
         String [] arr = sysDate.split("\\s+");
         final String sdate=arr[0];
         final String stime=arr[1];
-        clock=(TextView)findViewById(R.id.clock);
-        clock.setText(sdate+"   "+stime);
 
         tv_user = (TextView) findViewById(R.id.tv_user);
         user = (Button) findViewById(R.id.user);
         set =(Button)findViewById(R.id.set);
-        volume=(ImageView)findViewById(R.id.volume);
-        power=(ImageView)findViewById(R.id.power);
-        wifi=(ImageView)findViewById(R.id.wifi);
-        bluetooth=(ImageView)findViewById(R.id.bluetooth);
         tv_name = (TextView) findViewById(R.id.tv_name);
         tv_id = (TextView) findViewById(R.id.tv_id);
         tv_sex = (TextView) findViewById(R.id.tv_sex);
@@ -215,38 +209,6 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
             public void onClick(View v) {
                 Intent i;
                 i = new Intent(HistoryActivity.this, SystemSetActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        power.setOnClickListener(new Button.OnClickListener(){//创建监听
-            public void onClick(View v) {
-                Intent i;
-                i = new Intent(HistoryActivity.this,SystemSetActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        volume.setOnClickListener(new Button.OnClickListener(){//创建监听
-            public void onClick(View v) {
-                Intent i;
-                i = new Intent(HistoryActivity.this,SystemSetActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        wifi.setOnClickListener(new Button.OnClickListener(){//创建监听
-            public void onClick(View v) {
-                Intent i;
-                i = new Intent(HistoryActivity.this,SystemSetActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        bluetooth.setOnClickListener(new Button.OnClickListener(){//创建监听
-            public void onClick(View v) {
-                Intent i;
-                i = new Intent(HistoryActivity.this,SystemSetActivity.class);
                 startActivity(i);
                 finish();
             }

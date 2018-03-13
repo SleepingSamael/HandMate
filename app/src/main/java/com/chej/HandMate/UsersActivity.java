@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
+import android.media.AudioManager;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.ContextCompat;
@@ -12,6 +13,7 @@ import android.support.v7.widget.SearchView;
 import android.os.Bundle;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.ContextMenu;
 import android.view.Gravity;
@@ -44,6 +46,7 @@ import com.chej.HandMate.Search.PinyinComparator;
 import com.chej.HandMate.Search.SortAdapter;
 import com.chej.HandMate.Search.SortModel;
 import com.chej.HandMate.TTS.SpeechUtil;
+import com.chej.HandMate.fragments.CommonTop;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -51,7 +54,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-public class UsersActivity extends AppCompatActivity implements View.OnClickListener,PopupMenu.OnMenuItemClickListener {
+public class UsersActivity extends AppCompatActivity implements View.OnClickListener,PopupMenu.OnMenuItemClickListener, CommonTop.OnCommonBottomClick {
     private GridView users_gv;
     private Button user;
     private UserDataManager mUserDataManager;
@@ -62,8 +65,6 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
     private Button sortByDate;
     private Button sortByName;
     private Button add;
-    private TextView clock;
-    private static final int msgKey1 = 1;
     Bundle userbundle = new Bundle();//区分修改信息和新增用户界面
 
     private SpeechUtil speechUtil;
@@ -92,21 +93,14 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
         add = (Button) findViewById(R.id.add);
         final UserData userData = (UserData) getApplication();
 
+        //复用代码块的实例化
+        new CommonTop(this).init().setListener(this);
+
         SysApplication.getInstance().addActivity(this);
 
         speechUtil = new SpeechUtil(this);
         speechUtil.speak("请选择用户");
 
-        //获取系统时间
-        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd   HH:mm:ss");
-        String sysDate = sDateFormat.format(new java.util.Date());
-        String[] arr = sysDate.split("\\s+");
-        final String sdate = arr[0];
-        final String stime = arr[1];
-        clock = (TextView) findViewById(R.id.clock);
-        clock.setText(sdate + "   " + stime);
-
-        new TimeThread().start();
 
         //移除焦点
         searchView.setFocusable(false);
@@ -734,40 +728,4 @@ public class UsersActivity extends AppCompatActivity implements View.OnClickList
         users_gv.setAdapter(adapter);
     }
 
-
-    //动态更新时间的线程
-    public class TimeThread extends Thread {
-        @Override
-        public void run() {
-            super.run();
-            do {
-                try {
-                    Thread.sleep(1000);
-                    Message msg = new Message();
-                    msg.what = msgKey1;
-                    mHandler.sendMessage(msg);
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            } while (true);
-        }
-    }
-
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case msgKey1:
-                    long time = System.currentTimeMillis();
-                    Date date = new Date(time);
-                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd   HH:mm:ss");
-                    clock.setText(format.format(date));
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
 }

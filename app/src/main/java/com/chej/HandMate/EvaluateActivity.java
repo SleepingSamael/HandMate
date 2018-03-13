@@ -38,6 +38,7 @@ import com.chej.HandMate.Database.users.UserData;
 import com.chej.HandMate.TTS.SpeechUtil;
 import com.chej.HandMate.Transmission.USB.UsbService;
 import com.chej.HandMate.U3D.u3dPlayer;
+import com.chej.HandMate.fragments.CommonTop;
 import com.chej.library.ExpandingPagerFactory;
 import com.chej.library.fragments.ExpandingFragment;
 
@@ -48,7 +49,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class EvaluateActivity extends AppCompatActivity implements ExpandingFragment.OnExpandingClickListener,OnClickListener,OnMenuItemClickListener {
+public class EvaluateActivity extends AppCompatActivity implements ExpandingFragment.OnExpandingClickListener,OnClickListener,OnMenuItemClickListener, CommonTop.OnCommonBottomClick {
     @Bind(R.id.viewPager) ViewPager viewPager;
     @Bind(R.id.back1)ViewGroup back;
     @Bind(R.id.DetailPhoto)ImageView DetailPhoto;
@@ -58,12 +59,7 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
     @Bind(R.id.user)Button user;
     @Bind(R.id.tv_user) TextView tv_user;
     @Bind(R.id.introduce)TextView introduce;
-    @Bind(R.id.clock)TextView clock;
     @Bind(R.id.home)ImageView home;
-    @Bind(R.id.power)ImageView power;
-    @Bind(R.id.volume)ImageView volume;
-    @Bind(R.id.wifi)ImageView wifi;
-    @Bind(R.id.bluetooth)ImageView bluetooth;
     private HistoryDataManager mhistoryDataManager;
     HistoryData historyData=new HistoryData();
 
@@ -113,6 +109,9 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
         ButterKnife.bind(this);
         setupWindowAnimations();
 
+        //复用代码块的实例化
+        new CommonTop(this).init().setListener(this);
+
         //获取患侧手信息
         SharedPreferences userSettings = getSharedPreferences("setting", 0);
         final int gloveFlag;
@@ -132,7 +131,6 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
         String [] arr = sysDate.split("\\s+");
         final String sdate=arr[0];
         final String stime=arr[1];
-        clock.setText(sdate+"   "+stime);
 
 
         Intent myServiceIntent = new Intent(EvaluateActivity.this, UsbService.class);
@@ -301,38 +299,7 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
                 finish();
             }
         });
-        power.setOnClickListener(new Button.OnClickListener(){//创建监听
-            public void onClick(View v) {
-                Intent i;
-                i = new Intent(EvaluateActivity.this,SystemSetActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        volume.setOnClickListener(new Button.OnClickListener(){//创建监听
-            public void onClick(View v) {
-                Intent i;
-                i = new Intent(EvaluateActivity.this,SystemSetActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        wifi.setOnClickListener(new Button.OnClickListener(){//创建监听
-            public void onClick(View v) {
-                Intent i;
-                i = new Intent(EvaluateActivity.this,SystemSetActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        bluetooth.setOnClickListener(new Button.OnClickListener(){//创建监听
-            public void onClick(View v) {
-                Intent i;
-                i = new Intent(EvaluateActivity.this,SystemSetActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
+
         /**
          * 切换用户按钮
          */
@@ -512,6 +479,7 @@ public class EvaluateActivity extends AppCompatActivity implements ExpandingFrag
         super.onDestroy();
         unbindService(serviceConnection);
     }
+
 }
 
 

@@ -36,6 +36,7 @@ import com.chej.HandMate.Database.users.UserData;
 import com.chej.HandMate.TTS.SpeechUtil;
 import com.chej.HandMate.Transmission.USB.UsbService;
 import com.chej.HandMate.U3D.u3dPlayer;
+import com.chej.HandMate.fragments.CommonTop;
 import com.chej.library.ExpandingPagerFactory;
 import com.chej.library.fragments.ExpandingFragment;
 
@@ -46,7 +47,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MasterSlaveActivity extends AppCompatActivity implements ExpandingFragment.OnExpandingClickListener,View.OnClickListener,PopupMenu.OnMenuItemClickListener {
+public class MasterSlaveActivity extends AppCompatActivity implements ExpandingFragment.OnExpandingClickListener,View.OnClickListener,PopupMenu.OnMenuItemClickListener, CommonTop.OnCommonBottomClick {
     @Bind(R.id.viewPager) ViewPager viewPager;
     @Bind(R.id.back1)ViewGroup back;
     @Bind(R.id.DetailPhoto)ImageView DetailPhoto;
@@ -56,12 +57,8 @@ public class MasterSlaveActivity extends AppCompatActivity implements ExpandingF
     @Bind(R.id.user)Button user;
     @Bind(R.id.tv_user)TextView tv_user;
     @Bind(R.id.introduce)TextView introduce;
-    @Bind(R.id.clock)TextView clock;
     @Bind(R.id.home)ImageView home;
-    @Bind(R.id.power)ImageView power;
-    @Bind(R.id.volume)ImageView volume;
-    @Bind(R.id.wifi)ImageView wifi;
-    @Bind(R.id.bluetooth)ImageView bluetooth;
+
     private HistoryDataManager mhistoryDataManager;
     HistoryData historyData=new HistoryData();
 
@@ -115,6 +112,10 @@ public class MasterSlaveActivity extends AppCompatActivity implements ExpandingF
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_item);
 
+        //复用代码块的实例化
+        new CommonTop(this).init().setListener(this);
+
+
         SysApplication.getInstance().addActivity(this);
         speechUtil = new SpeechUtil(this);
 
@@ -139,7 +140,6 @@ public class MasterSlaveActivity extends AppCompatActivity implements ExpandingF
         String [] arr = sysDate.split("\\s+");
         final String sdate=arr[0];
         final String stime=arr[1];
-        clock.setText(sdate+"   "+stime);
 
         Intent myServiceIntent = new Intent(MasterSlaveActivity.this, UsbService.class);
         bindService(myServiceIntent, serviceConnection,
@@ -283,38 +283,7 @@ public class MasterSlaveActivity extends AppCompatActivity implements ExpandingF
                 finish();
             }
         });
-        power.setOnClickListener(new Button.OnClickListener(){//创建监听
-            public void onClick(View v) {
-                Intent i;
-                i = new Intent(MasterSlaveActivity.this,SystemSetActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        volume.setOnClickListener(new Button.OnClickListener(){//创建监听
-            public void onClick(View v) {
-                Intent i;
-                i = new Intent(MasterSlaveActivity.this,SystemSetActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        wifi.setOnClickListener(new Button.OnClickListener(){//创建监听
-            public void onClick(View v) {
-                Intent i;
-                i = new Intent(MasterSlaveActivity.this,SystemSetActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        bluetooth.setOnClickListener(new Button.OnClickListener(){//创建监听
-            public void onClick(View v) {
-                Intent i;
-                i = new Intent(MasterSlaveActivity.this,SystemSetActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
+
         /**
          * 切换用户按钮
          */
@@ -491,5 +460,6 @@ default:
         super.onDestroy();
         unbindService(serviceConnection);
     }
+
 }
 

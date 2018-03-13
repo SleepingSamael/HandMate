@@ -18,22 +18,18 @@ import com.chej.HandMate.Model.MyCustomDialog;
 import com.chej.HandMate.Model.SysApplication;
 import com.chej.HandMate.Database.users.UserData;
 import com.chej.HandMate.TTS.SpeechUtil;
+import com.chej.HandMate.fragments.CommonTop;
 
 import java.text.SimpleDateFormat;
 
-public class SeniorSetActivity extends AppCompatActivity implements View.OnClickListener,PopupMenu.OnMenuItemClickListener{
+public class SeniorSetActivity extends AppCompatActivity implements View.OnClickListener,PopupMenu.OnMenuItemClickListener, CommonTop.OnCommonBottomClick {
     private TextView tv_user;
     private Button user;
     private Button set;
     private CardView printSet;
     private CardView bluetoothSet;
     private CardView hardware;
-    private TextView clock;
     private ImageView home;
-    private ImageView power;
-    private ImageView volume;
-    private ImageView wifi;
-    private ImageView bluetooth;
 
     private SpeechUtil speechUtil;
 
@@ -53,19 +49,9 @@ public class SeniorSetActivity extends AppCompatActivity implements View.OnClick
         tv_user=(TextView)findViewById(R.id.tv_user);
         user=(Button)findViewById(R.id.user);
         set = (Button)findViewById(R.id.set);
-        volume=(ImageView)findViewById(R.id.volume);
-        power=(ImageView)findViewById(R.id.power);
-        wifi=(ImageView)findViewById(R.id.wifi);
-        bluetooth=(ImageView)findViewById(R.id.bluetooth);
 
-        //获取系统时间
-        SimpleDateFormat sDateFormat = new    SimpleDateFormat("yyyy-MM-dd  HH:mm");
-        String  sysDate = sDateFormat.format(new java.util.Date());
-        String [] arr = sysDate.split("\\s+");
-        final String sdate=arr[0];
-        final String stime=arr[1];
-        clock=(TextView)findViewById(R.id.clock);
-        clock.setText(sdate+"   "+stime);
+        //复用代码块的实例化
+        new CommonTop(this).init().setListener(this);
 
         //全局变量UserData中调取名字
         final UserData userData=(UserData)getApplication();
@@ -109,38 +95,7 @@ public class SeniorSetActivity extends AppCompatActivity implements View.OnClick
                 finish();
             }
         });
-        power.setOnClickListener(new Button.OnClickListener(){//创建监听
-            public void onClick(View v) {
-                Intent i;
-                i = new Intent(SeniorSetActivity.this,SystemSetActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        volume.setOnClickListener(new Button.OnClickListener(){//创建监听
-            public void onClick(View v) {
-                Intent i;
-                i = new Intent(SeniorSetActivity.this,SystemSetActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        wifi.setOnClickListener(new Button.OnClickListener(){//创建监听
-            public void onClick(View v) {
-                Intent i;
-                i = new Intent(SeniorSetActivity.this,SystemSetActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        bluetooth.setOnClickListener(new Button.OnClickListener(){//创建监听
-            public void onClick(View v) {
-                Intent i;
-                i = new Intent(SeniorSetActivity.this,SystemSetActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
+
 
     }
 
@@ -232,4 +187,5 @@ public class SeniorSetActivity extends AppCompatActivity implements View.OnClick
         });
         builder.create().show();
     }
+
 }

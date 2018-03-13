@@ -18,11 +18,11 @@ import com.chej.HandMate.Model.MyCustomDialog;
 import com.chej.HandMate.Model.SysApplication;
 import com.chej.HandMate.Database.users.UserData;
 import com.chej.HandMate.TTS.SpeechUtil;
+import com.chej.HandMate.fragments.CommonTop;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class UserEditActivity extends AppCompatActivity {
+public class UserEditActivity extends AppCompatActivity implements CommonTop.OnCommonBottomClick{
     private EditText name;
     private EditText age;
     private RadioButton male;
@@ -34,7 +34,6 @@ public class UserEditActivity extends AppCompatActivity {
     private EditText diag;
     private Button save;
     private Button quit;
-    private TextView clock;
     private UserDataManager mUserDataManager;
 
     private SpeechUtil speechUtil;
@@ -55,18 +54,12 @@ public class UserEditActivity extends AppCompatActivity {
         quit= (Button) findViewById(R.id.btn_quit);
         final UserData userData = (UserData) getApplication();
 
+       //只需要一行代码就可以直接完成复用代码块的实例化
+        new CommonTop(this).init().setListener(this);
+
         SysApplication.getInstance().addActivity(this);
 
         speechUtil = new SpeechUtil(this);
-        //获取系统时间
-        SimpleDateFormat sDateFormat = new    SimpleDateFormat("yyyy-MM-dd  HH:mm");
-        String  sysDate = sDateFormat.format(new java.util.Date());
-        String [] arr = sysDate.split("\\s+");
-        final String sdate=arr[0];
-        final String stime=arr[1];
-        clock=(TextView)findViewById(R.id.clock);
-        clock.setText(sdate+"   "+stime);
-
 
         if (mUserDataManager == null) {
             mUserDataManager = new UserDataManager(this);
@@ -230,7 +223,5 @@ public class UserEditActivity extends AppCompatActivity {
 
 
     }
-
-
 
 }

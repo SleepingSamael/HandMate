@@ -34,6 +34,7 @@ import com.chej.HandMate.Model.SysApplication;
 import com.chej.HandMate.Database.users.UserData;
 import com.chej.HandMate.TTS.SpeechUtil;
 import com.chej.HandMate.Transmission.USB.UsbService;
+import com.chej.HandMate.fragments.CommonTop;
 import com.chej.library.ExpandingPagerFactory;
 import com.chej.library.fragments.ExpandingFragment;
 
@@ -44,7 +45,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements ExpandingFragment.OnExpandingClickListener,OnClickListener,OnMenuItemClickListener {
+public class MainActivity extends AppCompatActivity implements ExpandingFragment.OnExpandingClickListener,OnClickListener,OnMenuItemClickListener, CommonTop.OnCommonBottomClick {
     @Bind(R.id.viewPager)
     ViewPager viewPager;
     @Bind(R.id.back)
@@ -55,13 +56,6 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
     Button user;
     @Bind(R.id.tv_user)
     TextView tv_user;
-    @Bind(R.id.clock)
-    TextView clock;
-    @Bind(R.id.power)ImageView power;
-    @Bind(R.id.volume)ImageView volume;
-    @Bind(R.id.wifi)ImageView wifi;
-    @Bind(R.id.bluetooth)ImageView bluetooth;
-
     private IMyAidlInterface iMyAidlInterface;
 
     private SpeechUtil speechUtil;
@@ -73,18 +67,13 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
         ButterKnife.bind(this);
         setupWindowAnimations();
 
+        //复用代码块的实例化
+        new CommonTop(this).init().setListener(this);
+
         SysApplication.getInstance().addActivity(this);
 
 
         speechUtil = new SpeechUtil(this);
-
-        //获取系统时间
-        SimpleDateFormat sDateFormat = new    SimpleDateFormat("yyyy-MM-dd  HH:mm");
-        String  sysDate = sDateFormat.format(new java.util.Date());
-        String [] arr = sysDate.split("\\s+");
-        final String sdate=arr[0];
-        final String stime=arr[1];
-        clock.setText(sdate+"   "+stime);
 
 
         Intent myServiceIntent = new Intent(MainActivity.this, UsbService.class);
@@ -176,38 +165,7 @@ public class MainActivity extends AppCompatActivity implements ExpandingFragment
                 finish();
             }
         });
-        power.setOnClickListener(new Button.OnClickListener(){//创建监听
-            public void onClick(View v) {
-                Intent i;
-                i = new Intent(MainActivity.this,SystemSetActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        volume.setOnClickListener(new Button.OnClickListener(){//创建监听
-            public void onClick(View v) {
-                Intent i;
-                i = new Intent(MainActivity.this,SystemSetActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        wifi.setOnClickListener(new Button.OnClickListener(){//创建监听
-            public void onClick(View v) {
-                Intent i;
-                i = new Intent(MainActivity.this,SystemSetActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        bluetooth.setOnClickListener(new Button.OnClickListener(){//创建监听
-            public void onClick(View v) {
-                Intent i;
-                i = new Intent(MainActivity.this,SystemSetActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
+
         /**
          * 切换用户按钮
          */
