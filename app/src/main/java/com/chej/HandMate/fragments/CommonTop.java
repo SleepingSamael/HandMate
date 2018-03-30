@@ -8,12 +8,11 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.chej.HandMate.ConnectActivity;
 import com.chej.HandMate.Database.users.UserData;
 import com.chej.HandMate.R;
-import com.chej.HandMate.SeniorSetActivity;
 import com.chej.HandMate.SystemSetActivity;
 
 import java.text.SimpleDateFormat;
@@ -30,9 +29,8 @@ public class CommonTop implements View.OnClickListener {
     OnCommonBottomClick listener;
     TextView clock;
     ImageView volume;
-    ImageView bluetooth;
-    ImageView power;
-    ImageView wifi;
+    ImageView m_hand;
+    ImageView s_hand;
     private static final int msgKey1 = 1;
     //音量状态
     AudioManager mAudioManager;
@@ -53,9 +51,9 @@ public class CommonTop implements View.OnClickListener {
                 i = new Intent(UserData.getContext(),SystemSetActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);//打开新acticity时关闭所有其他acticity
                 UserData.getContext().startActivity(i);
                 break;
-            case R.id.bluetooth:
+            case R.id.s_hand:
                 Intent i2;
-                i2 = new Intent(UserData.getContext(),SeniorSetActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);//打开新acticity时关闭所有其他acticity
+                i2 = new Intent(UserData.getContext(), ConnectActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);//打开新acticity时关闭所有其他acticity
                 UserData.getContext().startActivity(i2);
                 break;
         }
@@ -75,13 +73,11 @@ public class CommonTop implements View.OnClickListener {
 
     public CommonTop init() {
         volume = (ImageView) ((Activity) mContext).findViewById(R.id.volume);
-        bluetooth = (ImageView) ((Activity) mContext).findViewById(R.id.bluetooth);
-        power = (ImageView) ((Activity) mContext).findViewById(R.id.power);
-        wifi = (ImageView) ((Activity) mContext).findViewById(R.id.wifi);
+        s_hand = (ImageView) ((Activity) mContext).findViewById(R.id.s_hand);
+        m_hand = (ImageView) ((Activity) mContext).findViewById(R.id.m_hand);
         clock = (TextView) ((Activity) mContext).findViewById(R.id.clock);
-
         volume.setOnClickListener(this);
-        bluetooth.setOnClickListener(this);
+        s_hand.setOnClickListener(this);
 
         //获取系统时间
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd   HH:mm:ss");
@@ -149,4 +145,6 @@ public class CommonTop implements View.OnClickListener {
             }
         }
     };
+
+
 }

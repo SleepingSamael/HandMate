@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:background="@color/black"
-    android:orientation="vertical"
-    tools:context="com.chej.HandMate.com.qslll.handmate.Welcome">
+    android:orientation="vertical">
 
 
     <ProgressBar

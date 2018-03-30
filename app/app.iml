@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id=":app" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" external.system.module.group="expandingpager-master" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+<module external.linked.project.id=":app" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="android-gradle" name="Android-Gradle">
       <configuration>
@@ -98,10 +98,12 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant-run-support" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/javaPrecompile" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jniLibs" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/lint" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifests" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/prebuild" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/reload-dex" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/res" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/rs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/shaders" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/split-apk" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/splits-support" />
@@ -113,37 +115,39 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 25 Platform (5)" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="com.github.felHR85:UsbSerial-4.5" level="project" />
-    <orderEntry type="library" name="com.android.support:support-fragment-25.0.0" level="project" />
-    <orderEntry type="library" name="com.android.support:support-core-ui-25.0.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="junit:junit:4.12@jar" level="project" />
-    <orderEntry type="library" name="com.android.support:cardview-v7-25.0.0" level="project" />
-    <orderEntry type="library" name="com.google.android.gms:play-services-base-8.4.0" level="project" />
-    <orderEntry type="library" name="com.android.support:support-media-compat-25.0.0" level="project" />
-    <orderEntry type="library" name="__local_aars__:C.\Users\samael\Desktop\project\HandMate\app\libs\unity-classes.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" name="com.android.support.constraint:constraint-layout-solver:1.0.2@jar" level="project" />
-    <orderEntry type="library" name="com.android.support:animated-vector-drawable-25.0.0" level="project" />
-    <orderEntry type="library" name="com.android.support.constraint:constraint-layout-1.0.2" level="project" />
-    <orderEntry type="library" name="__local_aars__:C.\Users\samael\Desktop\project\HandMate\app\libs\iTextAsian-1.0.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" name="com.jakewharton:butterknife:7.0.1@jar" level="project" />
-    <orderEntry type="library" name="com.android.support:support-v4-25.0.0" level="project" />
-    <orderEntry type="library" name="com.google.android.gms:play-services-appindexing-8.4.0" level="project" />
-    <orderEntry type="library" name="com.android.support:support-annotations:25.0.0@jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="org.hamcrest:hamcrest-core:1.3@jar" level="project" />
-    <orderEntry type="library" name="__local_aars__:C.\Users\samael\Desktop\project\HandMate\app\libs\com.baidu.tts_2.3.0.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" name="com.android.support:support-core-utils-25.0.0" level="project" />
-    <orderEntry type="library" name="__local_aars__:C.\Users\samael\Desktop\project\HandMate\app\libs\commons-lang3-3.3.2.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" name="com.android.support:appcompat-v7-25.0.0" level="project" />
-    <orderEntry type="library" name="com.github.johnkil.android-robototextview:robototextview-2.5.0" level="project" />
-    <orderEntry type="library" name="__local_aars__:C.\Users\samael\Desktop\project\HandMate\app\libs\iTextpdf.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" name="com.android.support:support-compat-25.0.0" level="project" />
-    <orderEntry type="library" name="com.github.PhilJay:MPAndroidChart:v3.0.2@jar" level="project" />
-    <orderEntry type="library" name="__local_aars__:C.\Users\samael\Desktop\project\HandMate\app\libs\commons-io-2.4.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" name="joda-time:joda-time:2.9.6@jar" level="project" />
-    <orderEntry type="library" name="com.google.android.gms:play-services-basement-8.4.0" level="project" />
-    <orderEntry type="library" name="com.android.support:support-vector-drawable-25.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support.constraint:constraint-layout-solver:1.0.2@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.firebase:firebase-common-10.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-annotations:25.0.0@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-basement-10.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-fragment-25.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.firebase:firebase-appindexing-10.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-media-compat-25.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:C.\Users\samael\Desktop\project\HandMate\app\libs\iTextAsian-1.0.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.jakewharton:butterknife:7.0.1@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:appcompat-v7-25.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:animated-vector-drawable-25.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: joda-time:joda-time:2.9.6@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-compat-25.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-tasks-10.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:cardview-v7-25.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-base-10.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:C.\Users\samael\Desktop\project\HandMate\app\libs\commons-lang3-3.3.2.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-core-utils-25.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:C.\Users\samael\Desktop\project\HandMate\app\libs\com.baidu.tts_2.3.0.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-core-ui-25.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-vector-drawable-25.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support.constraint:constraint-layout-1.0.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: junit:junit:4.12@jar" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:C.\Users\samael\Desktop\project\HandMate\app\libs\commons-io-2.4.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-v4-25.0.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-core:1.3@jar" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:C.\Users\samael\Desktop\project\HandMate\app\libs\iTextpdf.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.johnkil.android-robototextview:robototextview-2.5.0" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:C.\Users\samael\Desktop\project\HandMate\app\libs\unity-classes.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.PhilJay:MPAndroidChart:v3.0.2@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.felHR85:UsbSerial-4.5" level="project" />
     <orderEntry type="module" module-name="library" />
-    <orderEntry type="library" name="android-android-25" level="project" />
-    <orderEntry type="library" name="org.apache.http.legacy-android-25" level="project" />
+    <orderEntry type="library" name="Gradle: android-android-25" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.http.legacy-android-25" level="project" />
   </component>
 </module>

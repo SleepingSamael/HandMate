@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="蓝牙通信测试程序"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/text_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ff00ff"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/text_chat"
+        android:layout_width="fill_parent"
+        android:layout_height="250dp"
+        android:cursorVisible="false"
+        android:editable="false"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:isScrollContainer="true" />
+
+    <EditText
+        android:id="@+id/text_input"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/but_off_on"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开启蓝牙" >
+        </Button>
+
+        <Button
+            android:id="@+id/but_search_div"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="搜索连接" />
+
+        <Button
+            android:id="@+id/but_cjlj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="创建连接" />
+
+        <Button
+            android:id="@+id/but_fsxx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发送消息" />
+    </LinearLayout>
+
+</LinearLayout>
