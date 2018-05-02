@@ -1,7 +1,5 @@
 package com.chej.HandMate.U3D;
 
-import com.unity3d.player.*;
-import android.app.Activity;
 import android.content.res.Configuration;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
@@ -9,7 +7,9 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.Window;
 
-public class UnityPlayerActivity extends Activity
+import com.unity3d.player.UnityPlayer;
+
+public class UnityPlayerActivity extends UnityPlayerNativeActivity
 {
 	protected UnityPlayer mUnityPlayer; // don't change the name of this variable; referenced from native code
 
